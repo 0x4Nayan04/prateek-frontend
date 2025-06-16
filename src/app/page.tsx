@@ -109,7 +109,7 @@ export default function Home() {
 							id='work'
 							data-border='rounded'
 							variant='primary'
-							size='l'
+							size='m'
 							weight='default'
 							arrowIcon>
 							View My Case Studies
