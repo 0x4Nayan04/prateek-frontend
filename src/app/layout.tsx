@@ -158,7 +158,7 @@ export default async function RootLayout({
 					<Flex
 						zIndex={0}
 						fillWidth
-						padding='l'
+						padding='8'
 						horizontal='center'
 						flex={1}>
 						<Flex

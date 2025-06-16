@@ -22,36 +22,37 @@ type TimeDisplayProps = {
 	locale?: string; // Optionally allow locale, defaulting to 'en-GB'
 };
 
-const TimeDisplay: React.FC<TimeDisplayProps> = ({
-	timeZone,
-	locale = 'en-GB'
-}) => {
-	const [currentTime, setCurrentTime] = useState('');
+function formatInTimeZone(
+	date: Date,
+	timeZone: string,
+	locale: string = 'en-GB'
+): string {
+	return new Intl.DateTimeFormat(locale, {
+		timeZone,
+		hour: '2-digit',
+		minute: '2-digit',
+		hour12: false
+	}).format(date);
+}
+
+function TimeDisplay({ timeZone, locale = 'en-GB' }: TimeDisplayProps) {
+	const [time, setTime] = useState<string>('');
 
 	useEffect(() => {
 		const updateTime = () => {
 			const now = new Date();
-			const options: Intl.DateTimeFormatOptions = {
-				timeZone,
-				hour: '2-digit',
-				minute: '2-digit',
-				second: '2-digit',
-				hour12: false
-			};
-			const timeString = new Intl.DateTimeFormat(locale, options).format(now);
-			setCurrentTime(timeString);
+			const formattedTime = formatInTimeZone(now, timeZone, locale);
+			setTime(formattedTime);
 		};
 
-		updateTime();
-		const intervalId = setInterval(updateTime, 1000);
+		updateTime(); // Set initial time
+		const interval = setInterval(updateTime, 1000); // Update every second
 
-		return () => clearInterval(intervalId);
+		return () => clearInterval(interval); // Cleanup interval on unmount
 	}, [timeZone, locale]);
 
-	return <>{currentTime}</>;
-};
-
-export default TimeDisplay;
+	return <>{time}</>;
+}
 
 export const Header = () => {
 	const pathname = usePathname() ?? '';
@@ -79,7 +80,7 @@ export const Header = () => {
 				position='unset'
 				className={styles.position}
 				as='header'
-				zIndex={9}
+				zIndex={10}
 				fillWidth
 				padding='8'
 				horizontal='center'
@@ -126,11 +127,6 @@ export const Header = () => {
 							)}
 							{routes['/about'] && (
 								<>
-									<Line
-										background='neutral-alpha-medium'
-										vert
-										maxHeight='24'
-									/>
 									<ToggleButton
 										className='s-flex-hide'
 										prefixIcon='person'
@@ -199,11 +195,6 @@ export const Header = () => {
 							)}
 							{display.themeSwitcher && (
 								<>
-									<Line
-										background='neutral-alpha-medium'
-										vert
-										maxHeight='24'
-									/>
 									<ThemeToggle />
 								</>
 							)}

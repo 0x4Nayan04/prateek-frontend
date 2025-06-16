@@ -8,7 +8,8 @@ export const Footer = () => {
 			fillWidth
 			padding='8'
 			horizontal='center'
-			mobileDirection='column'>
+			mobileDirection='column'
+			style={{ position: 'relative', zIndex: 1 }}>
 			<Flex
 				className={styles.mobile}
 				maxWidth='m'
@@ -24,7 +25,7 @@ export const Footer = () => {
 				</Text>
 			</Flex>
 			<Flex
-				height='80'
+				height='120'
 				show='s'></Flex>
 		</Flex>
 	);

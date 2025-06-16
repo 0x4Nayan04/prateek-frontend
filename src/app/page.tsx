@@ -37,18 +37,18 @@ export default function Home() {
 				fillWidth
 				horizontal='center'
 				vertical='center'
-				paddingY='48'
+				paddingY='32'
 				paddingX='24'
-				gap='24'>
+				gap='16'>
 				<Column
 					maxWidth='s'
 					horizontal='center'
-					gap='24'>
+					gap='12'>
 					{home.featured.display && (
 						<RevealFx
 							fillWidth
 							horizontal='center'
-							paddingBottom='0'>
+							paddingBottom='4'>
 							<Badge
 								background='success-alpha-weak'
 								paddingX='16'
@@ -60,16 +60,20 @@ export default function Home() {
 									gap='4'
 									vertical='center'
 									paddingY='2'>
+									<Icon
+										name='sparkle'
+										size='xs'
+									/>
 									{home.featured.title}
 								</Row>
 							</Badge>
 						</RevealFx>
 					)}
 					<RevealFx
-						translateY='12'
+						translateY='8'
 						fillWidth
 						horizontal='center'
-						paddingBottom='0'>
+						paddingBottom='12'>
 						<Heading
 							wrap='balance'
 							variant='display-strong-l'
@@ -78,24 +82,28 @@ export default function Home() {
 						</Heading>
 					</RevealFx>
 					<RevealFx
-						translateY='8'
+						translateY={6}
 						delay={0.2}
 						fillWidth
 						horizontal='center'
-						paddingBottom='0'>
+						paddingBottom='16'>
 						<Text
 							wrap='balance'
-							onBackground='neutral-weak'
-							variant='heading-default-s'
-							align='center'>
+							onBackground='neutral-medium'
+							variant='body-default-l'
+							align='center'
+							style={{
+								maxWidth: '480px',
+								lineHeight: '1.6',
+								letterSpacing: '0.01em'
+							}}>
 							{home.subline}
 						</Text>
 					</RevealFx>
 					<RevealFx
-						translateY='12'
+						translateY='8'
 						delay={0.4}
-						horizontal='center'
-						paddingTop='1'>
+						horizontal='center'>
 						<Button
 							href='/work'
 							id='work'
