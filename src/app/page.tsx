@@ -144,6 +144,106 @@ export default function Home() {
 					</Flex>
 				</Flex>
 			)}
+			<Flex
+				id='about'
+				fillWidth
+				background='surface'
+				border='neutral-alpha-weak'
+				radius='l'
+				padding='32'
+				marginY='32'
+				marginX='24'
+				mobileDirection='column'
+				gap='32'>
+				<Flex
+					flex={1}
+					paddingLeft='l'
+					paddingTop='8'>
+					<Heading
+						as='h2'
+						variant='display-strong-s'
+						wrap='balance'>
+						About Me
+					</Heading>
+				</Flex>
+				<Flex
+					flex={2}
+					paddingX='20'>
+					<Column gap='20'>
+						<Text
+							variant='body-default-l'
+							onBackground='neutral-medium'
+							style={{ lineHeight: '1.7' }}>
+							I'm{' '}
+							<Text
+								as='span'
+								variant='body-strong-l'
+								onBackground='neutral-strong'>
+								Pratik Srivastava
+							</Text>{' '}
+							— a data-driven product consultant focused on helping
+							organizations make faster, smarter decisions.
+						</Text>
+						<Text
+							variant='body-default-l'
+							onBackground='neutral-medium'
+							style={{ lineHeight: '1.7' }}>
+							With experience spanning{' '}
+							<Text
+								as='span'
+								variant='body-strong-m'
+								onBackground='brand-medium'>
+								SaaS platforms
+							</Text>
+							,{' '}
+							<Text
+								as='span'
+								variant='body-strong-m'
+								onBackground='brand-medium'>
+								analytics products
+							</Text>
+							, and{' '}
+							<Text
+								as='span'
+								variant='body-strong-m'
+								onBackground='brand-medium'>
+								marketing technology
+							</Text>
+							, I design tools and frameworks that transform raw data into
+							strategic outcomes. Whether it's building internal BI systems at{' '}
+							<Text
+								as='span'
+								variant='body-strong-m'
+								onBackground='accent-medium'>
+								Best Buy
+							</Text>{' '}
+							or developing marketing attribution platforms at{' '}
+							<Text
+								as='span'
+								variant='body-strong-m'
+								onBackground='accent-medium'>
+								Lifesight
+							</Text>
+							, my work sits at the intersection of data, product, and
+							execution.
+						</Text>
+						<Text
+							variant='body-default-l'
+							onBackground='neutral-medium'
+							style={{ lineHeight: '1.7' }}>
+							I thrive in{' '}
+							<Text
+								as='span'
+								variant='body-strong-l'
+								onBackground='neutral-strong'>
+								turning complexity into clarity
+							</Text>{' '}
+							— equipping business teams with the insights they need to move
+							with confidence.
+						</Text>
+					</Column>
+				</Flex>
+			</Flex>
 		</Column>
 	);
 }

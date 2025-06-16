@@ -54,6 +54,16 @@ function TimeDisplay({ timeZone, locale = 'en-GB' }: TimeDisplayProps) {
 	return <>{time}</>;
 }
 
+const scrollToAbout = () => {
+	const aboutSection = document.getElementById('about');
+	if (aboutSection) {
+		aboutSection.scrollIntoView({
+			behavior: 'smooth',
+			block: 'start'
+		});
+	}
+};
+
 export const Header = () => {
 	const pathname = usePathname() ?? '';
 
@@ -130,15 +140,15 @@ export const Header = () => {
 									<ToggleButton
 										className='s-flex-hide'
 										prefixIcon='person'
-										href='/about'
+										onClick={scrollToAbout}
 										label={about.label}
-										selected={pathname === '/about'}
+										selected={false}
 									/>
 									<ToggleButton
 										className='s-flex-show'
 										prefixIcon='person'
-										href='/about'
-										selected={pathname === '/about'}
+										onClick={scrollToAbout}
+										selected={false}
 									/>
 								</>
 							)}
