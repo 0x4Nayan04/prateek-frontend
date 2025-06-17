@@ -1,6 +1,6 @@
 import { Column, Meta, Schema } from '@once-ui-system/core';
 import { baseURL, about, person, work } from '@/resources';
-import { Projects } from '@/components/work/Projects';
+import { ModernProjects } from '@/components/work/ModernProjects';
 
 export const revalidate = 60; // ISR revalidation every 60 seconds
 
@@ -16,7 +16,10 @@ export async function generateMetadata() {
 
 export default function Work() {
 	return (
-		<Column maxWidth='m'>
+		<Column
+			maxWidth='l'
+			paddingX='24'
+			paddingY='32'>
 			<Schema
 				as='webPage'
 				baseURL={baseURL}
@@ -30,7 +33,12 @@ export default function Work() {
 					image: `${baseURL}${person.avatar}`
 				}}
 			/>
-			<Projects />
+			<ModernProjects
+				title='All Case Studies'
+				description='Comprehensive collection of data-driven solutions, strategic implementations, and impactful results across various industries and technologies'
+				showFilters={false}
+				columns='2'
+			/>
 		</Column>
 	);
 }

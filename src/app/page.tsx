@@ -14,6 +14,7 @@ import {
 } from '@once-ui-system/core';
 import { home, person, baseURL, routes } from '@/resources';
 import { Posts } from '@/components/blog/Posts';
+import { ModernProjects } from '@/components/work/ModernProjects';
 
 export default function Home() {
 	return (
@@ -117,6 +118,21 @@ export default function Home() {
 					</RevealFx>
 				</Column>
 			</Column>
+
+			{/* Featured Work Section */}
+			<Flex
+				fillWidth
+				paddingX='24'
+				paddingY='48'>
+				<ModernProjects
+					title='Featured Case Studies'
+					description='Explore my latest data-driven solutions and strategic implementations'
+					maxItems={8}
+					showFilters={false}
+					columns='2'
+				/>
+			</Flex>
+
 			{routes['/blog'] && (
 				<Flex
 					fillWidth

@@ -9,7 +9,10 @@ import {
 	Heading,
 	Text,
 	Tag,
-	Row
+	Row,
+	Grid,
+	RevealFx,
+	Line
 } from '@once-ui-system/core';
 import { baseURL, about, person, work } from '@/resources';
 import { getCaseStudyBySlug, getAllCaseStudies } from '@/lib/utils/content';
@@ -62,9 +65,10 @@ export default async function CaseStudyPage({
 	return (
 		<Column
 			as='section'
-			maxWidth='m'
+			fillWidth
 			horizontal='center'
-			gap='l'>
+			gap='xl'
+			paddingY='32'>
 			<Schema
 				as='article'
 				baseURL={baseURL}
@@ -83,171 +87,361 @@ export default async function CaseStudyPage({
 				}}
 			/>
 
-			{/* Header */}
+			{/* Header Section */}
 			<Column
-				maxWidth='xs'
-				gap='16'>
-				<Button
-					data-border='rounded'
-					href='/work'
-					variant='tertiary'
-					weight='default'
-					size='s'
-					prefixIcon='chevronLeft'>
-					Case Studies
-				</Button>
-				<Heading variant='display-strong-s'>{caseStudy.title}</Heading>
-				<Text
-					variant='body-default-m'
-					onBackground='neutral-medium'>
-					{caseStudy.summary}
-				</Text>
+				maxWidth='m'
+				paddingX='24'
+				gap='24'>
+				<RevealFx
+					translateY={16}
+					delay={0.1}>
+					<Button
+						data-border='rounded'
+						href='/work'
+						variant='tertiary'
+						weight='default'
+						size='s'
+						prefixIcon='chevronLeft'>
+						Back to Case Studies
+					</Button>
+				</RevealFx>
+
+				<RevealFx
+					translateY={16}
+					delay={0.2}>
+					<Column gap='16'>
+						<Heading
+							variant='display-strong-l'
+							style={{ fontSize: '48px', lineHeight: '1.1' }}>
+							{caseStudy.title}
+						</Heading>
+						<Text
+							variant='body-default-l'
+							onBackground='neutral-medium'
+							style={{ fontSize: '18px', lineHeight: '1.6' }}>
+							{caseStudy.summary}
+						</Text>
+					</Column>
+				</RevealFx>
 
 				{/* Tags */}
-				<Row
-					gap='8'
-					wrap>
-					{caseStudy.techStack.map((tech) => (
-						<Tag
-							key={tech}
-							size='s'
-							variant='neutral'>
-							{tech}
-						</Tag>
-					))}
-					{caseStudy.industry.map((industry) => (
-						<Tag
-							key={industry}
-							size='s'
-							variant='brand'>
-							{industry}
-						</Tag>
-					))}
-				</Row>
+				<RevealFx
+					translateY={16}
+					delay={0.3}>
+					<Column gap='12'>
+						<Row
+							gap='8'
+							wrap>
+							<Text
+								variant='label-default-s'
+								onBackground='neutral-medium'>
+								Tech Stack:
+							</Text>
+							{caseStudy.techStack?.map((tech) => (
+								<Tag
+									key={tech}
+									size='s'
+									variant='neutral'>
+									{tech}
+								</Tag>
+							))}
+						</Row>
+						<Row
+							gap='8'
+							wrap>
+							<Text
+								variant='label-default-s'
+								onBackground='neutral-medium'>
+								Industry:
+							</Text>
+							{caseStudy.industry?.map((industry) => (
+								<Tag
+									key={industry}
+									size='s'
+									variant='brand'>
+									{industry}
+								</Tag>
+							))}
+						</Row>
+					</Column>
+				</RevealFx>
 			</Column>
 
-			{/* Thumbnail Image */}
+			{/* Hero Image */}
 			{caseStudy.thumbnail && (
-				<img
-					src={urlFor(caseStudy.thumbnail).width(800).height(500).url()}
-					alt={caseStudy.thumbnail.alt}
-					style={{
-						width: '100%',
-						maxWidth: '800px',
-						height: 'auto',
-						borderRadius: '12px',
-						objectFit: 'cover'
-					}}
-				/>
+				<RevealFx
+					translateY={16}
+					delay={0.4}>
+					<Column
+						maxWidth='l'
+						paddingX='24'>
+						<img
+							src={urlFor(caseStudy.thumbnail).width(1200).height(700).url()}
+							alt={caseStudy.thumbnail.alt}
+							style={{
+								width: '100%',
+								height: 'auto',
+								borderRadius: '16px',
+								objectFit: 'cover',
+								boxShadow: '0 20px 40px rgba(0,0,0,0.1)'
+							}}
+						/>
+					</Column>
+				</RevealFx>
+			)}
+
+			{/* Gallery Images */}
+			{caseStudy.images && caseStudy.images.length > 0 && (
+				<RevealFx
+					translateY={16}
+					delay={0.5}>
+					<Column
+						maxWidth='l'
+						paddingX='24'
+						gap='16'>
+						<Heading variant='heading-strong-m'>Project Gallery</Heading>
+						<Grid
+							columns='2'
+							tabletColumns='2'
+							mobileColumns='1'
+							gap='16'>
+							{caseStudy.images.map((image, index) => (
+								<img
+									key={index}
+									src={urlFor(image).width(600).height(400).url()}
+									alt={image.alt}
+									style={{
+										width: '100%',
+										height: '300px',
+										borderRadius: '12px',
+										objectFit: 'cover'
+									}}
+								/>
+							))}
+						</Grid>
+					</Column>
+				</RevealFx>
 			)}
 
 			{/* Content Sections */}
 			<Column
-				style={{ margin: 'auto' }}
-				as='article'
-				maxWidth='xs'
-				gap='32'>
+				maxWidth='m'
+				paddingX='24'
+				gap='48'>
 				{/* Client Overview */}
 				{caseStudy.clientOverview && (
-					<Column
-						gap='16'
-						id='client-overview'>
-						<Heading variant='heading-strong-m'>Client Overview</Heading>
-						{/* TODO: Render block content - will be implemented in Phase 5 */}
-						<Text variant='body-default-m'>
-							[Client Overview content will be rendered here with block content
-							renderer]
-						</Text>
-					</Column>
+					<RevealFx
+						translateY={16}
+						delay={0.6}>
+						<Column
+							gap='16'
+							id='client-overview'
+							paddingY='24'
+							paddingX='32'
+							background='surface'
+							border='neutral-alpha-weak'
+							radius='l'>
+							<Heading variant='heading-strong-l'>Client Overview</Heading>
+							<Line />
+							<Text
+								variant='body-default-l'
+								style={{ lineHeight: '1.7' }}>
+								{/* TODO: Render block content properly */}
+								[Client Overview content will be rendered here with block
+								content renderer]
+							</Text>
+						</Column>
+					</RevealFx>
 				)}
 
 				{/* Problem */}
 				{caseStudy.problem && (
-					<Column
-						gap='16'
-						id='problem'>
-						<Heading variant='heading-strong-m'>Problem</Heading>
-						{/* TODO: Render block content - will be implemented in Phase 5 */}
-						<Text variant='body-default-m'>
-							[Problem content will be rendered here with block content
-							renderer]
-						</Text>
-					</Column>
+					<RevealFx
+						translateY={16}
+						delay={0.7}>
+						<Column
+							gap='16'
+							id='problem'
+							paddingY='24'
+							paddingX='32'
+							background='surface'
+							border='neutral-alpha-weak'
+							radius='l'>
+							<Heading variant='heading-strong-l'>Problem</Heading>
+							<Line />
+							<Text
+								variant='body-default-l'
+								style={{ lineHeight: '1.7' }}>
+								{/* TODO: Render block content properly */}
+								[Problem content will be rendered here with block content
+								renderer]
+							</Text>
+						</Column>
+					</RevealFx>
 				)}
 
 				{/* Approach */}
 				{caseStudy.approach && (
-					<Column
-						gap='16'
-						id='approach'>
-						<Heading variant='heading-strong-m'>Approach</Heading>
-						{/* TODO: Render block content - will be implemented in Phase 5 */}
-						<Text variant='body-default-m'>
-							[Approach content will be rendered here with block content
-							renderer]
-						</Text>
-					</Column>
+					<RevealFx
+						translateY={16}
+						delay={0.8}>
+						<Column
+							gap='16'
+							id='approach'
+							paddingY='24'
+							paddingX='32'
+							background='surface'
+							border='neutral-alpha-weak'
+							radius='l'>
+							<Heading variant='heading-strong-l'>Approach</Heading>
+							<Line />
+							<Text
+								variant='body-default-l'
+								style={{ lineHeight: '1.7' }}>
+								{/* TODO: Render block content properly */}
+								[Approach content will be rendered here with block content
+								renderer]
+							</Text>
+						</Column>
+					</RevealFx>
 				)}
 
 				{/* Solution */}
 				{caseStudy.solution && (
-					<Column
-						gap='16'
-						id='solution'>
-						<Heading variant='heading-strong-m'>Solution</Heading>
-						{/* TODO: Render block content - will be implemented in Phase 5 */}
-						<Text variant='body-default-m'>
-							[Solution content will be rendered here with block content
-							renderer]
-						</Text>
-					</Column>
+					<RevealFx
+						translateY={16}
+						delay={0.9}>
+						<Column
+							gap='16'
+							id='solution'
+							paddingY='24'
+							paddingX='32'
+							background='surface'
+							border='neutral-alpha-weak'
+							radius='l'>
+							<Heading variant='heading-strong-l'>Solution</Heading>
+							<Line />
+							<Text
+								variant='body-default-l'
+								style={{ lineHeight: '1.7' }}>
+								{/* TODO: Render block content properly */}
+								[Solution content will be rendered here with block content
+								renderer]
+							</Text>
+						</Column>
+					</RevealFx>
 				)}
 
 				{/* Result & Impact */}
 				{caseStudy.result && (
-					<Column
-						gap='16'
-						id='result'>
-						<Heading variant='heading-strong-m'>Result & Impact</Heading>
-						{/* TODO: Render block content - will be implemented in Phase 5 */}
-						<Text variant='body-default-m'>
-							[Result content will be rendered here with block content renderer]
-						</Text>
-					</Column>
-				)}
-
-				{/* External Links */}
-				{caseStudy.externalLinks && caseStudy.externalLinks.length > 0 && (
-					<Column gap='16'>
-						<Heading variant='heading-strong-m'>External Links</Heading>
-						<Column gap='8'>
-							{caseStudy.externalLinks.map((link, index) => (
-								<Button
-									key={index}
-									href={link.url}
-									variant='secondary'
-									size='m'
-									arrowIcon>
-									{link.title}
-								</Button>
-							))}
+					<RevealFx
+						translateY={16}
+						delay={1.0}>
+						<Column
+							gap='16'
+							id='result'
+							paddingY='24'
+							paddingX='32'
+							background='surface'
+							border='neutral-alpha-weak'
+							radius='l'>
+							<Heading variant='heading-strong-l'>Result & Impact</Heading>
+							<Line />
+							<Text
+								variant='body-default-l'
+								style={{ lineHeight: '1.7' }}>
+								{/* TODO: Render block content properly */}
+								[Result content will be rendered here with block content
+								renderer]
+							</Text>
 						</Column>
-					</Column>
+					</RevealFx>
 				)}
 
 				{/* Dashboard Embed */}
 				{caseStudy.iframePreview && (
-					<Column gap='16'>
-						<Heading variant='heading-strong-m'>Live Dashboard</Heading>
-						<iframe
-							src={caseStudy.iframePreview}
-							width='100%'
-							height='600'
-							style={{ border: 'none', borderRadius: '8px' }}
-							title='Dashboard Preview'
-						/>
-					</Column>
+					<RevealFx
+						translateY={16}
+						delay={1.1}>
+						<Column gap='16'>
+							<Heading variant='heading-strong-l'>Live Dashboard</Heading>
+							<iframe
+								src={caseStudy.iframePreview}
+								width='100%'
+								height='600'
+								style={{
+									border: 'none',
+									borderRadius: '12px',
+									boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
+								}}
+								title='Dashboard Preview'
+							/>
+						</Column>
+					</RevealFx>
 				)}
+
+				{/* PDF Download */}
+				{caseStudy.pdfFile && (
+					<RevealFx
+						translateY={16}
+						delay={1.2}>
+						<Column gap='16'>
+							<Heading variant='heading-strong-l'>Downloadable Report</Heading>
+							<Button
+								href={caseStudy.pdfFile.asset.url}
+								variant='primary'
+								size='l'
+								arrowIcon>
+								Download PDF Report
+							</Button>
+						</Column>
+					</RevealFx>
+				)}
+
+				{/* External Links */}
+				{caseStudy.externalLinks && caseStudy.externalLinks.length > 0 && (
+					<RevealFx
+						translateY={16}
+						delay={1.3}>
+						<Column gap='16'>
+							<Heading variant='heading-strong-l'>External Links</Heading>
+							<Grid
+								columns='2'
+								tabletColumns='1'
+								mobileColumns='1'
+								gap='12'>
+								{caseStudy.externalLinks.map((link, index) => (
+									<Button
+										key={index}
+										href={link.url}
+										variant='secondary'
+										size='m'
+										arrowIcon
+										fillWidth>
+										{link.title}
+									</Button>
+								))}
+							</Grid>
+						</Column>
+					</RevealFx>
+				)}
+
+				{/* Back to Work Button */}
+				<RevealFx
+					translateY={16}
+					delay={1.4}>
+					<Column
+						center
+						paddingY='32'>
+						<Button
+							href='/work'
+							variant='primary'
+							size='l'
+							arrowIcon>
+							View More Case Studies
+						</Button>
+					</Column>
+				</RevealFx>
 			</Column>
 
 			<ScrollToHash />
