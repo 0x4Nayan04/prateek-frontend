@@ -161,14 +161,16 @@ export function ModernCaseStudyGrid({
 				{/* Case Studies Grid */}
 				<Column
 					flex={1}
-					gap='32'>
+					gap='32'
+					paddingX='16'>
 					{hasResults ? (
 						<>
 							<Grid
 								columns={columns.desktop as any}
 								tabletColumns={columns.tablet as any}
 								mobileColumns={columns.mobile as any}
-								gap='32'>
+								gap='48'
+								fillWidth>
 								{displayedCaseStudies.map((caseStudy, index) => (
 									<ModernCaseStudyCard
 										key={caseStudy._id}

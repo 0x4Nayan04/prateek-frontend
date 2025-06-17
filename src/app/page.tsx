@@ -124,18 +124,18 @@ export default function Home() {
 				fillWidth
 				horizontal='center'
 				vertical='center'
-				paddingY='24'
-				paddingX='24'
-				gap='48'>
+				paddingY='xl'
+				paddingX='l'
+				gap='xl'>
 				<Column
-					maxWidth='s'
+					maxWidth='l'
 					horizontal='center'
-					gap='16'>
+					gap='m'>
 					<RevealFx
 						translateY='8'
 						fillWidth
 						horizontal='center'
-						paddingBottom='12'>
+						paddingBottom='s'>
 						<Heading
 							wrap='balance'
 							variant='display-strong-l'
@@ -148,14 +148,14 @@ export default function Home() {
 						delay={0.2}
 						fillWidth
 						horizontal='center'
-						paddingBottom='16'>
+						paddingBottom='m'>
 						<Text
 							wrap='balance'
 							onBackground='neutral-medium'
 							variant='body-default-l'
 							align='center'
 							style={{
-								maxWidth: '480px',
+								maxWidth: '600px',
 								lineHeight: '1.6',
 								letterSpacing: '0.01em'
 							}}>
@@ -168,39 +168,12 @@ export default function Home() {
 				<ModernProjects
 					title=''
 					description=''
-					maxItems={8}
+					maxItems={6}
 					showFilters={false}
 					columns='2'
 				/>
 			</Column>
 
-			{routes['/blog'] && (
-				<Flex
-					fillWidth
-					gap='24'
-					mobileDirection='column'
-					paddingX='24'>
-					<Flex
-						flex={1}
-						paddingLeft='l'
-						paddingTop='24'>
-						<Heading
-							as='h2'
-							variant='display-strong-xs'
-							wrap='balance'>
-							Latest from the blog
-						</Heading>
-					</Flex>
-					<Flex
-						flex={3}
-						paddingX='20'>
-						<Posts
-							range={[1, 2]}
-							columns='2'
-						/>
-					</Flex>
-				</Flex>
-			)}
 			<Flex
 				id='about'
 				fillWidth

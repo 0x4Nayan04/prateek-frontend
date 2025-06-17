@@ -73,7 +73,7 @@ export const Header = () => {
 				hide='s'
 				fillWidth
 				position='fixed'
-				height='80'
+				height='104'
 				zIndex={9}
 			/>
 			<Fade
@@ -82,7 +82,7 @@ export const Header = () => {
 				position='fixed'
 				bottom='0'
 				to='top'
-				height='80'
+				height={104}
 				zIndex={9}
 			/>
 			<Flex
@@ -92,7 +92,7 @@ export const Header = () => {
 				as='header'
 				zIndex={10}
 				fillWidth
-				padding='4'
+				padding='12'
 				horizontal='center'
 				data-border=''>
 				<Flex
