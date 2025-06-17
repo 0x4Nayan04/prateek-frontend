@@ -59,11 +59,11 @@ export function ModernCaseStudyCard({
 			delay={index * 0.1}>
 			<Card
 				fillWidth
-				maxWidth={32}
+				maxWidth={30}
 				radius='l'
 				direction='column'
-				border='neutral-alpha-medium'
-				background='surface'
+				border='neutral-alpha-strong'
+				background='brand-alpha-weak'
 				minHeight='48'
 				style={{
 					overflow: 'hidden',
@@ -75,7 +75,7 @@ export function ModernCaseStudyCard({
 				{currentImage && (
 					<div
 						style={{
-							padding: '12px', // Refined breathing space
+							padding: '10px', // Refined breathing space
 							background: 'rgb(250, 250, 250)', // Light: surface-50 equivalent
 							borderRadius: '12px 12px 0 0' // Clean top corners only
 						}}>
@@ -106,7 +106,7 @@ export function ModernCaseStudyCard({
 								style={{
 									objectFit: 'cover',
 									transition: 'opacity 0.3s ease-in-out',
-									borderRadius: '7px' // Perfect nesting
+									borderRadius: '5px' // Perfect nesting
 								}}
 							/>
 

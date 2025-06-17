@@ -79,3 +79,4 @@ export async function getAvailableFilters() {
 		return { techStack: [], industry: [] };
 	}
 }
+ 

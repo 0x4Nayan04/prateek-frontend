@@ -185,20 +185,20 @@ export default function Home() {
 				marginX='24'
 				mobileDirection='column'
 				gap='32'>
-				<Flex
-					flex={1}
-					paddingLeft='l'
+					<Flex
+						flex={1}
+						paddingLeft='l'
 					paddingTop='8'>
-					<Heading
-						as='h2'
+						<Heading
+							as='h2'
 						variant='display-strong-s'
-						wrap='balance'>
+							wrap='balance'>
 						About Me
-					</Heading>
-				</Flex>
-				<Flex
+						</Heading>
+					</Flex>
+					<Flex
 					flex={2}
-					paddingX='20'>
+						paddingX='20'>
 					<Column gap='20'>
 						<Text
 							variant='body-default-l'
