@@ -1,5 +1,8 @@
 import { client } from '@/lib/sanity/client';
-import { CASE_STUDIES_ALL_QUERY } from '@/lib/sanity/queries';
+import {
+	CASE_STUDIES_ALL_QUERY,
+	CASE_STUDIES_HOMEPAGE_QUERY
+} from '@/lib/sanity/queries';
 import { CaseStudy } from '@/lib/sanity/types';
 
 export async function getAllCaseStudies() {
@@ -15,6 +18,7 @@ export async function getAllCaseStudies() {
 
 export async function getFeaturedCaseStudies(limit: number = 6) {
 	try {
+		// Use the homepage query but limit the results
 		const caseStudies: CaseStudy[] = await client.fetch(
 			`*[_type == "caseStudy"] | order(priority asc) [0...${limit}] {
 				_id,
@@ -22,6 +26,7 @@ export async function getFeaturedCaseStudies(limit: number = 6) {
 				slug,
 				summary,
 				thumbnail,
+				images,
 				techStack,
 				industry,
 				priority
@@ -79,4 +84,3 @@ export async function getAvailableFilters() {
 		return { techStack: [], industry: [] };
 	}
 }
- 

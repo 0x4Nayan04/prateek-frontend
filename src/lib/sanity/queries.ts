@@ -5,6 +5,7 @@ export const CASE_STUDIES_HOMEPAGE_QUERY = `
     slug,
     summary,
     thumbnail,
+    images,
     techStack,
     industry,
     priority
@@ -18,6 +19,7 @@ export const CASE_STUDIES_ALL_QUERY = `
     slug,
     summary,
     thumbnail,
+    images,
     techStack,
     industry,
     priority
