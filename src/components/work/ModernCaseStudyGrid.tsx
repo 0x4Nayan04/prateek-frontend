@@ -189,12 +189,11 @@ export function ModernCaseStudyGrid({
 										center
 										paddingTop='32'>
 										<Button
-											id='show-more'
 											href='/work'
-											variant='primary'
+											variant='secondary'
 											size='l'
 											arrowIcon>
-											Show More{' '}
+											View All Case Studies
 											{hasMoreResults &&
 												` (${totalResults - displayedCaseStudies.length} more)`}
 										</Button>

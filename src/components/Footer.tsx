@@ -12,7 +12,7 @@ export const Footer = () => {
 			style={{ position: 'relative', zIndex: 1 }}>
 			<Flex
 				className={styles.mobile}
-				maxWidth='m'
+				maxWidth='l'
 				paddingY='8'
 				paddingX='16'
 				gap='16'
