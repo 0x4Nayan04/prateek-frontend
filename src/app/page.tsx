@@ -120,18 +120,59 @@ export default function Home() {
 			</Column>
 
 			{/* Featured Work Section */}
-			<Flex
+			<Column
 				fillWidth
+				horizontal='center'
+				vertical='center'
+				paddingY='24'
 				paddingX='24'
-				paddingY='48'>
+				gap='48'>
+				<Column
+					maxWidth='s'
+					horizontal='center'
+					gap='16'>
+					<RevealFx
+						translateY='8'
+						fillWidth
+						horizontal='center'
+						paddingBottom='12'>
+						<Heading
+							wrap='balance'
+							variant='display-strong-l'
+							align='center'>
+							Selected Work
+						</Heading>
+					</RevealFx>
+					<RevealFx
+						translateY={6}
+						delay={0.2}
+						fillWidth
+						horizontal='center'
+						paddingBottom='16'>
+						<Text
+							wrap='balance'
+							onBackground='neutral-medium'
+							variant='body-default-l'
+							align='center'
+							style={{
+								maxWidth: '480px',
+								lineHeight: '1.6',
+								letterSpacing: '0.01em'
+							}}>
+							Real-world solutions that transformed business outcomes through
+							strategic data implementation
+						</Text>
+					</RevealFx>
+				</Column>
+
 				<ModernProjects
-					title='Featured Case Studies'
-					description='Explore my latest data-driven solutions and strategic implementations'
+					title=''
+					description=''
 					maxItems={8}
 					showFilters={false}
 					columns='2'
 				/>
-			</Flex>
+			</Column>
 
 			{routes['/blog'] && (
 				<Flex

@@ -183,16 +183,18 @@ export function ModernCaseStudyGrid({
 							{(showViewAllButton || hasMoreResults) && (
 								<RevealFx
 									translateY={16}
+									horizontal='center'
 									delay={0.4}>
 									<Column
 										center
 										paddingTop='32'>
 										<Button
+											id='show-more'
 											href='/work'
-											variant='secondary'
+											variant='primary'
 											size='l'
 											arrowIcon>
-											View All Case Studies
+											Show More{' '}
 											{hasMoreResults &&
 												` (${totalResults - displayedCaseStudies.length} more)`}
 										</Button>
