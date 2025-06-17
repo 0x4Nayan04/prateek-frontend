@@ -3,19 +3,19 @@
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { Fade, Flex, Line, ToggleButton } from '@once-ui-system/core';
+import { Fade, Flex, ToggleButton } from '@once-ui-system/core';
 
 import {
-	routes,
-	display,
-	person,
 	about,
 	blog,
-	work,
-	gallery
+	display,
+	gallery,
+	person,
+	routes,
+	work
 } from '@/resources';
-import { ThemeToggle } from './ThemeToggle';
 import styles from './Header.module.scss';
+import { ThemeToggle } from './ThemeToggle';
 
 type TimeDisplayProps = {
 	timeZone: string;
@@ -87,14 +87,14 @@ export const Header = () => {
 			/>
 			<Flex
 				fitHeight
-				position='unset'
+				position='fixed'
 				className={styles.position}
 				as='header'
 				zIndex={10}
 				fillWidth
-				padding='8'
+				padding='4'
 				horizontal='center'
-				data-border='rounded'>
+				data-border=''>
 				<Flex
 					paddingLeft='12'
 					fillWidth

@@ -25,7 +25,7 @@ export const Footer = () => {
 				</Text>
 			</Flex>
 			<Flex
-				height='120'
+				height={120}
 				show='s'></Flex>
 		</Flex>
 	);
