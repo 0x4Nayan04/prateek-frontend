@@ -82,7 +82,7 @@ export const Header = () => {
 				position='fixed'
 				bottom='0'
 				to='top'
-				height={104}
+				height='104'
 				zIndex={9}
 			/>
 			<Flex
@@ -92,7 +92,7 @@ export const Header = () => {
 				as='header'
 				zIndex={10}
 				fillWidth
-				padding='12'
+				padding='4'
 				horizontal='center'
 				data-border=''>
 				<Flex

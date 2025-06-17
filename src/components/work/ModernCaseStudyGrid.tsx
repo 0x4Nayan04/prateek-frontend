@@ -191,8 +191,9 @@ export function ModernCaseStudyGrid({
 										center
 										paddingTop='32'>
 										<Button
+											id='view-all-case-studies'
 											href='/work'
-											variant='secondary'
+											variant='primary'
 											size='l'
 											arrowIcon>
 											View All Case Studies

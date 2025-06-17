@@ -1,20 +1,19 @@
 'use client';
 
-import { useState } from 'react';
+import { urlFor } from '@/lib/sanity/client';
+import { CaseStudy } from '@/lib/sanity/types';
 import {
+	Button,
 	Card,
 	Column,
-	Text,
+	Icon,
+	Media,
+	RevealFx,
 	Row,
 	Tag,
-	RevealFx,
-	Media,
-	Button,
-	Icon,
-	Background
+	Text
 } from '@once-ui-system/core';
-import { CaseStudy } from '@/lib/sanity/types';
-import { urlFor } from '@/lib/sanity/client';
+import { useState } from 'react';
 import styles from './ModernCaseStudyCard.module.scss';
 
 interface ModernCaseStudyCardProps {
