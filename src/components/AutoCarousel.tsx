@@ -163,7 +163,7 @@ export function AutoCarousel({
 						border: '1px solid rgba(255, 255, 255, 0.15)',
 						boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2)',
 						zIndex: 10,
-						fontFamily: '"Open Sans", "Inter", sans-serif',
+						fontFamily: '"Inter", sans-serif',
 						transition: 'all 0.2s ease'
 					}}>
 					{currentIndex + 1} / {items.length}

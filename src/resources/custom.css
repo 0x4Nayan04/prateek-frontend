@@ -57,7 +57,7 @@
    TYPOGRAPHY IMPROVEMENTS
    ============================================================================ */
 
-/* Open Sans font family for all headings */
+/* Inter font family for all headings */
 h1,
 h2,
 h3,
@@ -67,7 +67,6 @@ h6,
 [data-variant*='heading'],
 [data-variant*='display'] {
 	font-family:
-		'Open Sans',
 		'Inter',
 		-apple-system,
 		BlinkMacSystemFont,
@@ -81,7 +80,6 @@ div,
 [data-variant*='body'],
 [data-variant*='label'] {
 	font-family:
-		'Open Sans',
 		'Inter',
 		-apple-system,
 		BlinkMacSystemFont,
@@ -128,13 +126,13 @@ div,
 .portable-text h2,
 .portable-text h3,
 .portable-text h4 {
-	font-family: 'Open Sans', 'Inter', sans-serif !important;
+	font-family: 'Inter', sans-serif !important;
 	font-weight: 600 !important;
 	color: var(--neutral-on-background-strong) !important;
 }
 
 .portable-text p {
-	font-family: 'Open Sans', 'Inter', sans-serif !important;
+	font-family: 'Inter', sans-serif !important;
 	line-height: 1.7 !important;
 	color: var(--neutral-on-background-medium) !important;
 	margin-bottom: 16px !important;
@@ -142,7 +140,7 @@ div,
 
 .portable-text ul,
 .portable-text ol {
-	font-family: 'Open Sans', 'Inter', sans-serif !important;
+	font-family: 'Inter', sans-serif !important;
 	margin-left: 24px !important;
 	margin-bottom: 16px !important;
 }
@@ -167,7 +165,7 @@ div,
 /* Enhanced tag styling similar to case study cards */
 [data-tag] {
 	transition: all 0.2s ease !important;
-	font-family: 'Open Sans', 'Inter', sans-serif !important;
+	font-family: 'Inter', sans-serif !important;
 	font-weight: 500 !important;
 	letter-spacing: 0.01em !important;
 }
@@ -223,7 +221,7 @@ div,
 
 /* External link buttons */
 [data-variant='secondary'] {
-	font-family: 'Open Sans', 'Inter', sans-serif !important;
+	font-family: 'Inter', sans-serif !important;
 	font-weight: 500 !important;
 	transition: all 0.2s ease !important;
 }
@@ -235,7 +233,7 @@ div,
 
 /* Primary buttons */
 [data-variant='primary'] {
-	font-family: 'Open Sans', 'Inter', sans-serif !important;
+	font-family: 'Inter', sans-serif !important;
 	font-weight: 600 !important;
 	transition: all 0.2s ease !important;
 }

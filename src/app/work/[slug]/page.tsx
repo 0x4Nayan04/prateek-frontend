@@ -148,7 +148,7 @@ export default async function CaseStudyPage({
 								fontSize: 'clamp(32px, 4vw, 48px)',
 								lineHeight: '1.2',
 								fontFamily:
-									'"Open Sans", "Inter", -apple-system, BlinkMacSystemFont, sans-serif',
+									'"Inter", -apple-system, BlinkMacSystemFont, sans-serif',
 								fontWeight: '700',
 								textAlign: 'left'
 							}}>
@@ -165,7 +165,7 @@ export default async function CaseStudyPage({
 								fontSize: 'clamp(16px, 2vw, 18px)',
 								lineHeight: '1.6',
 								fontFamily:
-									'"Open Sans", "Inter", -apple-system, BlinkMacSystemFont, sans-serif',
+									'"Inter", -apple-system, BlinkMacSystemFont, sans-serif',
 								textAlign: 'left'
 							}}>
 							{caseStudy.summary}
@@ -193,7 +193,7 @@ export default async function CaseStudyPage({
 									variant='body-default-s'
 									onBackground='neutral-medium'
 									style={{
-										fontFamily: '"Open Sans", "Inter", sans-serif',
+										fontFamily: '"Inter", sans-serif',
 										fontWeight: '500',
 										marginBottom: '8px',
 										display: 'block'
@@ -217,7 +217,7 @@ export default async function CaseStudyPage({
 												color: 'var(--neutral-on-background-strong)',
 												fontSize: '14px',
 												fontWeight: '500',
-												fontFamily: '"Open Sans", "Inter", sans-serif',
+												fontFamily: '"Inter", sans-serif',
 												borderRadius: '6px',
 												border: '1px solid var(--neutral-alpha-medium)',
 												transition: 'all 0.2s ease',
@@ -239,7 +239,7 @@ export default async function CaseStudyPage({
 									variant='body-default-s'
 									onBackground='neutral-medium'
 									style={{
-										fontFamily: '"Open Sans", "Inter", sans-serif',
+										fontFamily: '"Inter", sans-serif',
 										fontWeight: '500',
 										marginBottom: '8px',
 										display: 'block'
@@ -263,7 +263,7 @@ export default async function CaseStudyPage({
 												color: 'var(--brand-on-background-strong)',
 												fontSize: '14px',
 												fontWeight: '500',
-												fontFamily: '"Open Sans", "Inter", sans-serif',
+												fontFamily: '"Inter", sans-serif',
 												borderRadius: '6px',
 												border: '1px solid var(--brand-alpha-medium)',
 												transition: 'all 0.2s ease',
@@ -330,7 +330,7 @@ export default async function CaseStudyPage({
 							<Heading
 								variant='heading-strong-xl'
 								style={{
-									fontFamily: '"Open Sans", "Inter", sans-serif',
+									fontFamily: '"Inter", sans-serif',
 									fontWeight: '600',
 									fontSize: 'clamp(24px, 3vw, 28px)',
 									textAlign: 'left'
@@ -345,7 +345,7 @@ export default async function CaseStudyPage({
 								<PortableText
 									value={caseStudy.clientOverview}
 									style={{
-										fontFamily: '"Open Sans", "Inter", sans-serif'
+										fontFamily: '"Inter", sans-serif'
 									}}
 								/>
 							</div>
@@ -362,7 +362,7 @@ export default async function CaseStudyPage({
 							<Heading
 								variant='heading-strong-xl'
 								style={{
-									fontFamily: '"Open Sans", "Inter", sans-serif',
+									fontFamily: '"Inter", sans-serif',
 									fontWeight: '600',
 									fontSize: 'clamp(24px, 3vw, 28px)',
 									textAlign: 'left'
@@ -377,7 +377,7 @@ export default async function CaseStudyPage({
 								<PortableText
 									value={caseStudy.problem}
 									style={{
-										fontFamily: '"Open Sans", "Inter", sans-serif'
+										fontFamily: '"Inter", sans-serif'
 									}}
 								/>
 							</div>
@@ -394,7 +394,7 @@ export default async function CaseStudyPage({
 							<Heading
 								variant='heading-strong-xl'
 								style={{
-									fontFamily: '"Open Sans", "Inter", sans-serif',
+									fontFamily: '"Inter", sans-serif',
 									fontWeight: '600',
 									fontSize: 'clamp(24px, 3vw, 28px)',
 									textAlign: 'left'
@@ -409,7 +409,7 @@ export default async function CaseStudyPage({
 								<PortableText
 									value={caseStudy.approach}
 									style={{
-										fontFamily: '"Open Sans", "Inter", sans-serif'
+										fontFamily: '"Inter", sans-serif'
 									}}
 								/>
 							</div>
@@ -426,7 +426,7 @@ export default async function CaseStudyPage({
 							<Heading
 								variant='heading-strong-xl'
 								style={{
-									fontFamily: '"Open Sans", "Inter", sans-serif',
+									fontFamily: '"Inter", sans-serif',
 									fontWeight: '600',
 									fontSize: 'clamp(24px, 3vw, 28px)',
 									textAlign: 'left'
@@ -441,7 +441,7 @@ export default async function CaseStudyPage({
 								<PortableText
 									value={caseStudy.solution}
 									style={{
-										fontFamily: '"Open Sans", "Inter", sans-serif'
+										fontFamily: '"Inter", sans-serif'
 									}}
 								/>
 							</div>
@@ -458,7 +458,7 @@ export default async function CaseStudyPage({
 							<Heading
 								variant='heading-strong-xl'
 								style={{
-									fontFamily: '"Open Sans", "Inter", sans-serif',
+									fontFamily: '"Inter", sans-serif',
 									fontWeight: '600',
 									fontSize: 'clamp(24px, 3vw, 28px)',
 									textAlign: 'left'
@@ -473,7 +473,7 @@ export default async function CaseStudyPage({
 								<PortableText
 									value={caseStudy.result}
 									style={{
-										fontFamily: '"Open Sans", "Inter", sans-serif'
+										fontFamily: '"Inter", sans-serif'
 									}}
 								/>
 							</div>
@@ -490,7 +490,7 @@ export default async function CaseStudyPage({
 							<Heading
 								variant='heading-strong-xl'
 								style={{
-									fontFamily: '"Open Sans", "Inter", sans-serif',
+									fontFamily: '"Inter", sans-serif',
 									fontWeight: '600',
 									fontSize: 'clamp(24px, 3vw, 28px)',
 									textAlign: 'left'
@@ -539,7 +539,7 @@ export default async function CaseStudyPage({
 									<Heading
 										variant='heading-strong-xl'
 										style={{
-											fontFamily: '"Open Sans", "Inter", sans-serif',
+											fontFamily: '"Inter", sans-serif',
 											fontWeight: '600',
 											fontSize: 'clamp(24px, 3vw, 28px)',
 											textAlign: 'left'
@@ -572,7 +572,7 @@ export default async function CaseStudyPage({
 											suffixIcon='arrowUpRightFromSquare'
 											style={{
 												alignSelf: 'center',
-												fontFamily: '"Open Sans", "Inter", sans-serif'
+												fontFamily: '"Inter", sans-serif'
 											}}>
 											Open in New Tab
 										</Button>
@@ -591,7 +591,7 @@ export default async function CaseStudyPage({
 							<Heading
 								variant='heading-strong-xl'
 								style={{
-									fontFamily: '"Open Sans", "Inter", sans-serif',
+									fontFamily: '"Inter", sans-serif',
 									fontWeight: '600',
 									fontSize: 'clamp(24px, 3vw, 28px)',
 									textAlign: 'left'
@@ -617,7 +617,7 @@ export default async function CaseStudyPage({
 										fillWidth
 										style={{
 											justifyContent: 'flex-start',
-											fontFamily: '"Open Sans", "Inter", sans-serif'
+											fontFamily: '"Inter", sans-serif'
 										}}>
 										{link.title}
 									</Button>
@@ -665,7 +665,7 @@ export default async function CaseStudyPage({
 											border: 'none',
 											borderRadius: '8px',
 											cursor: 'pointer',
-											fontFamily: '"Open Sans", "Inter", sans-serif',
+											fontFamily: '"Inter", sans-serif',
 											textAlign: 'left',
 											maxWidth: '280px',
 											transition: 'none',
@@ -734,7 +734,7 @@ export default async function CaseStudyPage({
 									variant='body-default-s'
 									onBackground='neutral-strong'
 									style={{
-										fontFamily: '"Open Sans", "Inter", sans-serif',
+										fontFamily: '"Inter", sans-serif',
 										fontSize: '14px',
 										fontWeight: '600'
 									}}>
@@ -760,7 +760,7 @@ export default async function CaseStudyPage({
 											border: 'none',
 											borderRadius: '8px',
 											cursor: 'pointer',
-											fontFamily: '"Open Sans", "Inter", sans-serif',
+											fontFamily: '"Inter", sans-serif',
 											textAlign: 'right',
 											maxWidth: '280px',
 											justifyContent: 'flex-end',

@@ -9,7 +9,7 @@ const components = {
 		normal: ({ children }: any) => (
 			<p
 				style={{
-					fontFamily: ' "Open Sans", "Inter", sans-serif',
+					fontFamily: ' "Inter", sans-serif',
 					fontSize: '16px',
 					lineHeight: '1.6',
 					marginBottom: '16px',
@@ -21,7 +21,7 @@ const components = {
 		h1: ({ children }: any) => (
 			<h1
 				style={{
-					fontFamily: '"Open Sans", "Inter", sans-serif',
+					fontFamily: '"Inter", sans-serif',
 					fontSize: 'clamp(28px, 4vw, 36px)',
 					fontWeight: '700',
 					lineHeight: '1.2',
@@ -35,7 +35,7 @@ const components = {
 		h2: ({ children }: any) => (
 			<h2
 				style={{
-					fontFamily: '"Open Sans", "Inter", sans-serif',
+					fontFamily: '"Inter", sans-serif',
 					fontSize: 'clamp(24px, 3.5vw, 30px)',
 					fontWeight: '600',
 					lineHeight: '1.3',
@@ -49,7 +49,7 @@ const components = {
 		h3: ({ children }: any) => (
 			<h3
 				style={{
-					fontFamily: '"Open Sans", "Inter", sans-serif',
+					fontFamily: '"Inter", sans-serif',
 					fontSize: 'clamp(20px, 3vw, 24px)',
 					fontWeight: '600',
 					lineHeight: '1.4',
@@ -63,7 +63,7 @@ const components = {
 		h4: ({ children }: any) => (
 			<h4
 				style={{
-					fontFamily: '"Open Sans", "Inter", sans-serif',
+					fontFamily: '"Inter", sans-serif',
 					fontSize: 'clamp(18px, 2.5vw, 20px)',
 					fontWeight: '600',
 					lineHeight: '1.4',
@@ -77,7 +77,7 @@ const components = {
 		blockquote: ({ children }: any) => (
 			<blockquote
 				style={{
-					fontFamily: ' "Open Sans", "Inter", sans-serif',
+					fontFamily: ' "Inter", sans-serif',
 					fontSize: '18px',
 					fontStyle: 'italic',
 					lineHeight: '1.6',
@@ -95,7 +95,7 @@ const components = {
 		bullet: ({ children }: any) => (
 			<ul
 				style={{
-					fontFamily: ' "Open Sans", "Inter", sans-serif',
+					fontFamily: ' "Inter", sans-serif',
 					fontSize: '16px',
 					lineHeight: '1.6',
 					marginBottom: '16px',
@@ -108,7 +108,7 @@ const components = {
 		number: ({ children }: any) => (
 			<ol
 				style={{
-					fontFamily: ' "Open Sans", "Inter", sans-serif',
+					fontFamily: ' "Inter", sans-serif',
 					fontSize: '16px',
 					lineHeight: '1.6',
 					marginBottom: '16px',
@@ -219,7 +219,7 @@ const components = {
 					{value.caption && (
 						<p
 							style={{
-								fontFamily: '"Open Sans", "Inter", sans-serif',
+								fontFamily: '"Inter", sans-serif',
 								fontSize: '14px',
 								fontStyle: 'italic',
 								textAlign: 'center',

@@ -235,12 +235,12 @@ export default function Home() {
 						<RevealFx
 							translateY={8}
 							delay={0.1}>
-						<Heading
-							as='h2'
+							<Heading
+								as='h2'
 								variant='display-strong-m'
-							wrap='balance'>
+								wrap='balance'>
 								About Me
-						</Heading>
+							</Heading>
 						</RevealFx>
 					</Flex>
 					<Flex flex={2}>
