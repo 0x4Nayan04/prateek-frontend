@@ -94,7 +94,13 @@ export default async function CaseStudyPage({
 			fillWidth
 			horizontal='center'
 			gap='xl'
-			paddingY='32'>
+			paddingY='32'
+			style={{
+				maxWidth: '800px',
+				margin: '0 auto',
+				paddingLeft: 'clamp(16px, 4vw, 24px)',
+				paddingRight: 'clamp(16px, 4vw, 24px)'
+			}}>
 			<Schema
 				as='article'
 				baseURL={baseURL}
@@ -115,10 +121,8 @@ export default async function CaseStudyPage({
 
 			{/* Header Section */}
 			<Column
-				maxWidth='l'
-				paddingX='24'
-				gap='32'
-				style={{ width: '100%' }}>
+				fillWidth
+				gap='32'>
 				<RevealFx
 					translateY={16}
 					delay={0.1}>
@@ -141,11 +145,12 @@ export default async function CaseStudyPage({
 						<Heading
 							variant='display-strong-xl'
 							style={{
-								fontSize: 'clamp(32px, 4vw, 56px)',
-								lineHeight: '1.1',
+								fontSize: 'clamp(32px, 4vw, 48px)',
+								lineHeight: '1.2',
 								fontFamily:
 									'"Open Sans", "Inter", -apple-system, BlinkMacSystemFont, sans-serif',
-								fontWeight: '700'
+								fontWeight: '700',
+								textAlign: 'left'
 							}}>
 							{caseStudy.title}
 						</Heading>
@@ -157,12 +162,11 @@ export default async function CaseStudyPage({
 							variant='body-default-xl'
 							onBackground='neutral-medium'
 							style={{
-								fontSize: 'clamp(16px, 2vw, 20px)',
+								fontSize: 'clamp(16px, 2vw, 18px)',
 								lineHeight: '1.6',
 								fontFamily:
 									'"Open Sans", "Inter", -apple-system, BlinkMacSystemFont, sans-serif',
-								maxWidth: '100%',
-								marginRight: 'auto'
+								textAlign: 'left'
 							}}>
 							{caseStudy.summary}
 						</Text>
@@ -282,24 +286,27 @@ export default async function CaseStudyPage({
 					delay={0.4}>
 					<Column
 						fillWidth
-						horizontal='center'
-						style={{ width: '100%' }}>
+						style={{
+							marginLeft: 'calc(-1 * clamp(16px, 4vw, 24px))',
+							marginRight: 'calc(-1 * clamp(16px, 4vw, 24px))',
+							width: 'calc(100% + 2 * clamp(16px, 4vw, 24px))'
+						}}>
 						<div
 							style={{
 								width: '100%',
-								maxWidth: '1200px',
+								maxWidth: '1000px',
 								margin: '0 auto',
-								padding: '0 clamp(16px, 4vw, 48px)'
+								padding: '0 clamp(16px, 4vw, 24px)'
 							}}>
 							<Carousel
 								items={carouselImages}
 								aspectRatio='16/10'
 								indicator={carouselImages.length > 1 ? 'line' : undefined}
-								sizes='(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px'
+								sizes='(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1000px'
 								style={{
-									borderRadius: '16px',
+									borderRadius: '12px',
 									overflow: 'hidden',
-									boxShadow: '0 12px 40px rgba(0, 0, 0, 0.15)',
+									boxShadow: '0 8px 24px rgba(0, 0, 0, 0.1)',
 									border: '1px solid var(--neutral-alpha-medium)',
 									background: 'var(--surface)',
 									width: '100%'
@@ -312,10 +319,8 @@ export default async function CaseStudyPage({
 
 			{/* Content Sections */}
 			<Column
-				maxWidth='l'
-				paddingX='24'
-				gap='56'
-				style={{ width: '100%' }}>
+				fillWidth
+				gap='56'>
 				{/* Client Overview */}
 				{caseStudy.clientOverview && (
 					<RevealFx
@@ -327,7 +332,8 @@ export default async function CaseStudyPage({
 								style={{
 									fontFamily: '"Open Sans", "Inter", sans-serif',
 									fontWeight: '600',
-									fontSize: 'clamp(24px, 3vw, 32px)'
+									fontSize: 'clamp(24px, 3vw, 28px)',
+									textAlign: 'left'
 								}}>
 								Client Overview
 							</Heading>
@@ -335,12 +341,14 @@ export default async function CaseStudyPage({
 								fillWidth
 								background='neutral-alpha-medium'
 							/>
-							<PortableText
-								value={caseStudy.clientOverview}
-								style={{
-									fontFamily: '"Open Sans", "Inter", sans-serif'
-								}}
-							/>
+							<div style={{ textAlign: 'left' }}>
+								<PortableText
+									value={caseStudy.clientOverview}
+									style={{
+										fontFamily: '"Open Sans", "Inter", sans-serif'
+									}}
+								/>
+							</div>
 						</Column>
 					</RevealFx>
 				)}
@@ -356,7 +364,8 @@ export default async function CaseStudyPage({
 								style={{
 									fontFamily: '"Open Sans", "Inter", sans-serif',
 									fontWeight: '600',
-									fontSize: 'clamp(24px, 3vw, 32px)'
+									fontSize: 'clamp(24px, 3vw, 28px)',
+									textAlign: 'left'
 								}}>
 								Problem
 							</Heading>
@@ -364,12 +373,14 @@ export default async function CaseStudyPage({
 								fillWidth
 								background='neutral-alpha-medium'
 							/>
-							<PortableText
-								value={caseStudy.problem}
-								style={{
-									fontFamily: '"Open Sans", "Inter", sans-serif'
-								}}
-							/>
+							<div style={{ textAlign: 'left' }}>
+								<PortableText
+									value={caseStudy.problem}
+									style={{
+										fontFamily: '"Open Sans", "Inter", sans-serif'
+									}}
+								/>
+							</div>
 						</Column>
 					</RevealFx>
 				)}
@@ -385,7 +396,8 @@ export default async function CaseStudyPage({
 								style={{
 									fontFamily: '"Open Sans", "Inter", sans-serif',
 									fontWeight: '600',
-									fontSize: 'clamp(24px, 3vw, 32px)'
+									fontSize: 'clamp(24px, 3vw, 28px)',
+									textAlign: 'left'
 								}}>
 								Approach
 							</Heading>
@@ -393,12 +405,14 @@ export default async function CaseStudyPage({
 								fillWidth
 								background='neutral-alpha-medium'
 							/>
-							<PortableText
-								value={caseStudy.approach}
-								style={{
-									fontFamily: '"Open Sans", "Inter", sans-serif'
-								}}
-							/>
+							<div style={{ textAlign: 'left' }}>
+								<PortableText
+									value={caseStudy.approach}
+									style={{
+										fontFamily: '"Open Sans", "Inter", sans-serif'
+									}}
+								/>
+							</div>
 						</Column>
 					</RevealFx>
 				)}
@@ -414,7 +428,8 @@ export default async function CaseStudyPage({
 								style={{
 									fontFamily: '"Open Sans", "Inter", sans-serif',
 									fontWeight: '600',
-									fontSize: 'clamp(24px, 3vw, 32px)'
+									fontSize: 'clamp(24px, 3vw, 28px)',
+									textAlign: 'left'
 								}}>
 								Solution
 							</Heading>
@@ -422,12 +437,14 @@ export default async function CaseStudyPage({
 								fillWidth
 								background='neutral-alpha-medium'
 							/>
-							<PortableText
-								value={caseStudy.solution}
-								style={{
-									fontFamily: '"Open Sans", "Inter", sans-serif'
-								}}
-							/>
+							<div style={{ textAlign: 'left' }}>
+								<PortableText
+									value={caseStudy.solution}
+									style={{
+										fontFamily: '"Open Sans", "Inter", sans-serif'
+									}}
+								/>
+							</div>
 						</Column>
 					</RevealFx>
 				)}
@@ -443,7 +460,8 @@ export default async function CaseStudyPage({
 								style={{
 									fontFamily: '"Open Sans", "Inter", sans-serif',
 									fontWeight: '600',
-									fontSize: 'clamp(24px, 3vw, 32px)'
+									fontSize: 'clamp(24px, 3vw, 28px)',
+									textAlign: 'left'
 								}}>
 								Result & Impact
 							</Heading>
@@ -451,12 +469,14 @@ export default async function CaseStudyPage({
 								fillWidth
 								background='neutral-alpha-medium'
 							/>
-							<PortableText
-								value={caseStudy.result}
-								style={{
-									fontFamily: '"Open Sans", "Inter", sans-serif'
-								}}
-							/>
+							<div style={{ textAlign: 'left' }}>
+								<PortableText
+									value={caseStudy.result}
+									style={{
+										fontFamily: '"Open Sans", "Inter", sans-serif'
+									}}
+								/>
+							</div>
 						</Column>
 					</RevealFx>
 				)}
@@ -472,7 +492,8 @@ export default async function CaseStudyPage({
 								style={{
 									fontFamily: '"Open Sans", "Inter", sans-serif',
 									fontWeight: '600',
-									fontSize: 'clamp(24px, 3vw, 32px)'
+									fontSize: 'clamp(24px, 3vw, 28px)',
+									textAlign: 'left'
 								}}>
 								Live Dashboard
 							</Heading>
@@ -520,7 +541,8 @@ export default async function CaseStudyPage({
 										style={{
 											fontFamily: '"Open Sans", "Inter", sans-serif',
 											fontWeight: '600',
-											fontSize: 'clamp(24px, 3vw, 32px)'
+											fontSize: 'clamp(24px, 3vw, 28px)',
+											textAlign: 'left'
 										}}>
 										Report Document
 									</Heading>
@@ -571,7 +593,8 @@ export default async function CaseStudyPage({
 								style={{
 									fontFamily: '"Open Sans", "Inter", sans-serif',
 									fontWeight: '600',
-									fontSize: 'clamp(24px, 3vw, 32px)'
+									fontSize: 'clamp(24px, 3vw, 28px)',
+									textAlign: 'left'
 								}}>
 								External Links
 							</Heading>
@@ -612,13 +635,7 @@ export default async function CaseStudyPage({
 					delay={1.4}>
 					<Column
 						fillWidth
-						horizontal='center'
-						style={{
-							maxWidth: '1200px',
-							margin: '0 auto',
-							paddingLeft: 'clamp(16px, 4vw, 48px)',
-							paddingRight: 'clamp(16px, 4vw, 48px)'
-						}}>
+						gap='24'>
 						<Line
 							fillWidth
 							background='neutral-alpha-medium'
@@ -626,20 +643,14 @@ export default async function CaseStudyPage({
 						<Row
 							fillWidth
 							gap='24'
-							paddingY='32'
+							paddingY='24'
 							mobileDirection='column'
-							horizontal='center'
-							vertical='center'
-							style={{
-								alignItems: 'center',
-								justifyContent: 'center'
-							}}>
+							horizontal='space-between'
+							vertical='center'>
 							{/* Previous Case Study */}
 							<Column
 								style={{
-									flex: '1',
-									maxWidth: '300px',
-									minWidth: '200px'
+									flex: '1'
 								}}>
 								{previousCaseStudy ? (
 									<a
@@ -648,15 +659,15 @@ export default async function CaseStudyPage({
 											all: 'unset',
 											display: 'flex',
 											alignItems: 'center',
-											gap: '12px',
-											padding: '16px 20px',
+											gap: '8px',
+											padding: '12px 16px',
 											backgroundColor: 'transparent',
 											border: 'none',
-											borderRadius: '12px',
+											borderRadius: '8px',
 											cursor: 'pointer',
 											fontFamily: '"Open Sans", "Inter", sans-serif',
 											textAlign: 'left',
-											width: '100%',
+											maxWidth: '280px',
 											transition: 'none',
 											textDecoration: 'none'
 										}}>
@@ -714,11 +725,10 @@ export default async function CaseStudyPage({
 								vertical='center'
 								style={{
 									flexShrink: 0,
-									padding: '12px 20px',
+									padding: '10px 16px',
 									backgroundColor: 'var(--neutral-alpha-weak)',
-									borderRadius: '12px',
-									border: '1px solid var(--neutral-alpha-medium)',
-									minWidth: '100px'
+									borderRadius: '8px',
+									border: '1px solid var(--neutral-alpha-medium)'
 								}}>
 								<Text
 									variant='body-default-s'
@@ -735,9 +745,7 @@ export default async function CaseStudyPage({
 							{/* Next Case Study */}
 							<Column
 								style={{
-									flex: '1',
-									maxWidth: '300px',
-									minWidth: '200px'
+									flex: '1'
 								}}>
 								{nextCaseStudy ? (
 									<a
@@ -746,16 +754,17 @@ export default async function CaseStudyPage({
 											all: 'unset',
 											display: 'flex',
 											alignItems: 'center',
-											gap: '12px',
-											padding: '16px 20px',
+											gap: '8px',
+											padding: '12px 16px',
 											backgroundColor: 'transparent',
 											border: 'none',
-											borderRadius: '12px',
+											borderRadius: '8px',
 											cursor: 'pointer',
 											fontFamily: '"Open Sans", "Inter", sans-serif',
 											textAlign: 'right',
-											width: '100%',
+											maxWidth: '280px',
 											justifyContent: 'flex-end',
+											marginLeft: 'auto',
 											transition: 'none',
 											textDecoration: 'none'
 										}}>
