@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { Fade, Flex, ToggleButton } from '@once-ui-system/core';
@@ -54,18 +54,83 @@ function TimeDisplay({ timeZone, locale = 'en-GB' }: TimeDisplayProps) {
 	return <>{time}</>;
 }
 
-const scrollToAbout = () => {
-	const aboutSection = document.getElementById('about');
-	if (aboutSection) {
-		aboutSection.scrollIntoView({
-			behavior: 'smooth',
-			block: 'start'
-		});
-	}
-};
-
 export const Header = () => {
 	const pathname = usePathname() ?? '';
+	const router = useRouter();
+	const [isAboutInView, setIsAboutInView] = useState(false);
+	const [mounted, setMounted] = useState(false);
+
+	// Handle mounting for SSR safety
+	useEffect(() => {
+		setMounted(true);
+	}, []);
+
+	// Set up intersection observer to track about section visibility
+	useEffect(() => {
+		if (!mounted || pathname !== '/') {
+			setIsAboutInView(false);
+			return;
+		}
+
+		const aboutSection = document.getElementById('about');
+		if (!aboutSection) return;
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.target.id === 'about') {
+						setIsAboutInView(entry.isIntersecting);
+						// Update URL hash when about section comes into view
+						if (entry.isIntersecting) {
+							window.history.replaceState(null, '', '#about');
+						} else {
+							// Remove hash when scrolling away from about section
+							if (window.location.hash === '#about') {
+								window.history.replaceState(null, '', '/');
+							}
+						}
+					}
+				});
+			},
+			{
+				// Trigger when 50% of the about section is visible
+				threshold: 0.5,
+				// Add some margin to trigger before the section is fully in view
+				rootMargin: '-20% 0px -20% 0px'
+			}
+		);
+
+		observer.observe(aboutSection);
+
+		return () => {
+			observer.disconnect();
+		};
+	}, [mounted, pathname]);
+
+	// Determine if About section should be highlighted
+	const isAboutActive =
+		mounted &&
+		pathname === '/' &&
+		(isAboutInView ||
+			(typeof window !== 'undefined' && window.location.hash === '#about'));
+
+	const scrollToAbout = () => {
+		// If we're already on the homepage, just scroll to about
+		if (pathname === '/') {
+			const aboutSection = document.getElementById('about');
+			if (aboutSection) {
+				aboutSection.scrollIntoView({
+					behavior: 'smooth',
+					block: 'start'
+				});
+				// Update URL hash to reflect the about section
+				window.history.replaceState(null, '', '#about');
+			}
+		} else {
+			// If we're on a different page, navigate to homepage with hash
+			router.push('/#about');
+		}
+	};
 
 	return (
 		<>
@@ -142,13 +207,13 @@ export const Header = () => {
 										prefixIcon='person'
 										onClick={scrollToAbout}
 										label={about.label}
-										selected={false}
+										selected={isAboutActive}
 									/>
 									<ToggleButton
 										className='s-flex-show'
 										prefixIcon='person'
 										onClick={scrollToAbout}
-										selected={false}
+										selected={isAboutActive}
 									/>
 								</>
 							)}

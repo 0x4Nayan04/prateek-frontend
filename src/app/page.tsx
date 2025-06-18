@@ -15,6 +15,7 @@ import {
 import { home, person, baseURL, routes } from '@/resources';
 import { Posts } from '@/components/blog/Posts';
 import { ModernProjects } from '@/components/work/ModernProjects';
+import { ScrollToHash } from '@/components';
 
 // Elegant Section Separator Component
 const SectionSeparator = ({
@@ -65,6 +66,7 @@ export default function Home() {
 			fillWidth
 			gap='0'
 			horizontal='center'>
+			<ScrollToHash />
 			<Schema
 				as='webPage'
 				baseURL={baseURL}

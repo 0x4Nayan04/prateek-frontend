@@ -34,9 +34,19 @@ export function InfiniteCaseStudyGrid({
 	const [loading, setLoading] = useState(false);
 	const [hasMore, setHasMore] = useState(true);
 	const [offset, setOffset] = useState(initialCaseStudies.length);
+	const [mounted, setMounted] = useState(false);
+
+	// Handle hydration
+	useEffect(() => {
+		setMounted(true);
+		// Initialize hasMore state based on initial data
+		if (initialCaseStudies.length < itemsPerPage) {
+			setHasMore(false);
+		}
+	}, [initialCaseStudies.length, itemsPerPage]);
 
 	const loadMore = useCallback(async () => {
-		if (loading) return false;
+		if (loading || !mounted) return false;
 
 		setLoading(true);
 
@@ -59,54 +69,79 @@ export function InfiniteCaseStudyGrid({
 		} finally {
 			setLoading(false);
 		}
-	}, [offset, itemsPerPage, loading]);
+	}, [offset, itemsPerPage, loading, mounted]);
 
-	// Initialize hasMore state based on initial data
-	useEffect(() => {
-		if (initialCaseStudies.length < itemsPerPage) {
-			setHasMore(false);
-		}
-	}, [initialCaseStudies.length, itemsPerPage]);
-
-	const renderCaseStudyItem = (caseStudy: CaseStudy, index: number) => (
-		<ModernCaseStudyCard
-			key={caseStudy._id}
-			caseStudy={caseStudy}
-			index={index}
-			priority={index < 4}
-		/>
-	);
-
-	const renderGrid = (items: CaseStudy[]) => {
-		// Create chunks for grid layout
-		const chunks: CaseStudy[][] = [];
-		for (let i = 0; i < items.length; i += columns.desktop) {
-			chunks.push(items.slice(i, i + columns.desktop));
-		}
-
+	// Don't render infinite scroll until mounted to avoid hydration issues
+	if (!mounted) {
 		return (
 			<Column
-				gap='48'
-				fillWidth>
-				{chunks.map((chunk, chunkIndex) => (
-					<Grid
-						key={chunkIndex}
-						columns={columns.desktop as any}
-						tabletColumns={columns.tablet as any}
-						mobileColumns={columns.mobile as any}
-						gap='48'
-						fillWidth>
-						{chunk.map((caseStudy, index) =>
-							renderCaseStudyItem(
-								caseStudy,
-								chunkIndex * columns.desktop + index
-							)
-						)}
-					</Grid>
-				))}
+				fillWidth
+				gap='40'>
+				{/* Header */}
+				{title && (
+					<RevealFx
+						translateY={12}
+						delay={0.1}
+						fillWidth
+						horizontal='center'
+						vertical='center'
+						paddingY='m'>
+						<Heading
+							variant='display-strong-l'
+							onBackground='neutral-strong'
+							align='center'
+							style={{
+								fontSize: '48px',
+								fontWeight: '800',
+								color: 'white'
+							}}>
+							{title}
+						</Heading>
+					</RevealFx>
+				)}
+
+				{/* Initial static grid for SSR */}
+				<Column
+					fillWidth
+					paddingX='l'>
+					{initialCaseStudies.length > 0 ? (
+						<Grid
+							columns={columns.desktop as any}
+							tabletColumns={columns.tablet as any}
+							mobileColumns={columns.mobile as any}
+							gap='48'
+							fillWidth>
+							{initialCaseStudies.map((caseStudy, index) => (
+								<ModernCaseStudyCard
+									key={caseStudy._id}
+									caseStudy={caseStudy}
+									index={index}
+									priority={index < 4}
+								/>
+							))}
+						</Grid>
+					) : (
+						<Column
+							fillWidth
+							center
+							padding='xl'
+							gap='20'
+							background='surface'
+							border='neutral-alpha-weak'
+							radius='xl'>
+							<Text
+								variant='heading-default-l'
+								onBackground='neutral-strong'
+								align='center'
+								style={{ fontSize: '28px', fontWeight: '700' }}>
+								Loading case studies...
+							</Text>
+						</Column>
+					)}
+				</Column>
 			</Column>
 		);
-	};
+	}
 
 	return (
 		<Column
@@ -135,7 +170,7 @@ export function InfiniteCaseStudyGrid({
 				</RevealFx>
 			)}
 
-			{/* Infinite Scroll Grid */}
+			{/* Infinite Scroll Grid - Only after mounting */}
 			<Column
 				fillWidth
 				paddingX='l'>

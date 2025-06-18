@@ -1,114 +1,149 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
-import { routes, protectedRoutes } from "@/resources";
-import { Flex, Spinner, Button, Heading, Column, PasswordInput } from "@once-ui-system/core";
-import NotFound from "@/app/not-found";
+import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { routes, protectedRoutes } from '@/resources';
+import {
+	Flex,
+	Spinner,
+	Button,
+	Heading,
+	Column,
+	PasswordInput
+} from '@once-ui-system/core';
+import NotFound from '@/app/not-found';
 
 interface RouteGuardProps {
 	children: React.ReactNode;
 }
 
 const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
-  const pathname = usePathname();
-  const [isRouteEnabled, setIsRouteEnabled] = useState(false);
-  const [isPasswordRequired, setIsPasswordRequired] = useState(false);
-  const [password, setPassword] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [error, setError] = useState<string | undefined>(undefined);
-  const [loading, setLoading] = useState(true);
+	const pathname = usePathname();
+	const [isRouteEnabled, setIsRouteEnabled] = useState(false);
+	const [isPasswordRequired, setIsPasswordRequired] = useState(false);
+	const [password, setPassword] = useState('');
+	const [isAuthenticated, setIsAuthenticated] = useState(false);
+	const [error, setError] = useState<string | undefined>(undefined);
+	const [loading, setLoading] = useState(true);
+	const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    const performChecks = async () => {
-      setLoading(true);
-      setIsRouteEnabled(false);
-      setIsPasswordRequired(false);
-      setIsAuthenticated(false);
+	useEffect(() => {
+		setMounted(true);
 
-      const checkRouteEnabled = () => {
-        if (!pathname) return false;
+		const performChecks = async () => {
+			setLoading(true);
+			setIsRouteEnabled(false);
+			setIsPasswordRequired(false);
+			setIsAuthenticated(false);
 
-        if (pathname in routes) {
-          return routes[pathname as keyof typeof routes];
-        }
+			const checkRouteEnabled = () => {
+				if (!pathname) return false;
 
-        const dynamicRoutes = ["/blog", "/work"] as const;
-        for (const route of dynamicRoutes) {
-          if (pathname?.startsWith(route) && routes[route]) {
-            return true;
-          }
-        }
+				if (pathname in routes) {
+					return routes[pathname as keyof typeof routes];
+				}
 
-        return false;
-      };
+				const dynamicRoutes = ['/blog', '/work'] as const;
+				for (const route of dynamicRoutes) {
+					if (pathname?.startsWith(route) && routes[route]) {
+						return true;
+					}
+				}
 
-      const routeEnabled = checkRouteEnabled();
-      setIsRouteEnabled(routeEnabled);
+				return false;
+			};
 
-      if (protectedRoutes[pathname as keyof typeof protectedRoutes]) {
-        setIsPasswordRequired(true);
+			const routeEnabled = checkRouteEnabled();
+			setIsRouteEnabled(routeEnabled);
 
-        const response = await fetch("/api/check-auth");
-        if (response.ok) {
-          setIsAuthenticated(true);
-        }
-      }
+			if (protectedRoutes[pathname as keyof typeof protectedRoutes]) {
+				setIsPasswordRequired(true);
 
-      setLoading(false);
-    };
+				try {
+					const response = await fetch('/api/check-auth');
+					if (response.ok) {
+						setIsAuthenticated(true);
+					}
+				} catch (error) {
+					console.error('Auth check failed:', error);
+				}
+			}
 
-    performChecks();
-  }, [pathname]);
+			setLoading(false);
+		};
 
-  const handlePasswordSubmit = async () => {
-    const response = await fetch("/api/authenticate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password }),
-    });
+		performChecks();
+	}, [pathname]);
 
-    if (response.ok) {
-      setIsAuthenticated(true);
-      setError(undefined);
-    } else {
-      setError("Incorrect password");
-    }
-  };
+	const handlePasswordSubmit = async () => {
+		try {
+			const response = await fetch('/api/authenticate', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ password })
+			});
 
-  if (loading) {
-    return (
-      <Flex fillWidth paddingY="128" horizontal="center">
-        <Spinner />
-      </Flex>
-    );
-  }
+			if (response.ok) {
+				setIsAuthenticated(true);
+				setError(undefined);
+			} else {
+				setError('Incorrect password');
+			}
+		} catch (error) {
+			setError('Authentication failed');
+		}
+	};
 
-  if (!isRouteEnabled) {
+	// During hydration, render children to match SSR
+	if (!mounted) {
+		return <>{children}</>;
+	}
+
+	if (loading) {
+		return (
+			<Flex
+				fillWidth
+				paddingY='128'
+				horizontal='center'>
+				<Spinner />
+			</Flex>
+		);
+	}
+
+	if (!isRouteEnabled) {
 		return <NotFound />;
 	}
 
-  if (isPasswordRequired && !isAuthenticated) {
-    return (
-      <Column paddingY="128" maxWidth={24} gap="24" center>
-        <Heading align="center" wrap="balance">
-          This page is password protected
-        </Heading>
-        <Column fillWidth gap="8" horizontal="center">
-          <PasswordInput
-            id="password"
-            label="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            errorMessage={error}
-          />
-          <Button onClick={handlePasswordSubmit}>Submit</Button>
-        </Column>
-      </Column>
-    );
-  }
+	if (isPasswordRequired && !isAuthenticated) {
+		return (
+			<Column
+				paddingY='128'
+				maxWidth={24}
+				gap='24'
+				center>
+				<Heading
+					align='center'
+					wrap='balance'>
+					This page is password protected
+				</Heading>
+				<Column
+					fillWidth
+					gap='8'
+					horizontal='center'>
+					<PasswordInput
+						id='password'
+						label='Password'
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+						errorMessage={error}
+					/>
+					<Button onClick={handlePasswordSubmit}>Submit</Button>
+				</Column>
+			</Column>
+		);
+	}
 
-  return <>{children}</>;
+	return <>{children}</>;
 };
 
 export { RouteGuard };
