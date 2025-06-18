@@ -1,9 +1,4 @@
-import {
-	AutoCarousel,
-	PDFViewer,
-	PortableText,
-	ScrollToHash
-} from '@/components';
+import { PortableText, ScrollToHash } from '@/components';
 import { getFileUrl, urlFor } from '@/lib/sanity/client';
 import { getAllCaseStudies, getCaseStudyBySlug } from '@/lib/utils/content';
 import { about, baseURL, person, work } from '@/resources';
@@ -16,7 +11,9 @@ import {
 	RevealFx,
 	Schema,
 	Text,
-	Row
+	Row,
+	Line,
+	Carousel
 } from '@once-ui-system/core';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -63,8 +60,20 @@ export default async function CaseStudyPage({
 		notFound();
 	}
 
+	// Get all case studies for pagination
+	const allCaseStudies = await getAllCaseStudies();
+	const currentIndex = allCaseStudies.findIndex(
+		(cs) => cs.slug.current === slug
+	);
+	const previousCaseStudy =
+		currentIndex > 0 ? allCaseStudies[currentIndex - 1] : null;
+	const nextCaseStudy =
+		currentIndex < allCaseStudies.length - 1
+			? allCaseStudies[currentIndex + 1]
+			: null;
+
 	// Prepare carousel items from case study images
-	const carouselItems =
+	const carouselImages =
 		caseStudy.images?.map((image, idx) => {
 			const imageUrl = urlFor(image)
 				.width(1200)
@@ -128,7 +137,7 @@ export default async function CaseStudyPage({
 				<RevealFx
 					translateY={16}
 					delay={0.2}>
-					<Column gap='20'>
+					<Column gap='16'>
 						<Heading
 							variant='display-strong-xl'
 							style={{
@@ -140,6 +149,10 @@ export default async function CaseStudyPage({
 							}}>
 							{caseStudy.title}
 						</Heading>
+						<Line
+							fillWidth
+							background='neutral-alpha-medium'
+						/>
 						<Text
 							variant='body-default-xl'
 							onBackground='neutral-medium'
@@ -262,25 +275,37 @@ export default async function CaseStudyPage({
 				</RevealFx>
 			</Column>
 
-			{/* Auto Carousel - Skip thumbnail, directly show gallery */}
-			{carouselItems.length > 0 && (
+			{/* Image Gallery Carousel */}
+			{carouselImages.length > 0 && (
 				<RevealFx
 					translateY={16}
 					delay={0.4}>
 					<Column
-						maxWidth='l'
-						paddingX='24'
-						gap='16'
+						fillWidth
+						horizontal='center'
 						style={{ width: '100%' }}>
-						<AutoCarousel
-							items={carouselItems}
-							aspectRatio='16/10'
-							autoAdvanceInterval={4000}
+						<div
 							style={{
-								marginTop: '32px',
-								position: 'relative'
-							}}
-						/>
+								width: '100%',
+								maxWidth: '1200px',
+								margin: '0 auto',
+								padding: '0 clamp(16px, 4vw, 48px)'
+							}}>
+							<Carousel
+								items={carouselImages}
+								aspectRatio='16/10'
+								indicator={carouselImages.length > 1 ? 'line' : undefined}
+								sizes='(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px'
+								style={{
+									borderRadius: '16px',
+									overflow: 'hidden',
+									boxShadow: '0 12px 40px rgba(0, 0, 0, 0.15)',
+									border: '1px solid var(--neutral-alpha-medium)',
+									background: 'var(--surface)',
+									width: '100%'
+								}}
+							/>
+						</div>
 					</Column>
 				</RevealFx>
 			)}
@@ -296,7 +321,7 @@ export default async function CaseStudyPage({
 					<RevealFx
 						translateY={16}
 						delay={0.6}>
-						<Column gap='24'>
+						<Column gap='16'>
 							<Heading
 								variant='heading-strong-xl'
 								style={{
@@ -306,6 +331,10 @@ export default async function CaseStudyPage({
 								}}>
 								Client Overview
 							</Heading>
+							<Line
+								fillWidth
+								background='neutral-alpha-medium'
+							/>
 							<PortableText
 								value={caseStudy.clientOverview}
 								style={{
@@ -321,7 +350,7 @@ export default async function CaseStudyPage({
 					<RevealFx
 						translateY={16}
 						delay={0.7}>
-						<Column gap='24'>
+						<Column gap='16'>
 							<Heading
 								variant='heading-strong-xl'
 								style={{
@@ -331,6 +360,10 @@ export default async function CaseStudyPage({
 								}}>
 								Problem
 							</Heading>
+							<Line
+								fillWidth
+								background='neutral-alpha-medium'
+							/>
 							<PortableText
 								value={caseStudy.problem}
 								style={{
@@ -346,7 +379,7 @@ export default async function CaseStudyPage({
 					<RevealFx
 						translateY={16}
 						delay={0.8}>
-						<Column gap='24'>
+						<Column gap='16'>
 							<Heading
 								variant='heading-strong-xl'
 								style={{
@@ -356,6 +389,10 @@ export default async function CaseStudyPage({
 								}}>
 								Approach
 							</Heading>
+							<Line
+								fillWidth
+								background='neutral-alpha-medium'
+							/>
 							<PortableText
 								value={caseStudy.approach}
 								style={{
@@ -371,7 +408,7 @@ export default async function CaseStudyPage({
 					<RevealFx
 						translateY={16}
 						delay={0.9}>
-						<Column gap='24'>
+						<Column gap='16'>
 							<Heading
 								variant='heading-strong-xl'
 								style={{
@@ -381,6 +418,10 @@ export default async function CaseStudyPage({
 								}}>
 								Solution
 							</Heading>
+							<Line
+								fillWidth
+								background='neutral-alpha-medium'
+							/>
 							<PortableText
 								value={caseStudy.solution}
 								style={{
@@ -396,7 +437,7 @@ export default async function CaseStudyPage({
 					<RevealFx
 						translateY={16}
 						delay={1.0}>
-						<Column gap='24'>
+						<Column gap='16'>
 							<Heading
 								variant='heading-strong-xl'
 								style={{
@@ -406,6 +447,10 @@ export default async function CaseStudyPage({
 								}}>
 								Result & Impact
 							</Heading>
+							<Line
+								fillWidth
+								background='neutral-alpha-medium'
+							/>
 							<PortableText
 								value={caseStudy.result}
 								style={{
@@ -421,7 +466,7 @@ export default async function CaseStudyPage({
 					<RevealFx
 						translateY={16}
 						delay={1.1}>
-						<Column gap='24'>
+						<Column gap='16'>
 							<Heading
 								variant='heading-strong-xl'
 								style={{
@@ -431,6 +476,10 @@ export default async function CaseStudyPage({
 								}}>
 								Live Dashboard
 							</Heading>
+							<Line
+								fillWidth
+								background='neutral-alpha-medium'
+							/>
 							<div
 								style={{
 									border: '1px solid var(--neutral-alpha-medium)',
@@ -463,7 +512,9 @@ export default async function CaseStudyPage({
 							<RevealFx
 								translateY={16}
 								delay={1.2}>
-								<Column gap='24'>
+								<Column
+									gap='16'
+									fillWidth>
 									<Heading
 										variant='heading-strong-xl'
 										style={{
@@ -473,7 +524,37 @@ export default async function CaseStudyPage({
 										}}>
 										Report Document
 									</Heading>
-									<PDFViewer fileUrl={pdfUrl} />
+									<Line
+										fillWidth
+										background='neutral-alpha-medium'
+									/>
+									<Column
+										gap='16'
+										fillWidth>
+										<iframe
+											src={pdfUrl}
+											style={{
+												width: '100%',
+												height: '700px',
+												border: '1px solid var(--neutral-alpha-medium)',
+												borderRadius: '16px',
+												backgroundColor: 'var(--neutral-solid-weak)'
+											}}
+											title={`${caseStudy.title} PDF Document`}
+										/>
+										<Button
+											href={pdfUrl}
+											target='_blank'
+											variant='primary'
+											size='m'
+											suffixIcon='arrowUpRightFromSquare'
+											style={{
+												alignSelf: 'center',
+												fontFamily: '"Open Sans", "Inter", sans-serif'
+											}}>
+											Open in New Tab
+										</Button>
+									</Column>
 								</Column>
 							</RevealFx>
 						) : null;
@@ -484,7 +565,7 @@ export default async function CaseStudyPage({
 					<RevealFx
 						translateY={16}
 						delay={1.3}>
-						<Column gap='24'>
+						<Column gap='16'>
 							<Heading
 								variant='heading-strong-xl'
 								style={{
@@ -494,6 +575,10 @@ export default async function CaseStudyPage({
 								}}>
 								External Links
 							</Heading>
+							<Line
+								fillWidth
+								background='neutral-alpha-medium'
+							/>
 							<Grid
 								columns='2'
 								tabletColumns='1'
@@ -519,6 +604,213 @@ export default async function CaseStudyPage({
 					</RevealFx>
 				)}
 			</Column>
+
+			{/* Pagination Section */}
+			{(previousCaseStudy || nextCaseStudy) && (
+				<RevealFx
+					translateY={16}
+					delay={1.4}>
+					<Column
+						fillWidth
+						horizontal='center'
+						style={{
+							maxWidth: '1200px',
+							margin: '0 auto',
+							paddingLeft: 'clamp(16px, 4vw, 48px)',
+							paddingRight: 'clamp(16px, 4vw, 48px)'
+						}}>
+						<Line
+							fillWidth
+							background='neutral-alpha-medium'
+						/>
+						<Row
+							fillWidth
+							gap='24'
+							paddingY='32'
+							mobileDirection='column'
+							horizontal='center'
+							vertical='center'
+							style={{
+								alignItems: 'center',
+								justifyContent: 'center'
+							}}>
+							{/* Previous Case Study */}
+							<Column
+								style={{
+									flex: '1',
+									maxWidth: '300px',
+									minWidth: '200px'
+								}}>
+								{previousCaseStudy ? (
+									<a
+										href={`/work/${previousCaseStudy.slug.current}`}
+										style={{
+											all: 'unset',
+											display: 'flex',
+											alignItems: 'center',
+											gap: '12px',
+											padding: '16px 20px',
+											backgroundColor: 'transparent',
+											border: 'none',
+											borderRadius: '12px',
+											cursor: 'pointer',
+											fontFamily: '"Open Sans", "Inter", sans-serif',
+											textAlign: 'left',
+											width: '100%',
+											transition: 'none',
+											textDecoration: 'none'
+										}}>
+										<svg
+											width='20'
+											height='20'
+											viewBox='0 0 24 24'
+											fill='none'
+											stroke='currentColor'
+											strokeWidth='2'
+											style={{
+												flexShrink: 0,
+												color: 'var(--neutral-on-background-medium)'
+											}}>
+											<path d='m15 18-6-6 6-6' />
+										</svg>
+										<Column
+											gap='4'
+											fillWidth>
+											<Text
+												variant='label-default-xs'
+												onBackground='neutral-medium'
+												style={{
+													fontSize: '11px',
+													textTransform: 'uppercase',
+													letterSpacing: '0.8px',
+													fontWeight: '500'
+												}}>
+												Previous
+											</Text>
+											<Text
+												variant='body-default-s'
+												onBackground='neutral-strong'
+												style={{
+													textAlign: 'left',
+													overflow: 'hidden',
+													textOverflow: 'ellipsis',
+													whiteSpace: 'nowrap',
+													fontWeight: '600',
+													fontSize: '14px',
+													lineHeight: '1.4'
+												}}>
+												{previousCaseStudy.title}
+											</Text>
+										</Column>
+									</a>
+								) : (
+									<div />
+								)}
+							</Column>
+
+							{/* Navigation Indicator */}
+							<Column
+								horizontal='center'
+								vertical='center'
+								style={{
+									flexShrink: 0,
+									padding: '12px 20px',
+									backgroundColor: 'var(--neutral-alpha-weak)',
+									borderRadius: '12px',
+									border: '1px solid var(--neutral-alpha-medium)',
+									minWidth: '100px'
+								}}>
+								<Text
+									variant='body-default-s'
+									onBackground='neutral-strong'
+									style={{
+										fontFamily: '"Open Sans", "Inter", sans-serif',
+										fontSize: '14px',
+										fontWeight: '600'
+									}}>
+									{currentIndex + 1} of {allCaseStudies.length}
+								</Text>
+							</Column>
+
+							{/* Next Case Study */}
+							<Column
+								style={{
+									flex: '1',
+									maxWidth: '300px',
+									minWidth: '200px'
+								}}>
+								{nextCaseStudy ? (
+									<a
+										href={`/work/${nextCaseStudy.slug.current}`}
+										style={{
+											all: 'unset',
+											display: 'flex',
+											alignItems: 'center',
+											gap: '12px',
+											padding: '16px 20px',
+											backgroundColor: 'transparent',
+											border: 'none',
+											borderRadius: '12px',
+											cursor: 'pointer',
+											fontFamily: '"Open Sans", "Inter", sans-serif',
+											textAlign: 'right',
+											width: '100%',
+											justifyContent: 'flex-end',
+											transition: 'none',
+											textDecoration: 'none'
+										}}>
+										<Column
+											gap='4'
+											fillWidth
+											horizontal='end'>
+											<Text
+												variant='label-default-xs'
+												onBackground='neutral-medium'
+												style={{
+													fontSize: '11px',
+													textTransform: 'uppercase',
+													letterSpacing: '0.8px',
+													fontWeight: '500'
+												}}>
+												Next
+											</Text>
+											<Text
+												variant='body-default-s'
+												onBackground='neutral-strong'
+												style={{
+													textAlign: 'right',
+													overflow: 'hidden',
+													textOverflow: 'ellipsis',
+													whiteSpace: 'nowrap',
+													fontWeight: '600',
+													fontSize: '14px',
+													lineHeight: '1.4'
+												}}>
+												{nextCaseStudy.title}
+											</Text>
+										</Column>
+										<svg
+											width='20'
+											height='20'
+											viewBox='0 0 24 24'
+											fill='none'
+											stroke='currentColor'
+											strokeWidth='2'
+											style={{
+												flexShrink: 0,
+												color: 'var(--neutral-on-background-medium)'
+											}}>
+											<path d='m9 18 6-6-6-6' />
+										</svg>
+									</a>
+								) : (
+									<div />
+								)}
+							</Column>
+						</Row>
+					</Column>
+				</RevealFx>
+			)}
 
 			<ScrollToHash />
 		</Column>
