@@ -339,6 +339,29 @@ div,
 
 	/* Remove any inherited max-width constraints */
 	max-width: none !important;
+
+	/* Smooth transitions for all interactive states */
+	transition: all 0.2s ease-in-out !important;
+}
+
+/* Prevent carousel from interfering with card navigation */
+[data-carousel-control='true'] {
+	position: relative !important;
+	z-index: 2 !important;
+}
+
+/* Link wrapper for cards should behave properly */
+a[href*='/work/'] {
+	display: block !important;
+	text-decoration: none !important;
+	color: inherit !important;
+}
+
+/* Ensure proper hover states for accessibility */
+a[href*='/work/']:focus-visible {
+	outline: 2px solid var(--brand-on-background-strong) !important;
+	outline-offset: 2px !important;
+	border-radius: 8px !important;
 }
 
 /* Grid Container Fixes */

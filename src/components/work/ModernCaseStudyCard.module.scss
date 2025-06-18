@@ -1,13 +1,23 @@
 .caseStudyCard {
+	transition: all 0.2s ease-in-out;
+
 	&:hover {
-		transform: translateY(-4px);
+		transform: translateY(-2px);
 		box-shadow:
-			0 10px 25px -5px rgba(0, 0, 0, 0.1),
-			0 10px 10px -5px rgba(0, 0, 0, 0.04);
-		border-color: var(--neutral-alpha-strong);
+			0 8px 25px -5px rgba(0, 0, 0, 0.12),
+			0 6px 12px -2px rgba(0, 0, 0, 0.08);
+		border-color: var(--brand-alpha-medium);
 	}
 
 	&:active {
-		transform: translateY(-2px);
+		transform: translateY(-1px);
+		box-shadow:
+			0 4px 15px -3px rgba(0, 0, 0, 0.15),
+			0 3px 8px -1px rgba(0, 0, 0, 0.1);
+	}
+
+	&:focus-within {
+		outline: 2px solid var(--brand-on-background-strong);
+		outline-offset: 2px;
 	}
 }

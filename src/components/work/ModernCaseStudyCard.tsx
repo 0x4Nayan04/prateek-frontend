@@ -11,7 +11,7 @@ import {
 	Tag,
 	Text
 } from '@once-ui-system/core';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import styles from './ModernCaseStudyCard.module.scss';
 
 interface ModernCaseStudyCardProps {
@@ -25,8 +25,6 @@ export function ModernCaseStudyCard({
 	index,
 	priority = false
 }: ModernCaseStudyCardProps) {
-	const router = useRouter();
-
 	// Use images array first, fallback to thumbnail if no images
 	const displayImages =
 		caseStudy.images && caseStudy.images.length > 0
@@ -50,30 +48,22 @@ export function ModernCaseStudyCard({
 		};
 	});
 
-	// Handle card click navigation
-	const handleCardClick = (e: React.MouseEvent) => {
-		// Don't navigate if clicking on carousel controls
-		if (
-			(e.target as HTMLElement).closest('.carousel-control') ||
-			(e.target as HTMLElement).closest('[data-carousel-control="true"]') ||
-			(e.target as HTMLElement).closest('button')
-		) {
-			e.stopPropagation();
-			return;
-		}
-
-		router.push(`/work/${caseStudy.slug.current}`);
+	// Handle carousel clicks to prevent navigation
+	const handleCarouselClick = (e: React.MouseEvent) => {
+		e.preventDefault();
+		e.stopPropagation();
 	};
 
 	return (
 		<RevealFx
 			translateY={16}
 			delay={index * 0.1}>
-			<div
-				onClick={handleCardClick}
+			<Link
+				href={`/work/${caseStudy.slug.current}`}
 				style={{
-					cursor: 'pointer',
-					transition: 'all 0.2s ease-in-out',
+					textDecoration: 'none',
+					color: 'inherit',
+					display: 'block',
 					width: '100%',
 					height: '100%'
 				}}>
@@ -89,7 +79,9 @@ export function ModernCaseStudyCard({
 						overflow: 'hidden',
 						height: '100%',
 						display: 'flex',
-						flexDirection: 'column'
+						flexDirection: 'column',
+						cursor: 'pointer',
+						transition: 'all 0.2s ease-in-out'
 					}}
 					className={styles.caseStudyCard}>
 					{/* Carousel Container with Breathing Space */}
@@ -108,7 +100,9 @@ export function ModernCaseStudyCard({
 									boxShadow:
 										'0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)'
 								}}>
-								<div data-carousel-control='true'>
+								<div
+									data-carousel-control='true'
+									onClick={handleCarouselClick}>
 									<Carousel
 										items={carouselItems}
 										aspectRatio='16 / 9'
@@ -277,8 +271,7 @@ export function ModernCaseStudyCard({
 						</Row>
 					</Column>
 				</Card>
-			</div>
+			</Link>
 		</RevealFx>
 	);
 }
- 
