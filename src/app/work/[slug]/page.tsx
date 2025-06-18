@@ -1,24 +1,24 @@
-import { notFound } from 'next/navigation';
-import { Metadata } from 'next';
 import {
-	Meta,
-	Schema,
+	AutoCarousel,
+	PDFViewer,
+	PortableText,
+	ScrollToHash
+} from '@/components';
+import { getFileUrl, urlFor } from '@/lib/sanity/client';
+import { getAllCaseStudies, getCaseStudyBySlug } from '@/lib/utils/content';
+import { about, baseURL, person, work } from '@/resources';
+import {
 	Button,
 	Column,
-	Flex,
-	Heading,
-	Text,
-	Tag,
-	Row,
 	Grid,
+	Heading,
+	Meta,
 	RevealFx,
-	Line
+	Schema,
+	Text
 } from '@once-ui-system/core';
-import { baseURL, about, person, work } from '@/resources';
-import { getCaseStudyBySlug, getAllCaseStudies } from '@/lib/utils/content';
-import { urlFor } from '@/lib/sanity/client';
-import { CaseStudy } from '@/lib/sanity/types';
-import { ScrollToHash } from '@/components';
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 export const revalidate = 60; // ISR revalidation every 60 seconds
 
@@ -62,6 +62,22 @@ export default async function CaseStudyPage({
 		notFound();
 	}
 
+	// Prepare carousel items from case study images
+	const carouselItems =
+		caseStudy.images?.map((image, idx) => {
+			const imageUrl = urlFor(image)
+				.width(1200)
+				.height(800)
+				.quality(95)
+				.format('webp')
+				.url();
+
+			return {
+				slide: imageUrl,
+				alt: image.alt || `${caseStudy.title} - Image ${idx + 1}`
+			};
+		}) || [];
+
 	return (
 		<Column
 			as='section'
@@ -89,16 +105,17 @@ export default async function CaseStudyPage({
 
 			{/* Header Section */}
 			<Column
-				maxWidth='m'
+				maxWidth='l'
 				paddingX='24'
-				gap='24'>
+				gap='32'
+				style={{ width: '100%' }}>
 				<RevealFx
 					translateY={16}
 					delay={0.1}>
 					<Button
 						data-border='rounded'
 						href='/work'
-						variant='tertiary'
+						variant='primary'
 						weight='default'
 						size='s'
 						prefixIcon='chevronLeft'>
@@ -106,150 +123,186 @@ export default async function CaseStudyPage({
 					</Button>
 				</RevealFx>
 
+				{/* Title and Summary */}
 				<RevealFx
 					translateY={16}
 					delay={0.2}>
-					<Column gap='16'>
+					<Column gap='20'>
 						<Heading
-							variant='display-strong-l'
-							style={{ fontSize: '48px', lineHeight: '1.1' }}>
+							variant='display-strong-xl'
+							style={{
+								fontSize: 'clamp(32px, 4vw, 56px)',
+								lineHeight: '1.1',
+								fontFamily:
+									'"Open Sans", "Inter", -apple-system, BlinkMacSystemFont, sans-serif',
+								fontWeight: '700'
+							}}>
 							{caseStudy.title}
 						</Heading>
 						<Text
-							variant='body-default-l'
+							variant='body-default-xl'
 							onBackground='neutral-medium'
-							style={{ fontSize: '18px', lineHeight: '1.6' }}>
+							style={{
+								fontSize: 'clamp(16px, 2vw, 20px)',
+								lineHeight: '1.6',
+								fontFamily:
+									'"Open Sans", "Inter", -apple-system, BlinkMacSystemFont, sans-serif',
+								maxWidth: '100%', // Better right margin
+								marginRight: 'auto'
+							}}>
 							{caseStudy.summary}
 						</Text>
 					</Column>
 				</RevealFx>
 
-				{/* Tags */}
+				{/* Tech Stack and Industry Tags */}
 				<RevealFx
 					translateY={16}
-					delay={0.3}>
-					<Column gap='12'>
-						<Row
-							gap='8'
-							wrap>
-							<Text
-								variant='label-default-s'
-								onBackground='neutral-medium'>
-								Tech Stack:
-							</Text>
-							{caseStudy.techStack?.map((tech) => (
-								<Tag
-									key={tech}
-									size='s'
-									variant='neutral'>
-									{tech}
-								</Tag>
-							))}
-						</Row>
-						<Row
-							gap='8'
-							wrap>
-							<Text
-								variant='label-default-s'
-								onBackground='neutral-medium'>
-								Industry:
-							</Text>
-							{caseStudy.industry?.map((industry) => (
-								<Tag
-									key={industry}
-									size='s'
-									variant='brand'>
-									{industry}
-								</Tag>
-							))}
-						</Row>
+					delay={0.4}>
+					<Column gap='16'>
+						{/* Tech Stack */}
+						{caseStudy.techStack && caseStudy.techStack.length > 0 && (
+							<div>
+								<Text
+									variant='body-default-s'
+									onBackground='neutral-medium'
+									style={{
+										fontFamily: '"Open Sans", "Inter", sans-serif',
+										fontWeight: '500',
+										marginBottom: '8px',
+										display: 'block'
+									}}>
+									Tech Stack
+								</Text>
+								<div
+									style={{
+										display: 'flex',
+										flexWrap: 'wrap',
+										gap: '8px',
+										alignItems: 'flex-start'
+									}}>
+									{caseStudy.techStack.map((tech, index) => (
+										<span
+											key={index}
+											style={{
+												display: 'inline-flex',
+												alignItems: 'center',
+												padding: '6px 12px',
+												backgroundColor: 'var(--neutral-alpha-weak)',
+												color: 'var(--neutral-on-background-strong)',
+												fontSize: '14px',
+												fontWeight: '500',
+												fontFamily: '"Open Sans", "Inter", sans-serif',
+												borderRadius: '6px',
+												border: '1px solid var(--neutral-alpha-medium)',
+												transition: 'all 0.2s ease',
+												lineHeight: '1'
+											}}>
+											{tech}
+										</span>
+									))}
+								</div>
+							</div>
+						)}
+
+						{/* Industry */}
+						{caseStudy.industry && caseStudy.industry.length > 0 && (
+							<div>
+								<Text
+									variant='body-default-s'
+									onBackground='neutral-medium'
+									style={{
+										fontFamily: '"Open Sans", "Inter", sans-serif',
+										fontWeight: '500',
+										marginBottom: '8px',
+										display: 'block'
+									}}>
+									Industry
+								</Text>
+								<div
+									style={{
+										display: 'flex',
+										flexWrap: 'wrap',
+										gap: '8px',
+										alignItems: 'flex-start'
+									}}>
+									{caseStudy.industry.map((ind, index) => (
+										<span
+											key={index}
+											style={{
+												display: 'inline-flex',
+												alignItems: 'center',
+												padding: '6px 12px',
+												backgroundColor: 'var(--brand-alpha-weak)',
+												color: 'var(--brand-on-background-strong)',
+												fontSize: '14px',
+												fontWeight: '500',
+												fontFamily: '"Open Sans", "Inter", sans-serif',
+												borderRadius: '6px',
+												border: '1px solid var(--brand-alpha-medium)',
+												transition: 'all 0.2s ease',
+												lineHeight: '1'
+											}}>
+											{ind}
+										</span>
+									))}
+								</div>
+							</div>
+						)}
 					</Column>
 				</RevealFx>
 			</Column>
 
-			{/* Hero Image */}
-			{caseStudy.thumbnail && (
+			{/* Auto Carousel - Skip thumbnail, directly show gallery */}
+			{carouselItems.length > 0 && (
 				<RevealFx
 					translateY={16}
 					delay={0.4}>
 					<Column
 						maxWidth='l'
-						paddingX='24'>
-						<img
-							src={urlFor(caseStudy.thumbnail).width(1200).height(700).url()}
-							alt={caseStudy.thumbnail.alt}
+						paddingX='24'
+						gap='16'
+						style={{ width: '100%' }}>
+						<AutoCarousel
+							items={carouselItems}
+							aspectRatio='16/10'
+							autoAdvanceInterval={4000}
 							style={{
-								width: '100%',
-								height: 'auto',
-								borderRadius: '16px',
-								objectFit: 'cover',
-								boxShadow: '0 20px 40px rgba(0,0,0,0.1)'
+								marginTop: '32px', // Better starting margin
+								position: 'relative'
 							}}
 						/>
 					</Column>
 				</RevealFx>
 			)}
 
-			{/* Gallery Images */}
-			{caseStudy.images && caseStudy.images.length > 0 && (
-				<RevealFx
-					translateY={16}
-					delay={0.5}>
-					<Column
-						maxWidth='l'
-						paddingX='24'
-						gap='16'>
-						<Heading variant='heading-strong-m'>Project Gallery</Heading>
-						<Grid
-							columns='2'
-							tabletColumns='2'
-							mobileColumns='1'
-							gap='16'>
-							{caseStudy.images.map((image, index) => (
-								<img
-									key={index}
-									src={urlFor(image).width(600).height(400).url()}
-									alt={image.alt}
-									style={{
-										width: '100%',
-										height: '300px',
-										borderRadius: '12px',
-										objectFit: 'cover'
-									}}
-								/>
-							))}
-						</Grid>
-					</Column>
-				</RevealFx>
-			)}
-
 			{/* Content Sections */}
 			<Column
-				maxWidth='m'
+				maxWidth='l'
 				paddingX='24'
-				gap='48'>
+				gap='56'
+				style={{ width: '100%' }}>
 				{/* Client Overview */}
 				{caseStudy.clientOverview && (
 					<RevealFx
 						translateY={16}
 						delay={0.6}>
-						<Column
-							gap='16'
-							id='client-overview'
-							paddingY='24'
-							paddingX='32'
-							background='surface'
-							border='neutral-alpha-weak'
-							radius='l'>
-							<Heading variant='heading-strong-l'>Client Overview</Heading>
-							<Line />
-							<Text
-								variant='body-default-l'
-								style={{ lineHeight: '1.7' }}>
-								{/* TODO: Render block content properly */}
-								[Client Overview content will be rendered here with block
-								content renderer]
-							</Text>
+						<Column gap='24'>
+							<Heading
+								variant='heading-strong-xl'
+								style={{
+									fontFamily: '"Open Sans", "Inter", sans-serif',
+									fontWeight: '600',
+									fontSize: 'clamp(24px, 3vw, 32px)'
+								}}>
+								Client Overview
+							</Heading>
+							<PortableText
+								value={caseStudy.clientOverview}
+								style={{
+									fontFamily: '"Open Sans", "Inter", sans-serif'
+								}}
+							/>
 						</Column>
 					</RevealFx>
 				)}
@@ -259,23 +312,22 @@ export default async function CaseStudyPage({
 					<RevealFx
 						translateY={16}
 						delay={0.7}>
-						<Column
-							gap='16'
-							id='problem'
-							paddingY='24'
-							paddingX='32'
-							background='surface'
-							border='neutral-alpha-weak'
-							radius='l'>
-							<Heading variant='heading-strong-l'>Problem</Heading>
-							<Line />
-							<Text
-								variant='body-default-l'
-								style={{ lineHeight: '1.7' }}>
-								{/* TODO: Render block content properly */}
-								[Problem content will be rendered here with block content
-								renderer]
-							</Text>
+						<Column gap='24'>
+							<Heading
+								variant='heading-strong-xl'
+								style={{
+									fontFamily: '"Open Sans", "Inter", sans-serif',
+									fontWeight: '600',
+									fontSize: 'clamp(24px, 3vw, 32px)'
+								}}>
+								Problem
+							</Heading>
+							<PortableText
+								value={caseStudy.problem}
+								style={{
+									fontFamily: '"Open Sans", "Inter", sans-serif'
+								}}
+							/>
 						</Column>
 					</RevealFx>
 				)}
@@ -285,23 +337,22 @@ export default async function CaseStudyPage({
 					<RevealFx
 						translateY={16}
 						delay={0.8}>
-						<Column
-							gap='16'
-							id='approach'
-							paddingY='24'
-							paddingX='32'
-							background='surface'
-							border='neutral-alpha-weak'
-							radius='l'>
-							<Heading variant='heading-strong-l'>Approach</Heading>
-							<Line />
-							<Text
-								variant='body-default-l'
-								style={{ lineHeight: '1.7' }}>
-								{/* TODO: Render block content properly */}
-								[Approach content will be rendered here with block content
-								renderer]
-							</Text>
+						<Column gap='24'>
+							<Heading
+								variant='heading-strong-xl'
+								style={{
+									fontFamily: '"Open Sans", "Inter", sans-serif',
+									fontWeight: '600',
+									fontSize: 'clamp(24px, 3vw, 32px)'
+								}}>
+								Approach
+							</Heading>
+							<PortableText
+								value={caseStudy.approach}
+								style={{
+									fontFamily: '"Open Sans", "Inter", sans-serif'
+								}}
+							/>
 						</Column>
 					</RevealFx>
 				)}
@@ -311,23 +362,22 @@ export default async function CaseStudyPage({
 					<RevealFx
 						translateY={16}
 						delay={0.9}>
-						<Column
-							gap='16'
-							id='solution'
-							paddingY='24'
-							paddingX='32'
-							background='surface'
-							border='neutral-alpha-weak'
-							radius='l'>
-							<Heading variant='heading-strong-l'>Solution</Heading>
-							<Line />
-							<Text
-								variant='body-default-l'
-								style={{ lineHeight: '1.7' }}>
-								{/* TODO: Render block content properly */}
-								[Solution content will be rendered here with block content
-								renderer]
-							</Text>
+						<Column gap='24'>
+							<Heading
+								variant='heading-strong-xl'
+								style={{
+									fontFamily: '"Open Sans", "Inter", sans-serif',
+									fontWeight: '600',
+									fontSize: 'clamp(24px, 3vw, 32px)'
+								}}>
+								Solution
+							</Heading>
+							<PortableText
+								value={caseStudy.solution}
+								style={{
+									fontFamily: '"Open Sans", "Inter", sans-serif'
+								}}
+							/>
 						</Column>
 					</RevealFx>
 				)}
@@ -337,87 +387,121 @@ export default async function CaseStudyPage({
 					<RevealFx
 						translateY={16}
 						delay={1.0}>
-						<Column
-							gap='16'
-							id='result'
-							paddingY='24'
-							paddingX='32'
-							background='surface'
-							border='neutral-alpha-weak'
-							radius='l'>
-							<Heading variant='heading-strong-l'>Result & Impact</Heading>
-							<Line />
-							<Text
-								variant='body-default-l'
-								style={{ lineHeight: '1.7' }}>
-								{/* TODO: Render block content properly */}
-								[Result content will be rendered here with block content
-								renderer]
-							</Text>
-						</Column>
-					</RevealFx>
-				)}
-
-				{/* Dashboard Embed */}
-				{caseStudy.iframePreview && (
-					<RevealFx
-						translateY={16}
-						delay={1.1}>
-						<Column gap='16'>
-							<Heading variant='heading-strong-l'>Live Dashboard</Heading>
-							<iframe
-								src={caseStudy.iframePreview}
-								width='100%'
-								height='600'
+						<Column gap='24'>
+							<Heading
+								variant='heading-strong-xl'
 								style={{
-									border: 'none',
-									borderRadius: '12px',
-									boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
+									fontFamily: '"Open Sans", "Inter", sans-serif',
+									fontWeight: '600',
+									fontSize: 'clamp(24px, 3vw, 32px)'
+								}}>
+								Result & Impact
+							</Heading>
+							<PortableText
+								value={caseStudy.result}
+								style={{
+									fontFamily: '"Open Sans", "Inter", sans-serif'
 								}}
-								title='Dashboard Preview'
 							/>
 						</Column>
 					</RevealFx>
 				)}
 
-				{/* PDF Download */}
-				{caseStudy.pdfFile && (
+				{/* Iframe Preview */}
+				{caseStudy.iframePreview && (
 					<RevealFx
 						translateY={16}
-						delay={1.2}>
-						<Column gap='16'>
-							<Heading variant='heading-strong-l'>Downloadable Report</Heading>
-							<Button
-								href={caseStudy.pdfFile.asset.url}
-								variant='primary'
-								size='l'
-								arrowIcon>
-								Download PDF Report
-							</Button>
+						delay={1.1}>
+						<Column gap='24'>
+							<Heading
+								variant='heading-strong-xl'
+								style={{
+									fontFamily: '"Open Sans", "Inter", sans-serif',
+									fontWeight: '600',
+									fontSize: 'clamp(24px, 3vw, 32px)'
+								}}>
+								Live Dashboard
+							</Heading>
+							<div
+								style={{
+									border: '1px solid var(--neutral-alpha-medium)',
+									borderRadius: '12px',
+									overflow: 'hidden',
+									boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12)',
+									background: 'var(--surface)'
+								}}>
+								<iframe
+									src={caseStudy.iframePreview}
+									width='100%'
+									height='600'
+									style={{
+										border: 'none',
+										display: 'block'
+									}}
+									title='Dashboard Preview'
+									loading='lazy'
+								/>
+							</div>
 						</Column>
 					</RevealFx>
 				)}
+
+				{/* PDF Display */}
+				{caseStudy.pdfFile &&
+					(() => {
+						const pdfUrl = getFileUrl(caseStudy.pdfFile.asset);
+						return pdfUrl ? (
+							<RevealFx
+								translateY={16}
+								delay={1.2}>
+								<Column gap='24'>
+									<Heading
+										variant='heading-strong-xl'
+										style={{
+											fontFamily: '"Open Sans", "Inter", sans-serif',
+											fontWeight: '600',
+											fontSize: 'clamp(24px, 3vw, 32px)'
+										}}>
+										Report Document
+									</Heading>
+									<PDFViewer fileUrl={pdfUrl} />
+								</Column>
+							</RevealFx>
+						) : null;
+					})()}
 
 				{/* External Links */}
 				{caseStudy.externalLinks && caseStudy.externalLinks.length > 0 && (
 					<RevealFx
 						translateY={16}
 						delay={1.3}>
-						<Column gap='16'>
-							<Heading variant='heading-strong-l'>External Links</Heading>
+						<Column gap='24'>
+							<Heading
+								variant='heading-strong-xl'
+								style={{
+									fontFamily: '"Open Sans", "Inter", sans-serif',
+									fontWeight: '600',
+									fontSize: 'clamp(24px, 3vw, 32px)'
+								}}>
+								External Links
+							</Heading>
 							<Grid
 								columns='2'
 								tabletColumns='1'
 								mobileColumns='1'
-								gap='12'>
+								gap='16'>
 								{caseStudy.externalLinks.map((link, index) => (
 									<Button
 										key={index}
 										href={link.url}
 										variant='secondary'
 										size='m'
-										arrowIcon
-										fillWidth>
+										suffixIcon='arrowUpRightFromSquare'
+										fillWidth
+										style={{
+											justifyContent: 'flex-start',
+											fontFamily: '"Open Sans", "Inter", sans-serif'
+										}}>
 										{link.title}
 									</Button>
 								))}
@@ -431,13 +515,17 @@ export default async function CaseStudyPage({
 					translateY={16}
 					delay={1.4}>
 					<Column
-						center
-						paddingY='32'>
+						horizontal='center'
+						paddingY='40'>
 						<Button
 							href='/work'
 							variant='primary'
 							size='l'
-							arrowIcon>
+							suffixIcon='arrowRight'
+							style={{
+								fontFamily: '"Open Sans", "Inter", sans-serif',
+								fontWeight: '500'
+							}}>
 							View More Case Studies
 						</Button>
 					</Column>

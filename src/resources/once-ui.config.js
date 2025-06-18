@@ -24,25 +24,28 @@ const protectedRoutes = {
 };
 
 // Import and set font for each variant
-import { Geist } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import { Geist_Mono } from 'next/font/google';
 
-const heading = Geist({
+const heading = Inter({
 	variable: '--font-heading',
 	subsets: ['latin'],
-	display: 'swap'
+	display: 'swap',
+	weight: ['400', '500', '600', '700']
 });
 
-const body = Geist({
+const body = Inter({
 	variable: '--font-body',
 	subsets: ['latin'],
-	display: 'swap'
+	display: 'swap',
+	weight: ['300', '400', '500', '600']
 });
 
-const label = Geist({
+const label = Inter({
 	variable: '--font-label',
 	subsets: ['latin'],
-	display: 'swap'
+	display: 'swap',
+	weight: ['400', '500', '600']
 });
 
 const code = Geist_Mono({

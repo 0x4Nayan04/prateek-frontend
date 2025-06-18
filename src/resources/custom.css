@@ -54,7 +54,265 @@
 }*/
 
 /* ============================================================================
-   CASE STUDY CARD SPACING & ALIGNMENT FIXES
+   TYPOGRAPHY IMPROVEMENTS
+   ============================================================================ */
+
+/* Open Sans font family for all headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+[data-variant*='heading'],
+[data-variant*='display'] {
+	font-family:
+		'Open Sans',
+		'Inter',
+		-apple-system,
+		BlinkMacSystemFont,
+		sans-serif !important;
+}
+
+/* Inter font family for body text with fallbacks */
+p,
+span,
+div,
+[data-variant*='body'],
+[data-variant*='label'] {
+	font-family:
+		'Open Sans',
+		'Inter',
+		-apple-system,
+		BlinkMacSystemFont,
+		sans-serif !important;
+}
+
+/* ============================================================================
+   AUTO CAROUSEL IMPROVEMENTS
+   ============================================================================ */
+
+/* Enhanced carousel styling */
+[data-carousel] {
+	transition: all 0.3s ease-in-out;
+	border-radius: 12px;
+	overflow: hidden;
+}
+
+/* Carousel controls enhancement */
+[data-carousel] button {
+	transition: all 0.2s ease;
+	backdrop-filter: blur(8px);
+}
+
+[data-carousel] button:hover {
+	transform: scale(1.05);
+}
+
+/* Carousel indicators */
+[data-carousel] [data-indicator] {
+	backdrop-filter: blur(8px);
+	border-radius: 8px;
+}
+
+/* ============================================================================
+   PDF VIEWER STYLING
+   ============================================================================ */
+
+/* ============================================================================
+   PORTABLE TEXT STYLING
+   ============================================================================ */
+
+/* Enhanced portable text typography */
+.portable-text h1,
+.portable-text h2,
+.portable-text h3,
+.portable-text h4 {
+	font-family: 'Open Sans', 'Inter', sans-serif !important;
+	font-weight: 600 !important;
+	color: var(--neutral-on-background-strong) !important;
+}
+
+.portable-text p {
+	font-family: 'Open Sans', 'Inter', sans-serif !important;
+	line-height: 1.7 !important;
+	color: var(--neutral-on-background-medium) !important;
+	margin-bottom: 16px !important;
+}
+
+.portable-text ul,
+.portable-text ol {
+	font-family: 'Open Sans', 'Inter', sans-serif !important;
+	margin-left: 24px !important;
+	margin-bottom: 16px !important;
+}
+
+.portable-text li {
+	margin-bottom: 8px !important;
+	line-height: 1.6 !important;
+}
+
+.portable-text blockquote {
+	border-left: 4px solid var(--brand-alpha-medium) !important;
+	padding-left: 20px !important;
+	margin: 20px 0 !important;
+	font-style: italic !important;
+	color: var(--neutral-on-background-medium) !important;
+}
+
+/* ============================================================================
+   CASE STUDY TAGS STYLING
+   ============================================================================ */
+
+/* Enhanced tag styling similar to case study cards */
+[data-tag] {
+	transition: all 0.2s ease !important;
+	font-family: 'Open Sans', 'Inter', sans-serif !important;
+	font-weight: 500 !important;
+	letter-spacing: 0.01em !important;
+}
+
+[data-tag]:hover {
+	transform: translateY(-1px) !important;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Tech stack tags */
+[data-variant='neutral'][data-tag] {
+	background: var(--neutral-alpha-weak) !important;
+	border: 1px solid var(--neutral-alpha-medium) !important;
+	color: var(--neutral-on-background-strong) !important;
+}
+
+/* Industry tags */
+[data-variant='brand'][data-tag] {
+	background: var(--brand-alpha-weak) !important;
+	border: 1px solid var(--brand-alpha-medium) !important;
+	color: var(--brand-on-background-strong) !important;
+}
+
+/* ============================================================================
+   IFRAME STYLING IMPROVEMENTS
+   ============================================================================ */
+
+/* Enhanced iframe container */
+.iframe-container {
+	border-radius: 12px !important;
+	overflow: hidden !important;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+	border: 1px solid var(--neutral-alpha-medium) !important;
+	background: var(--surface) !important;
+	transition: all 0.3s ease !important;
+}
+
+.iframe-container:hover {
+	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.16) !important;
+	transform: translateY(-2px) !important;
+}
+
+.iframe-container iframe {
+	border: none !important;
+	display: block !important;
+	width: 100% !important;
+	height: 100% !important;
+}
+
+/* ============================================================================
+   BUTTON IMPROVEMENTS
+   ============================================================================ */
+
+/* External link buttons */
+[data-variant='secondary'] {
+	font-family: 'Open Sans', 'Inter', sans-serif !important;
+	font-weight: 500 !important;
+	transition: all 0.2s ease !important;
+}
+
+[data-variant='secondary']:hover {
+	transform: translateY(-1px) !important;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Primary buttons */
+[data-variant='primary'] {
+	font-family: 'Open Sans', 'Inter', sans-serif !important;
+	font-weight: 600 !important;
+	transition: all 0.2s ease !important;
+}
+
+[data-variant='primary']:hover {
+	transform: translateY(-1px) !important;
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* ============================================================================
+   RESPONSIVE IMPROVEMENTS
+   ============================================================================ */
+
+/* Mobile typography adjustments */
+@media (max-width: 768px) {
+	.portable-text h1 {
+		font-size: 28px !important;
+		line-height: 1.2 !important;
+	}
+
+	.portable-text h2 {
+		font-size: 24px !important;
+		line-height: 1.3 !important;
+	}
+
+	.portable-text h3 {
+		font-size: 20px !important;
+		line-height: 1.3 !important;
+	}
+
+	.portable-text p {
+		font-size: 16px !important;
+		line-height: 1.6 !important;
+	}
+
+	/* Mobile carousel adjustments */
+	[data-carousel] {
+		margin: 0 !important;
+	}
+}
+
+/* Tablet adjustments */
+@media (max-width: 1024px) and (min-width: 769px) {
+	.portable-text h1 {
+		font-size: 32px !important;
+	}
+
+	.portable-text h2 {
+		font-size: 28px !important;
+	}
+}
+
+/* ============================================================================
+   ACCESSIBILITY IMPROVEMENTS
+   ============================================================================ */
+
+/* Focus states */
+[data-carousel] button:focus-visible,
+[data-tag]:focus-visible {
+	outline: 2px solid var(--brand-on-background-strong) !important;
+	outline-offset: 2px !important;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+	[data-carousel],
+	.iframe-container,
+	[data-tag],
+	[data-variant='secondary'],
+	[data-variant='primary'] {
+		transition: none !important;
+		animation: none !important;
+	}
+}
+
+/* ============================================================================
+   EXISTING STYLES (keeping all previous styles intact)
    ============================================================================ */
 
 /* Ensure consistent grid alignment and card spacing */
@@ -134,84 +392,80 @@
    ============================================================================ */
 
 /* Remove blur effects on tablets and mobile devices for better readability */
-@media screen and (max-width: 1024px) {
-	.mask,
-	[data-mask],
-	.blur-backdrop,
-	[data-blur] {
+@media (max-width: 1024px) {
+	*,
+	*::before,
+	*::after {
 		backdrop-filter: none !important;
 		-webkit-backdrop-filter: none !important;
-		filter: none !important;
-		background-color: var(--surface-background) !important;
 	}
 
-	/* Header specific fixes */
-	header,
-	[data-header],
-	nav,
-	[data-nav] {
+	[data-header] {
 		backdrop-filter: none !important;
 		-webkit-backdrop-filter: none !important;
-		background: var(--surface-background) !important;
+		background: var(--page-background) !important;
 		border-bottom: 1px solid var(--neutral-alpha-weak) !important;
 	}
-}
 
-@media screen and (max-width: 768px) {
-	.mask,
-	[data-mask],
-	.blur-backdrop,
-	[data-blur] {
+	/* Ensure readability on mobile */
+	[data-header] * {
 		backdrop-filter: none !important;
 		-webkit-backdrop-filter: none !important;
-		filter: none !important;
-		background-color: var(--surface-background) !important;
-	}
-
-	/* Mobile-specific header fixes */
-	header,
-	[data-header],
-	nav,
-	[data-nav] {
-		backdrop-filter: none !important;
-		-webkit-backdrop-filter: none !important;
-		background: var(--surface-background) !important;
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
 	}
 }
 
-/* ============================================================================
-   COMPLETE BLUR REMOVAL FOR HEADER/NAVBAR (All Devices)
-   ============================================================================ */
-
-/* Remove ALL backdrop filters and blur effects from header/navigation */
-header,
-[data-header],
-nav,
-[data-nav],
-.mask,
-[data-mask],
-.blur-backdrop,
-[data-blur],
-[data-fade],
-[data-position='fixed'] {
-	backdrop-filter: none !important;
-	-webkit-backdrop-filter: none !important;
-	filter: none !important;
+/* Universal backdrop filter removal for mobile */
+@media (hover: none) and (pointer: coarse) {
+	*,
+	*::before,
+	*::after {
+		backdrop-filter: none !important;
+		-webkit-backdrop-filter: none !important;
+	}
 }
 
-/* Specifically target Once UI Fade components in header area */
-header *,
-nav *,
-[data-header] *,
-[data-nav] * {
-	backdrop-filter: none !important;
-	-webkit-backdrop-filter: none !important;
-	filter: none !important;
+/* PDF Viewer Improvements */
+.pdf-viewer-container {
+	width: 100%;
+	max-width: 100%;
+	margin: 0 auto;
 }
 
-/* Remove any glassmorphism effects */
-*[style*='backdrop-filter'] {
-	backdrop-filter: none !important;
-	-webkit-backdrop-filter: none !important;
+.pdf-viewer-container iframe {
+	width: 100% !important;
+	height: 600px !important;
+	border: none !important;
+	border-radius: 12px !important;
+	background: #fff;
 }
+
+/* Responsive PDF viewer */
+@media (max-width: 768px) {
+	.pdf-viewer-container iframe {
+		height: 500px !important;
+	}
+}
+
+@media (max-width: 480px) {
+	.pdf-viewer-container iframe {
+		height: 400px !important;
+	}
+}
+
+/* Make sure PDF iframe respects container width */
+.pdf-viewer-container {
+	overflow: hidden;
+	border-radius: 12px;
+	border: 1px solid var(--neutral-alpha-medium);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* Remove any default iframe styling that might interfere */
+iframe[src*='.pdf'] {
+	display: block;
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+
+/* Enhanced Auto Carousel */

@@ -178,7 +178,7 @@ export function ModernCaseStudyGrid({
 											variant='primary'
 											size='l'
 											arrowIcon>
-											View All Case Studies
+											Show more case studies
 											{hasMoreResults &&
 												` (${totalResults - displayedCaseStudies.length} more)`}
 										</Button>

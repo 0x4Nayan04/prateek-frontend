@@ -54,3 +54,4 @@ export const AVAILABLE_FILTERS_QUERY = `
     "industry": *[_type == "caseStudy"].industry[] | unique | order(@)
   }
 `;
+ 

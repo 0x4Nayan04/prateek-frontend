@@ -9,6 +9,11 @@ export { ScrollToHash } from '@/components/ScrollToHash';
 export { ThemeToggle } from '@/components/ThemeToggle';
 export { CustomMDX } from '@/components/mdx';
 
+// Content Components
+export { PortableText } from '@/components/PortableText';
+export { AutoCarousel } from '@/components/AutoCarousel';
+export { PDFViewer } from '@/components/PDFViewer';
+
 // Enhanced Case Study Components
 export { CaseStudyCard } from '@/components/work/CaseStudyCard';
 export { CaseStudyGrid } from '@/components/work/CaseStudyGrid';
