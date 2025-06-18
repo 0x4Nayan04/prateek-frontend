@@ -15,7 +15,8 @@ import {
 	Meta,
 	RevealFx,
 	Schema,
-	Text
+	Text,
+	Row
 } from '@once-ui-system/core';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -147,7 +148,7 @@ export default async function CaseStudyPage({
 								lineHeight: '1.6',
 								fontFamily:
 									'"Open Sans", "Inter", -apple-system, BlinkMacSystemFont, sans-serif',
-								maxWidth: '100%', // Better right margin
+								maxWidth: '100%',
 								marginRight: 'auto'
 							}}>
 							{caseStudy.summary}
@@ -155,14 +156,22 @@ export default async function CaseStudyPage({
 					</Column>
 				</RevealFx>
 
-				{/* Tech Stack and Industry Tags */}
+				{/* Tech Stack and Industry Tags - Using Row for same line layout */}
 				<RevealFx
 					translateY={16}
 					delay={0.4}>
-					<Column gap='16'>
+					<Row
+						gap='32'
+						wrap
+						mobileDirection='column'
+						style={{
+							alignItems: 'flex-start'
+						}}>
 						{/* Tech Stack */}
 						{caseStudy.techStack && caseStudy.techStack.length > 0 && (
-							<div>
+							<Column
+								gap='12'
+								style={{ minWidth: '200px' }}>
 								<Text
 									variant='body-default-s'
 									onBackground='neutral-medium'
@@ -174,11 +183,10 @@ export default async function CaseStudyPage({
 									}}>
 									Tech Stack
 								</Text>
-								<div
+								<Row
+									gap='8'
+									wrap
 									style={{
-										display: 'flex',
-										flexWrap: 'wrap',
-										gap: '8px',
 										alignItems: 'flex-start'
 									}}>
 									{caseStudy.techStack.map((tech, index) => (
@@ -201,13 +209,15 @@ export default async function CaseStudyPage({
 											{tech}
 										</span>
 									))}
-								</div>
-							</div>
+								</Row>
+							</Column>
 						)}
 
 						{/* Industry */}
 						{caseStudy.industry && caseStudy.industry.length > 0 && (
-							<div>
+							<Column
+								gap='12'
+								style={{ minWidth: '200px' }}>
 								<Text
 									variant='body-default-s'
 									onBackground='neutral-medium'
@@ -219,11 +229,10 @@ export default async function CaseStudyPage({
 									}}>
 									Industry
 								</Text>
-								<div
+								<Row
+									gap='8'
+									wrap
 									style={{
-										display: 'flex',
-										flexWrap: 'wrap',
-										gap: '8px',
 										alignItems: 'flex-start'
 									}}>
 									{caseStudy.industry.map((ind, index) => (
@@ -246,10 +255,10 @@ export default async function CaseStudyPage({
 											{ind}
 										</span>
 									))}
-								</div>
-							</div>
+								</Row>
+							</Column>
 						)}
-					</Column>
+					</Row>
 				</RevealFx>
 			</Column>
 
@@ -268,7 +277,7 @@ export default async function CaseStudyPage({
 							aspectRatio='16/10'
 							autoAdvanceInterval={4000}
 							style={{
-								marginTop: '32px', // Better starting margin
+								marginTop: '32px',
 								position: 'relative'
 							}}
 						/>
@@ -509,27 +518,6 @@ export default async function CaseStudyPage({
 						</Column>
 					</RevealFx>
 				)}
-
-				{/* Back to Work Button */}
-				<RevealFx
-					translateY={16}
-					delay={1.4}>
-					<Column
-						horizontal='center'
-						paddingY='40'>
-						<Button
-							href='/work'
-							variant='primary'
-							size='l'
-							suffixIcon='arrowRight'
-							style={{
-								fontFamily: '"Open Sans", "Inter", sans-serif',
-								fontWeight: '500'
-							}}>
-							View More Case Studies
-						</Button>
-					</Column>
-				</RevealFx>
 			</Column>
 
 			<ScrollToHash />

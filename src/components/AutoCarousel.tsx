@@ -83,20 +83,29 @@ export function AutoCarousel({
 			<div
 				ref={carouselRef}
 				className={className}
-				style={{ position: 'relative', ...style }}>
-				<Carousel
-					items={items}
-					aspectRatio={aspectRatio}
-					indicator={items.length > 1 ? 'line' : undefined}
-					controls={items.length > 1}
-					sizes='(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw'
-					style={{
-						borderRadius: '12px',
-						overflow: 'hidden',
-						boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12)',
-						border: '1px solid var(--neutral-alpha-medium)'
-					}}
-				/>
+				style={{
+					position: 'relative',
+					width: '100%',
+					display: 'flex',
+					justifyContent: 'center',
+					...style
+				}}>
+				<div style={{ width: '100%', maxWidth: '1200px' }}>
+					<Carousel
+						items={items}
+						aspectRatio={aspectRatio}
+						indicator={items.length > 1 ? 'line' : undefined}
+						controls={items.length > 1}
+						sizes='(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 80vw'
+						style={{
+							borderRadius: '16px',
+							overflow: 'hidden',
+							boxShadow: '0 12px 40px rgba(0, 0, 0, 0.15)',
+							border: '1px solid var(--neutral-alpha-medium)',
+							background: 'var(--surface)'
+						}}
+					/>
+				</div>
 			</div>
 		);
 	}
@@ -105,39 +114,86 @@ export function AutoCarousel({
 		<div
 			ref={carouselRef}
 			className={className}
-			style={{ position: 'relative', ...style }}>
-			<Carousel
-				items={items}
-				aspectRatio={aspectRatio}
-				indicator={items.length > 1 ? 'line' : undefined}
-				controls={items.length > 1}
-				sizes='(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw'
+			style={{
+				position: 'relative',
+				width: '100%',
+				display: 'flex',
+				justifyContent: 'center',
+				alignItems: 'center',
+				...style
+			}}>
+			{/* Centered Carousel Container */}
+			<div
 				style={{
-					borderRadius: '12px',
-					overflow: 'hidden',
-					boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12)',
-					border: '1px solid var(--neutral-alpha-medium)'
-				}}
-			/>
+					width: '100%',
+					maxWidth: '1200px',
+					margin: '0 auto'
+				}}>
+				<Carousel
+					items={items}
+					aspectRatio={aspectRatio}
+					indicator={items.length > 1 ? 'line' : undefined}
+					controls={items.length > 1}
+					sizes='(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 80vw'
+					style={{
+						borderRadius: '16px',
+						overflow: 'hidden',
+						boxShadow: '0 12px 40px rgba(0, 0, 0, 0.15)',
+						border: '1px solid var(--neutral-alpha-medium)',
+						background: 'var(--surface)',
+						transition: 'all 0.3s ease-in-out'
+					}}
+				/>
+			</div>
 
-			{/* Auto-advance progress indicator - only show when mounted */}
+			{/* Enhanced Auto-advance progress indicator */}
 			{mounted && isInView && items.length > 1 && (
 				<div
 					style={{
 						position: 'absolute',
-						bottom: '16px',
-						right: '16px',
-						background: 'rgba(0, 0, 0, 0.7)',
+						bottom: '20px',
+						right: '20px',
+						background: 'rgba(0, 0, 0, 0.8)',
 						color: 'white',
-						padding: '6px 12px',
-						borderRadius: '16px',
-						fontSize: '12px',
+						padding: '8px 16px',
+						borderRadius: '20px',
+						fontSize: '13px',
 						fontWeight: '600',
-						backdropFilter: 'blur(8px)',
-						border: '1px solid rgba(255, 255, 255, 0.1)',
-						zIndex: 10
+						backdropFilter: 'blur(12px)',
+						border: '1px solid rgba(255, 255, 255, 0.15)',
+						boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2)',
+						zIndex: 10,
+						fontFamily: '"Open Sans", "Inter", sans-serif',
+						transition: 'all 0.2s ease'
 					}}>
 					{currentIndex + 1} / {items.length}
+				</div>
+			)}
+
+			{/* Progress Bar */}
+			{mounted && isInView && items.length > 1 && (
+				<div
+					style={{
+						position: 'absolute',
+						bottom: '0',
+						left: '0',
+						right: '0',
+						height: '4px',
+						background: 'rgba(0, 0, 0, 0.1)',
+						borderRadius: '0 0 16px 16px',
+						overflow: 'hidden',
+						zIndex: 5
+					}}>
+					<div
+						style={{
+							height: '100%',
+							width: `${((currentIndex + 1) / items.length) * 100}%`,
+							background:
+								'linear-gradient(90deg, var(--brand-on-background-strong), var(--brand-alpha-strong))',
+							transition: 'width 0.3s ease',
+							borderRadius: '0 0 16px 0'
+						}}
+					/>
 				</div>
 			)}
 		</div>

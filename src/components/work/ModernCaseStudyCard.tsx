@@ -281,3 +281,4 @@ export function ModernCaseStudyCard({
 		</RevealFx>
 	);
 }
+ 
