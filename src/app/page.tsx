@@ -16,11 +16,54 @@ import { home, person, baseURL, routes } from '@/resources';
 import { Posts } from '@/components/blog/Posts';
 import { ModernProjects } from '@/components/work/ModernProjects';
 
+// Elegant Section Separator Component
+const SectionSeparator = ({
+	variant = 'default'
+}: {
+	variant?: 'default' | 'subtle';
+}) => (
+	<RevealFx
+		translateY={8}
+		delay={0.1}
+		fillWidth
+		horizontal='center'
+		paddingY='32'>
+		<div
+			style={{
+				width: '100%',
+				maxWidth: variant === 'subtle' ? '200px' : '400px',
+				height: '1px',
+				background:
+					variant === 'subtle'
+						? 'linear-gradient(90deg, transparent 0%, var(--neutral-alpha-medium) 50%, transparent 100%)'
+						: 'linear-gradient(90deg, transparent 0%, var(--brand-alpha-medium) 20%, var(--accent-alpha-strong) 50%, var(--brand-alpha-medium) 80%, transparent 100%)',
+				position: 'relative'
+			}}>
+			{variant === 'default' && (
+				<div
+					style={{
+						position: 'absolute',
+						left: '50%',
+						top: '50%',
+						transform: 'translate(-50%, -50%)',
+						width: '4px',
+						height: '4px',
+						borderRadius: '50%',
+						background: 'var(--accent-background-strong)',
+						opacity: 0.9,
+						boxShadow: '0 0 8px var(--accent-alpha-medium)'
+					}}
+				/>
+			)}
+		</div>
+	</RevealFx>
+);
+
 export default function Home() {
 	return (
 		<Column
 			fillWidth
-			gap='xl'
+			gap='0'
 			horizontal='center'>
 			<Schema
 				as='webPage'
@@ -34,13 +77,16 @@ export default function Home() {
 					image: `${baseURL}${person.avatar}`
 				}}
 			/>
+
+			{/* Hero Section */}
 			<Column
 				fillWidth
 				horizontal='center'
 				vertical='center'
-				paddingY='32'
+				paddingY='48'
 				paddingX='24'
-				gap='16'>
+				gap='16'
+				style={{ minHeight: '70vh' }}>
 				<Column
 					maxWidth='s'
 					horizontal='center'
@@ -119,49 +165,32 @@ export default function Home() {
 				</Column>
 			</Column>
 
+			{/* Separator: Hero to Work */}
+			<SectionSeparator />
+
 			{/* Featured Work Section */}
 			<Column
 				fillWidth
 				horizontal='center'
 				vertical='center'
-				paddingY='xl'
-				paddingX='l'
-				gap='xl'>
+				paddingY='0'
+				paddingX='128'
+				gap='48'>
 				<Column
 					maxWidth='l'
 					horizontal='center'
-					gap='m'>
+					gap='16'>
 					<RevealFx
 						translateY='8'
 						fillWidth
 						horizontal='center'
-						paddingBottom='s'>
+						paddingBottom='8'>
 						<Heading
 							wrap='balance'
 							variant='display-strong-l'
 							align='center'>
-							Selected Work
+							Featured Work
 						</Heading>
-					</RevealFx>
-					<RevealFx
-						translateY={6}
-						delay={0.2}
-						fillWidth
-						horizontal='center'
-						paddingBottom='m'>
-						<Text
-							wrap='balance'
-							onBackground='neutral-medium'
-							variant='body-default-l'
-							align='center'
-							style={{
-								maxWidth: '600px',
-								lineHeight: '1.6',
-								letterSpacing: '0.01em'
-							}}>
-							Real-world solutions that transformed business outcomes through
-							strategic data implementation
-						</Text>
 					</RevealFx>
 				</Column>
 
@@ -174,106 +203,134 @@ export default function Home() {
 				/>
 			</Column>
 
-			<Flex
-				id='about'
+			{/* Separator: Work to About */}
+			<SectionSeparator />
+
+			{/* About Section */}
+			<Column
 				fillWidth
-				background='surface'
-				border='neutral-alpha-weak'
-				radius='l'
-				padding='32'
-				marginY='32'
-				marginX='24'
-				mobileDirection='column'
-				gap='32'>
+				horizontal='center'
+				paddingY='64'
+				paddingX='24'>
 				<Flex
-					flex={1}
-					paddingLeft='l'
-					paddingTop='8'>
-					<Heading
-						as='h2'
-						variant='display-strong-s'
-						wrap='balance'>
-						About Me
-					</Heading>
+					id='about'
+					fillWidth
+					maxWidth='xl'
+					background='surface'
+					border='neutral-alpha-weak'
+					radius='xl'
+					padding='48'
+					mobileDirection='column'
+					gap='40'
+					style={{
+						boxShadow: '0 4px 24px var(--neutral-alpha-weak)',
+						background:
+							'linear-gradient(135deg, var(--surface-background) 0%, var(--brand-alpha-weak) 100%)'
+					}}>
+					<Flex
+						flex={1}
+						paddingLeft='8'>
+						<RevealFx
+							translateY={8}
+							delay={0.1}>
+							<Heading
+								as='h2'
+								variant='display-strong-m'
+								wrap='balance'>
+								About Me
+							</Heading>
+						</RevealFx>
+					</Flex>
+					<Flex flex={2}>
+						<Column gap='24'>
+							<RevealFx
+								translateY={6}
+								delay={0.2}>
+								<Text
+									variant='body-default-l'
+									onBackground='neutral-medium'
+									style={{ lineHeight: '1.7' }}>
+									I'm{' '}
+									<Text
+										as='span'
+										variant='body-strong-l'
+										onBackground='neutral-strong'>
+										Pratik Srivastava
+									</Text>{' '}
+									— a data-driven product consultant focused on helping
+									organizations make faster, smarter decisions.
+								</Text>
+							</RevealFx>
+							<RevealFx
+								translateY={6}
+								delay={0.3}>
+								<Text
+									variant='body-default-l'
+									onBackground='neutral-medium'
+									style={{ lineHeight: '1.7' }}>
+									With experience spanning{' '}
+									<Text
+										as='span'
+										variant='body-strong-m'
+										onBackground='brand-medium'>
+										SaaS platforms
+									</Text>
+									,{' '}
+									<Text
+										as='span'
+										variant='body-strong-m'
+										onBackground='brand-medium'>
+										analytics products
+									</Text>
+									, and{' '}
+									<Text
+										as='span'
+										variant='body-strong-m'
+										onBackground='brand-medium'>
+										marketing technology
+									</Text>
+									, I design tools and frameworks that transform raw data into
+									strategic outcomes. Whether it's building internal BI systems
+									at{' '}
+									<Text
+										as='span'
+										variant='body-strong-m'
+										onBackground='accent-medium'>
+										Best Buy
+									</Text>{' '}
+									or developing marketing attribution platforms at{' '}
+									<Text
+										as='span'
+										variant='body-strong-m'
+										onBackground='accent-medium'>
+										Lifesight
+									</Text>
+									, my work sits at the intersection of data, product, and
+									execution.
+								</Text>
+							</RevealFx>
+							<RevealFx
+								translateY={6}
+								delay={0.4}>
+								<Text
+									variant='body-default-l'
+									onBackground='neutral-medium'
+									style={{ lineHeight: '1.7' }}>
+									I thrive in{' '}
+									<Text
+										as='span'
+										variant='body-strong-l'
+										onBackground='neutral-strong'>
+										turning complexity into clarity
+									</Text>{' '}
+									— equipping business teams with the insights they need to move
+									with confidence.
+								</Text>
+							</RevealFx>
+						</Column>
+					</Flex>
 				</Flex>
-				<Flex
-					flex={2}
-					paddingX='20'>
-					<Column gap='20'>
-						<Text
-							variant='body-default-l'
-							onBackground='neutral-medium'
-							style={{ lineHeight: '1.7' }}>
-							I'm{' '}
-							<Text
-								as='span'
-								variant='body-strong-l'
-								onBackground='neutral-strong'>
-								Pratik Srivastava
-							</Text>{' '}
-							— a data-driven product consultant focused on helping
-							organizations make faster, smarter decisions.
-						</Text>
-						<Text
-							variant='body-default-l'
-							onBackground='neutral-medium'
-							style={{ lineHeight: '1.7' }}>
-							With experience spanning{' '}
-							<Text
-								as='span'
-								variant='body-strong-m'
-								onBackground='brand-medium'>
-								SaaS platforms
-							</Text>
-							,{' '}
-							<Text
-								as='span'
-								variant='body-strong-m'
-								onBackground='brand-medium'>
-								analytics products
-							</Text>
-							, and{' '}
-							<Text
-								as='span'
-								variant='body-strong-m'
-								onBackground='brand-medium'>
-								marketing technology
-							</Text>
-							, I design tools and frameworks that transform raw data into
-							strategic outcomes. Whether it's building internal BI systems at{' '}
-							<Text
-								as='span'
-								variant='body-strong-m'
-								onBackground='accent-medium'>
-								Best Buy
-							</Text>{' '}
-							or developing marketing attribution platforms at{' '}
-							<Text
-								as='span'
-								variant='body-strong-m'
-								onBackground='accent-medium'>
-								Lifesight
-							</Text>
-							, my work sits at the intersection of data, product, and
-							execution.
-						</Text>
-						<Text
-							variant='body-default-l'
-							onBackground='neutral-medium'
-							style={{ lineHeight: '1.7' }}>
-							I thrive in{' '}
-							<Text
-								as='span'
-								variant='body-strong-l'
-								onBackground='neutral-strong'>
-								turning complexity into clarity
-							</Text>{' '}
-							— equipping business teams with the insights they need to move
-							with confidence.
-						</Text>
-					</Column>
-				</Flex>
-			</Flex>
+			</Column>
 		</Column>
 	);
 }

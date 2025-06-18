@@ -18,7 +18,7 @@ export function ModernProjectsClient({
 	caseStudies,
 	availableFilters,
 	title = 'Highlighted Projects',
-	description = 'Explore innovative solutions and strategic impact across various industries and cutting-edge technologies.',
+	description,
 	showFilters = true,
 	columns = '2',
 	maxItems

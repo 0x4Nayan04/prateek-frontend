@@ -7,12 +7,14 @@ import {
 	Text,
 	Heading,
 	RevealFx,
-	Button
+	Button,
+	InfiniteScroll
 } from '@once-ui-system/core';
 import { CaseStudy, FilterState, AvailableFilters } from '@/lib/sanity/types';
 import { ModernCaseStudyCard } from './ModernCaseStudyCard';
 import { FilterSidebar } from './FilterSidebar';
 import { FilterDropdown } from './FilterDropdown';
+import { useState, useCallback } from 'react';
 
 interface ModernCaseStudyGridProps {
 	caseStudies: CaseStudy[];
@@ -59,45 +61,25 @@ export function ModernCaseStudyGrid({
 			fillWidth
 			gap='40'>
 			{/* Header */}
-			{(title || description) && (
+			{title && (
 				<RevealFx
 					translateY={12}
-					delay={0.1}>
-					<Column
-						gap='16'
-						paddingX='20'
-						center>
-						{title && (
-							<Heading
-								variant='display-strong-l'
-								onBackground='neutral-strong'
-								align='center'
-								style={{
-									fontSize: '48px',
-									fontWeight: '800',
-									background:
-										'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-									WebkitBackgroundClip: 'text',
-									WebkitTextFillColor: 'transparent',
-									marginBottom: '8px'
-								}}>
-								{title}
-							</Heading>
-						)}
-						{description && (
-							<Text
-								variant='body-default-l'
-								onBackground='neutral-medium'
-								align='center'
-								style={{
-									maxWidth: '600px',
-									fontSize: '18px',
-									lineHeight: '1.6'
-								}}>
-								{description}
-							</Text>
-						)}
-					</Column>
+					delay={0.1}
+					fillWidth
+					horizontal='center'
+					vertical='center'
+					paddingY='m'>
+					<Heading
+						variant='display-strong-l'
+						onBackground='neutral-strong'
+						align='center'
+						style={{
+							fontSize: '48px',
+							fontWeight: '800',
+							color: 'white'
+						}}>
+						{title}
+					</Heading>
 				</RevealFx>
 			)}
 
@@ -107,8 +89,8 @@ export function ModernCaseStudyGrid({
 					translateY={12}
 					delay={0.2}>
 					<Column
-						paddingX='20'
-						gap='16'>
+						paddingX='l'
+						gap='m'>
 						<Row
 							horizontal='space-between'
 							vertical='center'
@@ -147,7 +129,7 @@ export function ModernCaseStudyGrid({
 			<Row
 				gap='40'
 				fillWidth
-				paddingX='20'>
+				paddingX='l'>
 				{/* Desktop Sidebar Filters */}
 				{shouldShowFilters && (
 					<FilterSidebar
@@ -161,8 +143,8 @@ export function ModernCaseStudyGrid({
 				{/* Case Studies Grid */}
 				<Column
 					flex={1}
-					gap='32'
-					paddingX='16'>
+					gap='s'
+					fillWidth>
 					{hasResults ? (
 						<>
 							<Grid

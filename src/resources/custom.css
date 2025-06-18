@@ -52,3 +52,166 @@
   --scheme-neutral-600-50: rgba(137,152,159,0.5);
   /*
 }*/
+
+/* ============================================================================
+   CASE STUDY CARD SPACING & ALIGNMENT FIXES
+   ============================================================================ */
+
+/* Ensure consistent grid alignment and card spacing */
+[data-grid] {
+	display: grid !important;
+	align-items: stretch !important;
+}
+
+[data-grid] > * {
+	display: flex !important;
+	flex-direction: column !important;
+	height: 100% !important;
+}
+
+/* Modern Case Study Card Layout Fixes */
+.caseStudyCard,
+[data-case-study-card] {
+	/* Ensure consistent sizing */
+	width: 100% !important;
+	height: 100% !important;
+	display: flex !important;
+	flex-direction: column !important;
+
+	/* Consistent spacing */
+	box-sizing: border-box !important;
+
+	/* Remove any inherited max-width constraints */
+	max-width: none !important;
+}
+
+/* Grid Container Fixes */
+[data-columns='2'] {
+	display: grid !important;
+	grid-template-columns: repeat(2, 1fr) !important;
+	align-items: stretch !important;
+}
+
+@media (max-width: 768px) {
+	[data-columns='2'] {
+		grid-template-columns: 1fr !important;
+	}
+}
+
+/* Ensure equal height cards */
+[data-card] {
+	height: 100% !important;
+	display: flex !important;
+	flex-direction: column !important;
+}
+
+/* Content spacing within cards */
+[data-card] > [data-column] {
+	flex: 1 !important;
+	display: flex !important;
+	flex-direction: column !important;
+	justify-content: space-between !important;
+}
+
+/* ============================================================================
+   CAROUSEL INTERACTION FIXES
+   ============================================================================ */
+
+/* Ensure carousel controls have proper z-index and interactions */
+[data-carousel-control='true'] .carousel-indicators,
+[data-carousel-control='true'] .carousel-controls {
+	z-index: 10;
+	pointer-events: auto;
+}
+
+[data-carousel-control='true'] button {
+	pointer-events: auto !important;
+	z-index: 11;
+}
+
+/* ============================================================================
+   MOBILE BLUR REMOVAL (Enhanced)
+   ============================================================================ */
+
+/* Remove blur effects on tablets and mobile devices for better readability */
+@media screen and (max-width: 1024px) {
+	.mask,
+	[data-mask],
+	.blur-backdrop,
+	[data-blur] {
+		backdrop-filter: none !important;
+		-webkit-backdrop-filter: none !important;
+		filter: none !important;
+		background-color: var(--surface-background) !important;
+	}
+
+	/* Header specific fixes */
+	header,
+	[data-header],
+	nav,
+	[data-nav] {
+		backdrop-filter: none !important;
+		-webkit-backdrop-filter: none !important;
+		background: var(--surface-background) !important;
+		border-bottom: 1px solid var(--neutral-alpha-weak) !important;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.mask,
+	[data-mask],
+	.blur-backdrop,
+	[data-blur] {
+		backdrop-filter: none !important;
+		-webkit-backdrop-filter: none !important;
+		filter: none !important;
+		background-color: var(--surface-background) !important;
+	}
+
+	/* Mobile-specific header fixes */
+	header,
+	[data-header],
+	nav,
+	[data-nav] {
+		backdrop-filter: none !important;
+		-webkit-backdrop-filter: none !important;
+		background: var(--surface-background) !important;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+	}
+}
+
+/* ============================================================================
+   COMPLETE BLUR REMOVAL FOR HEADER/NAVBAR (All Devices)
+   ============================================================================ */
+
+/* Remove ALL backdrop filters and blur effects from header/navigation */
+header,
+[data-header],
+nav,
+[data-nav],
+.mask,
+[data-mask],
+.blur-backdrop,
+[data-blur],
+[data-fade],
+[data-position='fixed'] {
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
+	filter: none !important;
+}
+
+/* Specifically target Once UI Fade components in header area */
+header *,
+nav *,
+[data-header] *,
+[data-nav] * {
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
+	filter: none !important;
+}
+
+/* Remove any glassmorphism effects */
+*[style*='backdrop-filter'] {
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
+}

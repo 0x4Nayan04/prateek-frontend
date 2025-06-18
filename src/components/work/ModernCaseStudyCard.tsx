@@ -3,17 +3,15 @@
 import { urlFor } from '@/lib/sanity/client';
 import { CaseStudy } from '@/lib/sanity/types';
 import {
-	Button,
 	Card,
+	Carousel,
 	Column,
-	Icon,
-	Media,
 	RevealFx,
 	Row,
 	Tag,
 	Text
 } from '@once-ui-system/core';
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import styles from './ModernCaseStudyCard.module.scss';
 
 interface ModernCaseStudyCardProps {
@@ -27,7 +25,7 @@ export function ModernCaseStudyCard({
 	index,
 	priority = false
 }: ModernCaseStudyCardProps) {
-	const [currentImageIndex, setCurrentImageIndex] = useState(0);
+	const router = useRouter();
 
 	// Use images array first, fallback to thumbnail if no images
 	const displayImages =
@@ -37,317 +35,249 @@ export function ModernCaseStudyCard({
 				? [caseStudy.thumbnail]
 				: [];
 
-	const nextImage = () => {
-		setCurrentImageIndex((prev) => (prev + 1) % displayImages.length);
-	};
+	// Prepare carousel items from Sanity images
+	const carouselItems = displayImages.map((image, idx) => {
+		const imageUrl = urlFor(image)
+			.width(1400)
+			.height(1000)
+			.quality(100)
+			.format('webp')
+			.url();
 
-	const prevImage = () => {
-		setCurrentImageIndex(
-			(prev) => (prev - 1 + displayImages.length) % displayImages.length
-		);
-	};
+		return {
+			slide: imageUrl,
+			alt: image.alt || `${caseStudy.title} - Image ${idx + 1}`
+		};
+	});
 
-	const goToImage = (index: number) => {
-		setCurrentImageIndex(index);
-	};
+	// Handle card click navigation
+	const handleCardClick = (e: React.MouseEvent) => {
+		// Don't navigate if clicking on carousel controls
+		if (
+			(e.target as HTMLElement).closest('.carousel-control') ||
+			(e.target as HTMLElement).closest('[data-carousel-control="true"]') ||
+			(e.target as HTMLElement).closest('button')
+		) {
+			e.stopPropagation();
+			return;
+		}
 
-	const currentImage = displayImages[currentImageIndex];
+		router.push(`/work/${caseStudy.slug.current}`);
+	};
 
 	return (
 		<RevealFx
 			translateY={16}
 			delay={index * 0.1}>
-			<Card
-				fillWidth
-				maxWidth={30}
-				radius='l'
-				direction='column'
-				border='neutral-alpha-strong'
-				background='brand-alpha-weak'
-				minHeight='48'
+			<div
+				onClick={handleCardClick}
 				style={{
-					overflow: 'hidden',
+					cursor: 'pointer',
 					transition: 'all 0.2s ease-in-out',
-					cursor: 'pointer'
-				}}
-				className={styles.caseStudyCard}>
-				{/* Image Container with Sophisticated Surface Colors - Inspired by PrimeVue */}
-				{currentImage && (
-					<div
-						style={{
-							padding: '10px', // Refined breathing space
-							background: 'rgb(250, 250, 250)', // Light: surface-50 equivalent
-							borderRadius: '12px 12px 0 0' // Clean top corners only
-						}}>
+					width: '100%',
+					height: '100%'
+				}}>
+				<Card
+					fillWidth
+					fillHeight
+					radius='l'
+					direction='column'
+					border='neutral-alpha-strong'
+					background='brand-alpha-weak'
+					minHeight='48'
+					style={{
+						overflow: 'hidden',
+						height: '100%',
+						display: 'flex',
+						flexDirection: 'column'
+					}}
+					className={styles.caseStudyCard}>
+					{/* Carousel Container with Breathing Space */}
+					{carouselItems.length > 0 && (
 						<div
 							style={{
-								position: 'relative',
-								width: '100%',
-								aspectRatio: '16/10',
-								overflow: 'hidden',
-								minHeight: '300px',
-								borderRadius: '8px', // Elegant nested radius
-								border: '1px solid rgb(230, 230, 230)', // surface-200 equivalent
-								boxShadow:
-									'0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)', // Tailwind shadow-sm equivalent
-								background: '#ffffff' // Pure white surface for image
+								padding: '8px', // Breathing space around carousel
+								background: 'rgb(250, 250, 250)', // Light surface background
+								borderRadius: '12px 12px 0 0' // Clean top corners only
 							}}>
-							{/* Image Layer */}
-							<Media
-								src={urlFor(currentImage)
-									.width(1400)
-									.height(1000)
-									.quality(100)
-									.format('webp')
-									.url()}
-								alt={currentImage.alt || caseStudy.title}
-								fill
-								sizes='(max-width: 768px) 90vw, (max-width: 1200px) 45vw, 30vw'
+							<div
 								style={{
-									objectFit: 'cover',
-									transition: 'opacity 0.3s ease-in-out',
-									borderRadius: '5px' // Perfect nesting
-								}}
-							/>
-
-							{/* Navigation Controls */}
-							{displayImages.length > 1 && (
-								<>
-									{/* Previous Button */}
-									<Button
-										variant='secondary'
-										size='s'
-										onClick={prevImage}
+									borderRadius: '8px', // Nested radius for carousel container
+									overflow: 'hidden',
+									border: '1px solid rgb(230, 230, 230)',
+									boxShadow:
+										'0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)'
+								}}>
+								<div data-carousel-control='true'>
+									<Carousel
+										items={carouselItems}
+										aspectRatio='16 / 9'
+										indicator={carouselItems.length > 1 ? 'line' : undefined}
+										controls={carouselItems.length > 1}
+										sizes='(max-width: 768px) 90vw, (max-width: 1200px) 45vw, 30vw'
 										style={{
-											position: 'absolute',
-											left: '10px',
-											top: '50%',
-											transform: 'translateY(-50%)',
-											background: 'rgba(0, 0, 0, 0.8)',
-											backdropFilter: 'blur(12px)',
-											border: '1px solid rgba(255, 255, 255, 0.2)',
-											borderRadius: '50%',
-											width: '36px',
-											height: '36px',
-											display: 'flex',
-											alignItems: 'center',
-											justifyContent: 'center',
-											zIndex: 10,
-											opacity: 0.9,
-											transition: 'all 0.2s ease-in-out'
-										}}>
-										<Icon
-											name='chevronLeft'
-											size='s'
-											onBackground='neutral-strong'
-										/>
-									</Button>
-
-									{/* Next Button */}
-									<Button
-										variant='secondary'
-										size='s'
-										onClick={nextImage}
-										style={{
-											position: 'absolute',
-											right: '10px',
-											top: '50%',
-											transform: 'translateY(-50%)',
-											background: 'rgba(0, 0, 0, 0.8)',
-											backdropFilter: 'blur(12px)',
-											border: '1px solid rgba(255, 255, 255, 0.2)',
-											borderRadius: '50%',
-											width: '36px',
-											height: '36px',
-											display: 'flex',
-											alignItems: 'center',
-											justifyContent: 'center',
-											zIndex: 10,
-											opacity: 0.9,
-											transition: 'all 0.2s ease-in-out'
-										}}>
-										<Icon
-											name='chevronRight'
-											size='s'
-											onBackground='neutral-strong'
-										/>
-									</Button>
-
-									{/* Dot Indicators */}
-									<Row
-										gap='8'
-										center
-										style={{
-											position: 'absolute',
-											bottom: '14px',
-											left: '50%',
-											transform: 'translateX(-50%)',
-											background: 'rgba(0, 0, 0, 0.8)',
-											backdropFilter: 'blur(12px)',
-											padding: '6px 14px',
-											borderRadius: '18px',
-											border: '1px solid rgba(255, 255, 255, 0.2)',
-											zIndex: 10
-										}}>
-										{displayImages.map((_, idx) => (
-											<button
-												key={idx}
-												onClick={() => goToImage(idx)}
-												style={{
-													width: '7px',
-													height: '7px',
-													borderRadius: '50%',
-													border: 'none',
-													background:
-														idx === currentImageIndex
-															? 'rgba(255, 255, 255, 0.9)'
-															: 'rgba(255, 255, 255, 0.4)',
-													cursor: 'pointer',
-													transition: 'all 0.2s ease-in-out',
-													transform:
-														idx === currentImageIndex
-															? 'scale(1.2)'
-															: 'scale(1)'
-												}}
-											/>
-										))}
-									</Row>
-								</>
-							)}
+											borderRadius: '7px' // Perfect nesting
+										}}
+									/>
+								</div>
+							</div>
 						</div>
-					</div>
-				)}
+					)}
 
-				{/* Sophisticated Visual Separator - PrimeVue Style */}
-				<div
-					style={{
-						width: '100%',
-						height: '1px',
-						background:
-							'linear-gradient(90deg, transparent 0%, rgb(210, 210, 210) 20%, rgb(180, 180, 180) 50%, rgb(210, 210, 210) 80%, transparent 100%)',
-						margin: '0',
-						position: 'relative'
-					}}>
-					{/* Elegant accent point */}
+					{/* If no carousel items, show fallback */}
+					{carouselItems.length === 0 && (
+						<div
+							style={{
+								padding: '8px',
+								background: 'rgb(250, 250, 250)',
+								borderRadius: '12px 12px 0 0'
+							}}>
+							<div
+								style={{
+									borderRadius: '8px',
+									overflow: 'hidden',
+									border: '1px solid rgb(230, 230, 230)',
+									boxShadow:
+										'0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+									minHeight: '200px',
+									display: 'flex',
+									alignItems: 'center',
+									justifyContent: 'center',
+									color: '#666',
+									background: 'rgb(248, 248, 248)'
+								}}>
+								No images available
+							</div>
+						</div>
+					)}
+
+					{/* Clean Visual Separator */}
 					<div
 						style={{
-							position: 'absolute',
-							left: '50%',
-							top: '50%',
-							transform: 'translate(-50%, -50%)',
-							width: '3px',
-							height: '3px',
-							borderRadius: '50%',
-							background: 'rgb(99, 102, 241)', // Elegant indigo accent
-							opacity: 0.7
+							width: '100%',
+							height: '1px',
+							background: 'rgb(230, 230, 230)',
+							margin: '0'
 						}}
 					/>
-				</div>
 
-				{/* Content Section */}
-				<Column
-					fillWidth
-					padding='20'
-					gap='12'
-					horizontal='start'>
-					{/* Title */}
-					<Text
-						variant='heading-strong-l'
-						onBackground='neutral-strong'
+					{/* Content Section */}
+					<Column
+						fillWidth
+						flex={1}
+						padding='m'
+						gap='s'
+						horizontal='start'
+						vertical='start'
 						style={{
-							lineHeight: '1.3',
-							fontSize: '1.25rem',
-							fontWeight: '700',
-							letterSpacing: '-0.01em'
+							justifyContent: 'space-between'
 						}}>
-						{caseStudy.title}
-					</Text>
+						{/* Title */}
+						<Text
+							variant='heading-strong-l'
+							onBackground='neutral-strong'
+							style={{
+								lineHeight: '1.2',
+								fontSize: '1.5rem',
+								fontWeight: '700',
+								letterSpacing: '-0.01em'
+							}}>
+							{caseStudy.title}
+						</Text>
 
-					{/* Summary */}
-					<Text
-						variant='body-default-m'
-						onBackground='neutral-weak'
-						style={{
-							lineHeight: '1.5',
-							fontSize: '0.875rem',
-							display: '-webkit-box',
-							WebkitLineClamp: 2,
-							WebkitBoxOrient: 'vertical',
-							overflow: 'hidden',
-							textOverflow: 'ellipsis'
-						}}>
-						{caseStudy.summary}
-					</Text>
+						{/* Summary */}
+						<Text
+							variant='body-default-m'
+							onBackground='neutral-weak'
+							style={{
+								lineHeight: '1.5',
+								fontSize: '0.975rem',
+								display: '-webkit-box',
+								WebkitLineClamp: 2,
+								WebkitBoxOrient: 'vertical',
+								overflow: 'hidden',
+								textOverflow: 'ellipsis'
+							}}>
+							{caseStudy.summary}
+						</Text>
 
-					{/* Tags Row */}
-					<Row
-						gap='8'
-						wrap
-						style={{ marginTop: '6px' }}>
-						{/* Tech Stack Tags */}
-						{caseStudy.techStack?.slice(0, 3).map((tech) => (
-							<Tag
-								key={tech}
-								size='s'
-								variant='neutral'
-								style={{
-									fontSize: '0.7rem',
-									fontWeight: '500',
-									padding: '5px 10px',
-									borderRadius: '10px',
-									backgroundColor: 'var(--neutral-alpha-weak)',
-									border: '1px solid var(--neutral-alpha-medium)',
-									color: 'var(--neutral-on-background-strong)',
-									transition: 'all 0.2s ease-in-out'
-								}}>
-								{tech}
-							</Tag>
-						))}
-						{/* Industry Tags */}
-						{caseStudy.industry?.slice(0, 2).map((industry) => (
-							<Tag
-								key={industry}
-								size='s'
-								variant='accent'
-								style={{
-									fontSize: '0.7rem',
-									fontWeight: '500',
-									padding: '5px 10px',
-									borderRadius: '10px',
-									backgroundColor: 'var(--accent-alpha-weak)',
-									border: '1px solid var(--accent-alpha-medium)',
-									color: 'var(--accent-on-background-strong)',
-									transition: 'all 0.2s ease-in-out'
-								}}>
-								{industry}
-							</Tag>
-						))}
-						{/* Overflow indicator */}
-						{(caseStudy.techStack?.length || 0) +
-							(caseStudy.industry?.length || 0) >
-							5 && (
-							<Tag
-								size='s'
-								variant='neutral'
-								style={{
-									fontSize: '0.7rem',
-									fontWeight: '500',
-									padding: '5px 10px',
-									borderRadius: '10px',
-									backgroundColor: 'var(--neutral-alpha-weak)',
-									border: '1px solid var(--neutral-alpha-medium)',
-									color: 'var(--neutral-on-background-medium)',
-									opacity: 0.8
-								}}>
-								+
-								{(caseStudy.techStack?.length || 0) +
-									(caseStudy.industry?.length || 0) -
-									5}
-							</Tag>
-						)}
-					</Row>
-				</Column>
-			</Card>
+						{/* Enhanced Tags Row */}
+						<Row
+							gap='s'
+							wrap
+							paddingTop='s'
+							style={{
+								marginTop: 'auto',
+								alignItems: 'flex-start'
+							}}>
+							{/* Tech Stack Tags with Brand Colors */}
+							{caseStudy.techStack?.slice(0, 3).map((tech) => (
+								<Tag
+									key={tech}
+									size='s'
+									variant='neutral'
+									style={{
+										fontSize: '0.7rem',
+										fontWeight: '600',
+										padding: '6px 12px',
+										borderRadius: '12px',
+										backgroundColor: 'var(--brand-alpha-weak)',
+										border: '1px solid var(--brand-alpha-medium)',
+										color: 'var(--brand-on-background-strong)',
+										transition: 'all 0.2s ease-in-out',
+										boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)'
+									}}>
+									{tech}
+								</Tag>
+							))}
+							{/* Industry Tags with Accent Colors */}
+							{caseStudy.industry?.slice(0, 2).map((industry) => (
+								<Tag
+									key={industry}
+									size='s'
+									variant='accent'
+									style={{
+										fontSize: '0.7rem',
+										fontWeight: '600',
+										padding: '6px 12px',
+										borderRadius: '12px',
+										backgroundColor: 'var(--accent-alpha-weak)',
+										border: '1px solid var(--accent-alpha-medium)',
+										color: 'var(--accent-on-background-strong)',
+										transition: 'all 0.2s ease-in-out',
+										boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)'
+									}}>
+									{industry}
+								</Tag>
+							))}
+							{/* Overflow indicator with neutral styling */}
+							{(caseStudy.techStack?.length || 0) +
+								(caseStudy.industry?.length || 0) >
+								5 && (
+								<Tag
+									size='s'
+									variant='neutral'
+									style={{
+										fontSize: '0.7rem',
+										fontWeight: '500',
+										padding: '6px 12px',
+										borderRadius: '12px',
+										backgroundColor: 'var(--neutral-alpha-weak)',
+										border: '1px solid var(--neutral-alpha-medium)',
+										color: 'var(--neutral-on-background-medium)',
+										opacity: 0.8,
+										transition: 'all 0.2s ease-in-out'
+									}}>
+									+
+									{(caseStudy.techStack?.length || 0) +
+										(caseStudy.industry?.length || 0) -
+										5}
+								</Tag>
+							)}
+						</Row>
+					</Column>
+				</Card>
+			</div>
 		</RevealFx>
 	);
 }
