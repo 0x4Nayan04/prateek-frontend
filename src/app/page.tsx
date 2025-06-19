@@ -85,14 +85,21 @@ export default function Home() {
 				fillWidth
 				horizontal='center'
 				vertical='center'
-				paddingY='48'
-				paddingX='24'
-				gap='16'
-				style={{ minHeight: '70vh' }}>
+				paddingY='l'
+				paddingX='m'
+				gap='12'
+				style={{ 
+					minHeight: '60vh',
+					'@media (max-width: 768px)': {
+						minHeight: '50vh',
+						paddingTop: 'var(--responsive-space-xl)',
+						paddingBottom: 'var(--responsive-space-l)'
+					}
+				} as React.CSSProperties}>
 				<Column
 					maxWidth='s'
 					horizontal='center'
-					gap='12'>
+					gap='8'>
 					{home.featured.display && (
 						<RevealFx
 							fillWidth
@@ -176,8 +183,17 @@ export default function Home() {
 				horizontal='center'
 				vertical='center'
 				paddingY='0'
-				paddingX='128'
-				gap='48'>
+				paddingX='l'
+				gap='48'
+				style={
+					{
+						'@media (max-width: 768px)': {
+							paddingLeft: 'var(--responsive-space-m)',
+							paddingRight: 'var(--responsive-space-m)',
+							gap: 'var(--responsive-space-m)'
+						}
+					} as React.CSSProperties
+				}>
 				<Column
 					maxWidth='l'
 					horizontal='center'
@@ -190,7 +206,15 @@ export default function Home() {
 						<Heading
 							wrap='balance'
 							variant='display-strong-l'
-							align='center'>
+							align='center'
+							style={
+								{
+									'@media (max-width: 768px)': {
+										fontSize: 'clamp(2rem, 8vw, 3rem)',
+										lineHeight: '1.2'
+									}
+								} as React.CSSProperties
+							}>
 							Featured Work
 						</Heading>
 					</RevealFx>

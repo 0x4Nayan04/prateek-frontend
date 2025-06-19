@@ -102,9 +102,15 @@ export default async function RootLayout({
 			<Providers>
 				<Column
 					as='body'
+					suppressHydrationWarning
 					background='page'
 					fillWidth
-					style={{ minHeight: '100vh' }}
+					style={{
+						minHeight: '100vh',
+						overflow: 'hidden auto',
+						display: 'flex',
+						flexDirection: 'column'
+					}}
 					margin='0'
 					padding='0'
 					horizontal='center'>
@@ -159,6 +165,7 @@ export default async function RootLayout({
 						zIndex={0}
 						fillWidth
 						padding='8'
+						paddingTop='xl'
 						horizontal='center'
 						flex={1}>
 						<Flex

@@ -490,3 +490,167 @@ iframe[src*='.pdf'] {
 }
 
 /* Enhanced Auto Carousel */
+
+/* ============================================================================
+   HYDRATION FIX & BODY STYLING
+   ============================================================================ */
+
+/* Ensure consistent body styling to prevent hydration errors */
+body {
+	min-height: 100vh !important;
+	overflow: hidden auto !important;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+/* Force consistent class application */
+body[class*='display-flex'] {
+	display: flex !important;
+	flex-direction: column !important;
+	align-items: center !important;
+	min-width: 0 !important;
+	width: 100% !important;
+}
+
+/* ============================================================================
+   MOBILE RESPONSIVENESS IMPROVEMENTS
+   ============================================================================ */
+
+/* Mobile typography adjustments */
+@media (max-width: 768px) {
+	.portable-text h1 {
+		font-size: 28px !important;
+		line-height: 1.2 !important;
+	}
+
+	.portable-text h2 {
+		font-size: 24px !important;
+		line-height: 1.3 !important;
+	}
+
+	.portable-text h3 {
+		font-size: 20px !important;
+		line-height: 1.3 !important;
+	}
+
+	.portable-text p {
+		font-size: 16px !important;
+		line-height: 1.6 !important;
+	}
+
+	/* Mobile carousel adjustments */
+	[data-carousel] {
+		margin: 0 !important;
+		padding: 0 var(--responsive-space-s) !important;
+	}
+
+	/* Mobile footer overflow fix */
+	footer {
+		width: 100% !important;
+		max-width: 100% !important;
+		overflow-x: hidden !important;
+		position: relative !important;
+		margin-bottom: 0 !important;
+		padding-bottom: env(safe-area-inset-bottom, 0px) !important;
+	}
+
+	/* Mobile viewport constraints */
+	html,
+	body {
+		overflow-x: hidden !important;
+		width: 100% !important;
+		max-width: 100% !important;
+	}
+
+	/* Mobile card responsive improvements */
+	[data-grid] {
+		padding: 0 var(--responsive-space-m) !important;
+		gap: var(--responsive-space-m) !important;
+	}
+
+	/* Card layout improvements for mobile */
+	[data-grid] > * {
+		width: 100% !important;
+		max-width: 100% !important;
+		flex-basis: 100% !important;
+		margin: 0 !important;
+	}
+
+	/* Ensure cards take full width on mobile */
+	[data-card] {
+		width: 100% !important;
+		max-width: 100% !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		min-height: auto !important;
+	}
+
+	/* Mobile-optimized typography */
+	[data-variant*='heading-strong-l'] {
+		font-size: clamp(1.25rem, 5vw, 1.5rem) !important;
+		line-height: 1.3 !important;
+		font-weight: 700 !important;
+	}
+
+	[data-variant*='body-default-m'] {
+		font-size: clamp(0.875rem, 3.5vw, 0.975rem) !important;
+		line-height: 1.5 !important;
+	}
+
+	/* Mobile carousel responsive sizing */
+	[data-carousel] {
+		width: 100% !important;
+		max-width: 100% !important;
+	}
+
+	/* Grid container mobile responsiveness */
+	[data-columns='2'] {
+		grid-template-columns: 1fr !important;
+		gap: var(--responsive-space-m) !important;
+	}
+
+	/* Tags on mobile - better line wrapping */
+	[data-tag] {
+		font-size: 0.75rem !important;
+		padding: 4px 8px !important;
+		white-space: nowrap !important;
+		max-width: 120px !important;
+		overflow: hidden !important;
+		text-overflow: ellipsis !important;
+	}
+
+	/* Row components mobile direction */
+	[data-mobile-direction='column'] {
+		flex-direction: column !important;
+		gap: var(--responsive-space-s) !important;
+	}
+
+	/* Enhanced spacing for mobile content */
+	[data-gap='s'] {
+		gap: var(--responsive-space-s) !important;
+	}
+
+	[data-gap='m'] {
+		gap: var(--responsive-space-s) !important;
+	}
+
+	[data-gap='l'] {
+		gap: var(--responsive-space-m) !important;
+	}
+
+	/* Mobile-specific padding adjustments */
+	[data-padding='m'] {
+		padding: var(--responsive-space-m) !important;
+	}
+
+	[data-padding='l'] {
+		padding: var(--responsive-space-m) !important;
+	}
+
+	/* Featured work section mobile optimizations */
+	.featured-work-section {
+		padding-left: var(--responsive-space-m) !important;
+		padding-right: var(--responsive-space-m) !important;
+		gap: var(--responsive-space-m) !important;
+	}
+}

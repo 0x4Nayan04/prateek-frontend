@@ -1,5 +1,7 @@
 .caseStudyCard {
 	transition: all 0.2s ease-in-out;
+	width: 100%;
+	max-width: 100%;
 
 	&:hover {
 		transform: translateY(-2px);
@@ -19,5 +21,28 @@
 	&:focus-within {
 		outline: 2px solid var(--brand-on-background-strong);
 		outline-offset: 2px;
+	}
+
+	/* Mobile Responsive Styling */
+	@media (max-width: 768px) {
+		width: 100% !important;
+		max-width: 100% !important;
+		margin: 0 !important;
+		min-height: auto !important;
+
+		/* Adjust hover effect for mobile - less pronounced */
+		&:hover {
+			transform: translateY(-1px);
+			box-shadow:
+				0 4px 15px -3px rgba(0, 0, 0, 0.08),
+				0 3px 8px -1px rgba(0, 0, 0, 0.06);
+		}
+
+		&:active {
+			transform: none;
+			box-shadow:
+				0 2px 8px -2px rgba(0, 0, 0, 0.1),
+				0 1px 4px -1px rgba(0, 0, 0, 0.06);
+		}
 	}
 }

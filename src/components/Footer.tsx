@@ -1,4 +1,4 @@
-import { Flex, Text, RevealFx } from '@once-ui-system/core';
+import { Flex, RevealFx, Text } from '@once-ui-system/core';
 import styles from './Footer.module.scss';
 
 // Elegant Section Separator Component
@@ -45,27 +45,39 @@ export const Footer = () => {
 			<Flex
 				as='footer'
 				fillWidth
-				padding='8'
+				paddingX='8'
+				paddingY='16'
 				horizontal='center'
 				mobileDirection='column'
-				style={{ position: 'relative', zIndex: 1 }}>
+				style={{
+					position: 'relative',
+					zIndex: 1,
+					marginTop: 'auto'
+				}}>
 				<Flex
 					className={styles.mobile}
 					maxWidth='l'
-					paddingY='8'
+					paddingY='16'
 					paddingX='16'
-					gap='16'
-					horizontal='space-between'
-					vertical='center'>
+					gap='4'
+					horizontal='center'
+					vertical='center'
+					fillWidth>
 					<Text
 						variant='body-default-s'
-						onBackground='neutral-strong'>
-						© 2025 Pratik Srivastava
+						onBackground='neutral-medium'
+						align='center'>
+						© 2025 / Pratik Srivastava
 					</Text>
 				</Flex>
+				{/* Mobile spacing for safe area */}
 				<Flex
-					height={120}
-					show='s'></Flex>
+					show='s'
+					height='8'
+					style={{
+						paddingBottom: 'env(safe-area-inset-bottom, 0px)'
+					}}
+				/>
 			</Flex>
 		</>
 	);
