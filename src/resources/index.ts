@@ -6,7 +6,6 @@ export {
 	baseURL,
 	fonts,
 	style,
-	schema,
 	effects,
 	dataStyle
 } from './once-ui.config';

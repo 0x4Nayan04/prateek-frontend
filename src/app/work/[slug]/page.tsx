@@ -8,15 +8,12 @@ import {
 	Column,
 	Grid,
 	Heading,
-	Meta,
 	RevealFx,
-	Schema,
 	Text,
 	Row,
 	Line,
 	Carousel
 } from '@once-ui-system/core';
-import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 export const revalidate = 60; // ISR revalidation every 60 seconds
@@ -26,27 +23,6 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
 	return caseStudies.map((caseStudy) => ({
 		slug: caseStudy.slug.current
 	}));
-}
-
-export async function generateMetadata({
-	params
-}: {
-	params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
-	const { slug } = await params;
-	const caseStudy = await getCaseStudyBySlug(slug);
-
-	if (!caseStudy) return {};
-
-	return Meta.generate({
-		title: caseStudy.title,
-		description: caseStudy.summary,
-		baseURL: baseURL,
-		image: caseStudy.thumbnail
-			? urlFor(caseStudy.thumbnail).width(1200).height(630).url()
-			: `/api/og/generate?title=${encodeURIComponent(caseStudy.title)}`,
-		path: `${work.path}/${caseStudy.slug.current}`
-	});
 }
 
 export default async function CaseStudyPage({
@@ -102,19 +78,6 @@ export default async function CaseStudyPage({
 				paddingLeft: 'clamp(16px, 4vw, 24px)',
 				paddingRight: 'clamp(16px, 4vw, 24px)'
 			}}>
-			<Schema
-				as='article'
-				baseURL={baseURL}
-				path={`${work.path}/${caseStudy.slug.current}`}
-				title={caseStudy.title}
-				description={caseStudy.summary}
-				image={
-					caseStudy.thumbnail
-						? urlFor(caseStudy.thumbnail).width(1200).height(630).url()
-						: `/api/og/generate?title=${encodeURIComponent(caseStudy.title)}`
-				}
-			/>
-
 			{/* Header Section */}
 			<Column
 				fillWidth

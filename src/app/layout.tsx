@@ -8,7 +8,6 @@ import {
 	Background,
 	Column,
 	Flex,
-	Meta,
 	opacity,
 	SpacingToken
 } from '@once-ui-system/core';
@@ -20,14 +19,6 @@ import {
 	ErrorBoundary
 } from '@/components';
 import { baseURL, effects, fonts, style, dataStyle, home } from '@/resources';
-
-export async function generateMetadata() {
-	return Meta.generate({
-		title: home.title,
-		description: home.description,
-		baseURL: baseURL
-	});
-}
 
 export default async function RootLayout({
 	children

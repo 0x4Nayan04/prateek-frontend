@@ -152,13 +152,4 @@ const effects = {
 	}
 };
 
-// default schema data
-const schema = {
-	logo: '',
-	type: 'Organization',
-	name: 'Once UI',
-	description: home.description,
-	email: 'lorant@once-ui.com'
-};
-
-export { routes, baseURL, fonts, style, schema, effects, dataStyle };
+export { routes, baseURL, fonts, style, effects, dataStyle };

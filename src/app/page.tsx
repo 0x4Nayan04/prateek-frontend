@@ -10,10 +10,8 @@ import {
 	Icon,
 	RevealFx,
 	Row,
-	Schema,
 	Text
 } from '@once-ui-system/core';
-import { Metadata } from 'next';
 
 // Elegant Section Separator Component
 const SectionSeparator = ({
