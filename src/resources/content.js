@@ -1,21 +1,23 @@
 const home = {
 	path: '/',
 	label: 'Home',
-	title: 'Portfolio',
-	description: 'Portfolio website showcasing my work',
+	title: 'Pratik Srivastava',
+	description:
+		'Product Manager specializing in Power BI technologies. 300+ successful Business Intelligence solutions delivered.',
 	headline: (
 		<>
-			We don't believe in guess work, only in{' '}
-			<span className='instrument-serif-highlight '>data driven</span> insights!
+			Building data-driven solutions with{' '}
+			<span className='instrument-serif-highlight'>modern technology</span>
 		</>
 	),
 	featured: {
 		display: true,
-		title: <>Helping companies unlock decisions with data</>
+		title: <>Transforming business insights through data & code</>
 	},
 	subline: (
 		<>
-			300 successful Business Intelligence solutions delivered across platforms
+			Product Manager with 300+ successful Business Intelligence solutions
+			delivered
 		</>
 	)
 };
@@ -23,10 +25,17 @@ const home = {
 const work = {
 	path: '/work',
 	label: 'Work',
-	title: 'Projects',
-	description: 'Power BI Projects'
+	title: 'Projects - Power BI & Web Development Portfolio',
+	description:
+		'Explore my portfolio of Power BI dashboards, web applications, and data visualization projects.'
 	// Create new project pages by adding a new .mdx file to app/work/projects
 	// All projects will be listed on the /home and /work routes
 };
 
-export { home, work };
+// Display configuration for components that need it
+const display = {
+	location: false,
+	time: false
+};
+
+export { home, work, display };

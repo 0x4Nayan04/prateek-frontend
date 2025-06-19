@@ -3,6 +3,7 @@ import '@once-ui-system/core/css/tokens.css';
 import '@/resources/custom.css';
 
 import classNames from 'classnames';
+import type { Metadata } from 'next';
 
 import {
 	Background,
@@ -11,14 +12,66 @@ import {
 	opacity,
 	SpacingToken
 } from '@once-ui-system/core';
-import {
-	Footer,
-	Header,
-	RouteGuard,
-	Providers,
-	ErrorBoundary
-} from '@/components';
+import { Footer, Header, Providers } from '@/components';
 import { baseURL, effects, fonts, style, dataStyle, home } from '@/resources';
+
+export const metadata: Metadata = {
+	metadataBase: new URL(baseURL),
+	title: {
+		default: home.title,
+		template: `%s | ${home.title}`
+	},
+	description: home.description,
+	openGraph: {
+		title: home.title,
+		description: home.description,
+		url: baseURL,
+		siteName: home.title,
+		images: [
+			{
+				url: '/api/og',
+				width: 1200,
+				height: 630,
+				alt: home.title
+			}
+		],
+		locale: 'en_US',
+		type: 'website'
+	},
+	twitter: {
+		card: 'summary_large_image',
+		title: home.title,
+		description: home.description,
+		images: ['/api/og']
+	},
+	robots: {
+		index: true,
+		follow: true,
+		googleBot: {
+			index: true,
+			follow: true,
+			'max-video-preview': -1,
+			'max-image-preview': 'large',
+			'max-snippet': -1
+		}
+	},
+	manifest: '/site.webmanifest',
+	alternates: {
+		canonical: baseURL
+	},
+	keywords: [
+		'Product Manager',
+		'Data Analyst',
+		'Power BI',
+		'Business Intelligence',
+		'Portfolio',
+		'Pratik Srivastava'
+	],
+	authors: [{ name: 'Pratik Srivastava' }],
+	creator: 'Pratik Srivastava',
+	publisher: 'Pratik Srivastava',
+	category: 'Portfolio'
+};
 
 export default async function RootLayout({
 	children
@@ -39,9 +92,25 @@ export default async function RootLayout({
 			)}>
 			<head>
 				<link
+					rel='apple-touch-icon'
+					sizes='180x180'
+					href='/apple-touch-icon.png'
+				/>
+				<link
 					rel='icon'
-					href='/favicon.ico'
-					sizes='any'
+					type='image/png'
+					sizes='32x32'
+					href='/favicon-32x32.png'
+				/>
+				<link
+					rel='icon'
+					type='image/png'
+					sizes='16x16'
+					href='/favicon-16x16.png'
+				/>
+				<link
+					rel='manifest'
+					href='/site.webmanifest'
 				/>
 				<script
 					id='theme-init'
@@ -51,7 +120,7 @@ export default async function RootLayout({
                 try {
                   const root = document.documentElement;
                   
-                  // Set defaults from config
+                  // Set theme attributes from config
                   const config = ${JSON.stringify({
 										brand: style.brand,
 										accent: style.accent,
@@ -65,52 +134,17 @@ export default async function RootLayout({
 										'viz-style': dataStyle.variant
 									})};
                   
-                  // Apply default values
                   Object.entries(config).forEach(([key, value]) => {
                     root.setAttribute('data-' + key, value);
                   });
                   
-                  // Always use dark theme
+                  // Always use dark theme for portfolio
                   root.setAttribute('data-theme', 'dark');
-                  
-                  // Apply any saved style overrides (excluding theme)
-                  const styleKeys = Object.keys(config);
-                  styleKeys.forEach(key => {
-                    const value = localStorage.getItem('data-' + key);
-                    if (value) {
-                      root.setAttribute('data-' + key, value);
-                    }
-                  });
                 } catch (e) {
                   console.error('Failed to initialize theme:', e);
                   document.documentElement.setAttribute('data-theme', 'dark');
                 }
               })();
-            `
-					}}
-				/>
-				<script
-					dangerouslySetInnerHTML={{
-						__html: `
-              // Global error handlers for async response issues
-              window.addEventListener('unhandledrejection', function(event) {
-                if (event.reason && event.reason.message && 
-                    event.reason.message.includes('A listener indicated an asynchronous response by returning true')) {
-                  console.warn('Caught async response error:', event.reason.message);
-                  event.preventDefault(); // Prevent the error from being logged to console as unhandled
-                  return;
-                }
-              });
-
-              // Handle extension-related errors (common cause of this issue)
-              window.addEventListener('error', function(event) {
-                if (event.error && event.error.message && 
-                    event.error.message.includes('A listener indicated an asynchronous response by returning true')) {
-                  console.warn('Caught extension async error:', event.error.message);
-                  event.preventDefault();
-                  return;
-                }
-              });
             `
 					}}
 				/>
@@ -181,16 +215,14 @@ export default async function RootLayout({
 						zIndex={0}
 						fillWidth
 						padding='8'
-						paddingTop='xl'
+						paddingTop='l'
 						horizontal='center'
 						flex={1}>
 						<Flex
 							horizontal='center'
 							fillWidth
 							minHeight='0'>
-							<ErrorBoundary>
-								<RouteGuard>{children}</RouteGuard>
-							</ErrorBoundary>
+							{children}
 						</Flex>
 					</Flex>
 					<Footer />

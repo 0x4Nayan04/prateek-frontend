@@ -7,14 +7,10 @@ import {
 	Text,
 	Heading,
 	RevealFx,
-	Button,
-	InfiniteScroll
+	Button
 } from '@once-ui-system/core';
 import { CaseStudy, FilterState, AvailableFilters } from '@/lib/sanity/types';
 import { ModernCaseStudyCard } from './ModernCaseStudyCard';
-import { FilterSidebar } from './FilterSidebar';
-import { FilterDropdown } from './FilterDropdown';
-import { useState, useCallback } from 'react';
 
 interface ModernCaseStudyGridProps {
 	caseStudies: CaseStudy[];
@@ -59,14 +55,14 @@ export function ModernCaseStudyGrid({
 	return (
 		<Column
 			fillWidth
-			gap='40'>
+			gap='16'>
 			{/* Title Section */}
 			<RevealFx
 				translateY={6}
 				delay={0.02}
 				fillWidth
 				horizontal='center'
-				paddingBottom='16'>
+				paddingBottom='8'>
 				<Column
 					horizontal='center'
 					gap='8'>
@@ -103,7 +99,8 @@ export function ModernCaseStudyGrid({
 			</RevealFx>
 
 			{/* Filters and Results */}
-			{shouldShowFilters && (
+			{/* Results Counter - Only show when filters are enabled and there are results */}
+			{shouldShowFilters && hasResults && (
 				<RevealFx
 					translateY={6}
 					delay={0.04}>
@@ -114,30 +111,13 @@ export function ModernCaseStudyGrid({
 							horizontal='space-between'
 							vertical='center'
 							wrap>
-							{/* Mobile Filter Dropdown */}
-							<FilterDropdown
-								filters={filters}
-								availableFilters={availableFilters}
-								onFiltersChange={onFiltersChange}
-								className='show-s'
-							/>
-
 							{/* Results Counter */}
 							<Text
 								variant='body-default-s'
 								onBackground='neutral-weak'>
-								{hasResults ? (
-									<>
-										Showing {displayedCaseStudies.length}
-										{maxItems &&
-											totalResults > maxItems &&
-											` of ${totalResults}`}
-										case{' '}
-										{displayedCaseStudies.length === 1 ? 'study' : 'studies'}
-									</>
-								) : (
-									'No case studies found'
-								)}
+								Showing {displayedCaseStudies.length}
+								{maxItems && totalResults > maxItems && ` of ${totalResults}`}
+								case {displayedCaseStudies.length === 1 ? 'study' : 'studies'}
 							</Text>
 						</Row>
 					</Column>
@@ -151,19 +131,12 @@ export function ModernCaseStudyGrid({
 				<Column
 					fillWidth
 					paddingX='l'>
-					{/* Desktop Sidebar Filters */}
+					{/* Desktop Sidebar Filters - Removed as showFilters is always false */}
 					{shouldShowFilters && (
 						<Row
 							fillWidth
 							gap='40'
 							style={{ alignItems: 'flex-start' }}>
-							<FilterSidebar
-								filters={filters}
-								availableFilters={availableFilters}
-								onFiltersChange={onFiltersChange}
-								className='hide-s'
-							/>
-
 							{/* Case Studies Grid with Sidebar */}
 							<Column
 								flex={1}

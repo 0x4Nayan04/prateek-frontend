@@ -275,7 +275,7 @@ export function InfiniteCaseStudyGrid({
 								variant='body-default-s'
 								onBackground='neutral-weak'
 								align='center'>
-								You've reached the end of our case studies
+								You&apos;ve reached the end of our case studies
 							</Text>
 						</Column>
 					</RevealFx>

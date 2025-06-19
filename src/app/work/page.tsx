@@ -1,6 +1,36 @@
 import { ModernProjects } from '@/components/work/ModernProjects';
 import { Column } from '@once-ui-system/core';
+import type { Metadata } from 'next';
+import { work, baseURL } from '@/resources';
+
 export const revalidate = 60; // ISR revalidation every 60 seconds
+
+export const metadata: Metadata = {
+	title: work.title,
+	description: work.description,
+	openGraph: {
+		title: work.title,
+		description: work.description,
+		url: `${baseURL}/work`,
+		images: [
+			{
+				url: `/api/og?title=${encodeURIComponent('My Work')}&subtitle=${encodeURIComponent('Portfolio & Case Studies')}&description=${encodeURIComponent(work.description || '')}`,
+				width: 1200,
+				height: 630,
+				alt: work.title
+			}
+		],
+		type: 'website'
+	},
+	twitter: {
+		card: 'summary_large_image',
+		title: work.title,
+		description: work.description,
+		images: [
+			`/api/og?title=${encodeURIComponent('My Work')}&subtitle=${encodeURIComponent('Portfolio & Case Studies')}`
+		]
+	}
+};
 
 export default function Work() {
 	return (

@@ -10,8 +10,6 @@ import {
 } from '@once-ui-system/core';
 import { CaseStudy, FilterState, AvailableFilters } from '@/lib/sanity/types';
 import { CaseStudyCard } from './CaseStudyCard';
-import { FilterSidebar } from './FilterSidebar';
-import { FilterDropdown } from './FilterDropdown';
 
 interface CaseStudyGridProps {
 	caseStudies: CaseStudy[];
@@ -69,16 +67,19 @@ export function CaseStudyGrid({
 					</RevealFx>
 				)}
 
-				{/* Filters */}
-				<RevealFx
-					translateY={6}
-					delay={0.04}>
-					<FilterSidebar
-						availableFilters={availableFilters}
-						filters={filters}
-						onFiltersChange={onFiltersChange}
-					/>
-				</RevealFx>
+				{/* Filters - Removed as showFilters is always false */}
+				{showFilters && (
+					<RevealFx
+						translateY={6}
+						delay={0.04}>
+						<Text
+							variant='body-default-s'
+							onBackground='neutral-medium'
+							align='center'>
+							Filters would appear here
+						</Text>
+					</RevealFx>
+				)}
 			</Column>
 
 			{/* Results */}

@@ -1,5 +1,5 @@
 // import a pre-defined template for config and content options
-export { home, work } from './content';
+export { home, work, display } from './content';
 
 export {
 	routes,

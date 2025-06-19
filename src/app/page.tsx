@@ -162,18 +162,18 @@ export default function Home() {
 				fillWidth
 				horizontal='center'
 				vertical='center'
-				paddingY='2'
+				paddingY='0'
 				paddingX='l'
-				gap='48'>
+				gap='0'>
 				<Column
 					maxWidth='l'
 					horizontal='center'
-					gap='16'>
+					gap='0'>
 					<RevealFx
 						translateY='4'
 						fillWidth
 						horizontal='center'
-						paddingBottom='8'>
+						paddingBottom='0'>
 						<Heading
 							wrap='balance'
 							variant='display-strong-l'
@@ -241,7 +241,7 @@ export default function Home() {
 									variant='body-default-l'
 									onBackground='neutral-medium'
 									style={{ lineHeight: '1.7' }}>
-									I'm{' '}
+									I&apos;m{' '}
 									<Text
 										as='span'
 										variant='body-strong-l'
@@ -281,8 +281,8 @@ export default function Home() {
 										marketing technology
 									</Text>
 									, I design tools and frameworks that transform raw data into
-									strategic outcomes. Whether it's building internal BI systems
-									at{' '}
+									strategic outcomes. Whether it&apos;s building internal BI
+									systems at{' '}
 									<Text
 										as='span'
 										variant='body-strong-m'
