@@ -31,27 +31,63 @@ const heading = Inter({
 	variable: '--font-heading',
 	subsets: ['latin'],
 	display: 'swap',
-	weight: ['400', '500', '600', '700']
+	weight: ['400', '500', '600', '700'],
+	preload: true,
+	fallback: [
+		'system-ui',
+		'-apple-system',
+		'BlinkMacSystemFont',
+		'Segoe UI',
+		'Arial',
+		'sans-serif'
+	]
 });
 
 const body = Inter({
 	variable: '--font-body',
 	subsets: ['latin'],
 	display: 'swap',
-	weight: ['300', '400', '500', '600']
+	weight: ['300', '400', '500', '600'],
+	preload: true,
+	fallback: [
+		'system-ui',
+		'-apple-system',
+		'BlinkMacSystemFont',
+		'Segoe UI',
+		'Arial',
+		'sans-serif'
+	]
 });
 
 const label = Inter({
 	variable: '--font-label',
 	subsets: ['latin'],
 	display: 'swap',
-	weight: ['400', '500', '600']
+	weight: ['400', '500', '600'],
+	preload: false, // Only preload critical fonts
+	fallback: [
+		'system-ui',
+		'-apple-system',
+		'BlinkMacSystemFont',
+		'Segoe UI',
+		'Arial',
+		'sans-serif'
+	]
 });
 
 const code = Geist_Mono({
 	variable: '--font-code',
 	subsets: ['latin'],
-	display: 'swap'
+	display: 'swap',
+	preload: false, // Code font is typically not critical
+	fallback: [
+		'Menlo',
+		'Monaco',
+		'Consolas',
+		'Liberation Mono',
+		'Courier New',
+		'monospace'
+	]
 });
 
 const fonts = {
