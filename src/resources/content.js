@@ -52,7 +52,12 @@ const home = {
 	label: 'Home',
 	title: `${person.name}'s Portfolio`,
 	description: `Portfolio website showcasing my work as a ${person.role}`,
-	headline: <>We don't believe in guess work, only in data driven insights!</>,
+	headline: (
+		<>
+			We don't believe in guess work, only in{' '}
+			<span className='instrument-serif-highlight '>data driven</span> insights!
+		</>
+	),
 	featured: {
 		display: true,
 		title: <>Helping companies unlock decisions with data</>

@@ -52,14 +52,14 @@ export const Footer = () => {
 				style={{
 					position: 'relative',
 					zIndex: 1,
-					marginTop: 'auto'
+					marginTop: '0px'
 				}}>
 				<Flex
 					className={styles.mobile}
 					maxWidth='l'
-					paddingY='16'
+					paddingY='12'
 					paddingX='16'
-					gap='4'
+					gap='0'
 					horizontal='center'
 					vertical='center'
 					fillWidth>
@@ -70,14 +70,6 @@ export const Footer = () => {
 						© 2025 / Pratik Srivastava
 					</Text>
 				</Flex>
-				{/* Mobile spacing for safe area */}
-				<Flex
-					show='s'
-					height='8'
-					style={{
-						paddingBottom: 'env(safe-area-inset-bottom, 0px)'
-					}}
-				/>
 			</Flex>
 		</>
 	);

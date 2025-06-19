@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+
 /* :root {
   /*
   /* Example setup for custom colors */
@@ -84,6 +86,14 @@ div,
 		-apple-system,
 		BlinkMacSystemFont,
 		sans-serif !important;
+}
+
+.instrument-serif-highlight {
+	font-family: 'Instrument Serif', serif;
+	font-weight: 400;
+	font-style: italic;
+	color: white;
+	text-decoration: underline;
 }
 
 /* ============================================================================
