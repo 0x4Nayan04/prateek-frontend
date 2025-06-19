@@ -15,7 +15,6 @@ import {
 	work
 } from '@/resources';
 import styles from './Header.module.scss';
-import { ThemeToggle } from './ThemeToggle';
 
 type TimeDisplayProps = {
 	timeZone: string;
@@ -266,11 +265,6 @@ export const Header = () => {
 										href='/gallery'
 										selected={pathname.startsWith('/gallery')}
 									/>
-								</>
-							)}
-							{display.themeSwitcher && (
-								<>
-									<ThemeToggle />
 								</>
 							)}
 						</Flex>
