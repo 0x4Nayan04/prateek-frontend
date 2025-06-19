@@ -33,14 +33,6 @@ import {
 	PiSparkle
 } from 'react-icons/pi';
 
-import {
-	FaDiscord,
-	FaGithub,
-	FaLinkedin,
-	FaX,
-	FaThreads
-} from 'react-icons/fa6';
-
 export const iconLibrary: Record<string, IconType> = {
 	chevronUp: HiChevronUp,
 	chevronDown: HiChevronDown,
@@ -63,13 +55,8 @@ export const iconLibrary: Record<string, IconType> = {
 	openLink: HiOutlineLink,
 	calendar: HiCalendarDays,
 	home: PiHouseDuotone,
-	discord: FaDiscord,
 	eye: HiOutlineEye,
 	eyeOff: HiOutlineEyeSlash,
-	github: FaGithub,
-	linkedin: FaLinkedin,
-	x: FaX,
-	threads: FaThreads,
 	clipboard: HiClipboard,
 	arrowUpRightFromSquare: HiArrowTopRightOnSquare,
 	document: HiOutlineDocument,

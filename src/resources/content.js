@@ -11,42 +11,6 @@ const person = {
 	languages: ['English', 'Bahasa'] // optional: Leave the array empty if you don't want to display languages
 };
 
-const newsletter = {
-	display: false,
-	title: <>Subscribe to {person.firstName}'s Newsletter</>,
-	description: (
-		<>
-			I occasionally write about design, technology, and share thoughts on the
-			intersection of creativity and engineering.
-		</>
-	)
-};
-
-const social = [
-	// Links are automatically displayed.
-	// Import new icons in /once-ui/icons.ts
-	{
-		name: 'GitHub',
-		icon: 'github',
-		link: 'https://github.com/once-ui-system/nextjs-starter'
-	},
-	{
-		name: 'LinkedIn',
-		icon: 'linkedin',
-		link: 'https://www.linkedin.com/company/once-ui/'
-	},
-	{
-		name: 'Threads',
-		icon: 'threads',
-		link: 'https://www.threads.com/@once_ui'
-	},
-	{
-		name: 'Email',
-		icon: 'email',
-		link: `mailto:${person.email}`
-	}
-];
-
 const home = {
 	path: '/',
 	label: 'Home',
@@ -210,4 +174,4 @@ const work = {
 	// All projects will be listed on the /home and /work routes
 };
 
-export { about, home, newsletter, person, social, work };
+export { about, home, person, work };

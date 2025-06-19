@@ -15,12 +15,6 @@ const display = {
 	themeSwitcher: false
 };
 
-// Enable password protection on selected routes
-// Set password in the .env file, refer to .env.example
-const protectedRoutes = {
-	'/work/automate-design-handovers-with-a-figma-to-code-pipeline': true
-};
-
 // Import and set font for each variant
 import { Inter } from 'next/font/google';
 import { Geist_Mono } from 'next/font/google';
@@ -164,50 +158,6 @@ const effects = {
 	}
 };
 
-const mailchimp = {
-	action: 'https://url/subscribe/post?parameters',
-	effects: {
-		mask: {
-			cursor: true,
-			x: 50,
-			y: 0,
-			radius: 120 // Slightly more generous masking for immersive glow
-		},
-		gradient: {
-			display: true,
-			opacity: 95,
-			x: 50,
-			y: 0,
-			width: 80,
-			height: 80,
-			tilt: -15,
-			colorStart: 'brand-on-background-strong', // Updated for strong branding highlight
-			colorEnd: 'static-transparent'
-		},
-		dots: {
-			display: true,
-			opacity: 30,
-			size: '1.5',
-			color: 'accent-on-background-weak'
-		},
-		grid: {
-			display: false, // grid not observed
-			opacity: 100,
-			color: 'neutral-alpha-medium',
-			width: '0.25rem',
-			height: '0.25rem'
-		},
-		lines: {
-			display: false, // no motion/gridlines seen
-			opacity: 100,
-			color: 'neutral-alpha-weak',
-			size: '16',
-			thickness: 1,
-			angle: 45
-		}
-	}
-};
-
 // default schema data
 const schema = {
 	logo: '',
@@ -217,23 +167,4 @@ const schema = {
 	email: 'lorant@once-ui.com'
 };
 
-// social links
-const sameAs = {
-	threads: 'https://www.threads.com/@once_ui',
-	linkedin: 'https://www.linkedin.com/company/once-ui/',
-	discord: 'https://discord.com/invite/5EyAQ4eNdS'
-};
-
-export {
-	display,
-	mailchimp,
-	routes,
-	protectedRoutes,
-	baseURL,
-	fonts,
-	style,
-	schema,
-	sameAs,
-	effects,
-	dataStyle
-};
+export { display, routes, baseURL, fonts, style, schema, effects, dataStyle };

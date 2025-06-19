@@ -12,7 +12,7 @@ import {
 	Meta,
 	Schema
 } from '@once-ui-system/core';
-import { baseURL, about, person, social } from '@/resources';
+import { baseURL, about, person } from '@/resources';
 import TableOfContents from '@/components/about/TableOfContents';
 import styles from '@/components/about/about.module.scss';
 import React from 'react';
@@ -170,43 +170,6 @@ export default function About() {
 							onBackground='neutral-weak'>
 							{person.role}
 						</Text>
-						{social.length > 0 && (
-							<Flex
-								className={styles.blockAlign}
-								paddingTop='20'
-								paddingBottom='8'
-								gap='8'
-								wrap
-								horizontal='center'
-								fitWidth
-								data-border='rounded'>
-								{social.map(
-									(item) =>
-										item.link && (
-											<React.Fragment key={item.name}>
-												<Button
-													className='s-flex-hide'
-													key={item.name}
-													href={item.link}
-													prefixIcon={item.icon}
-													label={item.name}
-													size='s'
-													weight='default'
-													variant='secondary'
-												/>
-												<IconButton
-													className='s-flex-show'
-													size='l'
-													key={`${item.name}-icon`}
-													href={item.link}
-													icon={item.icon}
-													variant='secondary'
-												/>
-											</React.Fragment>
-										)
-								)}
-							</Flex>
-						)}
 					</Column>
 
 					{about.intro.display && (
