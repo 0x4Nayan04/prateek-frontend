@@ -5,7 +5,7 @@ const home = {
 	description: '300+ successful Business Intelligence solutions delivered.',
 	headline: (
 		<>
-			We don't believe in guess work, only in{' '}
+			We don&apos;t believe in guess work, only in{' '}
 			<span className='instrument-serif-highlight'>data driven</span> insights!
 		</>
 	),
