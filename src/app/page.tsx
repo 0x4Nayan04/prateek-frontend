@@ -1,21 +1,18 @@
-import React from 'react';
-
+import { ScrollToHash } from '@/components';
+import { ModernProjects } from '@/components/work/ModernProjects';
+import { baseURL, home, person } from '@/resources';
 import {
-	Heading,
-	Flex,
-	Text,
-	Column,
 	Badge,
-	Schema,
+	Button,
+	Column,
+	Flex,
+	Heading,
+	Icon,
 	RevealFx,
 	Row,
-	Button,
-	Icon
+	Schema,
+	Text
 } from '@once-ui-system/core';
-import { home, person, baseURL, routes } from '@/resources';
-import { Posts } from '@/components/blog/Posts';
-import { ModernProjects } from '@/components/work/ModernProjects';
-import { ScrollToHash } from '@/components';
 
 // Elegant Section Separator Component
 const SectionSeparator = ({
@@ -85,13 +82,14 @@ export default function Home() {
 				fillWidth
 				horizontal='center'
 				vertical='center'
-				paddingY='l'
+				paddingY='0'
 				paddingX='m'
-				gap='12'
+				gap='0'
 				style={{
-					minHeight: '60vh'
+					minHeight: '7vh'
 				}}>
 				<Column
+					//do somethig here so that the look good !
 					maxWidth='s'
 					horizontal='center'
 					gap='8'>
@@ -103,7 +101,7 @@ export default function Home() {
 							<Badge
 								background='success-alpha-weak'
 								paddingX='16'
-								paddingY='2'
+								paddingY='4'
 								onBackground='neutral-strong'
 								textVariant='label-default-s'
 								arrow={false}>
@@ -124,9 +122,9 @@ export default function Home() {
 						translateY='8'
 						fillWidth
 						horizontal='center'
-						paddingBottom='12'>
+						paddingBottom='16'>
 						<Heading
-							wrap='balance'
+							wrap='pretty'
 							variant='display-strong-l'
 							align='center'>
 							{home.headline}
@@ -144,8 +142,8 @@ export default function Home() {
 							variant='body-default-l'
 							align='center'
 							style={{
-								maxWidth: '480px',
-								lineHeight: '1.6',
+								maxWidth: '500px',
+								lineHeight: '1.5',
 								letterSpacing: '0.01em'
 							}}>
 							{home.subline}
@@ -158,7 +156,7 @@ export default function Home() {
 						<Button
 							href='/work'
 							id='work'
-							data-border='rounded'
+							data-border='accent'
 							variant='primary'
 							size='m'
 							weight='default'
@@ -177,7 +175,7 @@ export default function Home() {
 				fillWidth
 				horizontal='center'
 				vertical='center'
-				paddingY='0'
+				paddingY='2'
 				paddingX='l'
 				gap='48'>
 				<Column
