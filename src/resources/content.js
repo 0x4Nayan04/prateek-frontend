@@ -7,17 +7,16 @@ const home = {
 	headline: (
 		<>
 			Building data-driven solutions with{' '}
-			<span className='instrument-serif-highlight'>modern technology</span>
+			<span className='instrument-serif-highlight'>data driven</span> insights
 		</>
 	),
 	featured: {
 		display: true,
-		title: <>Transforming business insights through data & code</>
+		title: <>Helping companies unlock decisions with data</>
 	},
 	subline: (
 		<>
-			Product Manager with 300+ successful Business Intelligence solutions
-			delivered
+			300 successful Business Intelligence solutions delivered across platforms
 		</>
 	)
 };
