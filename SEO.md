@@ -85,7 +85,7 @@ openGraph: {
   siteName: home.title,
   images: [
     {
-      url: '/api/og',        // Dynamic OG image generation
+              url: '/og-image.png',  // Manual OG image
       width: 1200,
       height: 630,
       alt: home.title
@@ -96,40 +96,32 @@ openGraph: {
 }
 ```
 
-### Dynamic OG Image Generation
+### Manual OG Image Setup
 
-Location: `src/app/api/og/route.tsx`
+Location: `public/og-image.png` (manual image)
 
-This generates dynamic Open Graph images for:
+Using static Open Graph images for:
 
-- Homepage
-- Individual project pages
-- Custom content based on URL parameters
+- Homepage: `/og-image.png` (1200x630px)
+- Work page: `/og-work.png` (1200x630px)
+- Individual projects: inherit from homepage
 
-**Customization Options:**
+**Setup Instructions:**
 
-- Change background colors/gradients
-- Update fonts and typography
-- Modify layout and positioning
-- Add logos or brand elements
+1. Create 1200x630px images with your branding
+2. Include your name, title, and logo
+3. Save as PNG format in public folder:
+   - `/public/og-image.png` (homepage)
+   - `/public/og-work.png` (work page)
+4. Optimize for social media platforms
+5. Test with social media validators
 
-### Manual OG Images (Alternative)
+**Benefits of Manual OG Images:**
 
-If you prefer static images:
-
-1. Create images (1200x630px) in `/public/og/`
-2. Update the images array:
-
-```typescript
-images: [
-	{
-		url: '/og/homepage.png',
-		width: 1200,
-		height: 630,
-		alt: 'Pratik Srivastava Portfolio'
-	}
-];
-```
+- Full control over design
+- No dynamic generation overhead
+- Consistent branding across platforms
+- Better performance and reliability
 
 ---
 
@@ -142,7 +134,7 @@ twitter: {
   card: 'summary_large_image',
   title: home.title,
   description: home.description,
-  images: ['/api/og']
+  images: ['/og-image.png']
 }
 ```
 
@@ -162,7 +154,7 @@ twitter: {
   creator: '@yourtwitterhandle', // Content creator
   title: home.title,
   description: home.description,
-  images: ['/api/og']
+  images: ['/og-image.png']
 }
 ```
 

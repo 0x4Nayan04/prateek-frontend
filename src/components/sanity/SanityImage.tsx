@@ -1,4 +1,5 @@
 import { urlFor } from '@/lib/sanity/client';
+import Image from 'next/image';
 
 interface SanityImageProps {
 	image: {
@@ -34,9 +35,11 @@ export function SanityImage({
 		.url();
 
 	return (
-		<img
+		<Image
 			src={imageUrl}
 			alt={alt || image.alt || 'Case study image'}
+			width={width}
+			height={height}
 			className={className}
 			style={{
 				width: '100%',
@@ -44,7 +47,7 @@ export function SanityImage({
 				objectFit: 'cover',
 				...style
 			}}
-			loading={priority ? 'eager' : 'lazy'}
+			priority={priority}
 		/>
 	);
 }

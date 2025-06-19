@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 		siteName: home.title,
 		images: [
 			{
-				url: '/api/og',
+				url: '/og-image.png',
 				width: 1200,
 				height: 630,
 				alt: home.title
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 		card: 'summary_large_image',
 		title: home.title,
 		description: home.description,
-		images: ['/api/og']
+		images: ['/og-image.png']
 	},
 	robots: {
 		index: true,

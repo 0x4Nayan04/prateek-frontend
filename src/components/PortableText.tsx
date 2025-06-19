@@ -3,6 +3,7 @@
 import { PortableText as BasePortableText } from '@portabletext/react';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import { urlFor } from '@/lib/sanity/client';
+import Image from 'next/image';
 
 const components = {
 	block: {
@@ -199,16 +200,20 @@ const components = {
 				return null;
 			}
 
+			const imageUrl = urlFor(value)
+				.width(800)
+				.height(600)
+				.fit('max')
+				.auto('format')
+				.url();
+
 			return (
 				<div style={{ margin: '32px 0' }}>
-					<img
-						src={urlFor(value)
-							.width(800)
-							.height(600)
-							.fit('max')
-							.auto('format')
-							.url()}
+					<Image
+						src={imageUrl}
 						alt={value.alt || ''}
+						width={800}
+						height={600}
 						style={{
 							width: '100%',
 							height: 'auto',

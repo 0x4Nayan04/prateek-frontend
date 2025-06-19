@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 		url: `${baseURL}/work`,
 		images: [
 			{
-				url: `/api/og?title=${encodeURIComponent('My Work')}&subtitle=${encodeURIComponent('Portfolio & Case Studies')}&description=${encodeURIComponent(work.description || '')}`,
+				url: '/og-work.png',
 				width: 1200,
 				height: 630,
 				alt: work.title
@@ -26,9 +26,7 @@ export const metadata: Metadata = {
 		card: 'summary_large_image',
 		title: work.title,
 		description: work.description,
-		images: [
-			`/api/og?title=${encodeURIComponent('My Work')}&subtitle=${encodeURIComponent('Portfolio & Case Studies')}`
-		]
+		images: ['/og-work.png']
 	}
 };
 
