@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { routes, protectedRoutes } from '@/resources';
 import {
@@ -26,11 +26,35 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
 	const [error, setError] = useState<string | undefined>(undefined);
 	const [loading, setLoading] = useState(true);
 	const [mounted, setMounted] = useState(false);
+	const abortControllerRef = useRef<AbortController | null>(null);
+	const isMountedRef = useRef(false);
 
 	useEffect(() => {
 		setMounted(true);
+		isMountedRef.current = true;
+
+		// Cleanup function
+		return () => {
+			isMountedRef.current = false;
+			if (abortControllerRef.current) {
+				abortControllerRef.current.abort();
+			}
+		};
+	}, []);
+
+	useEffect(() => {
+		// Cancel any previous operations
+		if (abortControllerRef.current) {
+			abortControllerRef.current.abort();
+		}
+
+		// Create new abort controller for this pathname
+		abortControllerRef.current = new AbortController();
+		const currentController = abortControllerRef.current;
 
 		const performChecks = async () => {
+			if (!isMountedRef.current) return;
+
 			setLoading(true);
 			setIsRouteEnabled(false);
 			setIsPasswordRequired(false);
@@ -54,43 +78,77 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
 			};
 
 			const routeEnabled = checkRouteEnabled();
+			if (!isMountedRef.current) return;
 			setIsRouteEnabled(routeEnabled);
 
 			if (protectedRoutes[pathname as keyof typeof protectedRoutes]) {
+				if (!isMountedRef.current) return;
 				setIsPasswordRequired(true);
 
 				try {
-					const response = await fetch('/api/check-auth');
-					if (response.ok) {
+					const response = await fetch('/api/check-auth', {
+						signal: currentController.signal
+					});
+
+					if (currentController.signal.aborted) return;
+
+					if (response.ok && isMountedRef.current) {
 						setIsAuthenticated(true);
 					}
-				} catch (error) {
+				} catch (error: any) {
+					if (error.name === 'AbortError') {
+						// Request was cancelled, ignore
+						return;
+					}
 					console.error('Auth check failed:', error);
 				}
 			}
 
-			setLoading(false);
+			if (isMountedRef.current) {
+				setLoading(false);
+			}
 		};
 
 		performChecks();
+
+		// Cleanup for this effect
+		return () => {
+			if (currentController) {
+				currentController.abort();
+			}
+		};
 	}, [pathname]);
 
 	const handlePasswordSubmit = async () => {
+		if (!isMountedRef.current) return;
+
+		// Create new abort controller for password submission
+		const controller = new AbortController();
+
 		try {
 			const response = await fetch('/api/authenticate', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ password })
+				body: JSON.stringify({ password }),
+				signal: controller.signal
 			});
 
-			if (response.ok) {
+			if (controller.signal.aborted) return;
+
+			if (response.ok && isMountedRef.current) {
 				setIsAuthenticated(true);
 				setError(undefined);
-			} else {
+			} else if (isMountedRef.current) {
 				setError('Incorrect password');
 			}
-		} catch (error) {
-			setError('Authentication failed');
+		} catch (error: any) {
+			if (error.name === 'AbortError') {
+				// Request was cancelled, ignore
+				return;
+			}
+			if (isMountedRef.current) {
+				setError('Authentication failed');
+			}
 		}
 	};
 

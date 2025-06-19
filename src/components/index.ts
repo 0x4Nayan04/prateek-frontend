@@ -29,3 +29,6 @@ export { ModernProjectsClient } from '@/components/work/ModernProjectsClient';
 
 // Sanity Components
 export { SanityImage } from '@/components/sanity/SanityImage';
+
+// New ErrorBoundary component
+export { ErrorBoundary } from './ErrorBoundary';

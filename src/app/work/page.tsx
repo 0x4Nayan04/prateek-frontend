@@ -21,15 +21,7 @@ export default function Work() {
 			horizontal='center'
 			paddingY='0'
 			paddingX='l'
-			gap='0'
-			style={
-				{
-					'@media (max-width: 768px)': {
-						paddingLeft: 'var(--responsive-space-m)',
-						paddingRight: 'var(--responsive-space-m)'
-					}
-				} as React.CSSProperties
-			}>
+			gap='0'>
 			<ModernProjects
 				title='Case Studies'
 				showFilters={false}

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import {
 	Column,
 	Text,
@@ -35,23 +35,50 @@ export function InfiniteCaseStudyGrid({
 	const [hasMore, setHasMore] = useState(true);
 	const [offset, setOffset] = useState(initialCaseStudies.length);
 	const [mounted, setMounted] = useState(false);
+	const isMountedRef = useRef(false);
+	const abortControllerRef = useRef<AbortController | null>(null);
 
-	// Handle hydration
+	// Handle hydration and setup cleanup
 	useEffect(() => {
 		setMounted(true);
+		isMountedRef.current = true;
+
 		// Initialize hasMore state based on initial data
 		if (initialCaseStudies.length < itemsPerPage) {
 			setHasMore(false);
 		}
+
+		// Cleanup function
+		return () => {
+			isMountedRef.current = false;
+			if (abortControllerRef.current) {
+				abortControllerRef.current.abort();
+			}
+		};
 	}, [initialCaseStudies.length, itemsPerPage]);
 
 	const loadMore = useCallback(async () => {
-		if (loading || !mounted) return false;
+		if (loading || !mounted || !isMountedRef.current) return false;
 
+		// Cancel any previous request
+		if (abortControllerRef.current) {
+			abortControllerRef.current.abort();
+		}
+
+		// Create new abort controller for this request
+		abortControllerRef.current = new AbortController();
+		const currentController = abortControllerRef.current;
+
+		if (!isMountedRef.current) return false;
 		setLoading(true);
 
 		try {
 			const result = await getCaseStudiesPaginated(offset, itemsPerPage);
+
+			// Check if request was cancelled or component unmounted
+			if (currentController.signal.aborted || !isMountedRef.current) {
+				return false;
+			}
 
 			if (result.caseStudies.length > 0) {
 				setItems((prev) => [...prev, ...result.caseStudies]);
@@ -62,12 +89,21 @@ export function InfiniteCaseStudyGrid({
 				setHasMore(false);
 				return false;
 			}
-		} catch (error) {
+		} catch (error: any) {
+			// If the request was aborted, don't log it as an error
+			if (error.name === 'AbortError' || currentController.signal.aborted) {
+				return false;
+			}
+
 			console.error('Error loading more case studies:', error);
-			setHasMore(false);
+			if (isMountedRef.current) {
+				setHasMore(false);
+			}
 			return false;
 		} finally {
-			setLoading(false);
+			if (isMountedRef.current) {
+				setLoading(false);
+			}
 		}
 	}, [offset, itemsPerPage, loading, mounted]);
 

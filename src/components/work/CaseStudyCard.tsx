@@ -89,7 +89,7 @@ export function CaseStudyCard({
 								variant='primary'
 								size='m'
 								arrowIcon
-								onClick={(e) => {
+								onClick={(e: React.MouseEvent) => {
 									e.preventDefault();
 									e.stopPropagation();
 									// Button will still navigate via parent Link

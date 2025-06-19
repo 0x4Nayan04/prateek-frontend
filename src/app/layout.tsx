@@ -12,7 +12,13 @@ import {
 	opacity,
 	SpacingToken
 } from '@once-ui-system/core';
-import { Footer, Header, RouteGuard, Providers } from '@/components';
+import {
+	Footer,
+	Header,
+	RouteGuard,
+	Providers,
+	ErrorBoundary
+} from '@/components';
 import { baseURL, effects, fonts, style, dataStyle, home } from '@/resources';
 
 export async function generateMetadata() {
@@ -98,6 +104,31 @@ export default async function RootLayout({
             `
 					}}
 				/>
+				<script
+					dangerouslySetInnerHTML={{
+						__html: `
+              // Global error handlers for async response issues
+              window.addEventListener('unhandledrejection', function(event) {
+                if (event.reason && event.reason.message && 
+                    event.reason.message.includes('A listener indicated an asynchronous response by returning true')) {
+                  console.warn('Caught async response error:', event.reason.message);
+                  event.preventDefault(); // Prevent the error from being logged to console as unhandled
+                  return;
+                }
+              });
+
+              // Handle extension-related errors (common cause of this issue)
+              window.addEventListener('error', function(event) {
+                if (event.error && event.error.message && 
+                    event.error.message.includes('A listener indicated an asynchronous response by returning true')) {
+                  console.warn('Caught extension async error:', event.error.message);
+                  event.preventDefault();
+                  return;
+                }
+              });
+            `
+					}}
+				/>
 			</head>
 			<Providers>
 				<Column
@@ -172,7 +203,9 @@ export default async function RootLayout({
 							horizontal='center'
 							fillWidth
 							minHeight='0'>
-							<RouteGuard>{children}</RouteGuard>
+							<ErrorBoundary>
+								<RouteGuard>{children}</RouteGuard>
+							</ErrorBoundary>
 						</Flex>
 					</Flex>
 					<Footer />

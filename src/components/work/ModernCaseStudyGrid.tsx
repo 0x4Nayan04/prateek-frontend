@@ -131,15 +131,7 @@ export function ModernCaseStudyGrid({
 				horizontal='center'>
 				<Column
 					fillWidth
-					paddingX='l'
-					style={
-						{
-							'@media (max-width: 768px)': {
-								paddingLeft: 'var(--responsive-space-m)',
-								paddingRight: 'var(--responsive-space-m)'
-							}
-						} as React.CSSProperties
-					}>
+					paddingX='l'>
 					{/* Desktop Sidebar Filters */}
 					{shouldShowFilters && (
 						<Row
@@ -165,15 +157,7 @@ export function ModernCaseStudyGrid({
 											tabletColumns={columns.tablet as any}
 											mobileColumns={1}
 											gap='48'
-											fillWidth
-											style={
-												{
-													'@media (max-width: 768px)': {
-														gap: 'var(--responsive-space-m)',
-														padding: '0'
-													}
-												} as React.CSSProperties
-											}>
+											fillWidth>
 											{displayedCaseStudies.map((caseStudy, index) => (
 												<ModernCaseStudyCard
 													key={caseStudy._id}
@@ -253,15 +237,7 @@ export function ModernCaseStudyGrid({
 										tabletColumns={columns.tablet as any}
 										mobileColumns={1}
 										gap='48'
-										fillWidth
-										style={
-											{
-												'@media (max-width: 768px)': {
-													gap: 'var(--responsive-space-m)',
-													padding: '0'
-												}
-											} as React.CSSProperties
-										}>
+										fillWidth>
 										{displayedCaseStudies.map((caseStudy, index) => (
 											<ModernCaseStudyCard
 												key={caseStudy._id}

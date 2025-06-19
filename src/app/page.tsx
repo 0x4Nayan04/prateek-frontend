@@ -88,14 +88,9 @@ export default function Home() {
 				paddingY='l'
 				paddingX='m'
 				gap='12'
-				style={{ 
-					minHeight: '60vh',
-					'@media (max-width: 768px)': {
-						minHeight: '50vh',
-						paddingTop: 'var(--responsive-space-xl)',
-						paddingBottom: 'var(--responsive-space-l)'
-					}
-				} as React.CSSProperties}>
+				style={{
+					minHeight: '60vh'
+				}}>
 				<Column
 					maxWidth='s'
 					horizontal='center'
@@ -184,16 +179,7 @@ export default function Home() {
 				vertical='center'
 				paddingY='0'
 				paddingX='l'
-				gap='48'
-				style={
-					{
-						'@media (max-width: 768px)': {
-							paddingLeft: 'var(--responsive-space-m)',
-							paddingRight: 'var(--responsive-space-m)',
-							gap: 'var(--responsive-space-m)'
-						}
-					} as React.CSSProperties
-				}>
+				gap='48'>
 				<Column
 					maxWidth='l'
 					horizontal='center'
@@ -207,14 +193,10 @@ export default function Home() {
 							wrap='balance'
 							variant='display-strong-l'
 							align='center'
-							style={
-								{
-									'@media (max-width: 768px)': {
-										fontSize: 'clamp(2rem, 8vw, 3rem)',
-										lineHeight: '1.2'
-									}
-								} as React.CSSProperties
-							}>
+							style={{
+								fontSize: 'clamp(2rem, 8vw, 3rem)',
+								lineHeight: '1.2'
+							}}>
 							Featured Work
 						</Heading>
 					</RevealFx>

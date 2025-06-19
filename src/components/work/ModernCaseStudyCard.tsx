@@ -75,21 +75,14 @@ export function ModernCaseStudyCard({
 					border='neutral-alpha-strong'
 					background='brand-alpha-weak'
 					minHeight='48'
-					style={
-						{
-							overflow: 'hidden',
-							height: '100%',
-							display: 'flex',
-							flexDirection: 'column',
-							cursor: 'pointer',
-							transition: 'all 0.2s ease-in-out',
-							'@media (max-width: 768px)': {
-								minHeight: 'auto',
-								border: '1px solid var(--neutral-alpha-medium)',
-								background: 'var(--surface-background)'
-							}
-						} as React.CSSProperties
-					}
+					style={{
+						overflow: 'hidden',
+						height: '100%',
+						display: 'flex',
+						flexDirection: 'column',
+						cursor: 'pointer',
+						transition: 'all 0.2s ease-in-out'
+					}}
 					className={styles.caseStudyCard}>
 					{/* Carousel Container with Breathing Space */}
 					{carouselItems.length > 0 && (
@@ -170,15 +163,9 @@ export function ModernCaseStudyCard({
 						gap='s'
 						horizontal='start'
 						vertical='start'
-						style={
-							{
-								justifyContent: 'space-between',
-								'@media (max-width: 768px)': {
-									padding: 'var(--responsive-space-m)',
-									gap: 'var(--responsive-space-s)'
-								}
-							} as React.CSSProperties
-						}>
+						style={{
+							justifyContent: 'space-between'
+						}}>
 						{/* Title */}
 						<Text
 							variant='heading-strong-l'
