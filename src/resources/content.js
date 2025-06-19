@@ -5,8 +5,8 @@ const home = {
 	description: '300+ successful Business Intelligence solutions delivered.',
 	headline: (
 		<>
-			Building data-driven solutions with{' '}
-			<span className='instrument-serif-highlight'>data driven</span> insights
+			We don't believe in guess work, only in{' '}
+			<span className='instrument-serif-highlight'>data driven</span> insights!
 		</>
 	),
 	featured: {
