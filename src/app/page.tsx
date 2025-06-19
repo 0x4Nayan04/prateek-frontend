@@ -1,6 +1,6 @@
 import { ScrollToHash } from '@/components';
 import { ModernProjects } from '@/components/work/ModernProjects';
-import { baseURL, home, person } from '@/resources';
+import { baseURL, home } from '@/resources';
 import {
 	Badge,
 	Button,
@@ -13,6 +13,7 @@ import {
 	Schema,
 	Text
 } from '@once-ui-system/core';
+import { Metadata } from 'next';
 
 // Elegant Section Separator Component
 const SectionSeparator = ({
@@ -64,18 +65,6 @@ export default function Home() {
 			gap='0'
 			horizontal='center'>
 			<ScrollToHash />
-			<Schema
-				as='webPage'
-				baseURL={baseURL}
-				path={home.path}
-				title={home.title}
-				description={home.description}
-				author={{
-					name: person.name,
-					url: `${baseURL}/about`,
-					image: `${baseURL}${person.avatar}`
-				}}
-			/>
 
 			{/* Hero Section */}
 			<Column

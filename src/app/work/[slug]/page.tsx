@@ -2,7 +2,7 @@ import { PortableText, ScrollToHash } from '@/components';
 import PaginationNav from '@/components/work/PaginationNav';
 import { getFileUrl, urlFor } from '@/lib/sanity/client';
 import { getAllCaseStudies, getCaseStudyBySlug } from '@/lib/utils/content';
-import { about, baseURL, person, work } from '@/resources';
+import { baseURL, work } from '@/resources';
 import {
 	Button,
 	Column,
@@ -113,11 +113,6 @@ export default async function CaseStudyPage({
 						? urlFor(caseStudy.thumbnail).width(1200).height(630).url()
 						: `/api/og/generate?title=${encodeURIComponent(caseStudy.title)}`
 				}
-				author={{
-					name: person.name,
-					url: `${baseURL}${about.path}`,
-					image: `${baseURL}${person.avatar}`
-				}}
 			/>
 
 			{/* Header Section */}

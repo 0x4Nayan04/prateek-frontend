@@ -5,48 +5,11 @@ import { useEffect, useState } from 'react';
 
 import { Fade, Flex, ToggleButton } from '@once-ui-system/core';
 
-import { about, display, person, routes, work } from '@/resources';
+import { routes, work } from '@/resources';
 import styles from './Header.module.scss';
 
-type TimeDisplayProps = {
-	timeZone: string;
-	locale?: string; // Optionally allow locale, defaulting to 'en-GB'
-};
-
-function formatInTimeZone(
-	date: Date,
-	timeZone: string,
-	locale: string = 'en-GB'
-): string {
-	return new Intl.DateTimeFormat(locale, {
-		timeZone,
-		hour: '2-digit',
-		minute: '2-digit',
-		hour12: false
-	}).format(date);
-}
-
-function TimeDisplay({ timeZone, locale = 'en-GB' }: TimeDisplayProps) {
-	const [time, setTime] = useState<string>('');
-
-	useEffect(() => {
-		const updateTime = () => {
-			const now = new Date();
-			const formattedTime = formatInTimeZone(now, timeZone, locale);
-			setTime(formattedTime);
-		};
-
-		updateTime(); // Set initial time
-		const interval = setInterval(updateTime, 1000); // Update every second
-
-		return () => clearInterval(interval); // Cleanup interval on unmount
-	}, [timeZone, locale]);
-
-	return <>{time}</>;
-}
-
 export const Header = () => {
-	const pathname = usePathname() ?? '';
+	const pathname = usePathname();
 	const router = useRouter();
 	const [isAboutInView, setIsAboutInView] = useState(false);
 	const [mounted, setMounted] = useState(false);
@@ -155,9 +118,7 @@ export const Header = () => {
 					paddingLeft='12'
 					fillWidth
 					vertical='center'
-					textVariant='body-default-s'>
-					{display.location && <Flex hide='s'>{person.location}</Flex>}
-				</Flex>
+					textVariant='body-default-s'></Flex>
 				<Flex
 					fillWidth
 					horizontal='center'>
@@ -191,23 +152,21 @@ export const Header = () => {
 									/>
 								</>
 							)}
-							{routes['/about'] && (
-								<>
-									<ToggleButton
-										className='s-flex-hide'
-										prefixIcon='person'
-										onClick={scrollToAbout}
-										label={about.label}
-										selected={isAboutActive}
-									/>
-									<ToggleButton
-										className='s-flex-show'
-										prefixIcon='person'
-										onClick={scrollToAbout}
-										selected={isAboutActive}
-									/>
-								</>
-							)}
+							<>
+								<ToggleButton
+									className='s-flex-hide'
+									prefixIcon='person'
+									onClick={scrollToAbout}
+									label='About'
+									selected={isAboutActive}
+								/>
+								<ToggleButton
+									className='s-flex-show'
+									prefixIcon='person'
+									onClick={scrollToAbout}
+									selected={isAboutActive}
+								/>
+							</>
 							{routes['/work'] && (
 								<>
 									<ToggleButton
@@ -229,20 +188,11 @@ export const Header = () => {
 					</Flex>
 				</Flex>
 				<Flex
+					paddingRight='12'
 					fillWidth
 					horizontal='end'
-					vertical='center'>
-					<Flex
-						paddingRight='12'
-						horizontal='end'
-						vertical='center'
-						textVariant='body-default-s'
-						gap='20'>
-						<Flex hide='s'>
-							{display.time && <TimeDisplay timeZone={person.location} />}
-						</Flex>
-					</Flex>
-				</Flex>
+					vertical='center'
+					textVariant='body-default-s'></Flex>
 			</Flex>
 		</>
 	);

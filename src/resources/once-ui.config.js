@@ -9,12 +9,6 @@ const routes = {
 	'/work': true
 };
 
-const display = {
-	location: false,
-	time: false,
-	themeSwitcher: false
-};
-
 // Import and set font for each variant
 import { Inter } from 'next/font/google';
 import { Geist_Mono } from 'next/font/google';
@@ -167,4 +161,4 @@ const schema = {
 	email: 'lorant@once-ui.com'
 };
 
-export { display, routes, baseURL, fonts, style, schema, effects, dataStyle };
+export { routes, baseURL, fonts, style, schema, effects, dataStyle };
