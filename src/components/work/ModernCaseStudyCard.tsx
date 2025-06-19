@@ -56,8 +56,8 @@ export function ModernCaseStudyCard({
 
 	return (
 		<RevealFx
-			translateY={16}
-			delay={index * 0.1}>
+			translateY={8}
+			delay={index * 0.02}>
 			<Link
 				href={`/work/${caseStudy.slug.current}`}
 				style={{
@@ -81,7 +81,7 @@ export function ModernCaseStudyCard({
 						display: 'flex',
 						flexDirection: 'column',
 						cursor: 'pointer',
-						transition: 'all 0.2s ease-in-out'
+						transition: 'all 0.15s ease-in-out'
 					}}
 					className={styles.caseStudyCard}>
 					{/* Carousel Container with Breathing Space */}
@@ -220,7 +220,7 @@ export function ModernCaseStudyCard({
 										backgroundColor: 'var(--brand-alpha-weak)',
 										border: '1px solid var(--brand-alpha-medium)',
 										color: 'var(--brand-on-background-strong)',
-										transition: 'all 0.2s ease-in-out',
+										transition: 'all 0.15s ease-in-out',
 										boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)'
 									}}>
 									{tech}
@@ -240,7 +240,7 @@ export function ModernCaseStudyCard({
 										backgroundColor: 'var(--accent-alpha-weak)',
 										border: '1px solid var(--accent-alpha-medium)',
 										color: 'var(--accent-on-background-strong)',
-										transition: 'all 0.2s ease-in-out',
+										transition: 'all 0.15s ease-in-out',
 										boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)'
 									}}>
 									{industry}
@@ -262,7 +262,7 @@ export function ModernCaseStudyCard({
 										border: '1px solid var(--neutral-alpha-medium)',
 										color: 'var(--neutral-on-background-medium)',
 										opacity: 0.8,
-										transition: 'all 0.2s ease-in-out'
+										transition: 'all 0.15s ease-in-out'
 									}}>
 									+
 									{(caseStudy.techStack?.length || 0) +

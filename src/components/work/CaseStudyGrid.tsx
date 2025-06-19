@@ -51,131 +51,80 @@ export function CaseStudyGrid({
 		<Column
 			fillWidth
 			gap='32'>
-			{/* Header */}
-			{(title || description) && (
-				<RevealFx
-					translateY={12}
-					delay={0.1}>
-					<Column
-						gap='16'
-						maxWidth='xs'>
-						{title && (
-							<Heading
-								variant='display-strong-s'
-								onBackground='neutral-strong'>
-								{title}
-							</Heading>
-						)}
-						{description && (
-							<Text
-								variant='body-default-m'
-								onBackground='neutral-medium'>
-								{description}
-							</Text>
-						)}
-					</Column>
-				</RevealFx>
-			)}
-
-			{/* Filters and Results */}
-			{showFilters && (
-				<RevealFx
-					translateY={12}
-					delay={0.2}>
-					<Row
-						horizontal='space-between'
-						vertical='center'
-						wrap>
-						{/* Mobile Filter Dropdown */}
-						<FilterDropdown
-							filters={filters}
-							availableFilters={availableFilters}
-							onFiltersChange={onFiltersChange}
-							className='show-s'
-						/>
-
-						{/* Results Counter */}
-						<Text
-							variant='body-default-s'
-							onBackground='neutral-weak'>
-							{hasResults ? (
-								<>
-									Showing {displayedCaseStudies.length}
-									{maxItems && totalResults > maxItems && ` of ${totalResults}`}
-									case {displayedCaseStudies.length === 1 ? 'study' : 'studies'}
-								</>
-							) : (
-								'No case studies found'
-							)}
-						</Text>
-					</Row>
-				</RevealFx>
-			)}
-
-			{/* Main Content */}
-			<Row
-				gap='32'
-				fillWidth>
-				{/* Desktop Sidebar Filters */}
-				{showFilters && (
-					<FilterSidebar
-						filters={filters}
-						availableFilters={availableFilters}
-						onFiltersChange={onFiltersChange}
-						className='hide-s'
-					/>
+			{/* Title and Filters */}
+			<Column
+				fillWidth
+				gap='24'>
+				{/* Title */}
+				{title && (
+					<RevealFx
+						translateY={6}
+						delay={0.02}>
+						<Heading
+							variant='display-strong-l'
+							align='center'
+							onBackground='neutral-strong'>
+							{title}
+						</Heading>
+					</RevealFx>
 				)}
 
-				{/* Case Studies Grid */}
-				<Column
-					flex={1}
-					gap='24'>
-					{hasResults ? (
+				{/* Filters */}
+				<RevealFx
+					translateY={6}
+					delay={0.04}>
+					<FilterSidebar
+						availableFilters={availableFilters}
+						filters={filters}
+						onFiltersChange={onFiltersChange}
+					/>
+				</RevealFx>
+			</Column>
+
+			{/* Results */}
+			<Column
+				fillWidth
+				gap='32'>
+				{/* Results Info */}
+				{(filters.techStack.length > 0 || filters.industry.length > 0) && (
+					<Text
+						variant='body-default-s'
+						onBackground='neutral-medium'
+						align='center'>
+						Showing {displayedCaseStudies.length} of {caseStudies.length} case
+						studies
+					</Text>
+				)}
+
+				{/* Grid */}
+				{displayedCaseStudies.length > 0 ? (
+					<RevealFx
+						translateY={8}
+						delay={0.06}>
 						<Grid
-							columns={columns.desktop as any}
-							tabletColumns={columns.tablet as any}
-							mobileColumns={columns.mobile as any}
-							gap='24'>
+							columns='2'
+							tabletColumns='2'
+							mobileColumns='1'
+							gap='24'
+							fillWidth>
 							{displayedCaseStudies.map((caseStudy, index) => (
 								<CaseStudyCard
 									key={caseStudy._id}
 									caseStudy={caseStudy}
 									index={index}
-									priority={index < 4}
 								/>
 							))}
 						</Grid>
-					) : (
-						<RevealFx
-							translateY={16}
-							delay={0.3}>
-							<Column
-								fillWidth
-								center
-								padding='48'
-								gap='16'
-								background='surface'
-								border='neutral-alpha-weak'
-								radius='l'>
-								<Text
-									variant='heading-default-m'
-									onBackground='neutral-strong'
-									align='center'>
-									No case studies found
-								</Text>
-								<Text
-									variant='body-default-m'
-									onBackground='neutral-medium'
-									align='center'
-									style={{ maxWidth: '400px' }}>
-									Try adjusting your filters or check back later for new case
-									studies.
-								</Text>
-							</Column>
-						</RevealFx>
-					)}
-				</Column>
-			</Row>
+					</RevealFx>
+				) : (
+					<Text
+						variant='body-default-m'
+						onBackground='neutral-medium'
+						align='center'>
+						No case studies match the selected filters.
+					</Text>
+				)}
+			</Column>
 		</Column>
 	);
 }

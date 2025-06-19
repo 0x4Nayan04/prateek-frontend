@@ -24,8 +24,8 @@ export default function PaginationNav({
 
 	return (
 		<RevealFx
-			translateY={16}
-			delay={1.4}>
+			translateY={8}
+			delay={0.05}>
 			<Column
 				fillWidth
 				gap='24'>

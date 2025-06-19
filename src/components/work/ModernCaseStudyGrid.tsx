@@ -60,34 +60,53 @@ export function ModernCaseStudyGrid({
 		<Column
 			fillWidth
 			gap='40'>
-			{/* Header */}
-			{title && (
-				<RevealFx
-					translateY={12}
-					delay={0.1}
-					fillWidth
+			{/* Title Section */}
+			<RevealFx
+				translateY={6}
+				delay={0.02}
+				fillWidth
+				horizontal='center'
+				paddingBottom='16'>
+				<Column
 					horizontal='center'
-					vertical='center'
-					paddingY='m'>
+					gap='8'>
 					<Heading
+						wrap='balance'
 						variant='display-strong-l'
-						onBackground='neutral-strong'
 						align='center'
 						style={{
-							fontSize: '48px',
-							fontWeight: '800',
-							color: 'white'
+							fontSize: 'clamp(2rem, 8vw, 3rem)',
+							lineHeight: '1.2'
 						}}>
 						{title}
 					</Heading>
-				</RevealFx>
-			)}
+				</Column>
+			</RevealFx>
+
+			{/* Description Section */}
+			<RevealFx
+				translateY={6}
+				delay={0.04}>
+				<Column gap='24'>
+					<Text
+						variant='body-default-l'
+						onBackground='neutral-medium'
+						align='center'
+						style={{
+							maxWidth: '600px',
+							margin: '0 auto',
+							lineHeight: '1.6'
+						}}>
+						{description}
+					</Text>
+				</Column>
+			</RevealFx>
 
 			{/* Filters and Results */}
 			{shouldShowFilters && (
 				<RevealFx
-					translateY={12}
-					delay={0.2}>
+					translateY={6}
+					delay={0.04}>
 					<Column
 						paddingX='l'
 						gap='m'>
@@ -171,9 +190,9 @@ export function ModernCaseStudyGrid({
 										{/* View All Button for Homepage */}
 										{(showViewAllButton || hasMoreResults) && (
 											<RevealFx
-												translateY={16}
+												translateY={8}
 												horizontal='center'
-												delay={0.4}>
+												delay={0.08}>
 												<Column
 													center
 													paddingTop='32'>
@@ -193,8 +212,8 @@ export function ModernCaseStudyGrid({
 									</>
 								) : (
 									<RevealFx
-										translateY={16}
-										delay={0.3}>
+										translateY={8}
+										delay={0.06}>
 										<Column
 											fillWidth
 											center
@@ -251,9 +270,9 @@ export function ModernCaseStudyGrid({
 									{/* View All Button for Homepage */}
 									{(showViewAllButton || hasMoreResults) && (
 										<RevealFx
-											translateY={16}
+											translateY={8}
 											horizontal='center'
-											delay={0.4}>
+											delay={0.08}>
 											<Column
 												center
 												paddingTop='32'>
@@ -273,8 +292,8 @@ export function ModernCaseStudyGrid({
 								</>
 							) : (
 								<RevealFx
-									translateY={16}
-									delay={0.3}>
+									translateY={8}
+									delay={0.06}>
 									<Column
 										fillWidth
 										center

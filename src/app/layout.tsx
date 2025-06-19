@@ -38,6 +38,11 @@ export default async function RootLayout({
 				fonts.code.variable
 			)}>
 			<head>
+				<link
+					rel='icon'
+					href='/favicon.ico'
+					sizes='any'
+				/>
 				<script
 					id='theme-init'
 					dangerouslySetInnerHTML={{

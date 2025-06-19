@@ -83,8 +83,8 @@ export default async function CaseStudyPage({
 				fillWidth
 				gap='32'>
 				<RevealFx
-					translateY={16}
-					delay={0.1}>
+					translateY={8}
+					delay={0.02}>
 					<Button
 						data-border='rounded'
 						href='/work'
@@ -98,8 +98,8 @@ export default async function CaseStudyPage({
 
 				{/* Title and Summary */}
 				<RevealFx
-					translateY={16}
-					delay={0.2}>
+					translateY={8}
+					delay={0.04}>
 					<Column gap='16'>
 						<Heading
 							variant='display-strong-xl'
@@ -134,8 +134,8 @@ export default async function CaseStudyPage({
 
 				{/* Tech Stack and Industry Tags - Using Row for same line layout */}
 				<RevealFx
-					translateY={16}
-					delay={0.4}>
+					translateY={8}
+					delay={0.06}>
 					<Row
 						gap='32'
 						wrap
@@ -241,8 +241,8 @@ export default async function CaseStudyPage({
 			{/* Image Gallery Carousel */}
 			{carouselImages.length > 0 && (
 				<RevealFx
-					translateY={16}
-					delay={0.4}>
+					translateY={8}
+					delay={0.08}>
 					<Column
 						fillWidth
 						style={{
@@ -265,10 +265,7 @@ export default async function CaseStudyPage({
 								style={{
 									borderRadius: '12px',
 									overflow: 'hidden',
-									boxShadow: '0 8px 24px rgba(0, 0, 0, 0.1)',
-									border: '1px solid var(--neutral-alpha-medium)',
-									background: 'var(--surface)',
-									width: '100%'
+									boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)'
 								}}
 							/>
 						</div>
@@ -283,8 +280,8 @@ export default async function CaseStudyPage({
 				{/* Client Overview */}
 				{caseStudy.clientOverview && (
 					<RevealFx
-						translateY={16}
-						delay={0.6}>
+						translateY={8}
+						delay={0.1}>
 						<Column gap='16'>
 							<Heading
 								variant='heading-strong-xl'
@@ -315,8 +312,8 @@ export default async function CaseStudyPage({
 				{/* Problem */}
 				{caseStudy.problem && (
 					<RevealFx
-						translateY={16}
-						delay={0.7}>
+						translateY={8}
+						delay={0.12}>
 						<Column gap='16'>
 							<Heading
 								variant='heading-strong-xl'
@@ -347,8 +344,8 @@ export default async function CaseStudyPage({
 				{/* Approach */}
 				{caseStudy.approach && (
 					<RevealFx
-						translateY={16}
-						delay={0.8}>
+						translateY={8}
+						delay={0.14}>
 						<Column gap='16'>
 							<Heading
 								variant='heading-strong-xl'
@@ -379,8 +376,8 @@ export default async function CaseStudyPage({
 				{/* Solution */}
 				{caseStudy.solution && (
 					<RevealFx
-						translateY={16}
-						delay={0.9}>
+						translateY={8}
+						delay={0.16}>
 						<Column gap='16'>
 							<Heading
 								variant='heading-strong-xl'
@@ -411,8 +408,8 @@ export default async function CaseStudyPage({
 				{/* Result & Impact */}
 				{caseStudy.result && (
 					<RevealFx
-						translateY={16}
-						delay={1.0}>
+						translateY={8}
+						delay={0.18}>
 						<Column gap='16'>
 							<Heading
 								variant='heading-strong-xl'
@@ -443,8 +440,8 @@ export default async function CaseStudyPage({
 				{/* Iframe Preview */}
 				{caseStudy.iframePreview && (
 					<RevealFx
-						translateY={16}
-						delay={1.1}>
+						translateY={8}
+						delay={0.12}>
 						<Column gap='16'>
 							<Heading
 								variant='heading-strong-xl'
@@ -490,8 +487,8 @@ export default async function CaseStudyPage({
 						const pdfUrl = getFileUrl(caseStudy.pdfFile.asset);
 						return pdfUrl ? (
 							<RevealFx
-								translateY={16}
-								delay={1.2}>
+								translateY={8}
+								delay={0.14}>
 								<Column
 									gap='16'
 									fillWidth>
@@ -544,8 +541,8 @@ export default async function CaseStudyPage({
 				{/* External Links */}
 				{caseStudy.externalLinks && caseStudy.externalLinks.length > 0 && (
 					<RevealFx
-						translateY={16}
-						delay={1.3}>
+						translateY={8}
+						delay={0.16}>
 						<Column gap='16'>
 							<Heading
 								variant='heading-strong-xl'

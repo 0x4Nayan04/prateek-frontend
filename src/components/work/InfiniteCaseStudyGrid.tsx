@@ -7,12 +7,12 @@ import {
 	Heading,
 	RevealFx,
 	InfiniteScroll,
-	Grid
+	Grid,
+	Button
 } from '@once-ui-system/core';
 import { CaseStudy } from '@/lib/sanity/types';
 import { ModernCaseStudyCard } from './ModernCaseStudyCard';
 import { getCaseStudiesPaginated } from '@/lib/utils/content';
-
 interface InfiniteCaseStudyGridProps {
 	title?: string;
 	initialCaseStudies?: CaseStudy[];
@@ -116,8 +116,8 @@ export function InfiniteCaseStudyGrid({
 				{/* Header */}
 				{title && (
 					<RevealFx
-						translateY={12}
-						delay={0.1}
+						translateY={6}
+						delay={0.02}
 						fillWidth
 						horizontal='center'
 						vertical='center'
@@ -186,8 +186,8 @@ export function InfiniteCaseStudyGrid({
 			{/* Header */}
 			{title && (
 				<RevealFx
-					translateY={12}
-					delay={0.1}
+					translateY={6}
+					delay={0.02}
 					fillWidth
 					horizontal='center'
 					vertical='center'
@@ -246,9 +246,9 @@ export function InfiniteCaseStudyGrid({
 				{/* Loading indicator */}
 				{loading && (
 					<RevealFx
-						translateY={16}
+						translateY={8}
 						horizontal='center'
-						delay={0.1}>
+						delay={0.06}>
 						<Column
 							center
 							paddingTop='32'>
@@ -265,9 +265,9 @@ export function InfiniteCaseStudyGrid({
 				{/* No more items message */}
 				{!hasMore && items.length > 0 && (
 					<RevealFx
-						translateY={16}
+						translateY={8}
 						horizontal='center'
-						delay={0.1}>
+						delay={0.06}>
 						<Column
 							center
 							paddingTop='32'>
@@ -284,8 +284,8 @@ export function InfiniteCaseStudyGrid({
 				{/* No items found */}
 				{items.length === 0 && !loading && (
 					<RevealFx
-						translateY={16}
-						delay={0.3}>
+						translateY={8}
+						delay={0.06}>
 						<Column
 							fillWidth
 							center

@@ -17,7 +17,7 @@ interface AutoCarouselProps {
 export function AutoCarousel({
 	items,
 	aspectRatio = '16/9',
-	autoAdvanceInterval = 3000,
+	autoAdvanceInterval = 1500,
 	className,
 	style
 }: AutoCarouselProps) {
@@ -141,7 +141,7 @@ export function AutoCarousel({
 						boxShadow: '0 12px 40px rgba(0, 0, 0, 0.15)',
 						border: '1px solid var(--neutral-alpha-medium)',
 						background: 'var(--surface)',
-						transition: 'all 0.3s ease-in-out'
+						transition: 'all 0.15s ease-in-out'
 					}}
 				/>
 			</div>
@@ -164,7 +164,7 @@ export function AutoCarousel({
 						boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2)',
 						zIndex: 10,
 						fontFamily: '"Inter", sans-serif',
-						transition: 'all 0.2s ease'
+						transition: 'all 0.1s ease'
 					}}>
 					{currentIndex + 1} / {items.length}
 				</div>
@@ -190,7 +190,7 @@ export function AutoCarousel({
 							width: `${((currentIndex + 1) / items.length) * 100}%`,
 							background:
 								'linear-gradient(90deg, var(--brand-on-background-strong), var(--brand-alpha-strong))',
-							transition: 'width 0.3s ease',
+							transition: 'width 0.15s ease',
 							borderRadius: '0 0 16px 0'
 						}}
 					/>

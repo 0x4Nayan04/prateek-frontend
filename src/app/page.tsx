@@ -106,7 +106,7 @@ export default function Home() {
 						</RevealFx>
 					)}
 					<RevealFx
-						translateY='8'
+						translateY='4'
 						fillWidth
 						horizontal='center'
 						paddingBottom='16'>
@@ -118,8 +118,8 @@ export default function Home() {
 						</Heading>
 					</RevealFx>
 					<RevealFx
-						translateY={6}
-						delay={0.2}
+						translateY={3}
+						delay={0.05}
 						fillWidth
 						horizontal='center'
 						paddingBottom='16'>
@@ -137,8 +137,8 @@ export default function Home() {
 						</Text>
 					</RevealFx>
 					<RevealFx
-						translateY='8'
-						delay={0.4}
+						translateY='4'
+						delay={0.1}
 						horizontal='center'>
 						<Button
 							href='/work'
@@ -170,7 +170,7 @@ export default function Home() {
 					horizontal='center'
 					gap='16'>
 					<RevealFx
-						translateY='8'
+						translateY='4'
 						fillWidth
 						horizontal='center'
 						paddingBottom='8'>
@@ -223,9 +223,7 @@ export default function Home() {
 					<Flex
 						flex={1}
 						paddingLeft='8'>
-						<RevealFx
-							translateY={8}
-							delay={0.1}>
+						<RevealFx translateY={4}>
 							<Heading
 								as='h2'
 								variant='display-strong-m'
@@ -237,8 +235,8 @@ export default function Home() {
 					<Flex flex={2}>
 						<Column gap='24'>
 							<RevealFx
-								translateY={6}
-								delay={0.2}>
+								translateY={3}
+								delay={0.05}>
 								<Text
 									variant='body-default-l'
 									onBackground='neutral-medium'
@@ -255,8 +253,8 @@ export default function Home() {
 								</Text>
 							</RevealFx>
 							<RevealFx
-								translateY={6}
-								delay={0.3}>
+								translateY={3}
+								delay={0.1}>
 								<Text
 									variant='body-default-l'
 									onBackground='neutral-medium'
@@ -303,8 +301,8 @@ export default function Home() {
 								</Text>
 							</RevealFx>
 							<RevealFx
-								translateY={6}
-								delay={0.4}>
+								translateY={3}
+								delay={0.15}>
 								<Text
 									variant='body-default-l'
 									onBackground='neutral-medium'

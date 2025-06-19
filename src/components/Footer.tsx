@@ -4,8 +4,8 @@ import styles from './Footer.module.scss';
 // Elegant Section Separator Component
 const SectionSeparator = () => (
 	<RevealFx
-		translateY={8}
-		delay={0.1}
+		translateY={4}
+		delay={0.02}
 		fillWidth
 		horizontal='center'
 		paddingY='32'>
@@ -65,9 +65,14 @@ export const Footer = () => {
 					fillWidth>
 					<Text
 						variant='body-default-s'
-						onBackground='neutral-medium'
+						onBackground='neutral-weak'
 						align='center'>
-						© 2025 / Pratik Srivastava
+						© 2025 ·{' '}
+						<Text
+							as='span'
+							onBackground='neutral-medium'>
+							Prateek Srivastava
+						</Text>
 					</Text>
 				</Flex>
 			</Flex>
