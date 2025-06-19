@@ -71,7 +71,7 @@ export const Footer = () => {
 						<Text
 							as='span'
 							onBackground='neutral-medium'>
-							Prateek Srivastava
+							Pratik Srivastava
 						</Text>
 					</Text>
 				</Flex>

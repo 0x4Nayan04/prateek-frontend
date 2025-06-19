@@ -1,11 +1,7 @@
-import { home } from './content';
-
-// IMPORTANT: Replace with your own domain address - it's used for SEO in meta tags and schema
 const baseURL = 'https://prateek-frontend.vercel.app';
 
 const routes = {
 	'/': true,
-	'/about': true,
 	'/work': true
 };
 

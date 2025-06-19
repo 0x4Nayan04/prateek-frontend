@@ -24,7 +24,7 @@ const work = {
 	path: '/work',
 	label: 'Work',
 	title: 'Projects',
-	description: 'Design and dev projects'
+	description: 'Power BI Projects'
 	// Create new project pages by adding a new .mdx file to app/work/projects
 	// All projects will be listed on the /home and /work routes
 };
