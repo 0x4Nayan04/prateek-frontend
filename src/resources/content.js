@@ -2,8 +2,7 @@ const home = {
 	path: '/',
 	label: 'Home',
 	title: 'Pratik Srivastava',
-	description:
-		'Product Manager specializing in Power BI technologies. 300+ successful Business Intelligence solutions delivered.',
+	description: '300+ successful Business Intelligence solutions delivered.',
 	headline: (
 		<>
 			Building data-driven solutions with{' '}
