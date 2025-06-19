@@ -6,9 +6,7 @@ const baseURL = 'https://prateek-frontend.vercel.app';
 const routes = {
 	'/': true,
 	'/about': true,
-	'/work': true,
-	'/blog': false,
-	'/gallery': false
+	'/work': true
 };
 
 const display = {

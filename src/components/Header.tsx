@@ -5,15 +5,7 @@ import { useEffect, useState } from 'react';
 
 import { Fade, Flex, ToggleButton } from '@once-ui-system/core';
 
-import {
-	about,
-	blog,
-	display,
-	gallery,
-	person,
-	routes,
-	work
-} from '@/resources';
+import { about, display, person, routes, work } from '@/resources';
 import styles from './Header.module.scss';
 
 type TimeDisplayProps = {
@@ -230,40 +222,6 @@ export const Header = () => {
 										prefixIcon='grid'
 										href='/work'
 										selected={pathname.startsWith('/work')}
-									/>
-								</>
-							)}
-							{routes['/blog'] && (
-								<>
-									<ToggleButton
-										className='s-flex-hide'
-										prefixIcon='book'
-										href='/blog'
-										label={blog.label}
-										selected={pathname.startsWith('/blog')}
-									/>
-									<ToggleButton
-										className='s-flex-show'
-										prefixIcon='book'
-										href='/blog'
-										selected={pathname.startsWith('/blog')}
-									/>
-								</>
-							)}
-							{routes['/gallery'] && (
-								<>
-									<ToggleButton
-										className='s-flex-hide'
-										prefixIcon='gallery'
-										href='/gallery'
-										label={gallery.label}
-										selected={pathname.startsWith('/gallery')}
-									/>
-									<ToggleButton
-										className='s-flex-show'
-										prefixIcon='gallery'
-										href='/gallery'
-										selected={pathname.startsWith('/gallery')}
 									/>
 								</>
 							)}
