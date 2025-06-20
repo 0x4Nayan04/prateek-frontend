@@ -12,7 +12,7 @@ import {
 	opacity,
 	SpacingToken
 } from '@once-ui-system/core';
-import { Footer, Header, Providers } from '@/components';
+import { Footer, Header, Providers, ScrollToTop } from '@/components';
 import { baseURL, effects, fonts, style, dataStyle, home } from '@/resources';
 
 export const metadata: Metadata = {
@@ -226,6 +226,7 @@ export default async function RootLayout({
 						</Flex>
 					</Flex>
 					<Footer />
+					<ScrollToTop />
 				</Column>
 			</Providers>
 		</Flex>

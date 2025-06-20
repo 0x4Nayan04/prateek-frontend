@@ -2,6 +2,7 @@ export { ProjectCard } from '@/components/ProjectCard';
 
 export { Providers } from '@/components/Providers';
 export { ScrollToHash } from '@/components/ScrollToHash';
+export { ScrollToTop } from '@/components/ScrollToTop';
 
 // Content Components
 export { PortableText } from '@/components/PortableText';

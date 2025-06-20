@@ -664,3 +664,53 @@ body[class*='display-flex'] {
 		gap: var(--responsive-space-m) !important;
 	}
 }
+
+/* ============================================================================
+   SCROLL TO TOP STYLING
+   ============================================================================ */
+
+.scroll-to-top {
+	pointer-events: none;
+	opacity: 0;
+	transform: translateY(20px);
+	transition:
+		opacity 0.3s ease,
+		transform 0.3s ease;
+}
+
+.scroll-to-top[data-visible='true'] {
+	pointer-events: auto;
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+	.scroll-to-top {
+		bottom: 80px !important; /* Avoid overlapping with mobile navigation */
+		right: 16px !important;
+	}
+
+	.scroll-to-top button {
+		min-width: 32px !important;
+		min-height: 32px !important;
+		opacity: 0.8 !important;
+	}
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+	.scroll-to-top {
+		transition: opacity 0.1s ease-in-out;
+		transform: none;
+	}
+
+	.scroll-to-top button {
+		transition: none !important;
+	}
+
+	.scroll-to-top button:hover {
+		transform: none !important;
+		box-shadow: none !important;
+	}
+}

@@ -50,26 +50,26 @@ export function CaseStudyGrid({
 			fillWidth
 			gap='32'>
 			{/* Title and Filters */}
-			<Column
+					<Column
 				fillWidth
 				gap='24'>
 				{/* Title */}
-				{title && (
+						{title && (
 					<RevealFx
 						translateY={6}
 						delay={0.02}>
-						<Heading
+							<Heading
 							variant='display-strong-l'
 							align='center'
-							onBackground='neutral-strong'>
-							{title}
-						</Heading>
-					</RevealFx>
-				)}
+								onBackground='neutral-strong'>
+								{title}
+							</Heading>
+				</RevealFx>
+			)}
 
 				{/* Filters - Removed as showFilters is always false */}
-				{showFilters && (
-					<RevealFx
+			{showFilters && (
+				<RevealFx
 						translateY={6}
 						delay={0.04}>
 						<Text
@@ -78,8 +78,8 @@ export function CaseStudyGrid({
 							align='center'>
 							Filters would appear here
 						</Text>
-					</RevealFx>
-				)}
+				</RevealFx>
+			)}
 			</Column>
 
 			{/* Results */}
@@ -118,14 +118,14 @@ export function CaseStudyGrid({
 						</Grid>
 					</RevealFx>
 				) : (
-					<Text
-						variant='body-default-m'
-						onBackground='neutral-medium'
+								<Text
+									variant='body-default-m'
+									onBackground='neutral-medium'
 						align='center'>
 						No case studies match the selected filters.
-					</Text>
-				)}
-			</Column>
+								</Text>
+					)}
+				</Column>
 		</Column>
 	);
 }

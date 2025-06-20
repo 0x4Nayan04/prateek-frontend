@@ -1,8 +1,5 @@
 import { client } from '@/lib/sanity/client';
-import {
-	CASE_STUDIES_ALL_QUERY,
-	CASE_STUDIES_HOMEPAGE_QUERY
-} from '@/lib/sanity/queries';
+import { CASE_STUDIES_ALL_QUERY } from '@/lib/sanity/queries';
 import { CaseStudy } from '@/lib/sanity/types';
 
 export async function getAllCaseStudies() {
@@ -91,7 +88,9 @@ export async function getCaseStudiesPaginated(
 ) {
 	try {
 		const caseStudies: CaseStudy[] = await client.fetch(
-			`*[_type == "caseStudy"] | order(priority asc) [${offset}...${offset + limit}] {
+			`*[_type == "caseStudy"] | order(priority asc) [${offset}...${
+				offset + limit
+			}] {
 				_id,
 				title,
 				slug,
