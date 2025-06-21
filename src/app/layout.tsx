@@ -154,6 +154,7 @@ export default async function RootLayout({
 			<Providers>
 				<Column
 					as='body'
+					className='body-wrapper'
 					suppressHydrationWarning
 					background='page'
 					fillWidth

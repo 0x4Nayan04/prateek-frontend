@@ -907,3 +907,14 @@ a[href*='/work/'] {
 		box-sizing: border-box !important;
 	}
 }
+
+/* ============================================================================
+   MOBILE FOOTER FIX
+   ============================================================================ */
+
+@media (max-width: 640px) {
+	.body-wrapper {
+		/* Creates space at the bottom for the fixed mobile nav, preventing overlap */
+		padding-bottom: 120px !important;
+	}
+}
