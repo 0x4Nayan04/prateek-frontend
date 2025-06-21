@@ -36,7 +36,6 @@ export default function PaginationNav({
 				<Row
 					fillWidth
 					gap='24'
-					paddingY='24'
 					mobileDirection='column'
 					horizontal='space-between'
 					vertical='center'>
