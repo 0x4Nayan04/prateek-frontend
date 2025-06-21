@@ -4,11 +4,27 @@ export interface CaseStudy {
 	slug: { current: string };
 	summary: string;
 	thumbnail: {
-		asset: { _ref: string };
+		asset: {
+			_ref: string;
+			metadata?: {
+				dimensions?: {
+					width: number;
+					height: number;
+				};
+			};
+		};
 		alt: string;
 	};
 	images?: Array<{
-		asset: { _ref: string };
+		asset: {
+			_ref: string;
+			metadata?: {
+				dimensions?: {
+					width: number;
+					height: number;
+				};
+			};
+		};
 		alt: string;
 	}>;
 	techStack: string[];

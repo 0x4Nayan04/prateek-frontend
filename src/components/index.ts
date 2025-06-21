@@ -24,6 +24,7 @@ export { ModernProjectsClient } from '@/components/work/ModernProjectsClient';
 
 // Sanity Components
 export { SanityImage } from '@/components/sanity/SanityImage';
+export { AdaptiveImage } from '@/components/sanity/AdaptiveImage';
 
 // Layout Components
 export { Header } from '@/components/Header';

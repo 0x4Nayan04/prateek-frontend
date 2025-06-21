@@ -22,8 +22,20 @@ export async function getFeaturedCaseStudies(limit: number = 6) {
 				title,
 				slug,
 				summary,
-				thumbnail,
-				images,
+				thumbnail {
+					...,
+					asset-> {
+						...,
+						metadata { dimensions }
+					}
+				},
+				images[] {
+					...,
+					asset-> {
+						...,
+						metadata { dimensions }
+					}
+				},
 				techStack,
 				industry,
 				priority
@@ -44,8 +56,20 @@ export async function getCaseStudyBySlug(slug: string) {
 				title,
 				slug,
 				summary,
-				thumbnail,
-				images,
+				thumbnail {
+					...,
+					asset-> {
+						...,
+						metadata { dimensions }
+					}
+				},
+				images[] {
+					...,
+					asset-> {
+						...,
+						metadata { dimensions }
+					}
+				},
 				techStack,
 				industry,
 				priority,
@@ -95,8 +119,20 @@ export async function getCaseStudiesPaginated(
 				title,
 				slug,
 				summary,
-				thumbnail,
-				images,
+				thumbnail {
+					...,
+					asset-> {
+						...,
+						metadata { dimensions }
+					}
+				},
+				images[] {
+					...,
+					asset-> {
+						...,
+						metadata { dimensions }
+					}
+				},
 				techStack,
 				industry,
 				priority

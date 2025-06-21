@@ -3,6 +3,23 @@
 	width: 100%;
 	max-width: 100%;
 
+	// Carousel container styling for adaptive images
+	.carousel-container {
+		img {
+			object-fit: contain !important;
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	// Ensure carousel images maintain aspect ratio
+	[data-carousel-control] {
+		img {
+			object-fit: contain !important;
+			background-color: transparent;
+		}
+	}
+
 	&:hover {
 		transform: translateY(-3px);
 		box-shadow:

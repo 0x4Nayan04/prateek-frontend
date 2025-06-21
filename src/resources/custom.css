@@ -107,6 +107,15 @@ div,
 	overflow: hidden;
 }
 
+/* Adaptive image handling for all carousels */
+[data-carousel] img,
+[data-carousel-control] img {
+	object-fit: contain !important;
+	background-color: transparent !important;
+	width: 100% !important;
+	height: 100% !important;
+}
+
 /* Carousel controls enhancement */
 [data-carousel] button {
 	transition: all 0.1s ease;
@@ -788,7 +797,7 @@ a[href*='/work/'] {
 		margin: 0 !important;
 		padding: 0 !important;
 	}
-	
+
 	/* Ensure grid containers use full width */
 	[data-grid] {
 		width: 100% !important;
@@ -797,7 +806,7 @@ a[href*='/work/'] {
 		padding-left: 0 !important;
 		padding-right: 0 !important;
 	}
-	
+
 	/* Case study cards mobile optimization */
 	.caseStudyCard,
 	[data-case-study-card] {
@@ -806,7 +815,7 @@ a[href*='/work/'] {
 		max-width: none !important;
 		box-sizing: border-box !important;
 	}
-	
+
 	/* Grid parent containers on mobile */
 	[data-padding='l'],
 	[data-paddingx='l'],
@@ -814,27 +823,27 @@ a[href*='/work/'] {
 		padding-left: clamp(8px, 2vw, 16px) !important;
 		padding-right: clamp(8px, 2vw, 16px) !important;
 	}
-	
+
 	/* Container width fixes for mobile */
 	[data-column][data-fillwidth='true'] {
 		width: 100% !important;
 		max-width: 100% !important;
 		box-sizing: border-box !important;
 	}
-	
+
 	/* Remove any constraining margins */
 	[data-revealf] {
 		margin-left: 0 !important;
 		margin-right: 0 !important;
 		width: 100% !important;
 	}
-	
+
 	/* Carousel sizing on mobile */
 	[data-carousel] {
 		margin: 0 !important;
 		width: 100% !important;
 	}
-	
+
 	/* Tags on mobile - better line wrapping */
 	[data-tag] {
 		font-size: 0.65rem !important;
@@ -844,35 +853,35 @@ a[href*='/work/'] {
 		overflow: hidden !important;
 		text-overflow: ellipsis !important;
 	}
-	
+
 	/* Row components mobile direction */
 	[data-mobile-direction='column'] {
 		flex-direction: column !important;
 		gap: var(--responsive-space-s) !important;
 	}
-	
+
 	/* Enhanced spacing for mobile content */
 	[data-gap='s'] {
 		gap: clamp(8px, 2vw, 12px) !important;
 	}
-	
+
 	[data-gap='m'] {
 		gap: clamp(12px, 3vw, 16px) !important;
 	}
-	
+
 	[data-gap='l'] {
 		gap: clamp(16px, 4vw, 24px) !important;
 	}
-	
+
 	/* Mobile-specific padding adjustments */
 	[data-padding='m'] {
 		padding: clamp(12px, 3vw, 16px) !important;
 	}
-	
+
 	[data-padding='l'] {
 		padding: clamp(16px, 4vw, 24px) !important;
 	}
-	
+
 	/* Featured work section mobile optimizations */
 	.featured-work-section {
 		padding-left: clamp(8px, 2vw, 16px) !important;
@@ -882,7 +891,7 @@ a[href*='/work/'] {
 		max-width: 100% !important;
 		box-sizing: border-box !important;
 	}
-	
+
 	/* Mobile carousel adjustments */
 	[data-carousel] {
 		margin: 0 !important;

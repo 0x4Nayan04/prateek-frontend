@@ -49,14 +49,13 @@ export default async function CaseStudyPage({
 			? allCaseStudies[currentIndex + 1]
 			: null;
 
-	// Prepare carousel items from case study images
+	// Prepare carousel items from case study images with adaptive sizing
 	const carouselImages =
 		caseStudy.images?.map((image, idx) => {
 			const imageUrl = urlFor(image)
 				.width(1200)
-				.height(800)
-				.quality(95)
-				.format('webp')
+				.fit('max') // Preserve aspect ratio
+				.auto('format')
 				.url();
 
 			return {
@@ -64,6 +63,19 @@ export default async function CaseStudyPage({
 				alt: image.alt || `${caseStudy.title} - Image ${idx + 1}`
 			};
 		}) || [];
+
+	// Calculate dynamic aspect ratio from first image or use fallback
+	const getDetailAspectRatio = () => {
+		if (
+			caseStudy.images &&
+			caseStudy.images.length > 0 &&
+			caseStudy.images[0]?.asset?.metadata?.dimensions
+		) {
+			const { width, height } = caseStudy.images[0].asset.metadata.dimensions;
+			return `${width} / ${height}`;
+		}
+		return '16 / 10'; // Fallback aspect ratio
+	};
 
 	return (
 		<Column
@@ -259,7 +271,7 @@ export default async function CaseStudyPage({
 							}}>
 							<Carousel
 								items={carouselImages}
-								aspectRatio='16/9'
+								aspectRatio={getDetailAspectRatio()}
 								indicator={carouselImages.length > 1 ? 'line' : undefined}
 								sizes='(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1000px'
 								style={{

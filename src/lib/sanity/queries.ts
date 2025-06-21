@@ -4,8 +4,20 @@ export const CASE_STUDIES_HOMEPAGE_QUERY = `
     title,
     slug,
     summary,
-    thumbnail,
-    images,
+    thumbnail {
+      ...,
+      asset-> {
+        ...,
+        metadata { dimensions }
+      }
+    },
+    images[] {
+      ...,
+      asset-> {
+        ...,
+        metadata { dimensions }
+      }
+    },
     techStack,
     industry,
     priority
@@ -18,8 +30,20 @@ export const CASE_STUDIES_ALL_QUERY = `
     title,
     slug,
     summary,
-    thumbnail,
-    images,
+    thumbnail {
+      ...,
+      asset-> {
+        ...,
+        metadata { dimensions }
+      }
+    },
+    images[] {
+      ...,
+      asset-> {
+        ...,
+        metadata { dimensions }
+      }
+    },
     techStack,
     industry,
     priority
@@ -32,8 +56,20 @@ export const CASE_STUDY_BY_SLUG_QUERY = `
     title,
     slug,
     summary,
-    thumbnail,
-    images,
+    thumbnail {
+      ...,
+      asset-> {
+        ...,
+        metadata { dimensions }
+      }
+    },
+    images[] {
+      ...,
+      asset-> {
+        ...,
+        metadata { dimensions }
+      }
+    },
     techStack,
     industry,
     priority,
@@ -54,4 +90,3 @@ export const AVAILABLE_FILTERS_QUERY = `
     "industry": *[_type == "caseStudy"].industry[] | unique | order(@)
   }
 `;
- 
