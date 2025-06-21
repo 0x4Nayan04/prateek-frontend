@@ -555,7 +555,9 @@ export default async function CaseStudyPage({
 					<RevealFx
 						translateY={8}
 						delay={0.16}>
-						<Column gap='16'>
+						<Column
+							gap='16'
+							fillWidth>
 							<Heading
 								variant='heading-strong-xl'
 								style={{
@@ -579,10 +581,9 @@ export default async function CaseStudyPage({
 									<Button
 										key={index}
 										href={link.url}
-										variant='secondary'
+										variant='primary'
 										size='m'
 										suffixIcon='arrowUpRightFromSquare'
-										fillWidth
 										style={{
 											justifyContent: 'flex-start',
 											fontFamily: '"Inter", sans-serif'
