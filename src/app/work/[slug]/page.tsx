@@ -15,6 +15,7 @@ import {
 	Carousel
 } from '@once-ui-system/core';
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 
 export const revalidate = 60; // ISR revalidation every 60 seconds
 
@@ -23,6 +24,69 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
 	return caseStudies.map((caseStudy) => ({
 		slug: caseStudy.slug.current
 	}));
+}
+
+export async function generateMetadata({
+	params
+}: {
+	params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+	const { slug } = await params;
+	const caseStudy = await getCaseStudyBySlug(slug);
+
+	if (!caseStudy) {
+		return {
+			title: 'Case Study Not Found',
+			description: 'The requested case study could not be found.'
+		};
+	}
+
+	// Generate OG image URL - use first image if available, otherwise fallback to work OG
+	const ogImageUrl =
+		caseStudy.images && caseStudy.images.length > 0
+			? urlFor(caseStudy.images[0])
+					.width(1200)
+					.height(630)
+					.fit('crop')
+					.auto('format')
+					.url()
+			: `${baseURL}/og-work.png`;
+
+	return {
+		title: caseStudy.title,
+		description: caseStudy.summary,
+		openGraph: {
+			title: caseStudy.title,
+			description: caseStudy.summary,
+			url: `${baseURL}/work/${slug}`,
+			images: [
+				{
+					url: ogImageUrl,
+					width: 1200,
+					height: 630,
+					alt: caseStudy.title,
+					type: 'image/png'
+				}
+			],
+			type: 'article',
+			publishedTime: new Date().toISOString(),
+			tags: [...(caseStudy.techStack || []), ...(caseStudy.industry || [])]
+		},
+		twitter: {
+			card: 'summary_large_image',
+			title: caseStudy.title,
+			description: caseStudy.summary,
+			images: [ogImageUrl]
+		},
+		keywords: [
+			caseStudy.title,
+			...(caseStudy.techStack || []),
+			...(caseStudy.industry || []),
+			'Business Intelligence',
+			'Data Analytics',
+			'Pratik Srivastava'
+		]
+	};
 }
 
 export default async function CaseStudyPage({
