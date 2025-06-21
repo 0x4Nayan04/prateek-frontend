@@ -107,11 +107,19 @@ div,
 	overflow: hidden;
 }
 
-/* Adaptive image handling for all carousels */
-[data-carousel] img,
-[data-carousel-control] img {
+/* Adaptive image handling ONLY for detail page carousels (not cards) */
+/* Target carousels that are NOT inside case study cards */
+:not(.caseStudyCard) [data-carousel] img {
 	object-fit: contain !important;
 	background-color: transparent !important;
+	width: 100% !important;
+	height: 100% !important;
+}
+
+/* Keep card carousels with original cropped styling */
+.caseStudyCard [data-carousel] img,
+.caseStudyCard [data-carousel-control] img {
+	object-fit: cover !important;
 	width: 100% !important;
 	height: 100% !important;
 }

@@ -33,24 +33,13 @@ export function ModernCaseStudyCard({
 				? [caseStudy.thumbnail]
 				: [];
 
-	// Calculate dynamic aspect ratio from first image or use fallback
-	const getAspectRatio = () => {
-		if (
-			displayImages.length > 0 &&
-			displayImages[0]?.asset?.metadata?.dimensions
-		) {
-			const { width, height } = displayImages[0].asset.metadata.dimensions;
-			return `${width} / ${height}`;
-		}
-		return '16 / 10'; // Fallback aspect ratio
-	};
-
-	// Prepare carousel items from Sanity images with improved fit
+	// Prepare carousel items from Sanity images - back to original cropped version
 	const carouselItems = displayImages.map((image, idx) => {
 		const imageUrl = urlFor(image)
 			.width(1400)
-			.fit('max') // Preserve aspect ratio
-			.auto('format')
+			.height(1000)
+			.quality(100)
+			.format('webp')
 			.url();
 
 		return {
@@ -116,7 +105,7 @@ export function ModernCaseStudyCard({
 									onClick={handleCarouselClick}>
 									<Carousel
 										items={carouselItems}
-										aspectRatio={getAspectRatio()}
+										aspectRatio='16 / 10'
 										indicator={carouselItems.length > 1 ? 'line' : undefined}
 										controls={carouselItems.length > 1}
 										sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'

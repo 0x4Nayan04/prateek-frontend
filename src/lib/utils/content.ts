@@ -15,27 +15,15 @@ export async function getAllCaseStudies() {
 
 export async function getFeaturedCaseStudies(limit: number = 6) {
 	try {
-		// Use the homepage query but limit the results
+		// Use the homepage query but limit the results - back to original without metadata
 		const caseStudies: CaseStudy[] = await client.fetch(
 			`*[_type == "caseStudy"] | order(priority asc) [0...${limit}] {
 				_id,
 				title,
 				slug,
 				summary,
-				thumbnail {
-					...,
-					asset-> {
-						...,
-						metadata { dimensions }
-					}
-				},
-				images[] {
-					...,
-					asset-> {
-						...,
-						metadata { dimensions }
-					}
-				},
+				thumbnail,
+				images,
 				techStack,
 				industry,
 				priority
@@ -119,20 +107,8 @@ export async function getCaseStudiesPaginated(
 				title,
 				slug,
 				summary,
-				thumbnail {
-					...,
-					asset-> {
-						...,
-						metadata { dimensions }
-					}
-				},
-				images[] {
-					...,
-					asset-> {
-						...,
-						metadata { dimensions }
-					}
-				},
+				thumbnail,
+				images,
 				techStack,
 				industry,
 				priority

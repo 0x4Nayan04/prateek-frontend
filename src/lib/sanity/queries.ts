@@ -4,20 +4,8 @@ export const CASE_STUDIES_HOMEPAGE_QUERY = `
     title,
     slug,
     summary,
-    thumbnail {
-      ...,
-      asset-> {
-        ...,
-        metadata { dimensions }
-      }
-    },
-    images[] {
-      ...,
-      asset-> {
-        ...,
-        metadata { dimensions }
-      }
-    },
+    thumbnail,
+    images,
     techStack,
     industry,
     priority
@@ -30,20 +18,8 @@ export const CASE_STUDIES_ALL_QUERY = `
     title,
     slug,
     summary,
-    thumbnail {
-      ...,
-      asset-> {
-        ...,
-        metadata { dimensions }
-      }
-    },
-    images[] {
-      ...,
-      asset-> {
-        ...,
-        metadata { dimensions }
-      }
-    },
+    thumbnail,
+    images,
     techStack,
     industry,
     priority

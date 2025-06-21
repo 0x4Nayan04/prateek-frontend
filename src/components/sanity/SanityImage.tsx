@@ -30,7 +30,7 @@ export function SanityImage({
 	const imageUrl = urlFor(image)
 		.width(width)
 		.height(height)
-		.fit('max')
+		.fit('crop')
 		.auto('format')
 		.url();
 
@@ -44,7 +44,7 @@ export function SanityImage({
 			style={{
 				width: '100%',
 				height: 'auto',
-				objectFit: 'contain',
+				objectFit: 'cover',
 				...style
 			}}
 			priority={priority}
