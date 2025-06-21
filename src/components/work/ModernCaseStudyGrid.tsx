@@ -65,7 +65,7 @@ export function ModernCaseStudyGrid({
 				paddingBottom='8'>
 				<Column
 					horizontal='center'
-					gap='8'>
+					gap='4'>
 					<Heading
 						wrap='balance'
 						variant='display-strong-l'
@@ -105,7 +105,7 @@ export function ModernCaseStudyGrid({
 					translateY={6}
 					delay={0.04}>
 					<Column
-						paddingX='l'
+						paddingX='xl'
 						gap='m'>
 						<Row
 							horizontal='space-between'
@@ -148,7 +148,7 @@ export function ModernCaseStudyGrid({
 											columns={columns.desktop as any}
 											tabletColumns={columns.tablet as any}
 											mobileColumns={1}
-											gap='48'
+											gap='64'
 											fillWidth>
 											{displayedCaseStudies.map((caseStudy, index) => (
 												<ModernCaseStudyCard
@@ -221,6 +221,7 @@ export function ModernCaseStudyGrid({
 					{!shouldShowFilters && (
 						<Column
 							fillWidth
+							paddingX='xl'
 							gap='s'>
 							{hasResults ? (
 								<>
@@ -228,7 +229,7 @@ export function ModernCaseStudyGrid({
 										columns={columns.desktop as any}
 										tabletColumns={columns.tablet as any}
 										mobileColumns={1}
-										gap='48'
+										gap='64'
 										fillWidth>
 										{displayedCaseStudies.map((caseStudy, index) => (
 											<ModernCaseStudyCard

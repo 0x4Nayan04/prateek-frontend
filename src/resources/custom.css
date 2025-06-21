@@ -669,48 +669,69 @@ body[class*='display-flex'] {
    SCROLL TO TOP STYLING
    ============================================================================ */
 
-.scroll-to-top {
-	pointer-events: none;
-	opacity: 0;
-	transform: translateY(20px);
-	transition:
-		opacity 0.3s ease,
-		transform 0.3s ease;
+/*
+  This targets the button inside the scroll-to-top component.
+  Using [data-variant='primary'] makes the selector highly specific
+  to override the default library styles for the primary button.
+*/
+.scroll-to-top button[data-variant='primary'] {
+	background-color: white !important;
+	color: #111 !important; /* A dark color for the icon */
+	border: 1px solid rgba(0, 0, 0, 0.08) !important;
+	box-shadow:
+		0 4px 8px rgba(0, 0, 0, 0.05),
+		0 1px 3px rgba(0, 0, 0, 0.1) !important;
+	border-radius: 50% !important;
+	width: 48px !important;
+	height: 48px !important;
+	transition: all 0.25s ease-out !important;
 }
 
-.scroll-to-top[data-visible='true'] {
-	pointer-events: auto;
-	opacity: 1;
-	transform: translateY(0);
+.scroll-to-top button[data-variant='primary']:hover {
+	transform: translateY(-3px) !important;
+	box-shadow:
+		0 8px 16px rgba(0, 0, 0, 0.08),
+		0 4px 6px rgba(0, 0, 0, 0.12) !important;
 }
 
-/* Mobile-specific styles */
+.scroll-to-top button[data-variant='primary']:active {
+	transform: translateY(-1px) !important;
+	box-shadow:
+		0 4px 8px rgba(0, 0, 0, 0.05),
+		0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Smooth scroll behavior */
+html {
+	scroll-behavior: smooth;
+}
+
+/* Focus states for accessibility */
+.scroll-to-top button[data-variant='primary']:focus-visible {
+	outline: 2px solid #3856ae !important; /* Using a brand color for focus */
+	outline-offset: 2px !important;
+}
+
+/* Mobile optimizations */
 @media (max-width: 768px) {
 	.scroll-to-top {
-		bottom: 80px !important; /* Avoid overlapping with mobile navigation */
-		right: 16px !important;
+		bottom: 32px !important; /* More space on mobile */
+		right: 24px !important;
 	}
 
-	.scroll-to-top button {
-		min-width: 32px !important;
-		min-height: 32px !important;
-		opacity: 0.8 !important;
+	.scroll-to-top button[data-variant='primary'] {
+		width: 44px !important;
+		height: 44px !important;
 	}
 }
 
-/* Reduced motion preferences */
+/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-	.scroll-to-top {
-		transition: opacity 0.1s ease-in-out;
-		transform: none;
+	.scroll-to-top button[data-variant='primary'] {
+		transition: opacity 0.2s ease !important;
 	}
-
-	.scroll-to-top button {
-		transition: none !important;
-	}
-
-	.scroll-to-top button:hover {
+	.scroll-to-top button[data-variant='primary']:hover,
+	.scroll-to-top button[data-variant='primary']:active {
 		transform: none !important;
-		box-shadow: none !important;
 	}
 }

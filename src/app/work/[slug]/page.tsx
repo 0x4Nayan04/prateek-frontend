@@ -259,7 +259,7 @@ export default async function CaseStudyPage({
 							}}>
 							<Carousel
 								items={carouselImages}
-								aspectRatio='16/10'
+								aspectRatio='16/9'
 								indicator={carouselImages.length > 1 ? 'line' : undefined}
 								sizes='(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1000px'
 								style={{
