@@ -365,6 +365,7 @@ a[href*='/work/'] {
 	display: block !important;
 	text-decoration: none !important;
 	color: inherit !important;
+	width: 100% !important;
 }
 
 /* Ensure proper hover states for accessibility */
@@ -381,10 +382,10 @@ a[href*='/work/']:focus-visible {
 	align-items: stretch !important;
 }
 
-@media (max-width: 768px) {
-	[data-columns='2'] {
-		grid-template-columns: 1fr !important;
-	}
+[data-columns='1'] {
+	display: grid !important;
+	grid-template-columns: 1fr !important;
+	align-items: stretch !important;
 }
 
 /* Ensure equal height cards */
@@ -733,5 +734,159 @@ html {
 	.scroll-to-top button[data-variant='primary']:hover,
 	.scroll-to-top button[data-variant='primary']:active {
 		transform: none !important;
+	}
+}
+
+/* ============================================================================
+   MODERN CASE STUDY CARD LAYOUT ENHANCEMENTS
+   ============================================================================ */
+
+/* Base card styling */
+.caseStudyCard,
+[data-case-study-card] {
+	width: 100% !important;
+	height: 100% !important;
+	display: flex !important;
+	flex-direction: column !important;
+	box-sizing: border-box !important;
+	max-width: none !important;
+	transition: all 0.15s ease-in-out !important;
+}
+
+/* Link wrapper for cards */
+a[href*='/work/'] {
+	display: block !important;
+	text-decoration: none !important;
+	color: inherit !important;
+	width: 100% !important;
+}
+
+/* Grid Container Fixes */
+[data-columns='2'] {
+	display: grid !important;
+	grid-template-columns: repeat(2, 1fr) !important;
+	align-items: stretch !important;
+}
+
+[data-columns='1'] {
+	display: grid !important;
+	grid-template-columns: 1fr !important;
+	align-items: stretch !important;
+}
+
+/* ============================================================================
+   MOBILE OPTIMIZATIONS FOR COMPLETE WIDTH COVERAGE
+   ============================================================================ */
+
+@media (max-width: 768px) {
+	/* Force single column on mobile with full width */
+	[data-columns='2'],
+	[data-columns='3'] {
+		grid-template-columns: 1fr !important;
+		gap: clamp(16px, 4vw, 24px) !important;
+		width: 100% !important;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+	
+	/* Ensure grid containers use full width */
+	[data-grid] {
+		width: 100% !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+	
+	/* Case study cards mobile optimization */
+	.caseStudyCard,
+	[data-case-study-card] {
+		width: 100% !important;
+		margin: 0 !important;
+		max-width: none !important;
+		box-sizing: border-box !important;
+	}
+	
+	/* Grid parent containers on mobile */
+	[data-padding='l'],
+	[data-paddingx='l'],
+	[data-paddingx='xl'] {
+		padding-left: clamp(8px, 2vw, 16px) !important;
+		padding-right: clamp(8px, 2vw, 16px) !important;
+	}
+	
+	/* Container width fixes for mobile */
+	[data-column][data-fillwidth='true'] {
+		width: 100% !important;
+		max-width: 100% !important;
+		box-sizing: border-box !important;
+	}
+	
+	/* Remove any constraining margins */
+	[data-revealf] {
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		width: 100% !important;
+	}
+	
+	/* Carousel sizing on mobile */
+	[data-carousel] {
+		margin: 0 !important;
+		width: 100% !important;
+	}
+	
+	/* Tags on mobile - better line wrapping */
+	[data-tag] {
+		font-size: 0.65rem !important;
+		padding: 3px 8px !important;
+		white-space: nowrap !important;
+		max-width: 100px !important;
+		overflow: hidden !important;
+		text-overflow: ellipsis !important;
+	}
+	
+	/* Row components mobile direction */
+	[data-mobile-direction='column'] {
+		flex-direction: column !important;
+		gap: var(--responsive-space-s) !important;
+	}
+	
+	/* Enhanced spacing for mobile content */
+	[data-gap='s'] {
+		gap: clamp(8px, 2vw, 12px) !important;
+	}
+	
+	[data-gap='m'] {
+		gap: clamp(12px, 3vw, 16px) !important;
+	}
+	
+	[data-gap='l'] {
+		gap: clamp(16px, 4vw, 24px) !important;
+	}
+	
+	/* Mobile-specific padding adjustments */
+	[data-padding='m'] {
+		padding: clamp(12px, 3vw, 16px) !important;
+	}
+	
+	[data-padding='l'] {
+		padding: clamp(16px, 4vw, 24px) !important;
+	}
+	
+	/* Featured work section mobile optimizations */
+	.featured-work-section {
+		padding-left: clamp(8px, 2vw, 16px) !important;
+		padding-right: clamp(8px, 2vw, 16px) !important;
+		gap: clamp(16px, 4vw, 24px) !important;
+		width: 100% !important;
+		max-width: 100% !important;
+		box-sizing: border-box !important;
+	}
+	
+	/* Mobile carousel adjustments */
+	[data-carousel] {
+		margin: 0 !important;
+		width: 100% !important;
+		box-sizing: border-box !important;
 	}
 }

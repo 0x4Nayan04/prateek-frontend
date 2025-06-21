@@ -141,7 +141,11 @@ export function ModernCaseStudyGrid({
 							<Column
 								flex={1}
 								gap='s'
-								fillWidth>
+								fillWidth
+								style={{
+									paddingLeft: 'clamp(8px, 2vw, 24px)',
+									paddingRight: 'clamp(8px, 2vw, 24px)'
+								}}>
 								{hasResults ? (
 									<>
 										<Grid
@@ -221,7 +225,11 @@ export function ModernCaseStudyGrid({
 					{!shouldShowFilters && (
 						<Column
 							fillWidth
-							paddingX='xl'
+							paddingX='l'
+							style={{
+								paddingLeft: 'clamp(8px, 2vw, 48px)',
+								paddingRight: 'clamp(8px, 2vw, 48px)'
+							}}
 							gap='s'>
 							{hasResults ? (
 								<>

@@ -149,7 +149,11 @@ export function InfiniteCaseStudyGrid({
 						{/* Initial static grid for SSR */}
 						<Column
 							fillWidth
-							paddingX='xl'
+							paddingX='l'
+							style={{
+								paddingLeft: 'clamp(8px, 2vw, 48px)',
+								paddingRight: 'clamp(8px, 2vw, 48px)'
+							}}
 							gap='s'>
 							{initialCaseStudies.length > 0 ? (
 								<Grid
@@ -233,7 +237,11 @@ export function InfiniteCaseStudyGrid({
 					{/* Infinite Scroll Grid */}
 					<Column
 						fillWidth
-						paddingX='xl'
+						paddingX='l'
+						style={{
+							paddingLeft: 'clamp(8px, 2vw, 48px)',
+							paddingRight: 'clamp(8px, 2vw, 48px)'
+						}}
 						gap='s'>
 						<InfiniteScroll
 							items={items}
