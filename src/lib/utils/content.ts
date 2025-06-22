@@ -79,21 +79,6 @@ export async function getCaseStudyBySlug(slug: string) {
 	}
 }
 
-export async function getAvailableFilters() {
-	try {
-		const filters = await client.fetch(`
-			{
-				"techStack": *[_type == "caseStudy"].techStack[] | unique | order(@),
-				"industry": *[_type == "caseStudy"].industry[] | unique | order(@)
-			}
-		`);
-		return filters;
-	} catch (error) {
-		console.error('Error fetching filters:', error);
-		return { techStack: [], industry: [] };
-	}
-}
-
 export async function getCaseStudiesPaginated(
 	offset: number = 0,
 	limit: number = 6

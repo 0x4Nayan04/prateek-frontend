@@ -191,7 +191,6 @@ export default function Home() {
 					title=''
 					description=''
 					maxItems={6}
-					showFilters={false}
 					columns='2'
 				/>
 			</Column>

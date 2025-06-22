@@ -45,13 +45,3 @@ export interface CaseStudy {
 		description?: string;
 	}>;
 }
-
-export interface FilterState {
-	techStack: string[];
-	industry: string[];
-}
-
-export interface AvailableFilters {
-	techStack: string[];
-	industry: string[];
-}

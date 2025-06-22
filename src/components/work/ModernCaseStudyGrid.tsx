@@ -9,15 +9,11 @@ import {
 	RevealFx,
 	Button
 } from '@once-ui-system/core';
-import { CaseStudy, FilterState, AvailableFilters } from '@/lib/sanity/types';
+import { CaseStudy } from '@/lib/sanity/types';
 import { ModernCaseStudyCard } from './ModernCaseStudyCard';
 
 interface ModernCaseStudyGridProps {
 	caseStudies: CaseStudy[];
-	filters: FilterState;
-	availableFilters: AvailableFilters | null;
-	onFiltersChange: (filters: FilterState) => void;
-	showFilters?: boolean;
 	title?: string;
 	description?: string;
 	maxItems?: number;
@@ -31,10 +27,6 @@ interface ModernCaseStudyGridProps {
 
 export function ModernCaseStudyGrid({
 	caseStudies,
-	filters,
-	availableFilters,
-	onFiltersChange,
-	showFilters = true,
 	title,
 	description,
 	maxItems,
@@ -49,9 +41,6 @@ export function ModernCaseStudyGrid({
 	const totalResults = caseStudies.length;
 	const hasMoreResults = maxItems && totalResults > maxItems;
 
-	// Only show filters if we have available filters data
-	const shouldShowFilters = showFilters && availableFilters;
-
 	return (
 		<Column
 			fillWidth
@@ -65,7 +54,7 @@ export function ModernCaseStudyGrid({
 				paddingBottom='8'>
 				<Column
 					horizontal='center'
-					gap='4'>
+					gap='16'>
 					<Heading
 						wrap='balance'
 						variant='display-strong-l'
@@ -98,32 +87,6 @@ export function ModernCaseStudyGrid({
 				</Column>
 			</RevealFx>
 
-			{/* Filters and Results */}
-			{/* Results Counter - Only show when filters are enabled and there are results */}
-			{shouldShowFilters && hasResults && (
-				<RevealFx
-					translateY={6}
-					delay={0.04}>
-					<Column
-						paddingX='xl'
-						gap='m'>
-						<Row
-							horizontal='space-between'
-							vertical='center'
-							wrap>
-							{/* Results Counter */}
-							<Text
-								variant='body-default-s'
-								onBackground='neutral-weak'>
-								Showing {displayedCaseStudies.length}
-								{maxItems && totalResults > maxItems && ` of ${totalResults}`}
-								case {displayedCaseStudies.length === 1 ? 'study' : 'studies'}
-							</Text>
-						</Row>
-					</Column>
-				</RevealFx>
-			)}
-
 			{/* Main Content */}
 			<Row
 				fillWidth
@@ -131,179 +94,87 @@ export function ModernCaseStudyGrid({
 				<Column
 					fillWidth
 					paddingX='l'>
-					{/* Desktop Sidebar Filters - Removed as showFilters is always false */}
-					{shouldShowFilters && (
-						<Row
-							fillWidth
-							gap='40'
-							style={{ alignItems: 'flex-start' }}>
-							{/* Case Studies Grid with Sidebar */}
-							<Column
-								flex={1}
-								gap='s'
-								fillWidth
-								style={{
-									paddingLeft: 'clamp(8px, 2vw, 24px)',
-									paddingRight: 'clamp(8px, 2vw, 24px)'
-								}}>
-								{hasResults ? (
-									<>
-										<Grid
-											columns={columns.desktop as any}
-											tabletColumns={columns.tablet as any}
-											mobileColumns={1}
-											gap='64'
-											fillWidth>
-											{displayedCaseStudies.map((caseStudy, index) => (
-												<ModernCaseStudyCard
-													key={caseStudy._id}
-													caseStudy={caseStudy}
-													index={index}
-													priority={index < 4}
-												/>
-											))}
-										</Grid>
+					{/* Full Width Grid */}
+					<Column
+						fillWidth
+						paddingX='l'
+						style={{
+							paddingLeft: 'clamp(8px, 2vw, 48px)',
+							paddingRight: 'clamp(8px, 2vw, 48px)'
+						}}
+						gap='s'>
+						{hasResults ? (
+							<>
+								<Grid
+									columns={columns.desktop as any}
+									tabletColumns={columns.tablet as any}
+									mobileColumns={1}
+									gap='64'
+									fillWidth>
+									{displayedCaseStudies.map((caseStudy, index) => (
+										<ModernCaseStudyCard
+											key={caseStudy._id}
+											caseStudy={caseStudy}
+											index={index}
+											priority={index < 4}
+										/>
+									))}
+								</Grid>
 
-										{/* View All Button for Homepage */}
-										{(showViewAllButton || hasMoreResults) && (
-											<RevealFx
-												translateY={8}
-												horizontal='center'
-												delay={0.08}>
-												<Column
-													center
-													paddingTop='32'>
-													<Button
-														id='view-all-case-studies'
-														href='/work'
-														variant='primary'
-														size='l'
-														arrowIcon>
-														Show more case studies
-														{hasMoreResults &&
-															` (${totalResults - displayedCaseStudies.length} more)`}
-													</Button>
-												</Column>
-											</RevealFx>
-										)}
-									</>
-								) : (
+								{/* View All Button for Homepage */}
+								{(showViewAllButton || hasMoreResults) && (
 									<RevealFx
 										translateY={8}
-										delay={0.06}>
+										horizontal='center'
+										delay={0.08}>
 										<Column
-											fillWidth
 											center
-											padding='xl'
-											gap='20'
-											background='surface'
-											border='neutral-alpha-weak'
-											radius='xl'
-											style={{
-												minHeight: '200px'
-											}}>
-											<Text
-												variant='heading-strong-l'
-												onBackground='neutral-strong'
-												align='center'>
-												No case studies found
-											</Text>
-											<Text
-												variant='body-default-m'
-												onBackground='neutral-weak'
-												align='center'>
-												Try adjusting your filters to see more results.
-											</Text>
+											paddingTop='32'>
+											<Button
+												id='view-all-case-studies'
+												href='/work'
+												variant='primary'
+												size='l'
+												arrowIcon>
+												Show more case studies
+												{hasMoreResults &&
+													` (${totalResults - displayedCaseStudies.length} more)`}
+											</Button>
 										</Column>
 									</RevealFx>
 								)}
-							</Column>
-						</Row>
-					)}
-
-					{/* No Sidebar - Full Width Grid */}
-					{!shouldShowFilters && (
-						<Column
-							fillWidth
-							paddingX='l'
-							style={{
-								paddingLeft: 'clamp(8px, 2vw, 48px)',
-								paddingRight: 'clamp(8px, 2vw, 48px)'
-							}}
-							gap='s'>
-							{hasResults ? (
-								<>
-									<Grid
-										columns={columns.desktop as any}
-										tabletColumns={columns.tablet as any}
-										mobileColumns={1}
-										gap='64'
-										fillWidth>
-										{displayedCaseStudies.map((caseStudy, index) => (
-											<ModernCaseStudyCard
-												key={caseStudy._id}
-												caseStudy={caseStudy}
-												index={index}
-												priority={index < 4}
-											/>
-										))}
-									</Grid>
-
-									{/* View All Button for Homepage */}
-									{(showViewAllButton || hasMoreResults) && (
-										<RevealFx
-											translateY={8}
-											horizontal='center'
-											delay={0.08}>
-											<Column
-												center
-												paddingTop='32'>
-												<Button
-													id='view-all-case-studies'
-													href='/work'
-													variant='primary'
-													size='l'
-													arrowIcon>
-													Show more case studies
-													{hasMoreResults &&
-														` (${totalResults - displayedCaseStudies.length} more)`}
-												</Button>
-											</Column>
-										</RevealFx>
-									)}
-								</>
-							) : (
-								<RevealFx
-									translateY={8}
-									delay={0.06}>
-									<Column
-										fillWidth
-										center
-										padding='xl'
-										gap='20'
-										background='surface'
-										border='neutral-alpha-weak'
-										radius='xl'
-										style={{
-											minHeight: '200px'
-										}}>
-										<Text
-											variant='heading-strong-l'
-											onBackground='neutral-strong'
-											align='center'>
-											No case studies found
-										</Text>
-										<Text
-											variant='body-default-m'
-											onBackground='neutral-weak'
-											align='center'>
-											Try adjusting your filters to see more results.
-										</Text>
-									</Column>
-								</RevealFx>
-							)}
-						</Column>
-					)}
+							</>
+						) : (
+							<RevealFx
+								translateY={8}
+								delay={0.06}>
+								<Column
+									fillWidth
+									center
+									padding='xl'
+									gap='20'
+									background='surface'
+									border='neutral-alpha-weak'
+									radius='xl'
+									style={{
+										minHeight: '200px'
+									}}>
+									<Text
+										variant='heading-strong-l'
+										onBackground='neutral-strong'
+										align='center'>
+										No case studies found
+									</Text>
+									<Text
+										variant='body-default-m'
+										onBackground='neutral-weak'
+										align='center'>
+										Please check back later for more content.
+									</Text>
+								</Column>
+							</RevealFx>
+						)}
+					</Column>
 				</Column>
 			</Row>
 		</Column>

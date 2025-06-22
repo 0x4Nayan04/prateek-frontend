@@ -1,17 +1,15 @@
 import {
 	getFeaturedCaseStudies,
 	getAllCaseStudies,
-	getAvailableFilters,
 	getCaseStudiesPaginated
 } from '@/lib/utils/content';
-import { ModernProjectsClient } from './ModernProjectsClient';
+import { ModernProjectsClientWrapper } from './ModernProjectsClientWrapper';
 import { InfiniteCaseStudyGrid } from './InfiniteCaseStudyGrid';
 
 interface ModernProjectsProps {
 	title?: string;
 	description?: string;
 	maxItems?: number;
-	showFilters?: boolean;
 	columns?: '1' | '2' | '3';
 	useInfiniteScroll?: boolean;
 }
@@ -20,7 +18,6 @@ export async function ModernProjects({
 	title = 'Featured Projects',
 	description,
 	maxItems,
-	showFilters = false,
 	columns = '2',
 	useInfiniteScroll = false
 }: ModernProjectsProps) {
@@ -48,15 +45,12 @@ export async function ModernProjects({
 		const caseStudies = maxItems
 			? await getFeaturedCaseStudies(maxItems)
 			: await getAllCaseStudies();
-		const availableFilters = showFilters ? await getAvailableFilters() : null;
 
 		return (
-			<ModernProjectsClient
+			<ModernProjectsClientWrapper
 				caseStudies={caseStudies}
-				availableFilters={availableFilters}
 				title={title}
 				description={description}
-				showFilters={showFilters}
 				columns={columns}
 				maxItems={maxItems}
 			/>
@@ -83,12 +77,10 @@ export async function ModernProjects({
 		}
 
 		return (
-			<ModernProjectsClient
+			<ModernProjectsClientWrapper
 				caseStudies={[]}
-				availableFilters={null}
 				title={title}
 				description={description}
-				showFilters={showFilters}
 				columns={columns}
 				maxItems={maxItems}
 			/>

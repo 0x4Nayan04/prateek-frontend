@@ -13,6 +13,10 @@ const nextConfig = {
 				pathname: '/images/**' // allow all images under this path
 			}
 		]
+	},
+	webpack: (config) => {
+		config.resolve.alias.canvas = false;
+		return config;
 	}
 };
 

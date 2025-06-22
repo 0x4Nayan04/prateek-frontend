@@ -16,6 +16,7 @@ import {
 } from '@once-ui-system/core';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import { PdfViewer } from '@/components/PdfViewer';
 
 export const revalidate = 60; // ISR revalidation every 60 seconds
 
@@ -103,6 +104,7 @@ export default async function CaseStudyPage({
 
 	// Get all case studies for pagination
 	const allCaseStudies = await getAllCaseStudies();
+
 	const currentIndex = allCaseStudies.findIndex(
 		(cs) => cs.slug.current === slug
 	);
@@ -161,15 +163,21 @@ export default async function CaseStudyPage({
 				<RevealFx
 					translateY={8}
 					delay={0.02}>
-					<Button
-						data-border='rounded'
-						href='/work'
-						variant='primary'
-						weight='default'
-						size='s'
-						prefixIcon='chevronLeft'>
-						Back to Case Studies
-					</Button>
+					<Row
+						fillWidth
+						horizontal='space-between'
+						vertical='center'
+						wrap>
+						<Button
+							data-border='rounded'
+							href='/work'
+							variant='primary'
+							weight='default'
+							size='s'
+							prefixIcon='chevronLeft'>
+							Back to Case Studies
+						</Button>
+					</Row>
 				</RevealFx>
 
 				{/* Title and Summary */}
@@ -582,33 +590,10 @@ export default async function CaseStudyPage({
 										fillWidth
 										background='neutral-alpha-medium'
 									/>
-									<Column
-										gap='16'
-										fillWidth>
-										<iframe
-											src={pdfUrl}
-											style={{
-												width: '100%',
-												height: '700px',
-												border: '1px solid var(--neutral-alpha-medium)',
-												borderRadius: '16px',
-												backgroundColor: 'var(--neutral-solid-weak)'
-											}}
-											title={`${caseStudy.title} PDF Document`}
-										/>
-										<Button
-											href={pdfUrl}
-											target='_blank'
-											variant='primary'
-											size='m'
-											suffixIcon='arrowUpRightFromSquare'
-											style={{
-												alignSelf: 'center',
-												fontFamily: '"Inter", sans-serif'
-											}}>
-											Open in New Tab
-										</Button>
-									</Column>
+									<PdfViewer
+										url={pdfUrl}
+										title={caseStudy.title}
+									/>
 								</Column>
 							</RevealFx>
 						) : null;

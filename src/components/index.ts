@@ -21,6 +21,7 @@ export { InfiniteCaseStudyGrid } from '@/components/work/InfiniteCaseStudyGrid';
 export { default as PaginationNav } from '@/components/work/PaginationNav';
 export { ModernProjects } from '@/components/work/ModernProjects';
 export { ModernProjectsClient } from '@/components/work/ModernProjectsClient';
+export { ModernProjectsClientWrapper } from '@/components/work/ModernProjectsClientWrapper';
 
 // Sanity Components
 export { SanityImage } from '@/components/sanity/SanityImage';
