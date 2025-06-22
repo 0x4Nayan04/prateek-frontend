@@ -1,4 +1,4 @@
-const baseURL = 'https://prateek-frontend.vercel.app';
+const baseURL = 'https://pratik-srivastava-bi.vercel.app';
 
 const routes = {
 	'/': true,

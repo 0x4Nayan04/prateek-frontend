@@ -8,7 +8,8 @@ import {
 	RevealFx,
 	InfiniteScroll,
 	Grid,
-	Button
+	Button,
+	Row
 } from '@once-ui-system/core';
 import { CaseStudy } from '@/lib/sanity/types';
 import { ModernCaseStudyCard } from './ModernCaseStudyCard';
@@ -112,7 +113,7 @@ export function InfiniteCaseStudyGrid({
 		return (
 			<Column
 				fillWidth
-				gap='40'>
+				gap='16'>
 				{/* Header */}
 				{title && (
 					<RevealFx
@@ -120,61 +121,79 @@ export function InfiniteCaseStudyGrid({
 						delay={0.02}
 						fillWidth
 						horizontal='center'
-						vertical='center'
-						paddingY='m'>
-						<Heading
-							variant='display-strong-l'
-							onBackground='neutral-strong'
-							align='center'
-							style={{
-								fontSize: '48px',
-								fontWeight: '800',
-								color: 'white'
-							}}>
-							{title}
-						</Heading>
+						paddingBottom='8'>
+						<Column
+							horizontal='center'
+							gap='8'>
+							<Heading
+								wrap='balance'
+								variant='display-strong-l'
+								align='center'
+								style={{
+									fontSize: 'clamp(2rem, 8vw, 3rem)',
+									lineHeight: '1.2'
+								}}>
+								{title}
+							</Heading>
+						</Column>
 					</RevealFx>
 				)}
 
-				{/* Initial static grid for SSR */}
-				<Column
+				{/* Main Content */}
+				<Row
 					fillWidth
-					paddingX='l'>
-					{initialCaseStudies.length > 0 ? (
-						<Grid
-							columns={columns.desktop as any}
-							tabletColumns={columns.tablet as any}
-							mobileColumns={columns.mobile as any}
-							gap='48'
-							fillWidth>
-							{initialCaseStudies.map((caseStudy, index) => (
-								<ModernCaseStudyCard
-									key={caseStudy._id}
-									caseStudy={caseStudy}
-									index={index}
-									priority={index < 4}
-								/>
-							))}
-						</Grid>
-					) : (
+					horizontal='center'>
+					<Column
+						fillWidth
+						paddingX='l'>
+						{/* Initial static grid for SSR */}
 						<Column
 							fillWidth
-							center
-							padding='xl'
-							gap='20'
-							background='surface'
-							border='neutral-alpha-weak'
-							radius='xl'>
-							<Text
-								variant='heading-default-l'
-								onBackground='neutral-strong'
-								align='center'
-								style={{ fontSize: '28px', fontWeight: '700' }}>
-								Loading case studies...
-							</Text>
+							paddingX='l'
+							style={{
+								paddingLeft: 'clamp(8px, 2vw, 48px)',
+								paddingRight: 'clamp(8px, 2vw, 48px)'
+							}}
+							gap='s'>
+							{initialCaseStudies.length > 0 ? (
+								<Grid
+									columns={columns.desktop as any}
+									tabletColumns={columns.tablet as any}
+									mobileColumns={columns.mobile as any}
+									gap='64'
+									fillWidth>
+									{initialCaseStudies.map((caseStudy, index) => (
+										<ModernCaseStudyCard
+											key={caseStudy._id}
+											caseStudy={caseStudy}
+											index={index}
+											priority={index < 4}
+										/>
+									))}
+								</Grid>
+							) : (
+								<Column
+									fillWidth
+									center
+									padding='xl'
+									gap='20'
+									background='surface'
+									border='neutral-alpha-weak'
+									radius='xl'
+									style={{
+										minHeight: '200px'
+									}}>
+									<Text
+										variant='heading-strong-l'
+										onBackground='neutral-strong'
+										align='center'>
+										Loading case studies...
+									</Text>
+								</Column>
+							)}
 						</Column>
-					)}
-				</Column>
+					</Column>
+				</Row>
 			</Column>
 		);
 	}
@@ -182,7 +201,7 @@ export function InfiniteCaseStudyGrid({
 	return (
 		<Column
 			fillWidth
-			gap='40'>
+			gap='16'>
 			{/* Header */}
 			{title && (
 				<RevealFx
@@ -190,132 +209,151 @@ export function InfiniteCaseStudyGrid({
 					delay={0.02}
 					fillWidth
 					horizontal='center'
-					vertical='center'
-					paddingY='m'>
-					<Heading
-						variant='display-strong-l'
-						onBackground='neutral-strong'
-						align='center'
-						style={{
-							fontSize: '48px',
-							fontWeight: '800',
-							color: 'white'
-						}}>
-						{title}
-					</Heading>
+					paddingBottom='8'>
+					<Column
+						horizontal='center'
+						gap='8'>
+						<Heading
+							wrap='balance'
+							variant='display-strong-l'
+							align='center'
+							style={{
+								fontSize: 'clamp(2rem, 8vw, 3rem)',
+								lineHeight: '1.2'
+							}}>
+							{title}
+						</Heading>
+					</Column>
 				</RevealFx>
 			)}
 
-			{/* Infinite Scroll Grid - Only after mounting */}
-			<Column
+			{/* Main Content */}
+			<Row
 				fillWidth
-				paddingX='l'>
-				<InfiniteScroll
-					items={items}
-					loadMore={loadMore}
-					loading={loading}
-					threshold={400}
-					renderItem={(item, index) => {
-						// For grid layout, we need to group items
-						if (index === 0 || index % columns.desktop === 0) {
-							const gridItems = items.slice(index, index + columns.desktop);
-							return (
-								<Grid
-									key={`grid-${Math.floor(index / columns.desktop)}`}
-									columns={columns.desktop as any}
-									tabletColumns={columns.tablet as any}
-									mobileColumns={columns.mobile as any}
-									gap='48'
+				horizontal='center'>
+				<Column
+					fillWidth
+					paddingX='l'>
+					{/* Infinite Scroll Grid */}
+					<Column
+						fillWidth
+						paddingX='l'
+						style={{
+							paddingLeft: 'clamp(8px, 2vw, 48px)',
+							paddingRight: 'clamp(8px, 2vw, 48px)'
+						}}
+						gap='s'>
+						<InfiniteScroll
+							items={items}
+							loadMore={loadMore}
+							loading={loading}
+							threshold={400}
+							renderItem={(item, index) => {
+								// For grid layout, we need to group items
+								if (index === 0 || index % columns.desktop === 0) {
+									const gridItems = items.slice(index, index + columns.desktop);
+									return (
+										<Grid
+											key={`grid-${Math.floor(index / columns.desktop)}`}
+											columns={columns.desktop as any}
+											tabletColumns={columns.tablet as any}
+											mobileColumns={columns.mobile as any}
+											gap='64'
+											fillWidth
+											style={{
+												marginBottom:
+													index + columns.desktop < items.length
+														? '32px'
+														: '0px'
+											}}>
+											{gridItems.map((gridItem, gridIndex) => (
+												<ModernCaseStudyCard
+													key={gridItem._id}
+													caseStudy={gridItem}
+													index={index + gridIndex}
+													priority={index + gridIndex < 4}
+												/>
+											))}
+										</Grid>
+									);
+								}
+								return null;
+							}}
+						/>
+
+						{/* Loading indicator */}
+						{loading && (
+							<RevealFx
+								translateY={8}
+								horizontal='center'
+								delay={0.06}>
+								<Column
+									center
+									paddingTop='16'>
+									<Text
+										variant='body-default-s'
+										onBackground='neutral-weak'
+										align='center'>
+										Loading more...
+									</Text>
+								</Column>
+							</RevealFx>
+						)}
+
+						{/* No more items message */}
+						{!hasMore && items.length > 0 && (
+							<RevealFx
+								translateY={8}
+								horizontal='center'
+								delay={0.06}>
+								<Column
+									center
+									paddingTop='16'>
+									<Text
+										variant='body-default-s'
+										onBackground='neutral-weak'
+										align='center'
+										style={{ fontSize: '0.8rem' }}>
+										You&apos;ve reached the end
+									</Text>
+								</Column>
+							</RevealFx>
+						)}
+
+						{/* No items found */}
+						{items.length === 0 && !loading && (
+							<RevealFx
+								translateY={8}
+								delay={0.06}>
+								<Column
 									fillWidth
-									style={{ marginBottom: '48px' }}>
-									{gridItems.map((gridItem, gridIndex) => (
-										<ModernCaseStudyCard
-											key={gridItem._id}
-											caseStudy={gridItem}
-											index={index + gridIndex}
-											priority={index + gridIndex < 4}
-										/>
-									))}
-								</Grid>
-							);
-						}
-						return null;
-					}}
-				/>
-
-				{/* Loading indicator */}
-				{loading && (
-					<RevealFx
-						translateY={8}
-						horizontal='center'
-						delay={0.06}>
-						<Column
-							center
-							paddingTop='32'>
-							<Text
-								variant='body-default-m'
-								onBackground='neutral-medium'
-								align='center'>
-								Loading more case studies...
-							</Text>
-						</Column>
-					</RevealFx>
-				)}
-
-				{/* No more items message */}
-				{!hasMore && items.length > 0 && (
-					<RevealFx
-						translateY={8}
-						horizontal='center'
-						delay={0.06}>
-						<Column
-							center
-							paddingTop='32'>
-							<Text
-								variant='body-default-s'
-								onBackground='neutral-weak'
-								align='center'>
-								You&apos;ve reached the end of our case studies
-							</Text>
-						</Column>
-					</RevealFx>
-				)}
-
-				{/* No items found */}
-				{items.length === 0 && !loading && (
-					<RevealFx
-						translateY={8}
-						delay={0.06}>
-						<Column
-							fillWidth
-							center
-							padding='xl'
-							gap='20'
-							background='surface'
-							border='neutral-alpha-weak'
-							radius='xl'>
-							<Text
-								variant='heading-default-l'
-								onBackground='neutral-strong'
-								align='center'
-								style={{ fontSize: '28px', fontWeight: '700' }}>
-								No case studies found
-							</Text>
-							<Text
-								variant='body-default-l'
-								onBackground='neutral-medium'
-								align='center'
-								style={{
-									maxWidth: '400px',
-									fontSize: '16px',
-									lineHeight: '1.6'
-								}}>
-								Check back later for new case studies.
-							</Text>
-						</Column>
-					</RevealFx>
-				)}
-			</Column>
+									center
+									padding='xl'
+									gap='20'
+									background='surface'
+									border='neutral-alpha-weak'
+									radius='xl'
+									style={{
+										minHeight: '200px'
+									}}>
+									<Text
+										variant='heading-strong-l'
+										onBackground='neutral-strong'
+										align='center'>
+										No case studies found
+									</Text>
+									<Text
+										variant='body-default-m'
+										onBackground='neutral-weak'
+										align='center'>
+										Check back later for new case studies.
+									</Text>
+								</Column>
+							</RevealFx>
+						)}
+					</Column>
+				</Column>
+			</Row>
 		</Column>
 	);
 }

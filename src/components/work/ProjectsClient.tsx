@@ -1,31 +1,19 @@
-"use client";
+'use client';
 
 import { CaseStudy } from '@/lib/sanity/types';
-import { CaseStudyGrid } from "./CaseStudyGrid";
-import { useFilters } from "@/hooks/useFilters";
+import { CaseStudyGrid } from './CaseStudyGrid';
 
 interface ProjectsClientProps {
-  caseStudies: CaseStudy[];
+	caseStudies: CaseStudy[];
 }
 
 export function ProjectsClient({ caseStudies }: ProjectsClientProps) {
-  const {
-    filters,
-    setFilters,
-    availableFilters,
-    filteredCaseStudies
-  } = useFilters(caseStudies);
-
-  return (
-    <CaseStudyGrid
-      caseStudies={filteredCaseStudies}
-      filters={filters}
-      availableFilters={availableFilters}
-      onFiltersChange={setFilters}
-      showFilters={true}
-      title="Case Studies"
-      description="Explore data-driven solutions and strategic impact across various industries and technologies."
-      columns={{ desktop: 1, tablet: 1, mobile: 1 }}
-    />
-  );
-} 
+	return (
+		<CaseStudyGrid
+			caseStudies={caseStudies}
+			title='Case Studies'
+			description='Explore data-driven solutions and strategic impact across various industries and technologies.'
+			columns={{ desktop: 1, tablet: 1, mobile: 1 }}
+		/>
+	);
+}

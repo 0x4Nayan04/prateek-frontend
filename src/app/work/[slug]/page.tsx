@@ -15,6 +15,8 @@ import {
 	Carousel
 } from '@once-ui-system/core';
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
+import { PdfViewer } from '@/components/PdfViewer';
 
 export const revalidate = 60; // ISR revalidation every 60 seconds
 
@@ -23,6 +25,69 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
 	return caseStudies.map((caseStudy) => ({
 		slug: caseStudy.slug.current
 	}));
+}
+
+export async function generateMetadata({
+	params
+}: {
+	params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+	const { slug } = await params;
+	const caseStudy = await getCaseStudyBySlug(slug);
+
+	if (!caseStudy) {
+		return {
+			title: 'Case Study Not Found',
+			description: 'The requested case study could not be found.'
+		};
+	}
+
+	// Generate OG image URL - use first image if available, otherwise fallback to work OG
+	const ogImageUrl =
+		caseStudy.images && caseStudy.images.length > 0
+			? urlFor(caseStudy.images[0])
+					.width(1200)
+					.height(630)
+					.fit('crop')
+					.auto('format')
+					.url()
+			: `${baseURL}/og-work.png`;
+
+	return {
+		title: caseStudy.title,
+		description: caseStudy.summary,
+		openGraph: {
+			title: caseStudy.title,
+			description: caseStudy.summary,
+			url: `${baseURL}/work/${slug}`,
+			images: [
+				{
+					url: ogImageUrl,
+					width: 1200,
+					height: 630,
+					alt: caseStudy.title,
+					type: 'image/png'
+				}
+			],
+			type: 'article',
+			publishedTime: new Date().toISOString(),
+			tags: [...(caseStudy.techStack || []), ...(caseStudy.industry || [])]
+		},
+		twitter: {
+			card: 'summary_large_image',
+			title: caseStudy.title,
+			description: caseStudy.summary,
+			images: [ogImageUrl]
+		},
+		keywords: [
+			caseStudy.title,
+			...(caseStudy.techStack || []),
+			...(caseStudy.industry || []),
+			'Business Intelligence',
+			'Data Analytics',
+			'Pratik Srivastava'
+		]
+	};
 }
 
 export default async function CaseStudyPage({
@@ -39,6 +104,7 @@ export default async function CaseStudyPage({
 
 	// Get all case studies for pagination
 	const allCaseStudies = await getAllCaseStudies();
+
 	const currentIndex = allCaseStudies.findIndex(
 		(cs) => cs.slug.current === slug
 	);
@@ -49,14 +115,13 @@ export default async function CaseStudyPage({
 			? allCaseStudies[currentIndex + 1]
 			: null;
 
-	// Prepare carousel items from case study images
+	// Prepare carousel items from case study images with adaptive sizing
 	const carouselImages =
 		caseStudy.images?.map((image, idx) => {
 			const imageUrl = urlFor(image)
 				.width(1200)
-				.height(800)
-				.quality(95)
-				.format('webp')
+				.fit('max') // Preserve aspect ratio
+				.auto('format')
 				.url();
 
 			return {
@@ -64,6 +129,19 @@ export default async function CaseStudyPage({
 				alt: image.alt || `${caseStudy.title} - Image ${idx + 1}`
 			};
 		}) || [];
+
+	// Calculate dynamic aspect ratio from first image or use fallback
+	const getDetailAspectRatio = () => {
+		if (
+			caseStudy.images &&
+			caseStudy.images.length > 0 &&
+			caseStudy.images[0]?.asset?.metadata?.dimensions
+		) {
+			const { width, height } = caseStudy.images[0].asset.metadata.dimensions;
+			return `${width} / ${height}`;
+		}
+		return '16 / 10'; // Fallback aspect ratio
+	};
 
 	return (
 		<Column
@@ -85,15 +163,21 @@ export default async function CaseStudyPage({
 				<RevealFx
 					translateY={8}
 					delay={0.02}>
-					<Button
-						data-border='rounded'
-						href='/work'
-						variant='primary'
-						weight='default'
-						size='s'
-						prefixIcon='chevronLeft'>
-						Back to Case Studies
-					</Button>
+					<Row
+						fillWidth
+						horizontal='space-between'
+						vertical='center'
+						wrap>
+						<Button
+							data-border='rounded'
+							href='/work'
+							variant='primary'
+							weight='default'
+							size='s'
+							prefixIcon='chevronLeft'>
+							Back to Case Studies
+						</Button>
+					</Row>
 				</RevealFx>
 
 				{/* Title and Summary */}
@@ -259,7 +343,7 @@ export default async function CaseStudyPage({
 							}}>
 							<Carousel
 								items={carouselImages}
-								aspectRatio='16/10'
+								aspectRatio={getDetailAspectRatio()}
 								indicator={carouselImages.length > 1 ? 'line' : undefined}
 								sizes='(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1000px'
 								style={{
@@ -506,33 +590,10 @@ export default async function CaseStudyPage({
 										fillWidth
 										background='neutral-alpha-medium'
 									/>
-									<Column
-										gap='16'
-										fillWidth>
-										<iframe
-											src={pdfUrl}
-											style={{
-												width: '100%',
-												height: '700px',
-												border: '1px solid var(--neutral-alpha-medium)',
-												borderRadius: '16px',
-												backgroundColor: 'var(--neutral-solid-weak)'
-											}}
-											title={`${caseStudy.title} PDF Document`}
-										/>
-										<Button
-											href={pdfUrl}
-											target='_blank'
-											variant='primary'
-											size='m'
-											suffixIcon='arrowUpRightFromSquare'
-											style={{
-												alignSelf: 'center',
-												fontFamily: '"Inter", sans-serif'
-											}}>
-											Open in New Tab
-										</Button>
-									</Column>
+									<PdfViewer
+										url={pdfUrl}
+										title={caseStudy.title}
+									/>
 								</Column>
 							</RevealFx>
 						) : null;
@@ -543,7 +604,9 @@ export default async function CaseStudyPage({
 					<RevealFx
 						translateY={8}
 						delay={0.16}>
-						<Column gap='16'>
+						<Column
+							gap='16'
+							fillWidth>
 							<Heading
 								variant='heading-strong-xl'
 								style={{
@@ -567,10 +630,9 @@ export default async function CaseStudyPage({
 									<Button
 										key={index}
 										href={link.url}
-										variant='secondary'
+										variant='primary'
 										size='m'
 										suffixIcon='arrowUpRightFromSquare'
-										fillWidth
 										style={{
 											justifyContent: 'flex-start',
 											fontFamily: '"Inter", sans-serif'

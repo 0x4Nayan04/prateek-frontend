@@ -1,8 +1,5 @@
 import { client } from '@/lib/sanity/client';
-import {
-	CASE_STUDIES_ALL_QUERY,
-	CASE_STUDIES_HOMEPAGE_QUERY
-} from '@/lib/sanity/queries';
+import { CASE_STUDIES_ALL_QUERY } from '@/lib/sanity/queries';
 import { CaseStudy } from '@/lib/sanity/types';
 
 export async function getAllCaseStudies() {
@@ -18,7 +15,7 @@ export async function getAllCaseStudies() {
 
 export async function getFeaturedCaseStudies(limit: number = 6) {
 	try {
-		// Use the homepage query but limit the results
+		// Use the homepage query but limit the results - back to original without metadata
 		const caseStudies: CaseStudy[] = await client.fetch(
 			`*[_type == "caseStudy"] | order(priority asc) [0...${limit}] {
 				_id,
@@ -47,8 +44,20 @@ export async function getCaseStudyBySlug(slug: string) {
 				title,
 				slug,
 				summary,
-				thumbnail,
-				images,
+				thumbnail {
+					...,
+					asset-> {
+						...,
+						metadata { dimensions }
+					}
+				},
+				images[] {
+					...,
+					asset-> {
+						...,
+						metadata { dimensions }
+					}
+				},
 				techStack,
 				industry,
 				priority,
@@ -70,28 +79,15 @@ export async function getCaseStudyBySlug(slug: string) {
 	}
 }
 
-export async function getAvailableFilters() {
-	try {
-		const filters = await client.fetch(`
-			{
-				"techStack": *[_type == "caseStudy"].techStack[] | unique | order(@),
-				"industry": *[_type == "caseStudy"].industry[] | unique | order(@)
-			}
-		`);
-		return filters;
-	} catch (error) {
-		console.error('Error fetching filters:', error);
-		return { techStack: [], industry: [] };
-	}
-}
-
 export async function getCaseStudiesPaginated(
 	offset: number = 0,
 	limit: number = 6
 ) {
 	try {
 		const caseStudies: CaseStudy[] = await client.fetch(
-			`*[_type == "caseStudy"] | order(priority asc) [${offset}...${offset + limit}] {
+			`*[_type == "caseStudy"] | order(priority asc) [${offset}...${
+				offset + limit
+			}] {
 				_id,
 				title,
 				slug,

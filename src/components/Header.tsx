@@ -152,21 +152,21 @@ export const Header = () => {
 									/>
 								</>
 							)}
-							<>
-								<ToggleButton
-									className='s-flex-hide'
-									prefixIcon='person'
-									onClick={scrollToAbout}
+								<>
+									<ToggleButton
+										className='s-flex-hide'
+										prefixIcon='person'
+										onClick={scrollToAbout}
 									label='About'
-									selected={isAboutActive}
-								/>
-								<ToggleButton
-									className='s-flex-show'
-									prefixIcon='person'
-									onClick={scrollToAbout}
-									selected={isAboutActive}
-								/>
-							</>
+										selected={isAboutActive}
+									/>
+									<ToggleButton
+										className='s-flex-show'
+										prefixIcon='person'
+										onClick={scrollToAbout}
+										selected={isAboutActive}
+									/>
+								</>
 							{routes['/work'] && (
 								<>
 									<ToggleButton
@@ -190,8 +190,8 @@ export const Header = () => {
 				<Flex
 					paddingRight='12'
 					fillWidth
-					horizontal='end'
-					vertical='center'
+						horizontal='end'
+						vertical='center'
 					textVariant='body-default-s'></Flex>
 			</Flex>
 		</>

@@ -3,7 +3,6 @@ import { ModernProjectsClient } from './ModernProjectsClient';
 
 interface ProjectsProps {
 	range?: [number, number?];
-	showFilters?: boolean;
 	maxItems?: number;
 	title?: string;
 	description?: string;
@@ -12,7 +11,6 @@ interface ProjectsProps {
 
 export async function Projects({
 	range,
-	showFilters = true,
 	maxItems,
 	title,
 	description,
@@ -34,8 +32,6 @@ export async function Projects({
 	return (
 		<ModernProjectsClient
 			caseStudies={displayedCaseStudies}
-			availableFilters={null}
-			showFilters={showFilters}
 			maxItems={maxItems}
 			title={title}
 			description={description}

@@ -12,7 +12,7 @@ import {
 	opacity,
 	SpacingToken
 } from '@once-ui-system/core';
-import { Footer, Header, Providers } from '@/components';
+import { Footer, Header, Providers, ScrollToTop } from '@/components';
 import { baseURL, effects, fonts, style, dataStyle, home } from '@/resources';
 
 export const metadata: Metadata = {
@@ -29,10 +29,11 @@ export const metadata: Metadata = {
 		siteName: home.title,
 		images: [
 			{
-				url: '/og-image.png',
+				url: `${baseURL}/og-image.png`,
 				width: 1200,
 				height: 630,
-				alt: home.title
+				alt: home.title,
+				type: 'image/png'
 			}
 		],
 		locale: 'en_US',
@@ -42,7 +43,8 @@ export const metadata: Metadata = {
 		card: 'summary_large_image',
 		title: home.title,
 		description: home.description,
-		images: ['/og-image.png']
+		images: [`${baseURL}/og-image.png`],
+		creator: '@pratik_sri'
 	},
 	robots: {
 		index: true,
@@ -152,6 +154,7 @@ export default async function RootLayout({
 			<Providers>
 				<Column
 					as='body'
+					className='body-wrapper'
 					suppressHydrationWarning
 					background='page'
 					fillWidth
@@ -226,6 +229,7 @@ export default async function RootLayout({
 						</Flex>
 					</Flex>
 					<Footer />
+					<ScrollToTop />
 				</Column>
 			</Providers>
 		</Flex>

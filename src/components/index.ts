@@ -2,6 +2,7 @@ export { ProjectCard } from '@/components/ProjectCard';
 
 export { Providers } from '@/components/Providers';
 export { ScrollToHash } from '@/components/ScrollToHash';
+export { ScrollToTop } from '@/components/ScrollToTop';
 
 // Content Components
 export { PortableText } from '@/components/PortableText';
@@ -20,9 +21,11 @@ export { InfiniteCaseStudyGrid } from '@/components/work/InfiniteCaseStudyGrid';
 export { default as PaginationNav } from '@/components/work/PaginationNav';
 export { ModernProjects } from '@/components/work/ModernProjects';
 export { ModernProjectsClient } from '@/components/work/ModernProjectsClient';
+export { ModernProjectsClientWrapper } from '@/components/work/ModernProjectsClientWrapper';
 
 // Sanity Components
 export { SanityImage } from '@/components/sanity/SanityImage';
+export { AdaptiveImage } from '@/components/sanity/AdaptiveImage';
 
 // Layout Components
 export { Header } from '@/components/Header';

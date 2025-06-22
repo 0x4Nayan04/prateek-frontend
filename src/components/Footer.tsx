@@ -46,7 +46,7 @@ export const Footer = () => {
 				as='footer'
 				fillWidth
 				paddingX='8'
-				paddingY='16'
+				paddingY='8'
 				horizontal='center'
 				mobileDirection='column'
 				style={{
@@ -56,13 +56,15 @@ export const Footer = () => {
 				}}>
 				<Flex
 					className={styles.mobile}
-					maxWidth='l'
-					paddingY='12'
-					paddingX='16'
+					background='page'
+					border='neutral-alpha-weak'
+					radius='m-4'
+					shadow='l'
+					paddingY='4'
+					paddingX='8'
 					gap='0'
 					horizontal='center'
-					vertical='center'
-					fillWidth>
+					vertical='center'>
 					<Text
 						variant='body-default-s'
 						onBackground='neutral-weak'

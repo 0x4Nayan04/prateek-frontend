@@ -107,6 +107,23 @@ div,
 	overflow: hidden;
 }
 
+/* Adaptive image handling ONLY for detail page carousels (not cards) */
+/* Target carousels that are NOT inside case study cards */
+:not(.caseStudyCard) [data-carousel] img {
+	object-fit: contain !important;
+	background-color: transparent !important;
+	width: 100% !important;
+	height: 100% !important;
+}
+
+/* Keep card carousels with original cropped styling */
+.caseStudyCard [data-carousel] img,
+.caseStudyCard [data-carousel-control] img {
+	object-fit: cover !important;
+	width: 100% !important;
+	height: 100% !important;
+}
+
 /* Carousel controls enhancement */
 [data-carousel] button {
 	transition: all 0.1s ease;
@@ -365,6 +382,7 @@ a[href*='/work/'] {
 	display: block !important;
 	text-decoration: none !important;
 	color: inherit !important;
+	width: 100% !important;
 }
 
 /* Ensure proper hover states for accessibility */
@@ -381,10 +399,10 @@ a[href*='/work/']:focus-visible {
 	align-items: stretch !important;
 }
 
-@media (max-width: 768px) {
-	[data-columns='2'] {
-		grid-template-columns: 1fr !important;
-	}
+[data-columns='1'] {
+	display: grid !important;
+	grid-template-columns: 1fr !important;
+	align-items: stretch !important;
 }
 
 /* Ensure equal height cards */
@@ -447,56 +465,10 @@ a[href*='/work/']:focus-visible {
 
 /* Universal backdrop filter removal for mobile */
 @media (hover: none) and (pointer: coarse) {
-	*,
-	*::before,
-	*::after {
+	* {
 		backdrop-filter: none !important;
 		-webkit-backdrop-filter: none !important;
 	}
-}
-
-/* PDF Viewer Improvements */
-.pdf-viewer-container {
-	width: 100%;
-	max-width: 100%;
-	margin: 0 auto;
-}
-
-.pdf-viewer-container iframe {
-	width: 100% !important;
-	height: 600px !important;
-	border: none !important;
-	border-radius: 12px !important;
-	background: #fff;
-}
-
-/* Responsive PDF viewer */
-@media (max-width: 768px) {
-	.pdf-viewer-container iframe {
-		height: 500px !important;
-	}
-}
-
-@media (max-width: 480px) {
-	.pdf-viewer-container iframe {
-		height: 400px !important;
-	}
-}
-
-/* Make sure PDF iframe respects container width */
-.pdf-viewer-container {
-	overflow: hidden;
-	border-radius: 12px;
-	border: 1px solid var(--neutral-alpha-medium);
-	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-}
-
-/* Remove any default iframe styling that might interfere */
-iframe[src*='.pdf'] {
-	display: block;
-	width: 100%;
-	height: 100%;
-	border: none;
 }
 
 /* Enhanced Auto Carousel */
@@ -662,5 +634,241 @@ body[class*='display-flex'] {
 		padding-left: var(--responsive-space-m) !important;
 		padding-right: var(--responsive-space-m) !important;
 		gap: var(--responsive-space-m) !important;
+	}
+}
+
+/* ============================================================================
+   SCROLL TO TOP STYLING
+   ============================================================================ */
+
+/*
+  This targets the button inside the scroll-to-top component.
+  Using [data-variant='primary'] makes the selector highly specific
+  to override the default library styles for the primary button.
+*/
+.scroll-to-top button[data-variant='primary'] {
+	background-color: white !important;
+	color: #111 !important; /* A dark color for the icon */
+	border: 1px solid rgba(0, 0, 0, 0.08) !important;
+	box-shadow:
+		0 4px 8px rgba(0, 0, 0, 0.05),
+		0 1px 3px rgba(0, 0, 0, 0.1) !important;
+	border-radius: 50% !important;
+	width: 48px !important;
+	height: 48px !important;
+	transition: all 0.25s ease-out !important;
+}
+
+.scroll-to-top button[data-variant='primary']:hover {
+	transform: translateY(-3px) !important;
+	box-shadow:
+		0 8px 16px rgba(0, 0, 0, 0.08),
+		0 4px 6px rgba(0, 0, 0, 0.12) !important;
+}
+
+.scroll-to-top button[data-variant='primary']:active {
+	transform: translateY(-1px) !important;
+	box-shadow:
+		0 4px 8px rgba(0, 0, 0, 0.05),
+		0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Smooth scroll behavior */
+html {
+	scroll-behavior: smooth;
+}
+
+/* Focus states for accessibility */
+.scroll-to-top button[data-variant='primary']:focus-visible {
+	outline: 2px solid #3856ae !important; /* Using a brand color for focus */
+	outline-offset: 2px !important;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+	.scroll-to-top {
+		bottom: 32px !important; /* More space on mobile */
+		right: 24px !important;
+	}
+
+	.scroll-to-top button[data-variant='primary'] {
+		width: 44px !important;
+		height: 44px !important;
+	}
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+	.scroll-to-top button[data-variant='primary'] {
+		transition: opacity 0.2s ease !important;
+	}
+	.scroll-to-top button[data-variant='primary']:hover,
+	.scroll-to-top button[data-variant='primary']:active {
+		transform: none !important;
+	}
+}
+
+/* ============================================================================
+   MODERN CASE STUDY CARD LAYOUT ENHANCEMENTS
+   ============================================================================ */
+
+/* Base card styling */
+.caseStudyCard,
+[data-case-study-card] {
+	width: 100% !important;
+	height: 100% !important;
+	display: flex !important;
+	flex-direction: column !important;
+	box-sizing: border-box !important;
+	max-width: none !important;
+	transition: all 0.15s ease-in-out !important;
+}
+
+/* Link wrapper for cards */
+a[href*='/work/'] {
+	display: block !important;
+	text-decoration: none !important;
+	color: inherit !important;
+	width: 100% !important;
+}
+
+/* Grid Container Fixes */
+[data-columns='2'] {
+	display: grid !important;
+	grid-template-columns: repeat(2, 1fr) !important;
+	align-items: stretch !important;
+}
+
+[data-columns='1'] {
+	display: grid !important;
+	grid-template-columns: 1fr !important;
+	align-items: stretch !important;
+}
+
+/* ============================================================================
+   MOBILE OPTIMIZATIONS FOR COMPLETE WIDTH COVERAGE
+   ============================================================================ */
+
+@media (max-width: 768px) {
+	/* Force single column on mobile with full width */
+	[data-columns='2'],
+	[data-columns='3'] {
+		grid-template-columns: 1fr !important;
+		gap: clamp(16px, 4vw, 24px) !important;
+		width: 100% !important;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+
+	/* Ensure grid containers use full width */
+	[data-grid] {
+		width: 100% !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+
+	/* Case study cards mobile optimization */
+	.caseStudyCard,
+	[data-case-study-card] {
+		width: 100% !important;
+		margin: 0 !important;
+		max-width: none !important;
+		box-sizing: border-box !important;
+	}
+
+	/* Grid parent containers on mobile */
+	[data-padding='l'],
+	[data-paddingx='l'],
+	[data-paddingx='xl'] {
+		padding-left: clamp(8px, 2vw, 16px) !important;
+		padding-right: clamp(8px, 2vw, 16px) !important;
+	}
+
+	/* Container width fixes for mobile */
+	[data-column][data-fillwidth='true'] {
+		width: 100% !important;
+		max-width: 100% !important;
+		box-sizing: border-box !important;
+	}
+
+	/* Remove any constraining margins */
+	[data-revealf] {
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		width: 100% !important;
+	}
+
+	/* Carousel sizing on mobile */
+	[data-carousel] {
+		margin: 0 !important;
+		width: 100% !important;
+	}
+
+	/* Tags on mobile - better line wrapping */
+	[data-tag] {
+		font-size: 0.65rem !important;
+		padding: 3px 8px !important;
+		white-space: nowrap !important;
+		max-width: 100px !important;
+		overflow: hidden !important;
+		text-overflow: ellipsis !important;
+	}
+
+	/* Row components mobile direction */
+	[data-mobile-direction='column'] {
+		flex-direction: column !important;
+		gap: var(--responsive-space-s) !important;
+	}
+
+	/* Enhanced spacing for mobile content */
+	[data-gap='s'] {
+		gap: clamp(8px, 2vw, 12px) !important;
+	}
+
+	[data-gap='m'] {
+		gap: clamp(12px, 3vw, 16px) !important;
+	}
+
+	[data-gap='l'] {
+		gap: clamp(16px, 4vw, 24px) !important;
+	}
+
+	/* Mobile-specific padding adjustments */
+	[data-padding='m'] {
+		padding: clamp(12px, 3vw, 16px) !important;
+	}
+
+	[data-padding='l'] {
+		padding: clamp(16px, 4vw, 24px) !important;
+	}
+
+	/* Featured work section mobile optimizations */
+	.featured-work-section {
+		padding-left: clamp(8px, 2vw, 16px) !important;
+		padding-right: clamp(8px, 2vw, 16px) !important;
+		gap: clamp(16px, 4vw, 24px) !important;
+		width: 100% !important;
+		max-width: 100% !important;
+		box-sizing: border-box !important;
+	}
+
+	/* Mobile carousel adjustments */
+	[data-carousel] {
+		margin: 0 !important;
+		width: 100% !important;
+		box-sizing: border-box !important;
+	}
+}
+
+/* ============================================================================
+   MOBILE FOOTER FIX
+   ============================================================================ */
+
+@media (max-width: 640px) {
+	.body-wrapper {
+		/* Creates space at the bottom for the fixed mobile nav, preventing overlap */
+		padding-bottom: 120px !important;
 	}
 }

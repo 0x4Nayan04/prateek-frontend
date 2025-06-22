@@ -14,10 +14,11 @@ export const metadata: Metadata = {
 		url: `${baseURL}/work`,
 		images: [
 			{
-				url: '/og-work.png',
+				url: `${baseURL}/og-work.png`,
 				width: 1200,
 				height: 630,
-				alt: work.title
+				alt: work.title,
+				type: 'image/png'
 			}
 		],
 		type: 'website'
@@ -26,7 +27,8 @@ export const metadata: Metadata = {
 		card: 'summary_large_image',
 		title: work.title,
 		description: work.description,
-		images: ['/og-work.png']
+		images: [`${baseURL}/og-work.png`],
+		creator: '@pratik_sri'
 	}
 };
 
@@ -40,7 +42,6 @@ export default function Work() {
 			gap='0'>
 			<ModernProjects
 				title='Case Studies'
-				showFilters={false}
 				columns='2'
 				useInfiniteScroll={true}
 			/>
