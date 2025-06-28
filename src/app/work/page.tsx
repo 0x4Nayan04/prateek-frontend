@@ -37,13 +37,14 @@ export default function Work() {
 		<Column
 			fillWidth
 			horizontal='center'
-			paddingY='0'
+			paddingY='32'
 			paddingX='l'
 			gap='0'>
 			<ModernProjects
 				title='Case Studies'
+				useInfiniteScroll={false}
+				enableFilters={true}
 				columns='2'
-				useInfiniteScroll={true}
 			/>
 		</Column>
 	);

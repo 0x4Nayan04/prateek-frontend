@@ -27,8 +27,8 @@ export interface CaseStudy {
 		};
 		alt: string;
 	}>;
-	techStack: string[];
-	industry: string[];
+	techStack?: string[];
+	industry?: string[];
 	priority: number;
 	clientOverview?: any;
 	problem?: any;

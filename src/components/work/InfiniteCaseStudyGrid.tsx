@@ -160,7 +160,7 @@ export function InfiniteCaseStudyGrid({
 									columns={columns.desktop as any}
 									tabletColumns={columns.tablet as any}
 									mobileColumns={columns.mobile as any}
-									gap='64'
+									gap='4'
 									fillWidth>
 									{initialCaseStudies.map((caseStudy, index) => (
 										<ModernCaseStudyCard
@@ -258,13 +258,10 @@ export function InfiniteCaseStudyGrid({
 											columns={columns.desktop as any}
 											tabletColumns={columns.tablet as any}
 											mobileColumns={columns.mobile as any}
-											gap='64'
+											gap='4'
 											fillWidth
 											style={{
-												marginBottom:
-													index + columns.desktop < items.length
-														? '32px'
-														: '0px'
+												marginBottom: '16px'
 											}}>
 											{gridItems.map((gridItem, gridIndex) => (
 												<ModernCaseStudyCard

@@ -872,3 +872,63 @@ a[href*='/work/'] {
 		padding-bottom: 120px !important;
 	}
 }
+
+/* ============================================================================
+   FILTER MODAL CHECKBOX FIXES
+   ============================================================================ */
+
+/* Fix checkbox styling in filter modal to prevent semi-circle background overlaps */
+.checkbox-wrapper input[type='checkbox'] {
+	border-radius: 4px !important;
+	width: 18px !important;
+	height: 18px !important;
+	border: 1px solid var(--neutral-alpha-medium) !important;
+	background: transparent !important;
+	overflow: hidden !important;
+	box-sizing: border-box !important;
+	position: relative !important;
+}
+
+.checkbox-wrapper input[type='checkbox']:checked {
+	background: var(--brand-solid-medium) !important;
+	border-color: var(--brand-solid-medium) !important;
+}
+
+.checkbox-wrapper {
+	display: flex !important;
+	align-items: center !important;
+	width: 100% !important;
+}
+
+/* Ensure clean checkbox rendering across all filter components */
+[data-dialog] input[type='checkbox'] {
+	appearance: none !important;
+	-webkit-appearance: none !important;
+	-moz-appearance: none !important;
+	border-radius: 4px !important;
+	width: 18px !important;
+	height: 18px !important;
+	border: 1px solid var(--neutral-alpha-medium) !important;
+	background: transparent !important;
+	overflow: hidden !important;
+	box-sizing: border-box !important;
+	position: relative !important;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+[data-dialog] input[type='checkbox']:checked {
+	background: var(--brand-solid-medium) !important;
+	border-color: var(--brand-solid-medium) !important;
+}
+
+[data-dialog] input[type='checkbox']:checked::after {
+	content: '✓' !important;
+	position: absolute !important;
+	top: 50% !important;
+	left: 50% !important;
+	transform: translate(-50%, -50%) !important;
+	color: white !important;
+	font-size: 12px !important;
+	font-weight: bold !important;
+}

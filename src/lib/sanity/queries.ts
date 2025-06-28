@@ -62,7 +62,7 @@ export const CASE_STUDY_BY_SLUG_QUERY = `
 
 export const AVAILABLE_FILTERS_QUERY = `
   {
-    "techStack": *[_type == "caseStudy"].techStack[] | unique | order(@),
-    "industry": *[_type == "caseStudy"].industry[] | unique | order(@)
+    "techStack": array::unique(*[_type == "caseStudy"].techStack[]) | order(@),
+    "industry": array::unique(*[_type == "caseStudy"].industry[]) | order(@)
   }
 `;

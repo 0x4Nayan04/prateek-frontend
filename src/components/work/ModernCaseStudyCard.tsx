@@ -207,48 +207,56 @@ export function ModernCaseStudyCard({
 								alignItems: 'flex-start'
 							}}>
 							{/* Tech Stack Tags with Brand Colors */}
-							{caseStudy.techStack?.slice(0, 3).map((tech) => (
-								<Tag
-									key={tech}
-									size='s'
-									variant='neutral'
-									style={{
-										fontSize: '0.65rem',
-										fontWeight: '600',
-										padding: '4px 10px',
-										borderRadius: '10px',
-										backgroundColor: 'var(--brand-alpha-weak)',
-										border: '1px solid var(--brand-alpha-medium)',
-										color: 'var(--brand-on-background-strong)',
-										transition: 'all 0.15s ease-in-out',
-										boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)'
-									}}>
-									{tech}
-								</Tag>
-							))}
+							{caseStudy.techStack
+								?.filter((t) => t && t.trim().length > 0)
+								.slice(0, 3)
+								.map((tech) => (
+									<Tag
+										key={tech}
+										size='s'
+										variant='neutral'
+										style={{
+											fontSize: '0.65rem',
+											fontWeight: '600',
+											padding: '4px 10px',
+											borderRadius: '10px',
+											backgroundColor: 'var(--brand-alpha-weak)',
+											border: '1px solid var(--brand-alpha-medium)',
+											color: 'var(--brand-on-background-strong)',
+											transition: 'all 0.15s ease-in-out',
+											boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)'
+										}}>
+										{tech}
+									</Tag>
+								))}
 							{/* Industry Tags with Accent Colors */}
-							{caseStudy.industry?.slice(0, 2).map((industry) => (
-								<Tag
-									key={industry}
-									size='s'
-									variant='accent'
-									style={{
-										fontSize: '0.65rem',
-										fontWeight: '600',
-										padding: '4px 10px',
-										borderRadius: '10px',
-										backgroundColor: 'var(--accent-alpha-weak)',
-										border: '1px solid var(--accent-alpha-medium)',
-										color: 'var(--accent-on-background-strong)',
-										transition: 'all 0.15s ease-in-out',
-										boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)'
-									}}>
-									{industry}
-								</Tag>
-							))}
+							{caseStudy.industry
+								?.filter((i) => i && i.trim().length > 0)
+								.slice(0, 2)
+								.map((industry) => (
+									<Tag
+										key={industry}
+										size='s'
+										variant='accent'
+										style={{
+											fontSize: '0.65rem',
+											fontWeight: '600',
+											padding: '4px 10px',
+											borderRadius: '10px',
+											backgroundColor: 'var(--accent-alpha-weak)',
+											border: '1px solid var(--accent-alpha-medium)',
+											color: 'var(--accent-on-background-strong)',
+											transition: 'all 0.15s ease-in-out',
+											boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)'
+										}}>
+										{industry}
+									</Tag>
+								))}
 							{/* Overflow indicator with neutral styling */}
-							{(caseStudy.techStack?.length || 0) +
-								(caseStudy.industry?.length || 0) >
+							{(caseStudy.techStack?.filter((t) => t && t.trim().length > 0)
+								.length || 0) +
+								(caseStudy.industry?.filter((i) => i && i.trim().length > 0)
+									.length || 0) >
 								5 && (
 								<Tag
 									size='s'
@@ -265,8 +273,10 @@ export function ModernCaseStudyCard({
 										transition: 'all 0.15s ease-in-out'
 									}}>
 									+
-									{(caseStudy.techStack?.length || 0) +
-										(caseStudy.industry?.length || 0) -
+									{(caseStudy.techStack?.filter((t) => t && t.trim().length > 0)
+										.length || 0) +
+										(caseStudy.industry?.filter((i) => i && i.trim().length > 0)
+											.length || 0) -
 										5}
 								</Tag>
 							)}

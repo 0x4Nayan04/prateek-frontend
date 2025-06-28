@@ -13,6 +13,7 @@ import {
 	SpacingToken
 } from '@once-ui-system/core';
 import { Footer, Header, Providers, ScrollToTop } from '@/components';
+import { StagewiseToolbar } from '@/components/StagewiseToolbar';
 import { baseURL, effects, fonts, style, dataStyle, home } from '@/resources';
 
 export const metadata: Metadata = {
@@ -152,6 +153,7 @@ export default async function RootLayout({
 				/>
 			</head>
 			<Providers>
+				<StagewiseToolbar />
 				<Column
 					as='body'
 					className='body-wrapper'

@@ -1,7 +1,8 @@
 import {
 	getFeaturedCaseStudies,
 	getAllCaseStudies,
-	getCaseStudiesPaginated
+	getCaseStudiesPaginated,
+	getAvailableFilters
 } from '@/lib/utils/content';
 import { ModernProjectsClientWrapper } from './ModernProjectsClientWrapper';
 import { InfiniteCaseStudyGrid } from './InfiniteCaseStudyGrid';
@@ -12,6 +13,7 @@ interface ModernProjectsProps {
 	maxItems?: number;
 	columns?: '1' | '2' | '3';
 	useInfiniteScroll?: boolean;
+	enableFilters?: boolean;
 }
 
 export async function ModernProjects({
@@ -19,7 +21,8 @@ export async function ModernProjects({
 	description,
 	maxItems,
 	columns = '2',
-	useInfiniteScroll = false
+	useInfiniteScroll = false,
+	enableFilters = false
 }: ModernProjectsProps) {
 	try {
 		// For infinite scroll, get initial batch
@@ -46,6 +49,11 @@ export async function ModernProjects({
 			? await getFeaturedCaseStudies(maxItems)
 			: await getAllCaseStudies();
 
+		// Get available filters if filtering is enabled
+		const availableFilters = enableFilters
+			? await getAvailableFilters()
+			: { techStack: [], industry: [] };
+
 		return (
 			<ModernProjectsClientWrapper
 				caseStudies={caseStudies}
@@ -53,6 +61,8 @@ export async function ModernProjects({
 				description={description}
 				columns={columns}
 				maxItems={maxItems}
+				enableFilters={enableFilters}
+				availableFilters={availableFilters}
 			/>
 		);
 	} catch (error) {
@@ -83,6 +93,8 @@ export async function ModernProjects({
 				description={description}
 				columns={columns}
 				maxItems={maxItems}
+				enableFilters={enableFilters}
+				availableFilters={{ techStack: [], industry: [] }}
 			/>
 		);
 	}

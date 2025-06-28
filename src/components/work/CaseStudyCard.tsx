@@ -136,50 +136,60 @@ export function CaseStudyCard({
 							{/* Tags */}
 							<Column gap='8'>
 								{/* Tech Stack Tags */}
-								{caseStudy.techStack.length > 0 && (
-									<Row
-										gap='4'
-										wrap>
-										{caseStudy.techStack.slice(0, 3).map((tech) => (
-											<Tag
-												key={tech}
-												size='s'
-												variant='neutral'>
-												{tech}
-											</Tag>
-										))}
-										{caseStudy.techStack.length > 3 && (
-											<Tag
-												size='s'
-												variant='neutral'>
-												+{caseStudy.techStack.length - 3}
-											</Tag>
-										)}
-									</Row>
-								)}
+								{(() => {
+									const techStackLength = caseStudy.techStack?.length ?? 0;
+									return (
+										techStackLength > 0 && (
+											<Row
+												gap='4'
+												wrap>
+												{caseStudy.techStack?.slice(0, 3).map((tech) => (
+													<Tag
+														key={tech}
+														size='s'
+														variant='neutral'>
+														{tech}
+													</Tag>
+												))}
+												{techStackLength > 3 && (
+													<Tag
+														size='s'
+														variant='neutral'>
+														+{techStackLength - 3}
+													</Tag>
+												)}
+											</Row>
+										)
+									);
+								})()}
 
 								{/* Industry Tags */}
-								{caseStudy.industry.length > 0 && (
-									<Row
-										gap='4'
-										wrap>
-										{caseStudy.industry.slice(0, 2).map((industry) => (
-											<Tag
-												key={industry}
-												size='s'
-												variant='brand'>
-												{industry}
-											</Tag>
-										))}
-										{caseStudy.industry.length > 2 && (
-											<Tag
-												size='s'
-												variant='brand'>
-												+{caseStudy.industry.length - 2}
-											</Tag>
-										)}
-									</Row>
-								)}
+								{(() => {
+									const industryLength = caseStudy.industry?.length ?? 0;
+									return (
+										industryLength > 0 && (
+											<Row
+												gap='4'
+												wrap>
+												{caseStudy.industry?.slice(0, 2).map((industry) => (
+													<Tag
+														key={industry}
+														size='s'
+														variant='brand'>
+														{industry}
+													</Tag>
+												))}
+												{industryLength > 2 && (
+													<Tag
+														size='s'
+														variant='brand'>
+														+{industryLength - 2}
+													</Tag>
+												)}
+											</Row>
+										)
+									);
+								})()}
 							</Column>
 						</Column>
 					</Column>

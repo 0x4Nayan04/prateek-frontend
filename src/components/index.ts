@@ -1,33 +1,27 @@
-export { ProjectCard } from '@/components/ProjectCard';
+// Core Components
+export { AutoCarousel } from './AutoCarousel';
+export { Footer } from './Footer';
+export { Header } from './Header';
+export { HeadingLink } from './HeadingLink';
+export { PdfViewer } from './PdfViewer';
+export { PortableText } from './PortableText';
+export { ProjectCard } from './ProjectCard';
+export { Providers } from './Providers';
+export { ScrollToHash } from './ScrollToHash';
+export { ScrollToTop } from './ScrollToTop';
 
-export { Providers } from '@/components/Providers';
-export { ScrollToHash } from '@/components/ScrollToHash';
-export { ScrollToTop } from '@/components/ScrollToTop';
+// Work Components
+export { CaseStudyCard } from './work/CaseStudyCard';
+export { CaseStudyGrid } from './work/CaseStudyGrid';
+export { ModernCaseStudyCard } from './work/ModernCaseStudyCard';
+export { ModernCaseStudyGrid } from './work/ModernCaseStudyGrid';
+export { ModernProjects } from './work/ModernProjects';
+export { FilteredCaseStudyGrid } from './work/FilteredCaseStudyGrid';
 
-// Content Components
-export { PortableText } from '@/components/PortableText';
-export { AutoCarousel } from '@/components/AutoCarousel';
-
-// Enhanced Case Study Components
-export { CaseStudyCard } from '@/components/work/CaseStudyCard';
-export { CaseStudyGrid } from '@/components/work/CaseStudyGrid';
-export { Projects } from '@/components/work/Projects';
-export { ProjectsClient } from '@/components/work/ProjectsClient';
-
-// Modern Case Study Components (Inspired by provided UI)
-export { ModernCaseStudyCard } from '@/components/work/ModernCaseStudyCard';
-export { ModernCaseStudyGrid } from '@/components/work/ModernCaseStudyGrid';
-export { InfiniteCaseStudyGrid } from '@/components/work/InfiniteCaseStudyGrid';
-export { default as PaginationNav } from '@/components/work/PaginationNav';
-export { ModernProjects } from '@/components/work/ModernProjects';
-export { ModernProjectsClient } from '@/components/work/ModernProjectsClient';
-export { ModernProjectsClientWrapper } from '@/components/work/ModernProjectsClientWrapper';
+// Filter System
+export { FilterProvider, useFilters } from '../contexts/FilterContext';
+export { FilterSystem } from './work/filters';
 
 // Sanity Components
-export { SanityImage } from '@/components/sanity/SanityImage';
-export { AdaptiveImage } from '@/components/sanity/AdaptiveImage';
-
-// Layout Components
-export { Header } from '@/components/Header';
-export { Footer } from '@/components/Footer';
-export { HeadingLink } from '@/components/HeadingLink';
+export { SanityImage } from './sanity/SanityImage';
+export { AdaptiveImage } from './sanity/AdaptiveImage';

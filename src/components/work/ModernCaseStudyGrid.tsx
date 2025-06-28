@@ -109,7 +109,7 @@ export function ModernCaseStudyGrid({
 									columns={columns.desktop as any}
 									tabletColumns={columns.tablet as any}
 									mobileColumns={1}
-									gap='64'
+									gap='4'
 									fillWidth>
 									{displayedCaseStudies.map((caseStudy, index) => (
 										<ModernCaseStudyCard

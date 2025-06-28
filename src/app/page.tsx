@@ -187,12 +187,34 @@ export default function Home() {
 					</RevealFx>
 				</Column>
 
-				<ModernProjects
-					title=''
-					description=''
-					maxItems={6}
-					columns='2'
-				/>
+				{/* Wrapper to add vertical breathing room below heading */}
+				<Column
+					fillWidth
+					paddingTop='32'
+					gap='24'
+					horizontal='center'>
+					<ModernProjects
+						title=''
+						maxItems={6}
+						columns='2'
+						enableFilters={true}
+					/>
+
+					{/* Show more case studies button */}
+					<RevealFx
+						translateY={6}
+						delay={0.08}
+						horizontal='center'>
+						<Button
+							href='/work'
+							id='home-show-more-case-studies'
+							variant='primary'
+							size='l'
+							arrowIcon>
+							Show more case studies
+						</Button>
+					</RevealFx>
+				</Column>
 			</Column>
 
 			{/* Separator: Work to About */}
