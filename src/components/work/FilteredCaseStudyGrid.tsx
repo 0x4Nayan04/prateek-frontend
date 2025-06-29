@@ -48,7 +48,7 @@ export function FilteredCaseStudyGrid({
 			fillWidth
 			gap='s'
 			horizontal='center'
-			paddingY='s'>
+			paddingY='1'>
 			{/* Title */}
 			{title && (
 				<Heading
@@ -74,7 +74,7 @@ export function FilteredCaseStudyGrid({
 				gap='l'
 				horizontal='center'
 				maxWidth='xl'
-				paddingTop='s'>
+				paddingTop='0'>
 				{/* Grid */}
 				{hasResults ? (
 					<Column

@@ -39,7 +39,7 @@ export default function Work() {
 			horizontal='center'
 			paddingY='16'
 			paddingX='l'
-			gap='8'>
+			gap='12'>
 			<ModernProjects
 				title='Case Studies'
 				useInfiniteScroll={false}
