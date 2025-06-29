@@ -167,45 +167,48 @@ export function ModernCaseStudyCard({
 						horizontal='start'
 						vertical='start'
 						style={{
-							justifyContent: 'space-between',
-							minHeight: '180px',
 							display: 'flex',
-							flexDirection: 'column'
+							flexDirection: 'column',
+							justifyContent: 'space-between'
 						}}>
-						{/* Title */}
-						<Text
-							variant='heading-strong-l'
-							onBackground='neutral-strong'
-							style={{
-								lineHeight: '1.3',
-								fontSize: 'clamp(1.125rem, 3.5vw, 1.375rem)',
-								fontWeight: '700',
-								letterSpacing: '-0.01em',
-								marginBottom: '8px'
-							}}>
-							{caseStudy.title}
-						</Text>
+						{/* Top section: Title and Summary */}
+						<Column>
+							{/* Title */}
+							<Text
+								variant='heading-strong-l'
+								onBackground='neutral-strong'
+								style={{
+									lineHeight: '1.3',
+									fontSize: 'clamp(1.125rem, 3.5vw, 1.375rem)',
+									fontWeight: '700',
+									letterSpacing: '-0.01em',
+									marginBottom: '8px'
+								}}>
+								{caseStudy.title}
+							</Text>
 
-						{/* Summary */}
-						<Text
-							variant='body-default-m'
-							onBackground='neutral-weak'
-							className={styles.summaryText}
-							style={{
-								lineHeight: '1.6',
-								fontSize: 'clamp(0.875rem, 2.8vw, 0.95rem)',
-								marginBottom: '12px'
-							}}>
-							{caseStudy.summary}
-						</Text>
+							{/* Summary */}
+							<Text
+								variant='body-default-m'
+								onBackground='neutral-weak'
+								className={styles.summaryText}
+								style={{
+									lineHeight: '1.6',
+									fontSize: 'clamp(0.875rem, 2.8vw, 0.95rem)',
+									marginBottom: '12px',
+									flexGrow: 1
+								}}>
+								{caseStudy.summary}
+							</Text>
+						</Column>
 
 						{/* Enhanced Tags Row */}
 						<Row
 							gap='8'
 							wrap
 							style={{
-								marginTop: 'auto',
-								alignItems: 'flex-start'
+								alignItems: 'flex-start',
+								marginTop: 'auto'
 							}}>
 							{/* Tech Stack Tags with Brand Colors */}
 							{caseStudy.techStack
