@@ -190,16 +190,11 @@ export function ModernCaseStudyCard({
 						<Text
 							variant='body-default-m'
 							onBackground='neutral-weak'
+							className={styles.summaryText}
 							style={{
 								lineHeight: '1.6',
 								fontSize: 'clamp(0.875rem, 2.8vw, 0.95rem)',
-								display: '-webkit-box',
-								WebkitLineClamp: 3,
-								WebkitBoxOrient: 'vertical',
-								overflow: 'hidden',
-								textOverflow: 'ellipsis',
-								marginBottom: '12px',
-								flex: 1
+								marginBottom: '12px'
 							}}>
 							{caseStudy.summary}
 						</Text>
