@@ -360,15 +360,10 @@ div,
 	height: 100% !important;
 	display: flex !important;
 	flex-direction: column !important;
-
-	/* Consistent spacing */
 	box-sizing: border-box !important;
-
-	/* Remove any inherited max-width constraints */
 	max-width: none !important;
-
-	/* Smooth transitions for all interactive states */
-	transition: all 0.15s ease-in-out !important;
+	transition: all 0.2s ease-out !important;
+	min-height: 320px !important;
 }
 
 /* Prevent carousel from interfering with card navigation */
@@ -397,6 +392,7 @@ a[href*='/work/']:focus-visible {
 	display: grid !important;
 	grid-template-columns: repeat(2, 1fr) !important;
 	align-items: stretch !important;
+	gap: clamp(12px, 2.5vw, 16px) !important;
 }
 
 [data-columns='1'] {
@@ -588,15 +584,15 @@ body[class*='display-flex'] {
 	/* Grid container mobile responsiveness */
 	[data-columns='2'] {
 		grid-template-columns: 1fr !important;
-		gap: var(--responsive-space-m) !important;
+		gap: clamp(12px, 3vw, 16px) !important;
 	}
 
 	/* Tags on mobile - better line wrapping */
 	[data-tag] {
-		font-size: 0.75rem !important;
-		padding: 4px 8px !important;
+		font-size: 0.65rem !important;
+		padding: 3px 6px !important;
 		white-space: nowrap !important;
-		max-width: 120px !important;
+		max-width: 100px !important;
 		overflow: hidden !important;
 		text-overflow: ellipsis !important;
 	}
@@ -737,6 +733,7 @@ a[href*='/work/'] {
 	display: grid !important;
 	grid-template-columns: repeat(2, 1fr) !important;
 	align-items: stretch !important;
+	gap: clamp(12px, 2.5vw, 16px) !important;
 }
 
 [data-columns='1'] {
@@ -754,10 +751,16 @@ a[href*='/work/'] {
 	[data-columns='2'],
 	[data-columns='3'] {
 		grid-template-columns: 1fr !important;
-		gap: clamp(16px, 4vw, 24px) !important;
+		gap: clamp(14px, 4vw, 20px) !important;
 		width: 100% !important;
 		margin: 0 !important;
 		padding: 0 !important;
+	}
+
+	/* Modern case study cards mobile optimization */
+	.caseStudyCard,
+	[data-case-study-card] {
+		min-height: 280px !important;
 	}
 
 	/* Ensure grid containers use full width */
@@ -808,10 +811,10 @@ a[href*='/work/'] {
 
 	/* Tags on mobile - better line wrapping */
 	[data-tag] {
-		font-size: 0.65rem !important;
-		padding: 3px 8px !important;
+		font-size: 0.6rem !important;
+		padding: 2px 6px !important;
 		white-space: nowrap !important;
-		max-width: 100px !important;
+		max-width: 90px !important;
 		overflow: hidden !important;
 		text-overflow: ellipsis !important;
 	}

@@ -113,7 +113,9 @@ export function InfiniteCaseStudyGrid({
 		return (
 			<Column
 				fillWidth
-				gap='16'>
+				gap='xl'
+				horizontal='center'
+				paddingY='xl'>
 				{/* Header */}
 				{title && (
 					<RevealFx
@@ -145,30 +147,45 @@ export function InfiniteCaseStudyGrid({
 					horizontal='center'>
 					<Column
 						fillWidth
-						paddingX='l'>
+						maxWidth='xl'
+						horizontal='center'>
 						{/* Initial static grid for SSR */}
 						<Column
 							fillWidth
-							paddingX='l'
+							paddingX='m'
 							style={{
-								paddingLeft: 'clamp(8px, 2vw, 48px)',
-								paddingRight: 'clamp(8px, 2vw, 48px)'
+								paddingLeft: 'clamp(16px, 3vw, 32px)',
+								paddingRight: 'clamp(16px, 3vw, 32px)'
 							}}
-							gap='s'>
+							gap='xl'>
 							{initialCaseStudies.length > 0 ? (
 								<Grid
 									columns={columns.desktop as any}
 									tabletColumns={columns.tablet as any}
 									mobileColumns={columns.mobile as any}
-									gap='4'
-									fillWidth>
+									gap='12'
+									fillWidth
+									style={{
+										justifyItems: 'center',
+										alignItems: 'stretch',
+										gridAutoRows: '1fr'
+									}}>
 									{initialCaseStudies.map((caseStudy, index) => (
-										<ModernCaseStudyCard
+										<div
 											key={caseStudy._id}
-											caseStudy={caseStudy}
-											index={index}
-											priority={index < 4}
-										/>
+											style={{
+												width: '100%',
+												maxWidth: '500px',
+												display: 'flex',
+												flexDirection: 'column',
+												height: '100%'
+											}}>
+											<ModernCaseStudyCard
+												caseStudy={caseStudy}
+												index={index}
+												priority={index < 4}
+											/>
+										</div>
 									))}
 								</Grid>
 							) : (
@@ -201,7 +218,9 @@ export function InfiniteCaseStudyGrid({
 	return (
 		<Column
 			fillWidth
-			gap='16'>
+			gap='xl'
+			horizontal='center'
+			paddingY='xl'>
 			{/* Header */}
 			{title && (
 				<RevealFx
@@ -233,16 +252,17 @@ export function InfiniteCaseStudyGrid({
 				horizontal='center'>
 				<Column
 					fillWidth
-					paddingX='l'>
+					maxWidth='xl'
+					horizontal='center'>
 					{/* Infinite Scroll Grid */}
 					<Column
 						fillWidth
-						paddingX='l'
+						paddingX='m'
 						style={{
-							paddingLeft: 'clamp(8px, 2vw, 48px)',
-							paddingRight: 'clamp(8px, 2vw, 48px)'
+							paddingLeft: 'clamp(16px, 3vw, 32px)',
+							paddingRight: 'clamp(16px, 3vw, 32px)'
 						}}
-						gap='s'>
+						gap='xl'>
 						<InfiniteScroll
 							items={items}
 							loadMore={loadMore}
@@ -258,18 +278,30 @@ export function InfiniteCaseStudyGrid({
 											columns={columns.desktop as any}
 											tabletColumns={columns.tablet as any}
 											mobileColumns={columns.mobile as any}
-											gap='4'
+											gap='12'
 											fillWidth
 											style={{
-												marginBottom: '16px'
+												marginBottom: '12px',
+												justifyItems: 'center',
+												alignItems: 'stretch',
+												gridAutoRows: '1fr'
 											}}>
 											{gridItems.map((gridItem, gridIndex) => (
-												<ModernCaseStudyCard
+												<div
 													key={gridItem._id}
-													caseStudy={gridItem}
-													index={index + gridIndex}
-													priority={index + gridIndex < 4}
-												/>
+													style={{
+														width: '100%',
+														maxWidth: '500px',
+														display: 'flex',
+														flexDirection: 'column',
+														height: '100%'
+													}}>
+													<ModernCaseStudyCard
+														caseStudy={gridItem}
+														index={index + gridIndex}
+														priority={index + gridIndex < 4}
+													/>
+												</div>
 											))}
 										</Grid>
 									);

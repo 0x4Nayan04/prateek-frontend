@@ -81,20 +81,22 @@ export function ModernCaseStudyCard({
 						display: 'flex',
 						flexDirection: 'column',
 						cursor: 'pointer',
-						transition: 'all 0.15s ease-in-out'
+						transition: 'all 0.15s ease-in-out',
+						maxWidth: '100%',
+						margin: '0 auto'
 					}}
 					className={styles.caseStudyCard}>
-					{/* Carousel Container with Breathing Space */}
+					{/* Carousel Container with improved spacing */}
 					{carouselItems.length > 0 && (
 						<div
 							style={{
-								padding: '6px', // Reduced breathing space around carousel
-								background: 'rgb(250, 250, 250)', // Light surface background
-								borderRadius: '12px 12px 0 0' // Clean top corners only
+								padding: '8px',
+								background: 'rgb(250, 250, 250)',
+								borderRadius: '12px 12px 0 0'
 							}}>
 							<div
 								style={{
-									borderRadius: '8px', // Nested radius for carousel container
+									borderRadius: '8px',
 									overflow: 'hidden',
 									border: '1px solid rgb(230, 230, 230)',
 									boxShadow:
@@ -105,12 +107,12 @@ export function ModernCaseStudyCard({
 									onClick={handleCarouselClick}>
 									<Carousel
 										items={carouselItems}
-										aspectRatio='16 / 10'
+										aspectRatio='16 / 9'
 										indicator={carouselItems.length > 1 ? 'line' : undefined}
 										controls={carouselItems.length > 1}
 										sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
 										style={{
-											borderRadius: '7px' // Perfect nesting
+											borderRadius: '7px'
 										}}
 									/>
 								</div>
@@ -122,7 +124,7 @@ export function ModernCaseStudyCard({
 					{carouselItems.length === 0 && (
 						<div
 							style={{
-								padding: '6px',
+								padding: '8px',
 								background: 'rgb(250, 250, 250)',
 								borderRadius: '12px 12px 0 0'
 							}}>
@@ -133,12 +135,13 @@ export function ModernCaseStudyCard({
 									border: '1px solid rgb(230, 230, 230)',
 									boxShadow:
 										'0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
-									minHeight: '180px',
+									minHeight: '200px',
 									display: 'flex',
 									alignItems: 'center',
 									justifyContent: 'center',
 									color: '#666',
-									background: 'rgb(248, 248, 248)'
+									background: 'rgb(248, 248, 248)',
+									aspectRatio: '16 / 9'
 								}}>
 								No images available
 							</div>
@@ -155,27 +158,30 @@ export function ModernCaseStudyCard({
 						}}
 					/>
 
-					{/* Content Section */}
+					{/* Content Section with improved spacing */}
 					<Column
 						fillWidth
 						flex={1}
-						padding='s'
-						gap='xs'
+						padding='m'
+						gap='s'
 						horizontal='start'
 						vertical='start'
 						style={{
-							justifyContent: 'space-between'
+							justifyContent: 'space-between',
+							minHeight: '180px',
+							display: 'flex',
+							flexDirection: 'column'
 						}}>
 						{/* Title */}
 						<Text
 							variant='heading-strong-l'
 							onBackground='neutral-strong'
 							style={{
-								lineHeight: '1.2',
+								lineHeight: '1.3',
 								fontSize: 'clamp(1.125rem, 3.5vw, 1.375rem)',
 								fontWeight: '700',
 								letterSpacing: '-0.01em',
-								marginBottom: '6px'
+								marginBottom: '8px'
 							}}>
 							{caseStudy.title}
 						</Text>
@@ -185,23 +191,23 @@ export function ModernCaseStudyCard({
 							variant='body-default-m'
 							onBackground='neutral-weak'
 							style={{
-								lineHeight: '1.5',
-								fontSize: 'clamp(0.8rem, 2.8vw, 0.9rem)',
+								lineHeight: '1.6',
+								fontSize: 'clamp(0.875rem, 2.8vw, 0.95rem)',
 								display: '-webkit-box',
-								WebkitLineClamp: 2,
+								WebkitLineClamp: 3,
 								WebkitBoxOrient: 'vertical',
 								overflow: 'hidden',
 								textOverflow: 'ellipsis',
-								marginBottom: '10px'
+								marginBottom: '12px',
+								flex: 1
 							}}>
 							{caseStudy.summary}
 						</Text>
 
 						{/* Enhanced Tags Row */}
 						<Row
-							gap='xs'
+							gap='8'
 							wrap
-							paddingTop='xs'
 							style={{
 								marginTop: 'auto',
 								alignItems: 'flex-start'
@@ -216,10 +222,10 @@ export function ModernCaseStudyCard({
 										size='s'
 										variant='neutral'
 										style={{
-											fontSize: '0.65rem',
+											fontSize: '0.7rem',
 											fontWeight: '600',
-											padding: '4px 10px',
-											borderRadius: '10px',
+											padding: '6px 12px',
+											borderRadius: '12px',
 											backgroundColor: 'var(--brand-alpha-weak)',
 											border: '1px solid var(--brand-alpha-medium)',
 											color: 'var(--brand-on-background-strong)',
@@ -239,10 +245,10 @@ export function ModernCaseStudyCard({
 										size='s'
 										variant='accent'
 										style={{
-											fontSize: '0.65rem',
+											fontSize: '0.7rem',
 											fontWeight: '600',
-											padding: '4px 10px',
-											borderRadius: '10px',
+											padding: '6px 12px',
+											borderRadius: '12px',
 											backgroundColor: 'var(--accent-alpha-weak)',
 											border: '1px solid var(--accent-alpha-medium)',
 											color: 'var(--accent-on-background-strong)',
@@ -262,10 +268,10 @@ export function ModernCaseStudyCard({
 									size='s'
 									variant='neutral'
 									style={{
-										fontSize: '0.65rem',
+										fontSize: '0.7rem',
 										fontWeight: '500',
-										padding: '4px 10px',
-										borderRadius: '10px',
+										padding: '6px 12px',
+										borderRadius: '12px',
 										backgroundColor: 'var(--neutral-alpha-weak)',
 										border: '1px solid var(--neutral-alpha-medium)',
 										color: 'var(--neutral-on-background-medium)',

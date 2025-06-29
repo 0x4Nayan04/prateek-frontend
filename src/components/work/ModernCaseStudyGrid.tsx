@@ -90,34 +90,50 @@ export function ModernCaseStudyGrid({
 			{/* Main Content */}
 			<Row
 				fillWidth
-				horizontal='center'>
+				horizontal='center'
+				paddingY='xl'>
 				<Column
 					fillWidth
-					paddingX='l'>
+					maxWidth='xl'
+					horizontal='center'>
 					{/* Full Width Grid */}
 					<Column
 						fillWidth
-						paddingX='l'
+						paddingX='m'
 						style={{
-							paddingLeft: 'clamp(8px, 2vw, 48px)',
-							paddingRight: 'clamp(8px, 2vw, 48px)'
+							paddingLeft: 'clamp(16px, 3vw, 32px)',
+							paddingRight: 'clamp(16px, 3vw, 32px)'
 						}}
-						gap='s'>
+						gap='xl'>
 						{hasResults ? (
 							<>
 								<Grid
 									columns={columns.desktop as any}
 									tabletColumns={columns.tablet as any}
 									mobileColumns={1}
-									gap='4'
-									fillWidth>
+									gap='12'
+									fillWidth
+									style={{
+										justifyItems: 'center',
+										alignItems: 'stretch',
+										gridAutoRows: '1fr'
+									}}>
 									{displayedCaseStudies.map((caseStudy, index) => (
-										<ModernCaseStudyCard
+										<div
 											key={caseStudy._id}
-											caseStudy={caseStudy}
-											index={index}
-											priority={index < 4}
-										/>
+											style={{
+												width: '100%',
+												maxWidth: '500px',
+												display: 'flex',
+												flexDirection: 'column',
+												height: '100%'
+											}}>
+											<ModernCaseStudyCard
+												caseStudy={caseStudy}
+												index={index}
+												priority={index < 4}
+											/>
+										</div>
 									))}
 								</Grid>
 

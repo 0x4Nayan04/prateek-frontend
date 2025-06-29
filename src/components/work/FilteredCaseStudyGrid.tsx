@@ -46,8 +46,9 @@ export function FilteredCaseStudyGrid({
 	return (
 		<Column
 			fillWidth
-			gap='24'
-			horizontal='center'>
+			gap='xl'
+			horizontal='center'
+			paddingY='xl'>
 			{/* Title */}
 			{title && (
 				<Heading
@@ -62,34 +63,40 @@ export function FilteredCaseStudyGrid({
 			<Column
 				fillWidth
 				horizontal='center'
-				gap='16'>
+				gap='l'>
 				<FilterSystem availableFilters={availableFilters} />
 			</Column>
 
 			{/* Results */}
 			<Column
 				fillWidth
-				gap='24'
-				horizontal='center'>
+				gap='xl'
+				horizontal='center'
+				maxWidth='xl'>
 				{/* Grid */}
 				{hasResults ? (
 					<Grid
 						columns='2'
 						tabletColumns='2'
 						mobileColumns='1'
-						gap='4'
+						gap='12'
 						fillWidth
-						maxWidth='l'
 						style={{
-							justifyItems: 'center'
+							justifyItems: 'center',
+							alignItems: 'stretch',
+							paddingLeft: 'clamp(16px, 3vw, 32px)',
+							paddingRight: 'clamp(16px, 3vw, 32px)',
+							gridAutoRows: '1fr'
 						}}>
 						{filteredCaseStudies.map((caseStudy, index) => (
 							<div
 								key={caseStudy._id}
 								style={{
-									maxWidth: '400px',
 									width: '100%',
-									marginBottom: '16px'
+									maxWidth: '500px',
+									display: 'flex',
+									flexDirection: 'column',
+									height: '100%'
 								}}>
 								<ModernCaseStudyCard
 									caseStudy={caseStudy}

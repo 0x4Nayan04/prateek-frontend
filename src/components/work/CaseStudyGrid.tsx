@@ -73,14 +73,35 @@ export function CaseStudyGrid({
 							columns='2'
 							tabletColumns='2'
 							mobileColumns='1'
-							gap='4'
-							fillWidth>
+							fillWidth
+							gap='16'
+							style={{
+								display: 'grid',
+								gridTemplateRows: 'repeat(auto-fit, minmax(480px, 1fr))',
+								justifyItems: 'center',
+								alignItems: 'stretch',
+								gap: '16px',
+								gridAutoFlow: 'row',
+								alignContent: 'start',
+								paddingLeft: 'clamp(16px, 3vw, 32px)',
+								paddingRight: 'clamp(16px, 3vw, 32px)'
+							}}>
 							{displayedCaseStudies.map((caseStudy, index) => (
-								<CaseStudyCard
+								<div
 									key={caseStudy._id}
+									style={{
+										width: '100%',
+										maxWidth: '500px',
+										height: '480px',
+										display: 'flex',
+										flexDirection: 'column'
+									}}>
+									<CaseStudyCard
 									caseStudy={caseStudy}
 									index={index}
+										priority={index < 4}
 								/>
+								</div>
 							))}
 						</Grid>
 					</RevealFx>
