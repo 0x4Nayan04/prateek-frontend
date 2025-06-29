@@ -73,7 +73,7 @@ export function CaseStudyGrid({
 							columns='2'
 							tabletColumns='2'
 							mobileColumns='1'
-							gap='4'
+							gap='12'
 							fillWidth>
 							{displayedCaseStudies.map((caseStudy, index) => (
 								<CaseStudyCard

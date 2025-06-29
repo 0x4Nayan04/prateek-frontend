@@ -37,9 +37,9 @@ export default function Work() {
 		<Column
 			fillWidth
 			horizontal='center'
-			paddingY='32'
+			paddingY='0'
 			paddingX='l'
-			gap='0'>
+			gap='8'>
 			<ModernProjects
 				title='Case Studies'
 				useInfiniteScroll={false}
