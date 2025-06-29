@@ -46,9 +46,9 @@ export function FilteredCaseStudyGrid({
 	return (
 		<Column
 			fillWidth
-			gap='xl'
+			gap='s'
 			horizontal='center'
-			paddingY='xl'>
+			paddingY='s'>
 			{/* Title */}
 			{title && (
 				<Heading
@@ -63,54 +63,60 @@ export function FilteredCaseStudyGrid({
 			<Column
 				fillWidth
 				horizontal='center'
-				gap='l'>
+				gap='s'
+				paddingY='1'>
 				<FilterSystem availableFilters={availableFilters} />
 			</Column>
 
 			{/* Results */}
 			<Column
 				fillWidth
-				gap='xl'
+				gap='l'
 				horizontal='center'
-				maxWidth='xl'>
+				maxWidth='xl'
+				paddingTop='s'>
 				{/* Grid */}
 				{hasResults ? (
-					<Grid
-						columns='2'
-						tabletColumns='2'
-						mobileColumns='1'
-						gap='12'
+					<Column
 						fillWidth
-						style={{
-							justifyItems: 'center',
-							alignItems: 'stretch',
-							paddingLeft: 'clamp(16px, 3vw, 32px)',
-							paddingRight: 'clamp(16px, 3vw, 32px)',
-							gridAutoRows: '1fr'
-						}}>
-						{filteredCaseStudies.map((caseStudy, index) => (
-							<div
-								key={caseStudy._id}
-								style={{
-									width: '100%',
-									maxWidth: '500px',
-									display: 'flex',
-									flexDirection: 'column',
-									height: '100%'
-								}}>
-								<ModernCaseStudyCard
-									caseStudy={caseStudy}
-									index={index}
-								/>
-							</div>
-						))}
-					</Grid>
+						paddingTop='m'>
+						<Grid
+							columns='2'
+							tabletColumns='2'
+							mobileColumns='1'
+							gap='12'
+							fillWidth
+							style={{
+								justifyItems: 'center',
+								alignItems: 'stretch',
+								paddingLeft: 'clamp(16px, 3vw, 32px)',
+								paddingRight: 'clamp(16px, 3vw, 32px)',
+								gridAutoRows: '1fr'
+							}}>
+							{filteredCaseStudies.map((caseStudy, index) => (
+								<div
+									key={caseStudy._id}
+									style={{
+										width: '100%',
+										maxWidth: '500px',
+										display: 'flex',
+										flexDirection: 'column',
+										height: '100%'
+									}}>
+									<ModernCaseStudyCard
+										caseStudy={caseStudy}
+										index={index}
+									/>
+								</div>
+							))}
+						</Grid>
+					</Column>
 				) : (
 					<Column
-						gap='16'
+						gap='24'
 						horizontal='center'
+						paddingY='xl'
 						style={{
-							padding: '48px 24px',
 							textAlign: 'center'
 						}}>
 						<Text

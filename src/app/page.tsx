@@ -190,7 +190,7 @@ export default function Home() {
 				{/* Wrapper to add vertical breathing room below heading */}
 				<Column
 					fillWidth
-					paddingTop='32'
+					paddingTop='16'
 					gap='24'
 					horizontal='center'>
 					<ModernProjects
