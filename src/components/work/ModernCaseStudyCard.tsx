@@ -33,20 +33,38 @@ export function ModernCaseStudyCard({
 				? [caseStudy.thumbnail]
 				: [];
 
-	// Prepare carousel items from Sanity images
-	const carouselItems = displayImages.map((image, idx) => {
-		const imageUrl = urlFor(image)
-			.width(1400)
-			.height(1000)
-			.quality(100)
-			.format('webp')
-			.url();
+	// Prepare carousel items from Sanity images with better optimization
+	const carouselItems =
+		displayImages.length > 0
+			? displayImages.map((image, idx) => {
+					try {
+						const imageUrl = urlFor(image)
+							.width(800) // Reduced from 1400 for better performance
+							.height(500) // Adjusted to maintain 16:10 aspect ratio
+							.quality(85) // Reduced from 100 for better performance
+							.format('webp')
+							.fit('crop') // Ensure proper cropping
+							.crop('center') // Center crop for better composition
+							.url();
 
-		return {
-			slide: imageUrl,
-			alt: image.alt || `${caseStudy.title} - Image ${idx + 1}`
-		};
-	});
+						return {
+							slide: imageUrl,
+							alt: image.alt || `${caseStudy.title} - Image ${idx + 1}`
+						};
+					} catch (error) {
+						console.warn(
+							'Error generating image URL for',
+							caseStudy.title,
+							error
+						);
+						// Return placeholder data structure if URL generation fails
+						return {
+							slide: `/og-image.png`, // Fallback to a public image
+							alt: `${caseStudy.title} - Preview not available`
+						};
+					}
+				})
+			: []; // No fallback items if no images
 
 	// Handle carousel clicks to prevent navigation
 	const handleCarouselClick = (e: React.MouseEvent) => {
@@ -77,21 +95,24 @@ export function ModernCaseStudyCard({
 					style={{
 						overflow: 'hidden',
 						height: '100%',
-						minHeight: '520px', // Consistent minimum height
+						minHeight: '520px',
 						display: 'flex',
 						flexDirection: 'column',
 						cursor: 'pointer',
 						transition: 'all 0.15s ease-in-out'
 					}}
 					className={styles.caseStudyCard}>
-					{/* Image Section - Fixed aspect ratio with increased height */}
+					{/* Image Section - Improved responsive container */}
 					<div
 						style={{
-							flex: '0 0 auto', // Don't grow or shrink
-							height: '320px', // Optimized height for better proportions matching reference
-							padding: '6px', // Slightly more breathing space around image
+							flex: '0 0 auto',
+							width: '100%',
+							aspectRatio: '16 / 10', // Use aspect ratio instead of fixed height
+							padding: '8px',
 							background: 'rgb(250, 250, 250)',
-							borderRadius: '12px 12px 0 0'
+							borderRadius: '12px 12px 0 0',
+							minHeight: '200px', // Minimum height for mobile
+							maxHeight: '350px' // Maximum height for larger screens
 						}}>
 						{carouselItems.length > 0 ? (
 							<div
@@ -101,21 +122,27 @@ export function ModernCaseStudyCard({
 									border: '1px solid rgb(230, 230, 230)',
 									boxShadow:
 										'0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
-									height: '100%'
+									height: '100%',
+									width: '100%',
+									position: 'relative'
 								}}>
 								<div
 									data-carousel-control='true'
 									onClick={handleCarouselClick}
-									style={{ height: '100%' }}>
+									style={{
+										height: '100%',
+										width: '100%'
+									}}>
 									<Carousel
 										items={carouselItems}
 										aspectRatio='16 / 10'
 										indicator={carouselItems.length > 1 ? 'line' : undefined}
 										controls={carouselItems.length > 1}
-										sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+										sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px'
 										style={{
 											borderRadius: '7px',
-											height: '100%'
+											height: '100%',
+											width: '100%'
 										}}
 									/>
 								</div>
@@ -129,13 +156,25 @@ export function ModernCaseStudyCard({
 									boxShadow:
 										'0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
 									height: '100%',
+									width: '100%',
 									display: 'flex',
 									alignItems: 'center',
 									justifyContent: 'center',
 									color: '#666',
-									background: 'rgb(248, 248, 248)'
+									background: 'rgb(248, 248, 248)',
+									fontSize: '14px',
+									fontWeight: '500'
 								}}>
-								No images available
+								<div
+									style={{
+										textAlign: 'center',
+										padding: '20px'
+									}}>
+									<div style={{ marginBottom: '8px', fontSize: '24px' }}>
+										📷
+									</div>
+									<div>No preview available</div>
+								</div>
 							</div>
 						)}
 					</div>
@@ -150,32 +189,39 @@ export function ModernCaseStudyCard({
 						}}
 					/>
 
-					{/* Content Section - Optimized spacing to match reference */}
+					{/* Content Section - Improved responsive spacing */}
 					<Column
 						fillWidth
 						flex={1}
-						padding='s' // Balanced padding for proper spacing
-						gap='s' // Proper gap for readable spacing
+						padding='m'
+						gap='s'
 						horizontal='start'
 						vertical='start'
 						style={{
 							justifyContent: 'space-between',
-							minHeight: '200px' // Balanced content height with larger image
+							minHeight: '180px',
+							display: 'flex',
+							flexDirection: 'column'
 						}}>
 						{/* Title and Summary Container */}
 						<Column
 							fillWidth
-							gap='xs' // Balanced gap between title and summary
+							gap='xs'
 							style={{ flex: '1 1 auto' }}>
 							{/* Title */}
 							<Text
 								variant='heading-strong-l'
 								onBackground='neutral-strong'
 								style={{
-									lineHeight: '1.2',
+									lineHeight: '1.3',
 									fontSize: 'clamp(1.125rem, 3.5vw, 1.375rem)',
 									fontWeight: '700',
-									letterSpacing: '-0.01em'
+									letterSpacing: '-0.01em',
+									marginBottom: '8px',
+									display: '-webkit-box',
+									WebkitLineClamp: 2,
+									WebkitBoxOrient: 'vertical',
+									overflow: 'hidden'
 								}}>
 								{caseStudy.title}
 							</Text>
@@ -185,90 +231,102 @@ export function ModernCaseStudyCard({
 								variant='body-default-m'
 								onBackground='neutral-weak'
 								style={{
-									lineHeight: '1.5',
-									fontSize: 'clamp(0.8rem, 2.8vw, 0.9rem)',
+									lineHeight: '1.6',
+									fontSize: 'clamp(0.875rem, 2.8vw, 0.95rem)',
 									display: '-webkit-box',
-									WebkitLineClamp: 2, // Keep at 2 lines for tighter layout
+									WebkitLineClamp: 3,
 									WebkitBoxOrient: 'vertical',
 									overflow: 'hidden',
-									textOverflow: 'ellipsis'
+									textOverflow: 'ellipsis',
+									marginBottom: '12px',
+									flex: 1
 								}}>
 								{caseStudy.summary}
 							</Text>
 						</Column>
 
-						{/* Tags Row - Anchored to bottom */}
+						{/* Tags Row - Improved responsive layout */}
 						<Row
-							gap='xs' // Proper gap between tags
+							gap='8'
 							wrap
 							style={{
-								flex: '0 0 auto', // Don't grow or shrink
-								alignItems: 'flex-start',
-								marginTop: 'auto'
+								marginTop: 'auto',
+								alignItems: 'flex-start'
 							}}>
-							{/* Tech Stack Tags */}
-							{caseStudy.techStack?.slice(0, 3).map((tech) => (
-								<Tag
-									key={tech}
-									size='s'
-									variant='neutral'
-									style={{
-										fontSize: '0.7rem',
-										fontWeight: '600',
-										padding: '6px 12px',
-										borderRadius: '12px',
-										backgroundColor: 'var(--brand-alpha-weak)',
-										border: '1px solid var(--brand-alpha-medium)',
-										color: 'var(--brand-on-background-strong)',
-										transition: 'all 0.15s ease-in-out',
-										boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)'
-									}}>
-									{tech}
-								</Tag>
-							))}
-
-							{/* Industry Tags */}
-							{caseStudy.industry?.slice(0, 2).map((industry) => (
-								<Tag
-									key={industry}
-									size='s'
-									variant='accent'
-									style={{
-										fontSize: '0.7rem',
-										fontWeight: '600',
-										padding: '6px 12px',
-										borderRadius: '12px',
-										backgroundColor: 'var(--accent-alpha-weak)',
-										border: '1px solid var(--accent-alpha-medium)',
-										color: 'var(--accent-on-background-strong)',
-										transition: 'all 0.15s ease-in-out',
-										boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)'
-									}}>
-									{industry}
-								</Tag>
-							))}
-
-							{/* Overflow indicator */}
-							{(caseStudy.techStack?.length || 0) +
-								(caseStudy.industry?.length || 0) >
+							{/* Tech Stack Tags with Brand Colors */}
+							{caseStudy.techStack
+								?.filter((t) => t && t.trim().length > 0)
+								.slice(0, 3)
+								.map((tech) => (
+									<Tag
+										key={tech}
+										size='s'
+										variant='neutral'
+										style={{
+											fontSize: 'clamp(0.65rem, 1.8vw, 0.75rem)',
+											fontWeight: '600',
+											padding: '6px 10px',
+											borderRadius: '12px',
+											backgroundColor: 'var(--brand-alpha-weak)',
+											border: '1px solid var(--brand-alpha-medium)',
+											color: 'var(--brand-on-background-strong)',
+											transition: 'all 0.15s ease-in-out',
+											boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
+											whiteSpace: 'nowrap'
+										}}>
+										{tech}
+									</Tag>
+								))}
+							{/* Industry Tags with Accent Colors */}
+							{caseStudy.industry
+								?.filter((i) => i && i.trim().length > 0)
+								.slice(0, 2)
+								.map((industry) => (
+									<Tag
+										key={industry}
+										size='s'
+										variant='accent'
+										style={{
+											fontSize: 'clamp(0.65rem, 1.8vw, 0.75rem)',
+											fontWeight: '600',
+											padding: '6px 10px',
+											borderRadius: '12px',
+											backgroundColor: 'var(--accent-alpha-weak)',
+											border: '1px solid var(--accent-alpha-medium)',
+											color: 'var(--accent-on-background-strong)',
+											transition: 'all 0.15s ease-in-out',
+											boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
+											whiteSpace: 'nowrap'
+										}}>
+										{industry}
+									</Tag>
+								))}
+							{/* Overflow indicator with neutral styling */}
+							{(caseStudy.techStack?.filter((t) => t && t.trim().length > 0)
+								.length || 0) +
+								(caseStudy.industry?.filter((i) => i && i.trim().length > 0)
+									.length || 0) >
 								5 && (
 								<Tag
 									size='s'
 									variant='neutral'
 									style={{
-										fontSize: '0.7rem',
+										fontSize: 'clamp(0.65rem, 1.8vw, 0.75rem)',
 										fontWeight: '500',
-										padding: '6px 12px',
+										padding: '6px 10px',
 										borderRadius: '12px',
 										backgroundColor: 'var(--neutral-alpha-weak)',
 										border: '1px solid var(--neutral-alpha-medium)',
 										color: 'var(--neutral-on-background-medium)',
 										opacity: 0.8,
-										transition: 'all 0.15s ease-in-out'
+										transition: 'all 0.15s ease-in-out',
+										whiteSpace: 'nowrap'
 									}}>
 									+
-									{(caseStudy.techStack?.length || 0) +
-										(caseStudy.industry?.length || 0) -
+									{(caseStudy.techStack?.filter((t) => t && t.trim().length > 0)
+										.length || 0) +
+										(caseStudy.industry?.filter((i) => i && i.trim().length > 0)
+											.length || 0) -
 										5}
 								</Tag>
 							)}
