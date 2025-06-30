@@ -596,7 +596,7 @@ body[class*='display-flex'] {
 		max-width: 100% !important;
 		flex-basis: 100% !important;
 		margin: 0 !important;
-		min-height: 480px !important; /* Consistent mobile height */
+		min-height: 460px !important; /* Consistent mobile height optimized */
 	}
 
 	/* Ensure cards take full width on mobile */
@@ -605,7 +605,7 @@ body[class*='display-flex'] {
 		max-width: 100% !important;
 		margin-left: 0 !important;
 		margin-right: 0 !important;
-		min-height: 480px !important; /* Mobile-optimized height */
+		min-height: 460px !important; /* Mobile-optimized height */
 	}
 
 	/* Case study cards mobile optimization */
@@ -615,12 +615,12 @@ body[class*='display-flex'] {
 		margin: 0 !important;
 		max-width: none !important;
 		box-sizing: border-box !important;
-		min-height: 480px !important; /* Mobile-specific height */
+		min-height: 460px !important; /* Mobile-specific height optimized */
 	}
 
 	/* Link wrapper mobile adjustments */
 	a[href*='/work/'] {
-		min-height: 480px !important;
+		min-height: 460px !important;
 	}
 
 	/* Mobile-optimized typography */

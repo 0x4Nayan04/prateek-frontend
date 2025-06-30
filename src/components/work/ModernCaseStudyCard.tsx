@@ -84,12 +84,12 @@ export function ModernCaseStudyCard({
 						transition: 'all 0.15s ease-in-out'
 					}}
 					className={styles.caseStudyCard}>
-					{/* Image Section - Fixed aspect ratio */}
+					{/* Image Section - Fixed aspect ratio with increased height */}
 					<div
 						style={{
 							flex: '0 0 auto', // Don't grow or shrink
-							height: '240px', // Fixed height for consistency
-							padding: '8px', // Breathing space around image
+							height: '320px', // Optimized height for better proportions matching reference
+							padding: '6px', // Slightly more breathing space around image
 							background: 'rgb(250, 250, 250)',
 							borderRadius: '12px 12px 0 0'
 						}}>
@@ -150,29 +150,29 @@ export function ModernCaseStudyCard({
 						}}
 					/>
 
-					{/* Content Section - Flexible height with proper spacing */}
+					{/* Content Section - Optimized spacing to match reference */}
 					<Column
 						fillWidth
 						flex={1}
-						padding='m' // Increased padding for better spacing
-						gap='m' // Increased gap between elements
+						padding='s' // Balanced padding for proper spacing
+						gap='s' // Proper gap for readable spacing
 						horizontal='start'
 						vertical='start'
 						style={{
 							justifyContent: 'space-between',
-							minHeight: '280px' // Minimum content area height
+							minHeight: '200px' // Balanced content height with larger image
 						}}>
 						{/* Title and Summary Container */}
 						<Column
 							fillWidth
-							gap='s'
+							gap='xs' // Balanced gap between title and summary
 							style={{ flex: '1 1 auto' }}>
 							{/* Title */}
 							<Text
 								variant='heading-strong-l'
 								onBackground='neutral-strong'
 								style={{
-									lineHeight: '1.3',
+									lineHeight: '1.2',
 									fontSize: 'clamp(1.125rem, 3.5vw, 1.375rem)',
 									fontWeight: '700',
 									letterSpacing: '-0.01em'
@@ -185,10 +185,10 @@ export function ModernCaseStudyCard({
 								variant='body-default-m'
 								onBackground='neutral-weak'
 								style={{
-									lineHeight: '1.6',
-									fontSize: 'clamp(0.875rem, 2.8vw, 0.9rem)',
+									lineHeight: '1.5',
+									fontSize: 'clamp(0.8rem, 2.8vw, 0.9rem)',
 									display: '-webkit-box',
-									WebkitLineClamp: 3, // Allow 3 lines for better content display
+									WebkitLineClamp: 2, // Keep at 2 lines for tighter layout
 									WebkitBoxOrient: 'vertical',
 									overflow: 'hidden',
 									textOverflow: 'ellipsis'
@@ -199,7 +199,7 @@ export function ModernCaseStudyCard({
 
 						{/* Tags Row - Anchored to bottom */}
 						<Row
-							gap='xs'
+							gap='xs' // Proper gap between tags
 							wrap
 							style={{
 								flex: '0 0 auto', // Don't grow or shrink

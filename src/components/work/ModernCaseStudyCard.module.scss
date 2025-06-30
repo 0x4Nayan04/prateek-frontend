@@ -5,7 +5,7 @@
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	min-height: 520px; // Consistent height
+	min-height: 520px; // Consistent height optimized for new proportions
 
 	&:hover {
 		transform: translateY(-3px);
@@ -32,7 +32,7 @@
 		width: 100% !important;
 		max-width: 100% !important;
 		margin: 0 !important;
-		min-height: 480px !important; // Slightly smaller but consistent on mobile
+		min-height: 460px !important; // Optimized mobile height for new proportions
 
 		/* Adjust hover effect for mobile - less pronounced */
 		&:hover {
@@ -52,19 +52,7 @@
 
 	/* Tablet responsive adjustments */
 	@media (max-width: 1024px) and (min-width: 769px) {
-		min-height: 500px; // Medium size for tablets
-
-		&:hover {
-			transform: translateY(-2px);
-			box-shadow:
-				0 8px 25px -4px rgba(0, 0, 0, 0.12),
-				0 6px 12px -2px rgba(0, 0, 0, 0.08);
-		}
-	}
-
-	/* Tablet responsive adjustments */
-	@media (max-width: 1024px) and (min-width: 769px) {
-		min-height: 500px; // Medium size for tablets
+		min-height: 490px; // Optimized tablet height for new proportions
 
 		&:hover {
 			transform: translateY(-2px);
