@@ -237,6 +237,13 @@ div,
 	transition: all var(--animation-duration-short)
 		var(--animation-easing-standard) !important;
 	border-radius: 8px !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	white-space: nowrap !important;
+	overflow: hidden !important;
+	text-overflow: ellipsis !important;
+	flex-shrink: 0 !important;
+	box-sizing: border-box !important;
 }
 
 [data-tag]:hover {
@@ -249,6 +256,7 @@ div,
 	background: var(--neutral-alpha-weak) !important;
 	border: 1px solid var(--neutral-alpha-medium) !important;
 	color: var(--neutral-on-background-strong) !important;
+	max-width: 120px !important;
 }
 
 /* Industry tags */
@@ -256,6 +264,52 @@ div,
 	background: var(--brand-alpha-weak) !important;
 	border: 1px solid var(--brand-alpha-medium) !important;
 	color: var(--brand-on-background-strong) !important;
+	max-width: 130px !important;
+}
+
+/* Specific overrides for Tag component CSS modules */
+[class*='Tag_tag'],
+[class*='Tag_brand'],
+[class*='Tag_s'] {
+	max-width: 130px !important;
+	overflow: hidden !important;
+	text-overflow: ellipsis !important;
+	white-space: nowrap !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	flex-shrink: 0 !important;
+	box-sizing: border-box !important;
+}
+
+/* Ensure manufacturing and longer industry names fit */
+[class*='Tag_brand'] {
+	max-width: 140px !important;
+}
+
+/* Mobile overrides for Tag CSS modules */
+[class*='Tag_tag'],
+[class*='Tag_brand'],
+[class*='Tag_s'] {
+	max-width: 110px !important;
+	font-size: 0.65rem !important;
+	padding: 3px 6px !important;
+}
+
+[class*='Tag_brand'] {
+	max-width: 120px !important;
+}
+
+/* Smaller mobile overrides for Tag CSS modules */
+[class*='Tag_tag'],
+[class*='Tag_brand'],
+[class*='Tag_s'] {
+	max-width: 100px !important;
+	font-size: 0.6rem !important;
+	padding: 2px 6px !important;
+}
+
+[class*='Tag_brand'] {
+	max-width: 110px !important;
 }
 
 /* ============================================================================
@@ -718,9 +772,12 @@ body[class*='display-flex'] {
 		font-size: 0.65rem !important;
 		padding: 3px 6px !important;
 		white-space: nowrap !important;
-		max-width: 100px !important;
+		max-width: 110px !important;
 		overflow: hidden !important;
 		text-overflow: ellipsis !important;
+		display: inline-flex !important;
+		align-items: center !important;
+		flex-shrink: 0 !important;
 	}
 
 	/* Row components mobile direction */
@@ -934,9 +991,12 @@ a[href*='/work/'] {
 		font-size: 0.6rem !important;
 		padding: 2px 6px !important;
 		white-space: nowrap !important;
-		max-width: 90px !important;
+		max-width: 100px !important;
 		overflow: hidden !important;
 		text-overflow: ellipsis !important;
+		display: inline-flex !important;
+		align-items: center !important;
+		flex-shrink: 0 !important;
 	}
 
 	/* Row components mobile direction */
@@ -1119,4 +1179,15 @@ a[href*='/work/'] {
 	}
 }
 
-/* === END CASE STUDY CARD GRID LAYOUT FIXES === */
+/* Flex container for tags to handle overflow properly */
+[data-gap='8'][data-wrap='true'] {
+	flex-wrap: wrap !important;
+	overflow: hidden !important;
+	align-items: flex-start !important;
+}
+
+/* Ensure tag containers don't exceed their parent width */
+[data-gap='8'][data-wrap='true'] > * {
+	flex-shrink: 1 !important;
+	min-width: 0 !important;
+}

@@ -276,7 +276,10 @@ export function ModernCaseStudyCard({
 											whiteSpace: 'nowrap',
 											maxWidth: '120px',
 											overflow: 'hidden',
-											textOverflow: 'ellipsis'
+											textOverflow: 'ellipsis',
+											display: 'inline-flex',
+											alignItems: 'center',
+											flexShrink: 0
 										}}>
 										{tech}
 									</Tag>
@@ -298,9 +301,12 @@ export function ModernCaseStudyCard({
 										transition:
 											'all var(--animation-duration-short) var(--animation-easing-standard)',
 										whiteSpace: 'nowrap',
-										maxWidth: '100px',
+										maxWidth: '130px',
 										overflow: 'hidden',
-										textOverflow: 'ellipsis'
+										textOverflow: 'ellipsis',
+										display: 'inline-flex',
+										alignItems: 'center',
+										flexShrink: 0
 									}}>
 									{caseStudy.industry}
 								</Tag>
