@@ -344,12 +344,29 @@ div,
 [data-grid] {
 	display: grid !important;
 	align-items: stretch !important;
+	grid-auto-rows: 1fr !important;
 }
 
 [data-grid] > * {
 	display: flex !important;
 	flex-direction: column !important;
 	height: 100% !important;
+	min-height: 520px !important; /* Consistent minimum height */
+}
+
+/* Grid Container Fixes */
+[data-columns='2'] {
+	display: grid !important;
+	grid-template-columns: repeat(2, 1fr) !important;
+	align-items: stretch !important;
+	grid-auto-rows: 1fr !important;
+}
+
+[data-columns='1'] {
+	display: grid !important;
+	grid-template-columns: 1fr !important;
+	align-items: stretch !important;
+	grid-auto-rows: 1fr !important;
 }
 
 /* Modern Case Study Card Layout Fixes */
@@ -362,8 +379,35 @@ div,
 	flex-direction: column !important;
 	box-sizing: border-box !important;
 	max-width: none !important;
-	transition: all 0.2s ease-out !important;
-	min-height: 320px !important;
+	transition: all 0.15s ease-in-out !important;
+	min-height: 520px !important; /* Force consistent height */
+}
+
+/* Link wrapper for cards should behave properly */
+a[href*='/work/'] {
+	display: block !important;
+	text-decoration: none !important;
+	color: inherit !important;
+	width: 100% !important;
+	height: 100% !important;
+	min-height: 520px !important;
+}
+
+/* Ensure equal height cards */
+[data-card] {
+	height: 100% !important;
+	display: flex !important;
+	flex-direction: column !important;
+	flex: 1 !important;
+	min-height: 520px !important;
+}
+
+/* Content spacing within cards */
+[data-card] > [data-column] {
+	flex: 1 !important;
+	display: flex !important;
+	flex-direction: column !important;
+	justify-content: space-between !important;
 }
 
 /* Prevent carousel from interfering with card navigation */
@@ -552,6 +596,7 @@ body[class*='display-flex'] {
 		max-width: 100% !important;
 		flex-basis: 100% !important;
 		margin: 0 !important;
+		min-height: 480px !important; /* Consistent mobile height */
 	}
 
 	/* Ensure cards take full width on mobile */
@@ -560,7 +605,22 @@ body[class*='display-flex'] {
 		max-width: 100% !important;
 		margin-left: 0 !important;
 		margin-right: 0 !important;
-		min-height: auto !important;
+		min-height: 480px !important; /* Mobile-optimized height */
+	}
+
+	/* Case study cards mobile optimization */
+	.caseStudyCard,
+	[data-case-study-card] {
+		width: 100% !important;
+		margin: 0 !important;
+		max-width: none !important;
+		box-sizing: border-box !important;
+		min-height: 480px !important; /* Mobile-specific height */
+	}
+
+	/* Link wrapper mobile adjustments */
+	a[href*='/work/'] {
+		min-height: 480px !important;
 	}
 
 	/* Mobile-optimized typography */
@@ -935,3 +995,68 @@ a[href*='/work/'] {
 	font-size: 12px !important;
 	font-weight: bold !important;
 }
+
+/* === CASE STUDY CARD GRID LAYOUT FIXES === */
+/* Ensure consistent grid behavior matching reference design */
+
+/* Force equal height cards in grid */
+[data-grid][data-columns='2'] {
+	display: grid !important;
+	grid-template-columns: repeat(2, 1fr) !important;
+	gap: 64px !important;
+	align-items: stretch !important;
+}
+
+[data-grid][data-columns='2'] > * {
+	display: flex !important;
+	flex-direction: column !important;
+	height: 100% !important;
+	min-height: 0 !important;
+}
+
+/* Ensure cards within grid items stretch to full height */
+[data-grid] [data-card] {
+	height: 100% !important;
+	display: flex !important;
+	flex-direction: column !important;
+	min-height: 400px !important;
+}
+
+/* Case study card specific fixes */
+.caseStudyCard {
+	height: 100% !important;
+	display: flex !important;
+	flex-direction: column !important;
+}
+
+/* Ensure content section flexes properly */
+.caseStudyCard [data-column] {
+	flex: 1 !important;
+	display: flex !important;
+	flex-direction: column !important;
+	justify-content: space-between !important;
+}
+
+/* Mobile responsive grid adjustments */
+@media (max-width: 768px) {
+	[data-grid][data-columns='2'] {
+		grid-template-columns: 1fr !important;
+		gap: 32px !important;
+	}
+
+	[data-grid] [data-card] {
+		min-height: 320px !important;
+	}
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+	[data-grid][data-columns='2'] {
+		gap: 48px !important;
+	}
+
+	[data-grid] [data-card] {
+		min-height: 380px !important;
+	}
+}
+
+/* === END CASE STUDY CARD GRID LAYOUT FIXES === */

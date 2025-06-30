@@ -45,99 +45,89 @@ export function ModernCaseStudyGrid({
 		<Column
 			fillWidth
 			gap='16'>
-			{/* Title Section */}
-			<RevealFx
-				translateY={6}
-				delay={0.02}
-				fillWidth
-				horizontal='center'
-				paddingBottom='8'>
-				<Column
+			{/* Header */}
+			{title && (
+				<RevealFx
+					translateY={6}
+					delay={0.02}
+					fillWidth
 					horizontal='center'
-					gap='16'>
-					<Heading
-						wrap='balance'
-						variant='display-strong-l'
-						align='center'
-						style={{
-							fontSize: 'clamp(2rem, 8vw, 3rem)',
-							lineHeight: '1.2'
-						}}>
-						{title}
-					</Heading>
-				</Column>
-			</RevealFx>
+					paddingBottom='8'>
+					<Column
+						horizontal='center'
+						gap='8'>
+						<Heading
+							wrap='balance'
+							variant='display-strong-l'
+							align='center'
+							style={{
+								fontSize: 'clamp(2rem, 8vw, 3rem)',
+								lineHeight: '1.2'
+							}}>
+							{title}
+						</Heading>
+					</Column>
+				</RevealFx>
+			)}
 
-			{/* Description Section */}
-			<RevealFx
-				translateY={6}
-				delay={0.04}>
-				<Column gap='24'>
+			{/* Description */}
+			{description && (
+				<RevealFx
+					translateY={6}
+					delay={0.04}
+					fillWidth
+					horizontal='center'>
 					<Text
 						variant='body-default-l'
 						onBackground='neutral-medium'
 						align='center'
 						style={{
 							maxWidth: '600px',
-							margin: '0 auto',
 							lineHeight: '1.6'
 						}}>
 						{description}
 					</Text>
-				</Column>
-			</RevealFx>
+				</RevealFx>
+			)}
 
 			{/* Main Content */}
 			<Row
 				fillWidth
-				horizontal='center'
-				paddingY='xl'>
+				horizontal='center'>
 				<Column
 					fillWidth
-					maxWidth='xl'
-					horizontal='center'>
-					{/* Full Width Grid */}
+					paddingX='l'>
+					{/* Grid Container with consistent spacing */}
 					<Column
 						fillWidth
-						paddingX='m'
+						paddingX='l'
 						style={{
-							paddingLeft: 'clamp(16px, 3vw, 32px)',
-							paddingRight: 'clamp(16px, 3vw, 32px)'
+							paddingLeft: 'clamp(8px, 2vw, 48px)',
+							paddingRight: 'clamp(8px, 2vw, 48px)'
 						}}
-						gap='xl'>
+						gap='s'>
 						{hasResults ? (
 							<>
 								<Grid
 									columns={columns.desktop as any}
 									tabletColumns={columns.tablet as any}
-									mobileColumns={1}
-									gap='12'
+									mobileColumns={columns.mobile as any}
+									gap='64'
 									fillWidth
 									style={{
-										justifyItems: 'center',
-										alignItems: 'stretch',
-										gridAutoRows: '1fr'
+										alignItems: 'stretch'
 									}}>
 									{displayedCaseStudies.map((caseStudy, index) => (
-										<div
+										<ModernCaseStudyCard
 											key={caseStudy._id}
-											style={{
-												width: '100%',
-												maxWidth: '500px',
-												display: 'flex',
-												flexDirection: 'column',
-												height: '100%'
-											}}>
-											<ModernCaseStudyCard
-												caseStudy={caseStudy}
-												index={index}
-												priority={index < 4}
-											/>
-										</div>
+											caseStudy={caseStudy}
+											index={index}
+											priority={index < 4}
+										/>
 									))}
 								</Grid>
 
-								{/* View All Button for Homepage */}
+								{/* View All Button */}
 								{(showViewAllButton || hasMoreResults) && (
 									<RevealFx
 										translateY={8}
@@ -185,7 +175,7 @@ export function ModernCaseStudyGrid({
 										variant='body-default-m'
 										onBackground='neutral-weak'
 										align='center'>
-										Please check back later for more content.
+										Check back later for new case studies.
 									</Text>
 								</Column>
 							</RevealFx>

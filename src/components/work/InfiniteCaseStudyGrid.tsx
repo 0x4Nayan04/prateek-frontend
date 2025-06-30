@@ -163,7 +163,7 @@ export function InfiniteCaseStudyGrid({
 									columns={columns.desktop as any}
 									tabletColumns={columns.tablet as any}
 									mobileColumns={columns.mobile as any}
-									gap='12'
+									gap='64'
 									fillWidth
 									style={{
 										justifyItems: 'center',
@@ -278,10 +278,10 @@ export function InfiniteCaseStudyGrid({
 											columns={columns.desktop as any}
 											tabletColumns={columns.tablet as any}
 											mobileColumns={columns.mobile as any}
-											gap='12'
+											gap='64'
 											fillWidth
 											style={{
-												marginBottom: '12px',
+												marginBottom: '32px',
 												justifyItems: 'center',
 												alignItems: 'stretch',
 												gridAutoRows: '1fr'
