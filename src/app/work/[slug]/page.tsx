@@ -1,5 +1,4 @@
 import { PortableText, ScrollToHash } from '@/components';
-import PaginationNav from '@/components/work/PaginationNav';
 import { getFileUrl, urlFor } from '@/lib/sanity/client';
 import { getAllCaseStudies, getCaseStudyBySlug } from '@/lib/utils/content';
 import { baseURL, work } from '@/resources';
@@ -101,19 +100,6 @@ export default async function CaseStudyPage({
 	if (!caseStudy) {
 		notFound();
 	}
-
-	// Get all case studies for pagination
-	const allCaseStudies = await getAllCaseStudies();
-
-	const currentIndex = allCaseStudies.findIndex(
-		(cs) => cs.slug.current === slug
-	);
-	const previousCaseStudy =
-		currentIndex > 0 ? allCaseStudies[currentIndex - 1] : null;
-	const nextCaseStudy =
-		currentIndex < allCaseStudies.length - 1
-			? allCaseStudies[currentIndex + 1]
-			: null;
 
 	// Prepare carousel items from case study images with adaptive sizing
 	const carouselImages =
@@ -645,14 +631,6 @@ export default async function CaseStudyPage({
 					</RevealFx>
 				)}
 			</Column>
-
-			{/* Pagination Section */}
-			<PaginationNav
-				previousCaseStudy={previousCaseStudy}
-				nextCaseStudy={nextCaseStudy}
-				currentIndex={currentIndex}
-				totalCaseStudies={allCaseStudies.length}
-			/>
 
 			<ScrollToHash />
 		</Column>
