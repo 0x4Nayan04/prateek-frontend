@@ -20,7 +20,7 @@ const SectionSeparator = ({
 	variant?: 'default' | 'subtle';
 }) => (
 	<RevealFx
-		translateY={8}
+		translateY={4}
 		delay={0.1}
 		fillWidth
 		horizontal='center'
@@ -28,11 +28,11 @@ const SectionSeparator = ({
 		<div
 			style={{
 				width: '100%',
-				maxWidth: variant === 'subtle' ? '200px' : '400px',
+				maxWidth: '400px',
 				height: '1px',
 				background:
 					variant === 'subtle'
-						? 'linear-gradient(90deg, transparent 0%, var(--neutral-alpha-medium) 50%, transparent 100%)'
+						? 'linear-gradient(90deg, transparent 0%, var(--neutral-alpha-weak) 20%, var(--neutral-alpha-medium) 50%, var(--neutral-alpha-weak) 80%, transparent 100%)'
 						: 'linear-gradient(90deg, transparent 0%, var(--brand-alpha-medium) 20%, var(--accent-alpha-strong) 50%, var(--brand-alpha-medium) 80%, transparent 100%)',
 				position: 'relative'
 			}}>
@@ -82,6 +82,8 @@ export default function Home() {
 					gap='8'>
 					{home.featured.display && (
 						<RevealFx
+							translateY={4}
+							delay={0}
 							fillWidth
 							horizontal='center'
 							paddingBottom='4'>
@@ -106,7 +108,8 @@ export default function Home() {
 						</RevealFx>
 					)}
 					<RevealFx
-						translateY='4'
+						translateY={4}
+						delay={0.05}
 						fillWidth
 						horizontal='center'
 						paddingBottom='16'>
@@ -118,8 +121,8 @@ export default function Home() {
 						</Heading>
 					</RevealFx>
 					<RevealFx
-						translateY={3}
-						delay={0.05}
+						translateY={4}
+						delay={0.1}
 						fillWidth
 						horizontal='center'
 						paddingBottom='16'>
@@ -137,8 +140,8 @@ export default function Home() {
 						</Text>
 					</RevealFx>
 					<RevealFx
-						translateY='4'
-						delay={0.1}
+						translateY={4}
+						delay={0.15}
 						horizontal='center'>
 						<Button
 							href='/work'
@@ -170,7 +173,8 @@ export default function Home() {
 					horizontal='center'
 					gap='0'>
 					<RevealFx
-						translateY='4'
+						translateY={4}
+						delay={0}
 						fillWidth
 						horizontal='center'
 						paddingBottom='0'>
@@ -202,8 +206,8 @@ export default function Home() {
 
 					{/* Show more case studies button */}
 					<RevealFx
-						translateY={6}
-						delay={0.08}
+						translateY={4}
+						delay={0.1}
 						horizontal='center'>
 						<Button
 							href='/work'
@@ -244,7 +248,9 @@ export default function Home() {
 					<Flex
 						flex={1}
 						paddingLeft='8'>
-						<RevealFx translateY={4}>
+						<RevealFx
+							translateY={4}
+							delay={0}>
 							<Heading
 								as='h2'
 								variant='display-strong-m'
@@ -256,7 +262,7 @@ export default function Home() {
 					<Flex flex={2}>
 						<Column gap='24'>
 							<RevealFx
-								translateY={3}
+								translateY={4}
 								delay={0.05}>
 								<Text
 									variant='body-default-l'
@@ -274,7 +280,7 @@ export default function Home() {
 								</Text>
 							</RevealFx>
 							<RevealFx
-								translateY={3}
+								translateY={4}
 								delay={0.1}>
 								<Text
 									variant='body-default-l'
@@ -322,7 +328,7 @@ export default function Home() {
 								</Text>
 							</RevealFx>
 							<RevealFx
-								translateY={3}
+								translateY={4}
 								delay={0.15}>
 								<Text
 									variant='body-default-l'

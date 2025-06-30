@@ -58,7 +58,8 @@ export function FilterChips({
 						fontWeight: '500',
 						color: 'var(--neutral-on-background-strong)',
 						cursor: 'pointer',
-						transition: 'opacity 0.2s ease',
+						transition:
+							'all var(--animation-duration-short) var(--animation-easing-standard)',
 						fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
 						lineHeight: '1.2',
 						whiteSpace: 'nowrap',

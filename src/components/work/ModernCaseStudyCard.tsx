@@ -74,8 +74,8 @@ export function ModernCaseStudyCard({
 
 	return (
 		<RevealFx
-			translateY={8}
-			delay={index * 0.02}>
+			translateY={4}
+			delay={index * 0.05}>
 			<Link
 				href={`/work/${caseStudy.slug.current}`}
 				style={{
@@ -99,7 +99,8 @@ export function ModernCaseStudyCard({
 						display: 'flex',
 						flexDirection: 'column',
 						cursor: 'pointer',
-						transition: 'all 0.15s ease-in-out'
+						transition:
+							'all var(--animation-duration-short) var(--animation-easing-standard)'
 					}}
 					className={styles.caseStudyCard}>
 					{/* Image Section - Improved responsive container */}
@@ -270,64 +271,59 @@ export function ModernCaseStudyCard({
 											backgroundColor: 'var(--brand-alpha-weak)',
 											border: '1px solid var(--brand-alpha-medium)',
 											color: 'var(--brand-on-background-strong)',
-											transition: 'all 0.15s ease-in-out',
-											boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
-											whiteSpace: 'nowrap'
+											transition:
+												'all var(--animation-duration-short) var(--animation-easing-standard)',
+											whiteSpace: 'nowrap',
+											maxWidth: '120px',
+											overflow: 'hidden',
+											textOverflow: 'ellipsis'
 										}}>
 										{tech}
 									</Tag>
 								))}
-							{/* Industry Tags with Accent Colors */}
-							{caseStudy.industry
-								?.filter((i) => i && i.trim().length > 0)
-								.slice(0, 2)
-								.map((industry) => (
-									<Tag
-										key={industry}
-										size='s'
-										variant='accent'
-										style={{
-											fontSize: 'clamp(0.65rem, 1.8vw, 0.75rem)',
-											fontWeight: '600',
-											padding: '6px 10px',
-											borderRadius: '12px',
-											backgroundColor: 'var(--accent-alpha-weak)',
-											border: '1px solid var(--accent-alpha-medium)',
-											color: 'var(--accent-on-background-strong)',
-											transition: 'all 0.15s ease-in-out',
-											boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
-											whiteSpace: 'nowrap'
-										}}>
-										{industry}
-									</Tag>
-								))}
-							{/* Overflow indicator with neutral styling */}
-							{(caseStudy.techStack?.filter((t) => t && t.trim().length > 0)
-								.length || 0) +
-								(caseStudy.industry?.filter((i) => i && i.trim().length > 0)
-									.length || 0) >
-								5 && (
+
+							{/* Industry Tag with Accent Colors */}
+							{caseStudy.industry && (
+								<Tag
+									size='s'
+									variant='brand'
+									style={{
+										fontSize: 'clamp(0.65rem, 1.8vw, 0.75rem)',
+										fontWeight: '600',
+										padding: '6px 10px',
+										borderRadius: '12px',
+										backgroundColor: 'var(--accent-alpha-weak)',
+										border: '1px solid var(--accent-alpha-medium)',
+										color: 'var(--accent-on-background-strong)',
+										transition:
+											'all var(--animation-duration-short) var(--animation-easing-standard)',
+										whiteSpace: 'nowrap',
+										maxWidth: '100px',
+										overflow: 'hidden',
+										textOverflow: 'ellipsis'
+									}}>
+									{caseStudy.industry}
+								</Tag>
+							)}
+
+							{/* Overflow indicator if more tags exist */}
+							{caseStudy.techStack && caseStudy.techStack.length > 3 && (
 								<Tag
 									size='s'
 									variant='neutral'
 									style={{
 										fontSize: 'clamp(0.65rem, 1.8vw, 0.75rem)',
-										fontWeight: '500',
+										fontWeight: '600',
 										padding: '6px 10px',
 										borderRadius: '12px',
 										backgroundColor: 'var(--neutral-alpha-weak)',
 										border: '1px solid var(--neutral-alpha-medium)',
 										color: 'var(--neutral-on-background-medium)',
-										opacity: 0.8,
-										transition: 'all 0.15s ease-in-out',
-										whiteSpace: 'nowrap'
+										transition:
+											'all var(--animation-duration-short) var(--animation-easing-standard)',
+										opacity: 0.7
 									}}>
-									+
-									{(caseStudy.techStack?.filter((t) => t && t.trim().length > 0)
-										.length || 0) +
-										(caseStudy.industry?.filter((i) => i && i.trim().length > 0)
-											.length || 0) -
-										5}
+									+{caseStudy.techStack.length - 3}
 								</Tag>
 							)}
 						</Row>

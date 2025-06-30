@@ -19,19 +19,27 @@ export function FilterButton({
 			variant={hasActiveFilters ? 'secondary' : 'tertiary'}
 			size='m'
 			style={{
-				borderRadius: '999px',
-				padding: '12px 20px',
-				background: hasActiveFilters
-					? 'var(--neutral-alpha-medium)'
+				minWidth: 'fit-content',
+				whiteSpace: 'nowrap',
+				padding: '8px 16px',
+				borderRadius: '12px',
+				border: `1px solid ${
+					hasActiveFilters
+						? 'var(--brand-alpha-strong)'
+						: 'var(--neutral-alpha-medium)'
+				}`,
+				backgroundColor: hasActiveFilters
+					? 'var(--brand-alpha-weak)'
 					: 'var(--neutral-alpha-weak)',
-				border: hasActiveFilters
-					? '1px solid var(--neutral-alpha-strong)'
-					: '1px solid var(--neutral-alpha-medium)',
 				color: hasActiveFilters
-					? 'var(--neutral-on-background-strong)'
+					? 'var(--brand-on-background-strong)'
 					: 'var(--neutral-on-background-medium)',
-				transition: 'all 0.2s ease',
-				fontWeight: '500'
+				cursor: 'pointer',
+				transition:
+					'all var(--animation-duration-short) var(--animation-easing-standard)',
+				fontSize: '0.875rem',
+				fontWeight: '500',
+				userSelect: 'none'
 			}}>
 			<Row
 				gap='8'

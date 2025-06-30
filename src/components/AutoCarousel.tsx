@@ -141,7 +141,8 @@ export function AutoCarousel({
 						boxShadow: '0 12px 40px rgba(0, 0, 0, 0.15)',
 						border: '1px solid var(--neutral-alpha-medium)',
 						background: 'var(--surface)',
-						transition: 'all 0.15s ease-in-out'
+						transition:
+							'all var(--animation-duration-short) var(--animation-easing-standard)'
 					}}
 				/>
 			</div>
@@ -164,7 +165,8 @@ export function AutoCarousel({
 						boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2)',
 						zIndex: 10,
 						fontFamily: '"Inter", sans-serif',
-						transition: 'all 0.1s ease'
+						transition:
+							'all var(--animation-duration-micro) var(--animation-easing-standard)'
 					}}>
 					{currentIndex + 1} / {items.length}
 				</div>
@@ -190,7 +192,8 @@ export function AutoCarousel({
 							width: `${((currentIndex + 1) / items.length) * 100}%`,
 							background:
 								'linear-gradient(90deg, var(--brand-on-background-strong), var(--brand-alpha-strong))',
-							transition: 'width 0.15s ease',
+							transition:
+								'width var(--animation-duration-short) var(--animation-easing-standard)',
 							borderRadius: '0 0 16px 0'
 						}}
 					/>

@@ -56,6 +56,46 @@
 }*/
 
 /* ============================================================================
+   ANIMATION SYSTEM STANDARDIZATION
+   ============================================================================ */
+
+/* Define standard animation timing system */
+:root {
+	/* Standard timing durations */
+	--animation-duration-micro: 0.1s;
+	--animation-duration-short: 0.15s;
+	--animation-duration-medium: 0.2s;
+	--animation-duration-long: 0.3s;
+
+	/* Standard easing functions */
+	--animation-easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+	--animation-easing-accelerate: cubic-bezier(0.4, 0, 1, 1);
+	--animation-easing-decelerate: cubic-bezier(0, 0, 0.2, 1);
+	--animation-easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+	/* Standard transform values */
+	--transform-translate-micro: 2px;
+	--transform-translate-small: 4px;
+	--transform-translate-medium: 8px;
+	--transform-scale-subtle: 1.02;
+	--transform-scale-medium: 1.05;
+}
+
+/* Performance optimizations for animated elements */
+[data-carousel],
+.caseStudyCard,
+[data-case-study-card],
+[data-variant='primary'],
+[data-variant='secondary'],
+[data-tag],
+.iframe-container,
+.scroll-to-top button {
+	will-change: transform, opacity, box-shadow;
+	backface-visibility: hidden;
+	transform-style: preserve-3d;
+}
+
+/* ============================================================================
    TYPOGRAPHY IMPROVEMENTS
    ============================================================================ */
 
@@ -102,7 +142,8 @@ div,
 
 /* Enhanced carousel styling */
 [data-carousel] {
-	transition: all 0.15s ease-in-out;
+	transition: all var(--animation-duration-short)
+		var(--animation-easing-standard);
 	border-radius: 12px;
 	overflow: hidden;
 }
@@ -114,6 +155,8 @@ div,
 	background-color: transparent !important;
 	width: 100% !important;
 	height: 100% !important;
+	transition: transform var(--animation-duration-medium)
+		var(--animation-easing-standard);
 }
 
 /* Keep card carousels with original cropped styling */
@@ -122,22 +165,27 @@ div,
 	object-fit: cover !important;
 	width: 100% !important;
 	height: 100% !important;
+	transition: transform var(--animation-duration-medium)
+		var(--animation-easing-standard);
 }
 
 /* Carousel controls enhancement */
 [data-carousel] button {
-	transition: all 0.1s ease;
+	transition: all var(--animation-duration-micro)
+		var(--animation-easing-standard);
 	backdrop-filter: blur(8px);
 }
 
 [data-carousel] button:hover {
-	transform: scale(1.05);
+	transform: scale(var(--transform-scale-medium));
 }
 
 /* Carousel indicators */
 [data-carousel] [data-indicator] {
 	backdrop-filter: blur(8px);
 	border-radius: 8px;
+	transition: all var(--animation-duration-micro)
+		var(--animation-easing-standard);
 }
 
 /* ============================================================================
@@ -152,37 +200,32 @@ div,
 .portable-text h1,
 .portable-text h2,
 .portable-text h3,
-.portable-text h4 {
+.portable-text h4,
+.portable-text h5,
+.portable-text h6 {
 	font-family: 'Inter', sans-serif !important;
-	font-weight: 600 !important;
-	color: var(--neutral-on-background-strong) !important;
+	font-weight: 700 !important;
 }
 
 .portable-text p {
 	font-family: 'Inter', sans-serif !important;
-	line-height: 1.7 !important;
-	color: var(--neutral-on-background-medium) !important;
-	margin-bottom: 16px !important;
+	font-weight: 400 !important;
 }
 
 .portable-text ul,
 .portable-text ol {
 	font-family: 'Inter', sans-serif !important;
-	margin-left: 24px !important;
-	margin-bottom: 16px !important;
 }
 
 .portable-text li {
-	margin-bottom: 8px !important;
-	line-height: 1.6 !important;
+	font-family: 'Inter', sans-serif !important;
 }
 
 .portable-text blockquote {
-	border-left: 4px solid var(--brand-alpha-medium) !important;
-	padding-left: 20px !important;
-	margin: 20px 0 !important;
 	font-style: italic !important;
-	color: var(--neutral-on-background-medium) !important;
+	border-left: 4px solid var(--brand-alpha-medium) !important;
+	padding-left: 16px !important;
+	margin-left: 0 !important;
 }
 
 /* ============================================================================
@@ -191,15 +234,14 @@ div,
 
 /* Enhanced tag styling similar to case study cards */
 [data-tag] {
-	transition: all 0.15s ease !important;
-	font-family: 'Inter', sans-serif !important;
-	font-weight: 500 !important;
-	letter-spacing: 0.01em !important;
+	transition: all var(--animation-duration-short)
+		var(--animation-easing-standard) !important;
+	border-radius: 8px !important;
 }
 
 [data-tag]:hover {
-	transform: translateY(-1px) !important;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+	transform: translateY(calc(-1 * var(--transform-translate-small))) !important;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
 }
 
 /* Tech stack tags */
@@ -227,12 +269,13 @@ div,
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
 	border: 1px solid var(--neutral-alpha-medium) !important;
 	background: var(--surface) !important;
-	transition: all 0.15s ease !important;
+	transition: all var(--animation-duration-short)
+		var(--animation-easing-standard) !important;
 }
 
 .iframe-container:hover {
 	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.16) !important;
-	transform: translateY(-2px) !important;
+	transform: translateY(calc(-1 * var(--transform-translate-small))) !important;
 }
 
 .iframe-container iframe {
@@ -250,11 +293,12 @@ div,
 [data-variant='secondary'] {
 	font-family: 'Inter', sans-serif !important;
 	font-weight: 500 !important;
-	transition: all 0.15s ease !important;
+	transition: all var(--animation-duration-short)
+		var(--animation-easing-standard) !important;
 }
 
 [data-variant='secondary']:hover {
-	transform: translateY(-1px) !important;
+	transform: translateY(calc(-1 * var(--transform-translate-small))) !important;
 	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
 }
 
@@ -262,11 +306,12 @@ div,
 [data-variant='primary'] {
 	font-family: 'Inter', sans-serif !important;
 	font-weight: 600 !important;
-	transition: all 0.15s ease !important;
+	transition: all var(--animation-duration-short)
+		var(--animation-easing-standard) !important;
 }
 
 [data-variant='primary']:hover {
-	transform: translateY(-1px) !important;
+	transform: translateY(calc(-1 * var(--transform-translate-small))) !important;
 	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
 }
 
@@ -324,15 +369,36 @@ div,
 	outline-offset: 2px !important;
 }
 
-/* Reduced motion support */
+/* Comprehensive reduced motion support */
 @media (prefers-reduced-motion: reduce) {
+	/* Disable all animations and transitions */
+	*,
+	*::before,
+	*::after,
 	[data-carousel],
 	.iframe-container,
 	[data-tag],
 	[data-variant='secondary'],
-	[data-variant='primary'] {
+	[data-variant='primary'],
+	.caseStudyCard,
+	[data-case-study-card],
+	.scroll-to-top button,
+	[data-revealf] {
 		transition: none !important;
 		animation: none !important;
+		transform: none !important;
+		will-change: auto !important;
+	}
+
+	/* Maintain only opacity changes for accessibility */
+	[data-carousel] button:hover,
+	[data-tag]:hover,
+	[data-variant='secondary']:hover,
+	[data-variant='primary']:hover,
+	.caseStudyCard:hover,
+	.iframe-container:hover {
+		transform: none !important;
+		opacity: 0.8;
 	}
 }
 
@@ -712,18 +778,21 @@ body[class*='display-flex'] {
 	border-radius: 50% !important;
 	width: 48px !important;
 	height: 48px !important;
-	transition: all 0.25s ease-out !important;
+	transition: all var(--animation-duration-medium)
+		var(--animation-easing-standard) !important;
 }
 
 .scroll-to-top button[data-variant='primary']:hover {
-	transform: translateY(-3px) !important;
+	transform: translateY(
+		calc(-1 * var(--transform-translate-medium))
+	) !important;
 	box-shadow:
 		0 8px 16px rgba(0, 0, 0, 0.08),
 		0 4px 6px rgba(0, 0, 0, 0.12) !important;
 }
 
 .scroll-to-top button[data-variant='primary']:active {
-	transform: translateY(-1px) !important;
+	transform: translateY(calc(-1 * var(--transform-translate-small))) !important;
 	box-shadow:
 		0 4px 8px rgba(0, 0, 0, 0.05),
 		0 1px 3px rgba(0, 0, 0, 0.1) !important;
@@ -753,16 +822,7 @@ html {
 	}
 }
 
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-	.scroll-to-top button[data-variant='primary'] {
-		transition: opacity 0.2s ease !important;
-	}
-	.scroll-to-top button[data-variant='primary']:hover,
-	.scroll-to-top button[data-variant='primary']:active {
-		transform: none !important;
-	}
-}
+/* This section is now handled by the comprehensive reduced motion support above */
 
 /* ============================================================================
    MODERN CASE STUDY CARD LAYOUT ENHANCEMENTS

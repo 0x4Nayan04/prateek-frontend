@@ -31,8 +31,8 @@ export function CaseStudyCard({
 
 	return (
 		<RevealFx
-			translateY={8}
-			delay={index * 0.02}>
+			translateY={4}
+			delay={index * 0.05}>
 			<Link
 				href={`/work/${caseStudy.slug.current}`}
 				style={{
@@ -55,7 +55,8 @@ export function CaseStudyCard({
 						display: 'flex',
 						flexDirection: 'column',
 						cursor: 'pointer',
-						transition: 'all 0.15s ease-in-out',
+						transition:
+							'all var(--animation-duration-short) var(--animation-easing-standard)',
 						maxWidth: '100%',
 						margin: '0 auto'
 					}}
@@ -111,47 +112,53 @@ export function CaseStudyCard({
 						vertical='start'
 						style={{
 							justifyContent: 'space-between',
-							minHeight: '180px',
+							minHeight: '200px',
 							display: 'flex',
 							flexDirection: 'column'
 						}}>
-						{/* Title */}
-						<Heading
-							variant='heading-strong-l'
-							onBackground='neutral-strong'
-							style={{
-								lineHeight: '1.3',
-								fontSize: 'clamp(1.125rem, 3.5vw, 1.375rem)',
-								fontWeight: '700',
-								letterSpacing: '-0.01em',
-								marginBottom: '8px',
-								display: '-webkit-box',
-								WebkitLineClamp: 2,
-								WebkitBoxOrient: 'vertical',
-								overflow: 'hidden'
-							}}>
-							{caseStudy.title}
-						</Heading>
+						{/* Title and Summary Container */}
+						<Column
+							fillWidth
+							gap='xs'
+							style={{ flex: '1 1 auto' }}>
+							{/* Title */}
+							<Text
+								variant='heading-strong-l'
+								onBackground='neutral-strong'
+								style={{
+									lineHeight: '1.3',
+									fontSize: 'clamp(1.125rem, 3.5vw, 1.375rem)',
+									fontWeight: '700',
+									letterSpacing: '-0.01em',
+									marginBottom: '8px',
+									display: '-webkit-box',
+									WebkitLineClamp: 2,
+									WebkitBoxOrient: 'vertical',
+									overflow: 'hidden'
+								}}>
+								{caseStudy.title}
+							</Text>
 
-						{/* Summary */}
-						<Text
-							variant='body-default-m'
-							onBackground='neutral-weak'
-							style={{
-								lineHeight: '1.6',
-								fontSize: 'clamp(0.875rem, 2.8vw, 0.95rem)',
-								display: '-webkit-box',
-								WebkitLineClamp: 3,
-								WebkitBoxOrient: 'vertical',
-								overflow: 'hidden',
-								textOverflow: 'ellipsis',
-								marginBottom: '12px',
-								flex: 1
-							}}>
-							{caseStudy.summary}
-						</Text>
+							{/* Summary */}
+							<Text
+								variant='body-default-m'
+								onBackground='neutral-weak'
+								style={{
+									lineHeight: '1.6',
+									fontSize: 'clamp(0.875rem, 2.8vw, 0.95rem)',
+									display: '-webkit-box',
+									WebkitLineClamp: 3,
+									WebkitBoxOrient: 'vertical',
+									overflow: 'hidden',
+									textOverflow: 'ellipsis',
+									marginBottom: '12px',
+									flex: 1
+								}}>
+								{caseStudy.summary}
+							</Text>
+						</Column>
 
-						{/* Enhanced Tags Row */}
+						{/* Tags Row - Improved responsive layout */}
 						<Row
 							gap='8'
 							wrap
@@ -159,7 +166,7 @@ export function CaseStudyCard({
 								marginTop: 'auto',
 								alignItems: 'flex-start'
 							}}>
-							{/* Tech Stack Tags with Brand Colors */}
+							{/* Tech Stack Tags */}
 							{caseStudy.techStack
 								?.filter((t) => t && t.trim().length > 0)
 								.slice(0, 3)
@@ -169,68 +176,66 @@ export function CaseStudyCard({
 										size='s'
 										variant='neutral'
 										style={{
-											fontSize: '0.7rem',
+											fontSize: 'clamp(0.65rem, 1.8vw, 0.75rem)',
 											fontWeight: '600',
-											padding: '6px 12px',
+											padding: '6px 10px',
 											borderRadius: '12px',
 											backgroundColor: 'var(--brand-alpha-weak)',
 											border: '1px solid var(--brand-alpha-medium)',
 											color: 'var(--brand-on-background-strong)',
-											transition: 'all 0.15s ease-in-out',
-											boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)'
+											transition:
+												'all var(--animation-duration-short) var(--animation-easing-standard)',
+											whiteSpace: 'nowrap',
+											maxWidth: '120px',
+											overflow: 'hidden',
+											textOverflow: 'ellipsis'
 										}}>
 										{tech}
 									</Tag>
 								))}
-							{/* Industry Tags with Accent Colors */}
-							{caseStudy.industry
-								?.filter((i) => i && i.trim().length > 0)
-								.slice(0, 2)
-								.map((industry) => (
-									<Tag
-										key={industry}
-										size='s'
-										variant='accent'
-										style={{
-											fontSize: '0.7rem',
-											fontWeight: '600',
-											padding: '6px 12px',
-											borderRadius: '12px',
-											backgroundColor: 'var(--accent-alpha-weak)',
-											border: '1px solid var(--accent-alpha-medium)',
-											color: 'var(--accent-on-background-strong)',
-											transition: 'all 0.15s ease-in-out',
-											boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)'
-										}}>
-										{industry}
-									</Tag>
-								))}
-							{/* Overflow indicator with neutral styling */}
-							{(caseStudy.techStack?.filter((t) => t && t.trim().length > 0)
-								.length || 0) +
-								(caseStudy.industry?.filter((i) => i && i.trim().length > 0)
-									.length || 0) >
-								5 && (
+
+							{/* Industry Tag */}
+							{caseStudy.industry && (
+								<Tag
+									size='s'
+									variant='brand'
+									style={{
+										fontSize: 'clamp(0.65rem, 1.8vw, 0.75rem)',
+										fontWeight: '600',
+										padding: '6px 10px',
+										borderRadius: '12px',
+										backgroundColor: 'var(--accent-alpha-weak)',
+										border: '1px solid var(--accent-alpha-medium)',
+										color: 'var(--accent-on-background-strong)',
+										transition:
+											'all var(--animation-duration-short) var(--animation-easing-standard)',
+										whiteSpace: 'nowrap',
+										maxWidth: '100px',
+										overflow: 'hidden',
+										textOverflow: 'ellipsis'
+									}}>
+									{caseStudy.industry}
+								</Tag>
+							)}
+
+							{/* Overflow indicator */}
+							{caseStudy.techStack && caseStudy.techStack.length > 3 && (
 								<Tag
 									size='s'
 									variant='neutral'
 									style={{
-										fontSize: '0.7rem',
-										fontWeight: '500',
-										padding: '6px 12px',
+										fontSize: 'clamp(0.65rem, 1.8vw, 0.75rem)',
+										fontWeight: '600',
+										padding: '6px 10px',
 										borderRadius: '12px',
 										backgroundColor: 'var(--neutral-alpha-weak)',
 										border: '1px solid var(--neutral-alpha-medium)',
 										color: 'var(--neutral-on-background-medium)',
-										opacity: 0.8,
-										transition: 'all 0.15s ease-in-out'
+										transition:
+											'all var(--animation-duration-short) var(--animation-easing-standard)',
+										opacity: 0.7
 									}}>
-									+
-									{(caseStudy.techStack?.filter((t) => t && t.trim().length > 0)
-										.length || 0) +
-										(caseStudy.industry?.filter((i) => i && i.trim().length > 0)
-											.length || 0) -
-										5}
+									+{caseStudy.techStack.length - 3}
 								</Tag>
 							)}
 						</Row>
