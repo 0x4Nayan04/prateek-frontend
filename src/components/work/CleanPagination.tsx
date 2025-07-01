@@ -75,6 +75,15 @@ export function CleanPagination({
 										transition: 'all 0.2s ease-in-out',
 										borderRadius: '8px',
 										minHeight: '44px'
+									}}
+									onMouseEnter={(e) => {
+										e.currentTarget.style.backgroundColor =
+											'var(--neutral-alpha-weak)';
+										e.currentTarget.style.transform = 'translateX(-2px)';
+									}}
+									onMouseLeave={(e) => {
+										e.currentTarget.style.backgroundColor = 'transparent';
+										e.currentTarget.style.transform = 'translateX(0px)';
 									}}>
 									{/* Arrow Icon */}
 									<Row
@@ -107,7 +116,7 @@ export function CleanPagination({
 											variant='label-default-xs'
 											onBackground='neutral-medium'
 											style={{
-												fontSize: '9px',
+												fontSize: '11px',
 												textTransform: 'uppercase',
 												letterSpacing: '0.8px',
 												fontWeight: '500',
@@ -122,7 +131,8 @@ export function CleanPagination({
 												overflow: 'hidden',
 												textOverflow: 'ellipsis',
 												whiteSpace: 'nowrap',
-												fontSize: '13px',
+												fontSize: '14px',
+												fontWeight: '600',
 												lineHeight: '1.3'
 											}}>
 											{previousCaseStudy.title}
@@ -183,6 +193,15 @@ export function CleanPagination({
 										transition: 'all 0.2s ease-in-out',
 										borderRadius: '8px',
 										minHeight: '44px'
+									}}
+									onMouseEnter={(e) => {
+										e.currentTarget.style.backgroundColor =
+											'var(--neutral-alpha-weak)';
+										e.currentTarget.style.transform = 'translateX(2px)';
+									}}
+									onMouseLeave={(e) => {
+										e.currentTarget.style.backgroundColor = 'transparent';
+										e.currentTarget.style.transform = 'translateX(0px)';
 									}}>
 									{/* Text Content */}
 									<Column
@@ -192,9 +211,8 @@ export function CleanPagination({
 										<Text
 											variant='label-default-xs'
 											onBackground='neutral-medium'
-											align='right'
 											style={{
-												fontSize: '9px',
+												fontSize: '11px',
 												textTransform: 'uppercase',
 												letterSpacing: '0.8px',
 												fontWeight: '500',
@@ -210,7 +228,8 @@ export function CleanPagination({
 												overflow: 'hidden',
 												textOverflow: 'ellipsis',
 												whiteSpace: 'nowrap',
-												fontSize: '13px',
+												fontSize: '14px',
+												fontWeight: '600',
 												lineHeight: '1.3'
 											}}>
 											{nextCaseStudy.title}
