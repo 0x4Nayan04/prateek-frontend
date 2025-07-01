@@ -1,4 +1,13 @@
-import { Button, Column, Row, RevealFx, Line } from '@once-ui-system/core';
+'use client';
+
+import {
+	Button,
+	Column,
+	Row,
+	RevealFx,
+	Line,
+	Text
+} from '@once-ui-system/core';
 import { CaseStudy } from '@/lib/sanity/types';
 
 interface CleanPaginationProps {
@@ -10,12 +19,10 @@ export function CleanPagination({
 	currentSlug,
 	allCaseStudies
 }: CleanPaginationProps) {
-	// Find current case study index
 	const currentIndex = allCaseStudies.findIndex(
 		(study) => study.slug.current === currentSlug
 	);
 
-	// Determine previous and next case studies
 	const previousCaseStudy =
 		currentIndex > 0 ? allCaseStudies[currentIndex - 1] : null;
 	const nextCaseStudy =
@@ -23,7 +30,6 @@ export function CleanPagination({
 			? allCaseStudies[currentIndex + 1]
 			: null;
 
-	// If no navigation available, don't render anything
 	if (!previousCaseStudy && !nextCaseStudy) {
 		return null;
 	}
@@ -31,69 +37,228 @@ export function CleanPagination({
 	return (
 		<RevealFx
 			translateY={8}
-			delay={0.2}>
+			delay={0.05}>
 			<Column
 				fillWidth
-				gap='16'>
-				{/* Divider line */}
+				gap='24'>
 				<Line
 					fillWidth
 					background='neutral-alpha-medium'
 				/>
-
-				{/* Navigation buttons in a compact row layout */}
 				<Row
 					fillWidth
-					gap='l'
-					horizontal='center'
+					gap='24'
+					mobileDirection='column'
+					horizontal='space-between'
 					vertical='center'>
-					{/* Previous case study button */}
-					{previousCaseStudy && (
-						<Button
-							href={`/work/${previousCaseStudy.slug.current}`}
-							variant='secondary'
-							size='l'
-							prefixIcon='chevronLeft'
-							weight='default'
-							style={{
-								flex: '1',
-								maxWidth: '300px',
-								minHeight: '44px',
-								fontSize: '14px',
-								fontWeight: '500',
-								padding: '12px 20px',
-								whiteSpace: 'nowrap',
-								overflow: 'hidden',
-								textOverflow: 'ellipsis',
-								borderRadius: '8px'
-							}}>
-							{previousCaseStudy.title}
-						</Button>
-					)}
+					{/* Previous Case Study */}
+					<Column
+						style={{
+							flex: '1'
+						}}>
+						{previousCaseStudy ? (
+							<a
+								href={`/work/${previousCaseStudy.slug.current}`}
+								style={{
+									all: 'unset',
+									textDecoration: 'none',
+									cursor: 'pointer',
+									maxWidth: '300px'
+								}}>
+								<Row
+									gap='12'
+									padding='16'
+									vertical='center'
+									horizontal='start'
+									radius='m'
+									style={{
+										transition: 'all 0.2s ease-in-out',
+										backgroundColor: 'transparent'
+									}}
+									onMouseEnter={(e) => {
+										e.currentTarget.style.backgroundColor =
+											'var(--neutral-alpha-weak)';
+									}}
+									onMouseLeave={(e) => {
+										e.currentTarget.style.backgroundColor = 'transparent';
+									}}>
+									{/* Arrow Icon */}
+									<Row
+										vertical='center'
+										horizontal='center'
+										style={{
+											flexShrink: 0,
+											width: '20px',
+											height: '20px'
+										}}>
+										<svg
+											width='16'
+											height='16'
+											viewBox='0 0 24 24'
+											fill='none'
+											stroke='currentColor'
+											strokeWidth='2.5'
+											style={{
+												color: 'var(--neutral-on-background-medium)'
+											}}>
+											<path d='m15 18-6-6 6-6' />
+										</svg>
+									</Row>
 
-					{/* Next case study button */}
-					{nextCaseStudy && (
-						<Button
-							href={`/work/${nextCaseStudy.slug.current}`}
-							variant='secondary'
-							size='l'
-							suffixIcon='chevronRight'
-							weight='default'
+									{/* Text Content */}
+									<Column
+										gap='2'
+										fillWidth>
+										<Text
+											variant='label-default-xs'
+											onBackground='neutral-medium'
+											style={{
+												fontSize: '11px',
+												textTransform: 'uppercase',
+												letterSpacing: '0.8px',
+												fontWeight: '500',
+												lineHeight: '1'
+											}}>
+											PREVIOUS
+										</Text>
+										<Text
+											variant='body-default-s'
+											onBackground='neutral-strong'
+											style={{
+												overflow: 'hidden',
+												textOverflow: 'ellipsis',
+												whiteSpace: 'nowrap',
+												fontWeight: '600',
+												fontSize: '14px',
+												lineHeight: '1.3'
+											}}>
+											{previousCaseStudy.title}
+										</Text>
+									</Column>
+								</Row>
+							</a>
+						) : (
+							<div />
+						)}
+					</Column>
+
+					{/* Navigation Indicator */}
+					<Column
+						horizontal='center'
+						vertical='center'
+						style={{
+							flexShrink: 0,
+							padding: '10px 16px',
+							backgroundColor: 'var(--neutral-alpha-weak)',
+							borderRadius: '8px',
+							border: '1px solid var(--neutral-alpha-medium)'
+						}}>
+						<Text
+							variant='body-default-s'
+							onBackground='neutral-strong'
 							style={{
-								flex: '1',
-								maxWidth: '300px',
-								minHeight: '44px',
+								fontFamily: '"Inter", sans-serif',
 								fontSize: '14px',
-								fontWeight: '500',
-								padding: '12px 20px',
-								whiteSpace: 'nowrap',
-								overflow: 'hidden',
-								textOverflow: 'ellipsis',
-								borderRadius: '8px'
+								fontWeight: '600'
 							}}>
-							{nextCaseStudy.title}
-						</Button>
-					)}
+							{currentIndex + 1} of {allCaseStudies.length}
+						</Text>
+					</Column>
+
+					{/* Next Case Study */}
+					<Column
+						style={{
+							flex: '1'
+						}}
+						horizontal='end'>
+						{nextCaseStudy ? (
+							<a
+								href={`/work/${nextCaseStudy.slug.current}`}
+								style={{
+									all: 'unset',
+									textDecoration: 'none',
+									cursor: 'pointer',
+									maxWidth: '300px'
+								}}>
+								<Row
+									gap='12'
+									padding='16'
+									vertical='center'
+									horizontal='end'
+									radius='m'
+									style={{
+										transition: 'all 0.2s ease-in-out',
+										backgroundColor: 'transparent'
+									}}
+									onMouseEnter={(e) => {
+										e.currentTarget.style.backgroundColor =
+											'var(--neutral-alpha-weak)';
+									}}
+									onMouseLeave={(e) => {
+										e.currentTarget.style.backgroundColor = 'transparent';
+									}}>
+									{/* Text Content */}
+									<Column
+										gap='2'
+										fillWidth
+										horizontal='end'>
+										<Text
+											variant='label-default-xs'
+											onBackground='neutral-medium'
+											align='right'
+											style={{
+												fontSize: '11px',
+												textTransform: 'uppercase',
+												letterSpacing: '0.8px',
+												fontWeight: '500',
+												lineHeight: '1'
+											}}>
+											NEXT
+										</Text>
+										<Text
+											variant='body-default-s'
+											onBackground='neutral-strong'
+											align='right'
+											style={{
+												overflow: 'hidden',
+												textOverflow: 'ellipsis',
+												whiteSpace: 'nowrap',
+												fontWeight: '600',
+												fontSize: '14px',
+												lineHeight: '1.3'
+											}}>
+											{nextCaseStudy.title}
+										</Text>
+									</Column>
+
+									{/* Arrow Icon */}
+									<Row
+										vertical='center'
+										horizontal='center'
+										style={{
+											flexShrink: 0,
+											width: '20px',
+											height: '20px'
+										}}>
+										<svg
+											width='16'
+											height='16'
+											viewBox='0 0 24 24'
+											fill='none'
+											stroke='currentColor'
+											strokeWidth='2.5'
+											style={{
+												color: 'var(--neutral-on-background-medium)'
+											}}>
+											<path d='m9 18 6-6-6-6' />
+										</svg>
+									</Row>
+								</Row>
+							</a>
+						) : (
+							<div />
+						)}
+					</Column>
 				</Row>
 			</Column>
 		</RevealFx>
