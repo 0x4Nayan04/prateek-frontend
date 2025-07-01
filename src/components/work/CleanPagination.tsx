@@ -66,21 +66,15 @@ export function CleanPagination({
 									maxWidth: '300px'
 								}}>
 								<Row
-									gap='12'
-									padding='16'
+									gap='8'
+									padding='12'
 									vertical='center'
 									horizontal='start'
 									radius='m'
 									style={{
 										transition: 'all 0.2s ease-in-out',
-										backgroundColor: 'transparent'
-									}}
-									onMouseEnter={(e) => {
-										e.currentTarget.style.backgroundColor =
-											'var(--neutral-alpha-weak)';
-									}}
-									onMouseLeave={(e) => {
-										e.currentTarget.style.backgroundColor = 'transparent';
+										borderRadius: '8px',
+										minHeight: '44px'
 									}}>
 									{/* Arrow Icon */}
 									<Row
@@ -92,12 +86,12 @@ export function CleanPagination({
 											height: '20px'
 										}}>
 										<svg
-											width='16'
-											height='16'
+											width='14'
+											height='14'
 											viewBox='0 0 24 24'
 											fill='none'
 											stroke='currentColor'
-											strokeWidth='2.5'
+											strokeWidth='2'
 											style={{
 												color: 'var(--neutral-on-background-medium)'
 											}}>
@@ -113,7 +107,7 @@ export function CleanPagination({
 											variant='label-default-xs'
 											onBackground='neutral-medium'
 											style={{
-												fontSize: '11px',
+												fontSize: '9px',
 												textTransform: 'uppercase',
 												letterSpacing: '0.8px',
 												fontWeight: '500',
@@ -128,8 +122,7 @@ export function CleanPagination({
 												overflow: 'hidden',
 												textOverflow: 'ellipsis',
 												whiteSpace: 'nowrap',
-												fontWeight: '600',
-												fontSize: '14px',
+												fontSize: '13px',
 												lineHeight: '1.3'
 											}}>
 											{previousCaseStudy.title}
@@ -148,18 +141,18 @@ export function CleanPagination({
 						vertical='center'
 						style={{
 							flexShrink: 0,
-							padding: '10px 16px',
+							padding: '12px 16px',
 							backgroundColor: 'var(--neutral-alpha-weak)',
 							borderRadius: '8px',
-							border: '1px solid var(--neutral-alpha-medium)'
+							border: '1px solid var(--neutral-alpha-medium)',
+							minHeight: '40px'
 						}}>
 						<Text
 							variant='body-default-s'
 							onBackground='neutral-strong'
 							style={{
-								fontFamily: '"Inter", sans-serif',
-								fontSize: '14px',
-								fontWeight: '600'
+								fontSize: '13px',
+								fontWeight: '500'
 							}}>
 							{currentIndex + 1} of {allCaseStudies.length}
 						</Text>
@@ -181,21 +174,15 @@ export function CleanPagination({
 									maxWidth: '300px'
 								}}>
 								<Row
-									gap='12'
-									padding='16'
+									gap='8'
+									padding='12'
 									vertical='center'
 									horizontal='end'
 									radius='m'
 									style={{
 										transition: 'all 0.2s ease-in-out',
-										backgroundColor: 'transparent'
-									}}
-									onMouseEnter={(e) => {
-										e.currentTarget.style.backgroundColor =
-											'var(--neutral-alpha-weak)';
-									}}
-									onMouseLeave={(e) => {
-										e.currentTarget.style.backgroundColor = 'transparent';
+										borderRadius: '8px',
+										minHeight: '44px'
 									}}>
 									{/* Text Content */}
 									<Column
@@ -207,7 +194,7 @@ export function CleanPagination({
 											onBackground='neutral-medium'
 											align='right'
 											style={{
-												fontSize: '11px',
+												fontSize: '9px',
 												textTransform: 'uppercase',
 												letterSpacing: '0.8px',
 												fontWeight: '500',
@@ -223,8 +210,7 @@ export function CleanPagination({
 												overflow: 'hidden',
 												textOverflow: 'ellipsis',
 												whiteSpace: 'nowrap',
-												fontWeight: '600',
-												fontSize: '14px',
+												fontSize: '13px',
 												lineHeight: '1.3'
 											}}>
 											{nextCaseStudy.title}
@@ -241,12 +227,12 @@ export function CleanPagination({
 											height: '20px'
 										}}>
 										<svg
-											width='16'
-											height='16'
+											width='14'
+											height='14'
 											viewBox='0 0 24 24'
 											fill='none'
 											stroke='currentColor'
-											strokeWidth='2.5'
+											strokeWidth='2'
 											style={{
 												color: 'var(--neutral-on-background-medium)'
 											}}>
