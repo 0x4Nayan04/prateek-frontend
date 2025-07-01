@@ -82,47 +82,6 @@ export async function getCaseStudyBySlug(slug: string) {
 	}
 }
 
-export async function getCaseStudiesPaginated(
-	offset: number = 0,
-	limit: number = 6
-) {
-	try {
-		const caseStudies: CaseStudy[] = await client.fetch(
-			`*[_type == "caseStudy"] | order(priority asc) [${offset}...${
-				offset + limit
-			}] {
-				_id,
-				title,
-				slug,
-				summary,
-				thumbnail,
-				images,
-				techStack,
-				industry,
-				priority
-			}`
-		);
-
-		// Get total count for pagination
-		const totalCount: number = await client.fetch(
-			`count(*[_type == "caseStudy"])`
-		);
-
-		return {
-			caseStudies,
-			totalCount,
-			hasMore: offset + limit < totalCount
-		};
-	} catch (error) {
-		console.error('Error fetching paginated case studies:', error);
-		return {
-			caseStudies: [],
-			totalCount: 0,
-			hasMore: false
-		};
-	}
-}
-
 // New function to get available filters
 export async function getAvailableFilters() {
 	try {

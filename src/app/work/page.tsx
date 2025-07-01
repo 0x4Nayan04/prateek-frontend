@@ -42,7 +42,6 @@ export default function Work() {
 			gap='12'>
 			<ModernProjects
 				title='Case Studies'
-				useInfiniteScroll={false}
 				enableFilters={true}
 				columns='2'
 			/>

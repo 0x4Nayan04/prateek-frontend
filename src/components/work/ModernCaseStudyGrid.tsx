@@ -38,8 +38,6 @@ export function ModernCaseStudyGrid({
 		: caseStudies;
 
 	const hasResults = displayedCaseStudies.length > 0;
-	const totalResults = caseStudies.length;
-	const hasMoreResults = maxItems && totalResults > maxItems;
 
 	return (
 		<Column
@@ -128,7 +126,7 @@ export function ModernCaseStudyGrid({
 								</Grid>
 
 								{/* View All Button */}
-								{(showViewAllButton || hasMoreResults) && (
+								{showViewAllButton && (
 									<RevealFx
 										translateY={8}
 										horizontal='center'
@@ -143,8 +141,6 @@ export function ModernCaseStudyGrid({
 												size='l'
 												arrowIcon>
 												Show more case studies
-												{hasMoreResults &&
-													` (${totalResults - displayedCaseStudies.length} more)`}
 											</Button>
 										</Column>
 									</RevealFx>

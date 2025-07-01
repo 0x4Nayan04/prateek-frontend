@@ -1,18 +1,15 @@
 import {
 	getFeaturedCaseStudies,
 	getAllCaseStudies,
-	getCaseStudiesPaginated,
 	getAvailableFilters
 } from '@/lib/utils/content';
 import { ModernProjectsClientWrapper } from './ModernProjectsClientWrapper';
-import { InfiniteCaseStudyGrid } from './InfiniteCaseStudyGrid';
 
 interface ModernProjectsProps {
 	title?: string;
 	description?: string;
 	maxItems?: number;
 	columns?: '1' | '2' | '3';
-	useInfiniteScroll?: boolean;
 	enableFilters?: boolean;
 }
 
@@ -21,30 +18,10 @@ export async function ModernProjects({
 	description,
 	maxItems,
 	columns = '2',
-	useInfiniteScroll = false,
 	enableFilters = false
 }: ModernProjectsProps) {
 	try {
-		// For infinite scroll, get initial batch
-		if (useInfiniteScroll && !maxItems) {
-			const initialData = await getCaseStudiesPaginated(0, 6);
-			const columnsConfig = {
-				desktop: parseInt(columns),
-				tablet: parseInt(columns),
-				mobile: 1
-			};
-
-			return (
-				<InfiniteCaseStudyGrid
-					title={title}
-					initialCaseStudies={initialData.caseStudies}
-					itemsPerPage={6}
-					columns={columnsConfig}
-				/>
-			);
-		}
-
-		// For homepage with maxItems or non-infinite scroll
+		// Get case studies based on maxItems
 		const caseStudies = maxItems
 			? await getFeaturedCaseStudies(maxItems)
 			: await getAllCaseStudies();
@@ -67,24 +44,6 @@ export async function ModernProjects({
 		);
 	} catch (error) {
 		console.error('Error fetching case studies:', error);
-
-		// Return empty infinite scroll or regular component based on useInfiniteScroll
-		if (useInfiniteScroll && !maxItems) {
-			const columnsConfig = {
-				desktop: parseInt(columns),
-				tablet: parseInt(columns),
-				mobile: 1
-			};
-
-			return (
-				<InfiniteCaseStudyGrid
-					title={title}
-					initialCaseStudies={[]}
-					itemsPerPage={6}
-					columns={columnsConfig}
-				/>
-			);
-		}
 
 		return (
 			<ModernProjectsClientWrapper
