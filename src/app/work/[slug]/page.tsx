@@ -1,4 +1,6 @@
 import { PortableText, ScrollToHash } from '@/components';
+import { CaseStudyPagination } from '@/components/work/CaseStudyPagination';
+import { CleanPagination } from '@/components/work/CleanPagination';
 import { getFileUrl, urlFor } from '@/lib/sanity/client';
 import { getAllCaseStudies, getCaseStudyBySlug } from '@/lib/utils/content';
 import { baseURL, work } from '@/resources';
@@ -96,6 +98,8 @@ export default async function CaseStudyPage({
 }) {
 	const { slug } = await params;
 	const caseStudy = await getCaseStudyBySlug(slug);
+	// Fetch all case studies for pagination
+	const allCaseStudies = await getAllCaseStudies();
 
 	if (!caseStudy) {
 		notFound();
@@ -631,6 +635,12 @@ export default async function CaseStudyPage({
 					</RevealFx>
 				)}
 			</Column>
+
+			{/* Case Study Pagination - Clean Implementation */}
+			<CleanPagination
+				currentSlug={slug}
+				allCaseStudies={allCaseStudies}
+			/>
 
 			<ScrollToHash />
 		</Column>

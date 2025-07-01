@@ -1,0 +1,112 @@
+/* ============================================================================
+   NEUTRALIZE PROBLEMATIC WIDTH/HEIGHT OVERRIDES
+   ============================================================================ */
+
+/* Remove forced heights and widths from cards */
+.caseStudyCard,
+[data-case-study-card],
+a[href*='/work/'],
+[data-card] {
+	width: 100% !important;
+	height: auto !important;
+	min-height: unset !important;
+	max-height: unset !important;
+	max-width: unset !important;
+}
+
+/* Fix grid system to use natural sizing */
+[data-grid] > *,
+[data-grid],
+[data-columns='2'],
+[data-columns='1'] {
+	height: auto !important;
+	min-height: unset !important;
+	max-height: unset !important;
+	grid-auto-rows: auto !important;
+}
+
+/* Remove excessive padding/margin overrides */
+[data-padding='l'],
+[data-paddingx='l'],
+[data-paddingx='xl'],
+[data-padding='m'],
+[data-gap='s'],
+[data-gap='m'],
+[data-gap='l'],
+[data-gap='xl'] {
+	padding: unset !important;
+	gap: unset !important;
+}
+
+/* Let Once UI handle its own spacing */
+[data-gap] {
+	gap: var(--space-m) !important;
+}
+
+/* Clean up carousel dimensions */
+[data-carousel] {
+	width: 100% !important;
+	height: auto !important;
+	margin: 0 !important;
+}
+
+/* Remove tag width constraints */
+[data-tag] {
+	max-width: unset !important;
+	width: auto !important;
+	height: auto !important;
+	min-height: unset !important;
+}
+
+/* Remove mobile-specific overrides that conflict */
+@media (max-width: 768px) {
+	.caseStudyCard,
+	[data-case-study-card],
+	[data-grid] > *,
+	[data-card],
+	a[href*='/work/'] {
+		min-height: unset !important;
+		max-height: unset !important;
+		height: auto !important;
+		width: 100% !important;
+	}
+
+	[data-tag] {
+		max-width: unset !important;
+		font-size: unset !important;
+	}
+}
+
+/* ============================================================================
+   PROGRESSIVE ENHANCEMENT - CLEAN COMPONENT STYLES
+   ============================================================================ */
+
+/* When clean components are used, style them properly */
+.card-base {
+	background: var(--brand-alpha-weak);
+	border: 1px solid var(--neutral-alpha-strong);
+	border-radius: 12px;
+	overflow: hidden;
+	transition: all 0.25s ease-out;
+	text-decoration: none;
+	color: inherit;
+}
+
+.card-base:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.grid-responsive {
+	display: grid;
+	gap: var(--space-2xl);
+	grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
+	align-items: start;
+}
+
+@media (max-width: 768px) {
+	.grid-responsive {
+		grid-template-columns: 1fr;
+		gap: var(--space-l);
+	}
+}
