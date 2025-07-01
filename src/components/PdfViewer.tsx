@@ -17,18 +17,30 @@ interface PdfViewerProps {
 }
 
 export function PdfViewer({ url, title = 'Document' }: PdfViewerProps) {
-	const [viewMode, setViewMode] = useState<'preview' | 'download'>('preview');
 	const [isLoading, setIsLoading] = useState(true);
 	const [hasError, setHasError] = useState(false);
+	const [isDownloading, setIsDownloading] = useState(false);
 
-	const handleDownload = () => {
-		const link = document.createElement('a');
-		link.href = url;
-		link.download = title + '.pdf';
-		link.target = '_blank';
-		document.body.appendChild(link);
-		link.click();
-		document.body.removeChild(link);
+	const handleDownload = async () => {
+		setIsDownloading(true);
+		try {
+			const link = document.createElement('a');
+			link.href = url;
+			link.download = title + '.pdf';
+			link.target = '_blank';
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
+		} catch (error) {
+			console.error('Download failed:', error);
+		} finally {
+			// Add small delay for better UX
+			setTimeout(() => setIsDownloading(false), 1000);
+		}
+	};
+
+	const handleOpenInNewTab = () => {
+		window.open(url, '_blank');
 	};
 
 	const handlePreviewLoad = () => {
@@ -65,14 +77,7 @@ export function PdfViewer({ url, title = 'Document' }: PdfViewerProps) {
 				style={{
 					borderBottom: '1px solid var(--neutral-alpha-weak)'
 				}}>
-				<Row
-					vertical='center'
-					gap='12'>
-					<Icon
-						name='document'
-						size='m'
-						style={{ color: 'var(--accent-medium)' }}
-					/>
+				<Row vertical='center'>
 					<Column gap='2'>
 						<Text
 							variant='label-strong-m'
@@ -89,20 +94,26 @@ export function PdfViewer({ url, title = 'Document' }: PdfViewerProps) {
 
 				<Row gap='8'>
 					<Button
-						variant={viewMode === 'preview' ? 'primary' : 'secondary'}
-						size='s'
-						prefixIcon='eye'
-						onClick={() => setViewMode('preview')}
-						style={{ minWidth: 'auto' }}>
-						Preview
-					</Button>
-					<Button
 						variant='secondary'
 						size='s'
-						prefixIcon='chevronDown'
+						prefixIcon='arrowUpRightFromSquare'
+						onClick={handleOpenInNewTab}
+						style={{
+							minWidth: 'auto',
+							backgroundColor: 'var(--neutral-alpha-medium)',
+							border: '1px solid var(--neutral-alpha-strong)',
+							color: 'var(--neutral-on-background-strong)'
+						}}>
+						Open
+					</Button>
+					<Button
+						variant='primary'
+						size='s'
+						prefixIcon={isDownloading ? 'refresh' : 'chevronDown'}
 						onClick={handleDownload}
+						disabled={isDownloading}
 						style={{ minWidth: 'auto' }}>
-						Download
+						{isDownloading ? 'Downloading...' : 'Download'}
 					</Button>
 				</Row>
 			</Row>
@@ -111,138 +122,106 @@ export function PdfViewer({ url, title = 'Document' }: PdfViewerProps) {
 			<Column
 				fillWidth
 				style={{ flex: 1, position: 'relative' }}>
-				{viewMode === 'preview' ? (
-					<>
-						{isLoading && (
-							<Column
-								fillWidth
-								fill
-								center
-								gap='16'
-								style={{
-									position: 'absolute',
-									top: 0,
-									left: 0,
-									right: 0,
-									bottom: 0,
-									backgroundColor: 'var(--neutral-alpha-weak)',
-									zIndex: 1
-								}}>
-								<div
-									style={{
-										width: '32px',
-										height: '32px',
-										border: '3px solid var(--neutral-alpha-medium)',
-										borderTop: '3px solid var(--accent-medium)',
-										borderRadius: '50%',
-										animation: 'spin 1s linear infinite'
-									}}
-								/>
-								<Text
-									variant='body-default-s'
-									style={{ color: 'var(--neutral-medium)' }}>
-									Loading document...
-								</Text>
-							</Column>
-						)}
-
-						{hasError ? (
-							<Column
-								fillWidth
-								fill
-								center
-								gap='16'
-								padding='40'>
-								<Icon
-									name='warning'
-									size='l'
-									style={{ color: 'var(--warning-medium)' }}
-								/>
-								<Column
-									gap='8'
-									center>
-									<Text
-										variant='heading-strong-s'
-										style={{ color: 'var(--neutral-strong)' }}>
-										Preview Unavailable
-									</Text>
-									<Text
-										variant='body-default-s'
-										style={{
-											color: 'var(--neutral-medium)',
-											textAlign: 'center'
-										}}>
-										This PDF cannot be previewed in the browser. Please download
-										it to view.
-									</Text>
-								</Column>
-								<Button
-									variant='primary'
-									size='m'
-									prefixIcon='chevronDown'
-									onClick={handleDownload}>
-									Download PDF
-								</Button>
-							</Column>
-						) : (
-							<iframe
-								src={googleDocsUrl}
-								style={{
-									width: '100%',
-									height: '100%',
-									border: 'none',
-									borderRadius: '0 0 12px 12px'
-								}}
-								onLoad={handlePreviewLoad}
-								onError={handlePreviewError}
-								title={`${title} - PDF Preview`}
-								sandbox='allow-scripts allow-same-origin'
-							/>
-						)}
-					</>
-				) : (
+				{isLoading && (
 					<Column
 						fillWidth
 						fill
 						center
-						gap='24'
-						padding='40'>
-						<Card
-							padding='24'
-							radius='l'
-							background='accent-alpha-weak'
-							border='accent-alpha-medium'
-							center>
-							<Icon
-								name='document'
-								size='xl'
-								style={{ color: 'var(--accent-medium)' }}
-							/>
-						</Card>
+						gap='16'
+						style={{
+							position: 'absolute',
+							top: 0,
+							left: 0,
+							right: 0,
+							bottom: 0,
+							backgroundColor: 'var(--neutral-alpha-weak)',
+							zIndex: 1
+						}}>
+						<div
+							style={{
+								width: '32px',
+								height: '32px',
+								border: '3px solid var(--neutral-alpha-medium)',
+								borderTop: '3px solid var(--accent-medium)',
+								borderRadius: '50%',
+								animation: 'spin 1s linear infinite'
+							}}
+						/>
+						<Text
+							variant='body-default-s'
+							style={{ color: 'var(--neutral-medium)' }}>
+							Loading document...
+						</Text>
+					</Column>
+				)}
 
+				{hasError ? (
+					<Column
+						fillWidth
+						fill
+						center
+						gap='16'
+						padding='40'>
+						<Icon
+							name='warningTriangle'
+							size='l'
+							style={{ color: 'var(--warning-medium)' }}
+						/>
 						<Column
-							gap='12'
+							gap='8'
 							center>
 							<Text
-								variant='heading-strong-m'
+								variant='heading-strong-s'
 								style={{ color: 'var(--neutral-strong)' }}>
-								{title}
+								Preview Unavailable
 							</Text>
 							<Text
 								variant='body-default-s'
-								style={{ color: 'var(--neutral-medium)', textAlign: 'center' }}>
-								Click the button below to download and view this PDF document.
+								style={{
+									color: 'var(--neutral-medium)',
+									textAlign: 'center'
+								}}>
+								This PDF cannot be previewed in the browser. Please download it
+								to view.
 							</Text>
 						</Column>
-
-						<Button
-							variant='primary'
-							size='l'
-							prefixIcon='chevronDown'
-							onClick={handleDownload}>
-							Download PDF
-						</Button>
+						<Row gap='12'>
+							<Button
+								variant='secondary'
+								size='m'
+								prefixIcon='arrowUpRightFromSquare'
+								onClick={handleOpenInNewTab}
+								style={{
+									backgroundColor: 'var(--neutral-alpha-medium)',
+									border: '1px solid var(--neutral-alpha-strong)',
+									color: 'var(--neutral-on-background-strong)'
+								}}>
+								Open in New Tab
+							</Button>
+							<Button
+								variant='primary'
+								size='m'
+								prefixIcon={isDownloading ? 'refresh' : 'chevronDown'}
+								onClick={handleDownload}
+								disabled={isDownloading}>
+								{isDownloading ? 'Downloading...' : 'Download PDF'}
+							</Button>
+						</Row>
 					</Column>
+				) : (
+					<iframe
+						src={googleDocsUrl}
+						style={{
+							width: '100%',
+							height: '100%',
+							border: 'none',
+							borderRadius: '0 0 12px 12px'
+						}}
+						onLoad={handlePreviewLoad}
+						onError={handlePreviewError}
+						title={`${title} - PDF Preview`}
+						sandbox='allow-scripts allow-same-origin'
+					/>
 				)}
 			</Column>
 
