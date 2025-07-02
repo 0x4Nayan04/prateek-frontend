@@ -68,6 +68,9 @@ export const Header = () => {
 		(isAboutInView ||
 			(typeof window !== 'undefined' && window.location.hash === '#about'));
 
+	// Determine if Home section should be highlighted (exclude when about is active)
+	const isHomeActive = pathname === '/' && !isAboutActive;
+
 	const scrollToAbout = () => {
 		// If we're already on the homepage, just scroll to about
 		if (pathname === '/') {
@@ -142,31 +145,31 @@ export const Header = () => {
 										prefixIcon='home'
 										href='/'
 										label='Home'
-										selected={pathname === '/'}
+										selected={isHomeActive}
 									/>
 									<ToggleButton
 										className='s-flex-show'
 										prefixIcon='home'
 										href='/'
-										selected={pathname === '/'}
+										selected={isHomeActive}
 									/>
 								</>
 							)}
-								<>
-									<ToggleButton
-										className='s-flex-hide'
-										prefixIcon='person'
-										onClick={scrollToAbout}
+							<>
+								<ToggleButton
+									className='s-flex-hide'
+									prefixIcon='person'
+									onClick={scrollToAbout}
 									label='About'
-										selected={isAboutActive}
-									/>
-									<ToggleButton
-										className='s-flex-show'
-										prefixIcon='person'
-										onClick={scrollToAbout}
-										selected={isAboutActive}
-									/>
-								</>
+									selected={isAboutActive}
+								/>
+								<ToggleButton
+									className='s-flex-show'
+									prefixIcon='person'
+									onClick={scrollToAbout}
+									selected={isAboutActive}
+								/>
+							</>
 							{routes['/work'] && (
 								<>
 									<ToggleButton
@@ -190,8 +193,8 @@ export const Header = () => {
 				<Flex
 					paddingRight='12'
 					fillWidth
-						horizontal='end'
-						vertical='center'
+					horizontal='end'
+					vertical='center'
 					textVariant='body-default-s'></Flex>
 			</Flex>
 		</>
