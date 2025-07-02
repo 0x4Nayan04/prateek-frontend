@@ -74,12 +74,12 @@ export function CaseStudyGrid({
 							tabletColumns='2'
 							mobileColumns='1'
 							fillWidth
-							gap='64'
+							gap='32'
 							style={{
 								display: 'grid',
 								justifyItems: 'center',
 								alignItems: 'stretch',
-								gap: '64px',
+								gap: '32px',
 								gridAutoFlow: 'row',
 								alignContent: 'start',
 								paddingLeft: 'clamp(16px, 3vw, 32px)',

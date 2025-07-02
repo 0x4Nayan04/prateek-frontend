@@ -84,7 +84,7 @@ export function FilteredCaseStudyGrid({
 							columns='2'
 							tabletColumns='2'
 							mobileColumns='1'
-							gap='64'
+							gap='32'
 							fillWidth
 							style={{
 								justifyItems: 'center',

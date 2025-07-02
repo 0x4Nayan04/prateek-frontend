@@ -110,7 +110,7 @@ export function ModernCaseStudyGrid({
 									columns={columns.desktop as any}
 									tabletColumns={columns.tablet as any}
 									mobileColumns={columns.mobile as any}
-									gap='64'
+									gap='32'
 									fillWidth
 									style={{
 										alignItems: 'stretch'
