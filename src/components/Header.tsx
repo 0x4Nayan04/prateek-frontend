@@ -13,10 +13,22 @@ export const Header = () => {
 	const router = useRouter();
 	const [isAboutInView, setIsAboutInView] = useState(false);
 	const [mounted, setMounted] = useState(false);
+	const [isMobile, setIsMobile] = useState(false);
 
-	// Handle mounting for SSR safety
+	// Handle mounting for SSR safety and responsive detection
 	useEffect(() => {
 		setMounted(true);
+
+		const checkMobile = () => {
+			setIsMobile(window.innerWidth <= 768);
+		};
+
+		checkMobile();
+		window.addEventListener('resize', checkMobile);
+
+		return () => {
+			window.removeEventListener('resize', checkMobile);
+		};
 	}, []);
 
 	// Set up intersection observer to track about section visibility
@@ -139,53 +151,26 @@ export const Header = () => {
 							textVariant='body-default-s'
 							suppressHydrationWarning>
 							{routes['/'] && (
-								<>
-									<ToggleButton
-										className='s-flex-hide'
-										prefixIcon='home'
-										href='/'
-										label='Home'
-										selected={isHomeActive}
-									/>
-									<ToggleButton
-										className='s-flex-show'
-										prefixIcon='home'
-										href='/'
-										selected={isHomeActive}
-									/>
-								</>
+								<ToggleButton
+									prefixIcon='home'
+									href='/'
+									label={!isMobile ? 'Home' : undefined}
+									selected={isHomeActive}
+								/>
 							)}
-							<>
-								<ToggleButton
-									className='s-flex-hide'
-									prefixIcon='person'
-									onClick={scrollToAbout}
-									label='About'
-									selected={isAboutActive}
-								/>
-								<ToggleButton
-									className='s-flex-show'
-									prefixIcon='person'
-									onClick={scrollToAbout}
-									selected={isAboutActive}
-								/>
-							</>
+							<ToggleButton
+								prefixIcon='person'
+								onClick={scrollToAbout}
+								label={!isMobile ? 'About' : undefined}
+								selected={isAboutActive}
+							/>
 							{routes['/work'] && (
-								<>
-									<ToggleButton
-										className='s-flex-hide'
-										prefixIcon='grid'
-										href='/work'
-										label={work.label}
-										selected={pathname.startsWith('/work')}
-									/>
-									<ToggleButton
-										className='s-flex-show'
-										prefixIcon='grid'
-										href='/work'
-										selected={pathname.startsWith('/work')}
-									/>
-								</>
+								<ToggleButton
+									prefixIcon='grid'
+									href='/work'
+									label={!isMobile ? work.label : undefined}
+									selected={pathname.startsWith('/work')}
+								/>
 							)}
 						</Flex>
 					</Flex>
