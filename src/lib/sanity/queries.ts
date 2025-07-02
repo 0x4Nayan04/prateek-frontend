@@ -1,5 +1,5 @@
 export const CASE_STUDIES_HOMEPAGE_QUERY = `
-  *[_type == "caseStudy"] | order(priority asc) [0...8] {
+  *[_type == "caseStudy"] | order(_createdAt desc) [0...8] {
     _id,
     title,
     slug,
@@ -8,12 +8,12 @@ export const CASE_STUDIES_HOMEPAGE_QUERY = `
     images,
     techStack,
     industry,
-    priority
+    _createdAt
   }
 `;
 
 export const CASE_STUDIES_ALL_QUERY = `
-  *[_type == "caseStudy"] | order(priority asc) {
+  *[_type == "caseStudy"] | order(_createdAt desc) {
     _id,
     title,
     slug,
@@ -22,7 +22,7 @@ export const CASE_STUDIES_ALL_QUERY = `
     images,
     techStack,
     industry,
-    priority
+    _createdAt
   }
 `;
 
@@ -48,7 +48,7 @@ export const CASE_STUDY_BY_SLUG_QUERY = `
     },
     techStack,
     industry,
-    priority,
+    _createdAt,
     clientOverview,
     problem,
     approach,

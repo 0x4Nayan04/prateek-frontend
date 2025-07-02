@@ -120,7 +120,6 @@ export function ModernCaseStudyGrid({
 											key={caseStudy._id}
 											caseStudy={caseStudy}
 											index={index}
-											priority={index < 4}
 										/>
 									))}
 								</Grid>
@@ -136,11 +135,11 @@ export function ModernCaseStudyGrid({
 											paddingTop='32'>
 											<Button
 												id='view-all-case-studies'
-												href='/work'
+												href='/#case-studies'
 												variant='primary'
 												size='l'
 												arrowIcon>
-												Show more case studies
+												View all case studies
 											</Button>
 										</Column>
 									</RevealFx>

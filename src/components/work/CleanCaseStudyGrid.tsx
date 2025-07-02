@@ -77,7 +77,6 @@ export function CleanCaseStudyGrid({
 									key={caseStudy._id}
 									caseStudy={caseStudy}
 									index={index}
-									priority={index < 4}
 								/>
 							))}
 						</div>

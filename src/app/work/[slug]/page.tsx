@@ -160,7 +160,7 @@ export default async function CaseStudyPage({
 						wrap>
 						<Button
 							data-border='rounded'
-							href='/work'
+							href='/#case-studies'
 							variant='primary'
 							weight='default'
 							size='s'

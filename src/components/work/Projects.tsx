@@ -18,16 +18,10 @@ export async function Projects({
 }: ProjectsProps) {
 	const allCaseStudies = await getAllCaseStudies();
 
-	const sortedCaseStudies = allCaseStudies.sort((a, b) => {
-		return a.priority - b.priority; // Lower priority number = higher priority
-	});
-
+	// Case studies are already sorted by _createdAt desc in the query
 	const displayedCaseStudies = range
-		? sortedCaseStudies.slice(
-				range[0] - 1,
-				range[1] ?? sortedCaseStudies.length
-			)
-		: sortedCaseStudies;
+		? allCaseStudies.slice(range[0] - 1, range[1] ?? allCaseStudies.length)
+		: allCaseStudies;
 
 	return (
 		<ModernProjectsClient

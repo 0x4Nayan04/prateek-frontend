@@ -18,9 +18,9 @@ export async function getAllCaseStudies() {
 
 export async function getFeaturedCaseStudies(limit: number = 6) {
 	try {
-		// Use the homepage query but limit the results - back to original without metadata
+		// Use recent date ordering instead of priority
 		const caseStudies: CaseStudy[] = await client.fetch(
-			`*[_type == "caseStudy"] | order(priority asc) [0...${limit}] {
+			`*[_type == "caseStudy"] | order(_createdAt desc) [0...${limit}] {
 				_id,
 				title,
 				slug,
@@ -29,7 +29,7 @@ export async function getFeaturedCaseStudies(limit: number = 6) {
 				images,
 				techStack,
 				industry,
-				priority
+				_createdAt
 			}`
 		);
 		return caseStudies;
@@ -63,7 +63,7 @@ export async function getCaseStudyBySlug(slug: string) {
 				},
 				techStack,
 				industry,
-				priority,
+				_createdAt,
 				clientOverview,
 				problem,
 				approach,
@@ -136,4 +136,45 @@ export function filterCaseStudies(
 		// Return true if both conditions are met (OR logic for multiple selections within same category, AND logic between categories)
 		return techStackMatch && industryMatch;
 	});
+}
+
+export async function getCaseStudiesPaginated(
+	offset: number = 0,
+	limit: number = 6
+) {
+	try {
+		const caseStudies: CaseStudy[] = await client.fetch(
+			`*[_type == "caseStudy"] | order(_createdAt desc) [${offset}...${
+				offset + limit
+			}] {
+				_id,
+				title,
+				slug,
+				summary,
+				thumbnail,
+				images,
+				techStack,
+				industry,
+				_createdAt
+			}`
+		);
+
+		// Get total count for pagination
+		const totalCount: number = await client.fetch(
+			`count(*[_type == "caseStudy"])`
+		);
+
+		return {
+			caseStudies,
+			totalCount,
+			hasMore: offset + limit < totalCount
+		};
+	} catch (error) {
+		console.error('Error fetching paginated case studies:', error);
+		return {
+			caseStudies: [],
+			totalCount: 0,
+			hasMore: false
+		};
+	}
 }

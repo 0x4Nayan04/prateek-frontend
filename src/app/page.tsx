@@ -1,5 +1,5 @@
 import { ScrollToHash } from '@/components';
-import { ModernProjects } from '@/components/work/ModernProjects';
+import { HomeCaseStudiesWrapper } from '@/components/work/HomeCaseStudiesWrapper';
 import { baseURL, home } from '@/resources';
 import {
 	Badge,
@@ -139,29 +139,15 @@ export default function Home() {
 							{home.subline}
 						</Text>
 					</RevealFx>
-					<RevealFx
-						translateY={4}
-						delay={0.15}
-						horizontal='center'>
-						<Button
-							href='/work'
-							id='work'
-							data-border='accent'
-							variant='primary'
-							size='m'
-							weight='default'
-							arrowIcon>
-							View My Case Studies
-						</Button>
-					</RevealFx>
 				</Column>
 			</Column>
 
 			{/* Separator: Hero to Work */}
 			<SectionSeparator />
 
-			{/* Featured Work Section */}
+			{/* Case Studies Section */}
 			<Column
+				id='case-studies'
 				fillWidth
 				horizontal='center'
 				vertical='center'
@@ -177,7 +163,7 @@ export default function Home() {
 						delay={0}
 						fillWidth
 						horizontal='center'
-						paddingBottom='0'>
+						paddingY='m'>
 						<Heading
 							wrap='balance'
 							variant='display-strong-l'
@@ -186,7 +172,7 @@ export default function Home() {
 								fontSize: 'clamp(2rem, 8vw, 3rem)',
 								lineHeight: '1.2'
 							}}>
-							Featured Work
+							Case Studies
 						</Heading>
 					</RevealFx>
 				</Column>
@@ -197,27 +183,7 @@ export default function Home() {
 					paddingTop='16'
 					gap='24'
 					horizontal='center'>
-					<ModernProjects
-						title=''
-						maxItems={6}
-						columns='2'
-						enableFilters={true}
-					/>
-
-					{/* Show more case studies button */}
-					<RevealFx
-						translateY={4}
-						delay={0.1}
-						horizontal='center'>
-						<Button
-							href='/work'
-							id='home-show-more-case-studies'
-							variant='primary'
-							size='l'
-							arrowIcon>
-							Show more case studies
-						</Button>
-					</RevealFx>
+					<HomeCaseStudiesWrapper />
 				</Column>
 			</Column>
 

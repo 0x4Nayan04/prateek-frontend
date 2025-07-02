@@ -1,8 +1,7 @@
 const baseURL = 'https://pratik-srivastava-bi.vercel.app';
 
 const routes = {
-	'/': true,
-	'/work': true
+	'/': true
 };
 
 // Import and set font for each variant

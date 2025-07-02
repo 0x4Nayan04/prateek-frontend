@@ -19,14 +19,9 @@ import styles from './ModernCaseStudyCard.module.scss';
 interface CaseStudyCardProps {
 	caseStudy: CaseStudy;
 	index: number;
-	priority?: boolean;
 }
 
-export function CaseStudyCard({
-	caseStudy,
-	index,
-	priority = false
-}: CaseStudyCardProps) {
+export function CaseStudyCard({ caseStudy, index }: CaseStudyCardProps) {
 	const [isHovered, setIsHovered] = useState(false);
 
 	return (
@@ -87,7 +82,6 @@ export function CaseStudyCard({
 									height: '100%',
 									objectFit: 'cover'
 								}}
-								priority={priority}
 							/>
 						</div>
 					</div>

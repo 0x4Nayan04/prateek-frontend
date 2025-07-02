@@ -99,7 +99,6 @@ export function CaseStudyGrid({
 									<CaseStudyCard
 										caseStudy={caseStudy}
 										index={index}
-										priority={index < 4}
 									/>
 								</div>
 							))}

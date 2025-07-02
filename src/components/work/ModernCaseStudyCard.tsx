@@ -17,13 +17,11 @@ import styles from './ModernCaseStudyCard.module.scss';
 interface ModernCaseStudyCardProps {
 	caseStudy: CaseStudy;
 	index: number;
-	priority?: boolean;
 }
 
 export function ModernCaseStudyCard({
 	caseStudy,
-	index,
-	priority = false
+	index
 }: ModernCaseStudyCardProps) {
 	// Use images array first, fallback to thumbnail if no images
 	const displayImages =

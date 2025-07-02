@@ -29,7 +29,7 @@ export interface CaseStudy {
 	}>;
 	techStack?: string[];
 	industry?: string[];
-	priority: number;
+	_createdAt: string;
 	clientOverview?: any;
 	problem?: any;
 	approach?: any;

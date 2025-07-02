@@ -12,6 +12,7 @@ export const Header = () => {
 	const pathname = usePathname();
 	const router = useRouter();
 	const [isAboutInView, setIsAboutInView] = useState(false);
+	const [isCaseStudiesInView, setIsCaseStudiesInView] = useState(false);
 	const [mounted, setMounted] = useState(false);
 
 	// Handle mounting for SSR safety
@@ -19,15 +20,16 @@ export const Header = () => {
 		setMounted(true);
 	}, []);
 
-	// Set up intersection observer to track about section visibility
+	// Set up intersection observer to track about and case studies section visibility
 	useEffect(() => {
 		if (!mounted || pathname !== '/') {
 			setIsAboutInView(false);
+			setIsCaseStudiesInView(false);
 			return;
 		}
 
 		const aboutSection = document.getElementById('about');
-		if (!aboutSection) return;
+		const caseStudiesSection = document.getElementById('case-studies');
 
 		const observer = new IntersectionObserver(
 			(entries) => {
@@ -43,18 +45,30 @@ export const Header = () => {
 								window.history.replaceState(null, '', '/');
 							}
 						}
+					} else if (entry.target.id === 'case-studies') {
+						setIsCaseStudiesInView(entry.isIntersecting);
+						// Update URL hash when case studies section comes into view
+						if (entry.isIntersecting) {
+							window.history.replaceState(null, '', '#case-studies');
+						} else {
+							// Remove hash when scrolling away from case studies section
+							if (window.location.hash === '#case-studies') {
+								window.history.replaceState(null, '', '/');
+							}
+						}
 					}
 				});
 			},
 			{
-				// Trigger when 50% of the about section is visible
+				// Trigger when 50% of the section is visible
 				threshold: 0.5,
 				// Add some margin to trigger before the section is fully in view
 				rootMargin: '-20% 0px -20% 0px'
 			}
 		);
 
-		observer.observe(aboutSection);
+		if (aboutSection) observer.observe(aboutSection);
+		if (caseStudiesSection) observer.observe(caseStudiesSection);
 
 		return () => {
 			observer.disconnect();
@@ -68,21 +82,57 @@ export const Header = () => {
 		(isAboutInView ||
 			(typeof window !== 'undefined' && window.location.hash === '#about'));
 
+	// Determine if Case Studies section should be highlighted
+	const isCaseStudiesActive =
+		mounted &&
+		pathname === '/' &&
+		(isCaseStudiesInView ||
+			(typeof window !== 'undefined' &&
+				window.location.hash === '#case-studies'));
+
 	const scrollToAbout = () => {
 		// If we're already on the homepage, just scroll to about
 		if (pathname === '/') {
 			const aboutSection = document.getElementById('about');
 			if (aboutSection) {
-				aboutSection.scrollIntoView({
-					behavior: 'smooth',
-					block: 'start'
+				// Calculate offset to account for sticky header
+				const headerHeight = 104 + 32; // Header height + some padding for better visibility
+				const elementPosition = aboutSection.offsetTop - headerHeight;
+
+				window.scrollTo({
+					top: Math.max(0, elementPosition),
+					behavior: 'smooth'
 				});
+
 				// Update URL hash to reflect the about section
 				window.history.replaceState(null, '', '#about');
 			}
 		} else {
 			// If we're on a different page, navigate to homepage with hash
 			router.push('/#about');
+		}
+	};
+
+	const scrollToCaseStudies = () => {
+		// If we're already on the homepage, just scroll to case studies
+		if (pathname === '/') {
+			const caseStudiesSection = document.getElementById('case-studies');
+
+			if (caseStudiesSection) {
+				// Position the section right below the header to hide hero content
+				const elementPosition = caseStudiesSection.offsetTop - 104; // Just header height
+
+				window.scrollTo({
+					top: Math.max(0, elementPosition),
+					behavior: 'smooth'
+				});
+
+				// Update URL hash to reflect the case studies section
+				window.history.replaceState(null, '', '#case-studies');
+			}
+		} else {
+			// If we're on a different page, navigate to homepage with hash
+			router.push('/#case-studies');
 		}
 	};
 
@@ -152,46 +202,44 @@ export const Header = () => {
 									/>
 								</>
 							)}
-								<>
-									<ToggleButton
-										className='s-flex-hide'
-										prefixIcon='person'
-										onClick={scrollToAbout}
+							<>
+								<ToggleButton
+									className='s-flex-hide'
+									prefixIcon='person'
+									onClick={scrollToAbout}
 									label='About'
-										selected={isAboutActive}
-									/>
-									<ToggleButton
-										className='s-flex-show'
-										prefixIcon='person'
-										onClick={scrollToAbout}
-										selected={isAboutActive}
-									/>
-								</>
-							{routes['/work'] && (
-								<>
-									<ToggleButton
-										className='s-flex-hide'
-										prefixIcon='grid'
-										href='/work'
-										label={work.label}
-										selected={pathname.startsWith('/work')}
-									/>
-									<ToggleButton
-										className='s-flex-show'
-										prefixIcon='grid'
-										href='/work'
-										selected={pathname.startsWith('/work')}
-									/>
-								</>
-							)}
+									selected={isAboutActive}
+								/>
+								<ToggleButton
+									className='s-flex-show'
+									prefixIcon='person'
+									onClick={scrollToAbout}
+									selected={isAboutActive}
+								/>{' '}
+							</>
+							<>
+								<ToggleButton
+									className='s-flex-hide'
+									prefixIcon='grid'
+									onClick={scrollToCaseStudies}
+									label={work.label}
+									selected={isCaseStudiesActive}
+								/>
+								<ToggleButton
+									className='s-flex-show'
+									prefixIcon='grid'
+									onClick={scrollToCaseStudies}
+									selected={isCaseStudiesActive}
+								/>
+							</>
 						</Flex>
 					</Flex>
 				</Flex>
 				<Flex
 					paddingRight='12'
 					fillWidth
-						horizontal='end'
-						vertical='center'
+					horizontal='end'
+					vertical='center'
 					textVariant='body-default-s'></Flex>
 			</Flex>
 		</>
