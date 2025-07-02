@@ -56,6 +56,33 @@
 }*/
 
 /* ============================================================================
+   RESPONSIVE HEADER NAVIGATION CLASSES
+   ============================================================================ */
+
+/* Desktop behavior: Show labels (hide on small screens only) */
+.s-flex-hide {
+	display: flex !important;
+	align-items: center !important;
+}
+
+/* Mobile behavior: Show icons only (show on small screens only) */
+.s-flex-show {
+	display: none !important;
+}
+
+/* Mobile breakpoint - swap the behavior */
+@media (max-width: 768px) {
+	.s-flex-hide {
+		display: none !important;
+	}
+
+	.s-flex-show {
+		display: flex !important;
+		align-items: center !important;
+	}
+}
+
+/* ============================================================================
    ANIMATION SYSTEM STANDARDIZATION
    ============================================================================ */
 
