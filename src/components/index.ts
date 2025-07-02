@@ -1,11 +1,8 @@
 // Core Components
-export { AutoCarousel } from './AutoCarousel';
 export { Footer } from './Footer';
 export { Header } from './Header';
-export { HeadingLink } from './HeadingLink';
 export { PdfViewer } from './PdfViewer';
 export { PortableText } from './PortableText';
-export { ProjectCard } from './ProjectCard';
 export { Providers } from './Providers';
 export { ScrollToHash } from './ScrollToHash';
 export { ScrollToTop } from './ScrollToTop';
