@@ -55,9 +55,9 @@ export function CleanCaseStudyCard({
 						{caseStudy.summary}
 					</Text>
 
-					{/* Tags Footer */}
+					{/* Tags Footer - Matching reference design */}
 					<div className='card-footer'>
-						{/* Tech Stack */}
+						{/* Tech Stack Tags */}
 						{caseStudy.techStack && caseStudy.techStack.length > 0 && (
 							<Row
 								gap='8'
@@ -67,13 +67,18 @@ export function CleanCaseStudyCard({
 									<span
 										key={techIndex}
 										style={{
-											fontSize: '0.75rem',
-											fontWeight: '500',
-											padding: '4px 8px',
+											display: 'inline-flex',
+											alignItems: 'center',
+											padding: '6px 12px',
 											backgroundColor: 'var(--neutral-alpha-weak)',
 											color: 'var(--neutral-on-background-strong)',
-											borderRadius: '4px',
+											fontSize: '14px',
+											fontWeight: '500',
+											fontFamily: '"Inter", sans-serif',
+											borderRadius: '6px',
 											border: '1px solid var(--neutral-alpha-medium)',
+											transition: 'all 0.2s ease',
+											lineHeight: '1',
 											whiteSpace: 'nowrap',
 											maxWidth: '120px',
 											overflow: 'hidden',
@@ -85,19 +90,27 @@ export function CleanCaseStudyCard({
 								{caseStudy.techStack.length > 3 && (
 									<span
 										style={{
-											fontSize: '0.75rem',
+											display: 'inline-flex',
+											alignItems: 'center',
+											padding: '6px 12px',
+											backgroundColor: 'var(--neutral-alpha-weak)',
+											color: 'var(--neutral-on-background-medium)',
+											fontSize: '14px',
 											fontWeight: '500',
-											padding: '4px 8px',
-											color: 'var(--neutral-on-background-weak)',
-											fontStyle: 'italic'
+											fontFamily: '"Inter", sans-serif',
+											borderRadius: '6px',
+											border: '1px solid var(--neutral-alpha-medium)',
+											transition: 'all 0.2s ease',
+											lineHeight: '1',
+											opacity: 0.7
 										}}>
-										+{caseStudy.techStack.length - 3} more
+										+{caseStudy.techStack.length - 3}
 									</span>
 								)}
 							</Row>
 						)}
 
-						{/* Industry */}
+						{/* Industry Tags */}
 						{caseStudy.industry && caseStudy.industry.length > 0 && (
 							<Row
 								gap='8'
@@ -106,21 +119,46 @@ export function CleanCaseStudyCard({
 									<span
 										key={indIndex}
 										style={{
-											fontSize: '0.75rem',
-											fontWeight: '500',
-											padding: '4px 8px',
+											display: 'inline-flex',
+											alignItems: 'center',
+											padding: '6px 12px',
 											backgroundColor: 'var(--brand-alpha-weak)',
 											color: 'var(--brand-on-background-strong)',
-											borderRadius: '4px',
+											fontSize: '14px',
+											fontWeight: '500',
+											fontFamily: '"Inter", sans-serif',
+											borderRadius: '6px',
 											border: '1px solid var(--brand-alpha-medium)',
+											transition: 'all 0.2s ease',
+											lineHeight: '1',
 											whiteSpace: 'nowrap',
-											maxWidth: '120px',
+											maxWidth: '130px',
 											overflow: 'hidden',
 											textOverflow: 'ellipsis'
 										}}>
 										{ind}
 									</span>
 								))}
+								{caseStudy.industry.length > 2 && (
+									<span
+										style={{
+											display: 'inline-flex',
+											alignItems: 'center',
+											padding: '6px 12px',
+											backgroundColor: 'var(--neutral-alpha-weak)',
+											color: 'var(--neutral-on-background-medium)',
+											fontSize: '14px',
+											fontWeight: '500',
+											fontFamily: '"Inter", sans-serif',
+											borderRadius: '6px',
+											border: '1px solid var(--neutral-alpha-medium)',
+											transition: 'all 0.2s ease',
+											lineHeight: '1',
+											opacity: 0.7
+										}}>
+										+{caseStudy.industry.length - 2}
+									</span>
+								)}
 							</Row>
 						)}
 					</div>

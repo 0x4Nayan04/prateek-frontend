@@ -158,7 +158,7 @@ export function CaseStudyCard({
 							</Text>
 						</Column>
 
-						{/* Tags Row - Improved responsive layout */}
+						{/* Tags Row - Matching reference design */}
 						<Row
 							gap='8'
 							wrap
@@ -166,77 +166,84 @@ export function CaseStudyCard({
 								marginTop: 'auto',
 								alignItems: 'flex-start'
 							}}>
-							{/* Tech Stack Tags */}
+							{/* Tech Stack Tags - Match detail page styling */}
 							{caseStudy.techStack
 								?.filter((t) => t && t.trim().length > 0)
 								.slice(0, 3)
 								.map((tech) => (
-									<Tag
+									<span
 										key={tech}
-										size='s'
-										variant='neutral'
 										style={{
-											fontSize: 'clamp(0.65rem, 1.8vw, 0.75rem)',
-											fontWeight: '600',
-											padding: '6px 10px',
-											borderRadius: '12px',
-											backgroundColor: 'var(--brand-alpha-weak)',
-											border: '1px solid var(--brand-alpha-medium)',
-											color: 'var(--brand-on-background-strong)',
-											transition:
-												'all var(--animation-duration-short) var(--animation-easing-standard)',
+											display: 'inline-flex',
+											alignItems: 'center',
+											padding: '6px 12px',
+											backgroundColor: 'var(--neutral-alpha-weak)',
+											color: 'var(--neutral-on-background-strong)',
+											fontSize: '14px',
+											fontWeight: '500',
+											fontFamily: '"Inter", sans-serif',
+											borderRadius: '6px',
+											border: '1px solid var(--neutral-alpha-medium)',
+											transition: 'all 0.2s ease',
+											lineHeight: '1',
 											whiteSpace: 'nowrap',
 											maxWidth: '120px',
 											overflow: 'hidden',
 											textOverflow: 'ellipsis'
 										}}>
 										{tech}
-									</Tag>
+									</span>
 								))}
 
-							{/* Industry Tag */}
-							{caseStudy.industry && (
-								<Tag
-									size='s'
-									variant='brand'
+							{/* Industry Tags - Match detail page styling */}
+							{caseStudy.industry?.slice(0, 2).map((industry) => (
+								<span
+									key={industry}
 									style={{
-										fontSize: 'clamp(0.65rem, 1.8vw, 0.75rem)',
-										fontWeight: '600',
-										padding: '6px 10px',
-										borderRadius: '12px',
-										backgroundColor: 'var(--accent-alpha-weak)',
-										border: '1px solid var(--accent-alpha-medium)',
-										color: 'var(--accent-on-background-strong)',
-										transition:
-											'all var(--animation-duration-short) var(--animation-easing-standard)',
+										display: 'inline-flex',
+										alignItems: 'center',
+										padding: '6px 12px',
+										backgroundColor: 'var(--brand-alpha-weak)',
+										color: 'var(--brand-on-background-strong)',
+										fontSize: '14px',
+										fontWeight: '500',
+										fontFamily: '"Inter", sans-serif',
+										borderRadius: '6px',
+										border: '1px solid var(--brand-alpha-medium)',
+										transition: 'all 0.2s ease',
+										lineHeight: '1',
 										whiteSpace: 'nowrap',
-										maxWidth: '100px',
+										maxWidth: '130px',
 										overflow: 'hidden',
 										textOverflow: 'ellipsis'
 									}}>
-									{caseStudy.industry}
-								</Tag>
-							)}
+									{industry}
+								</span>
+							))}
 
-							{/* Overflow indicator */}
-							{caseStudy.techStack && caseStudy.techStack.length > 3 && (
-								<Tag
-									size='s'
-									variant='neutral'
+							{/* Overflow indicator if more tags exist */}
+							{((caseStudy.techStack?.length || 0) > 3 ||
+								(caseStudy.industry?.length || 0) > 2) && (
+								<span
 									style={{
-										fontSize: 'clamp(0.65rem, 1.8vw, 0.75rem)',
-										fontWeight: '600',
-										padding: '6px 10px',
-										borderRadius: '12px',
+										display: 'inline-flex',
+										alignItems: 'center',
+										padding: '6px 12px',
 										backgroundColor: 'var(--neutral-alpha-weak)',
-										border: '1px solid var(--neutral-alpha-medium)',
 										color: 'var(--neutral-on-background-medium)',
-										transition:
-											'all var(--animation-duration-short) var(--animation-easing-standard)',
+										fontSize: '14px',
+										fontWeight: '500',
+										fontFamily: '"Inter", sans-serif',
+										borderRadius: '6px',
+										border: '1px solid var(--neutral-alpha-medium)',
+										transition: 'all 0.2s ease',
+										lineHeight: '1',
 										opacity: 0.7
 									}}>
-									+{caseStudy.techStack.length - 3}
-								</Tag>
+									+
+									{Math.max(0, (caseStudy.techStack?.length || 0) - 3) +
+										Math.max(0, (caseStudy.industry?.length || 0) - 2)}
+								</span>
 							)}
 						</Row>
 					</Column>
