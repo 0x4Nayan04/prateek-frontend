@@ -1,0 +1,71 @@
+/* ============================================================================
+   DARK THEME ENFORCEMENT - CRITICAL FOR DEPLOYMENT CONSISTENCY
+   ============================================================================ */
+
+/* Force dark theme globally - this overrides any system preferences */
+:root {
+	color-scheme: dark !important;
+}
+
+/* Ensure dark theme regardless of data attributes */
+html,
+html[data-theme],
+html[data-theme='light'],
+html[data-theme='dark'] {
+	color-scheme: dark !important;
+	background-color: var(--neutral-100, #020b10) !important;
+}
+
+/* Override any potential light theme variables */
+html[data-theme='light'] {
+	--page-background: var(--neutral-100, #020b10) !important;
+	--surface-background: var(--neutral-200, #0b181d) !important;
+	--neutral-on-background-weak: var(--neutral-600, #89989f) !important;
+	--neutral-on-background-medium: var(--neutral-700, #a7b7be) !important;
+	--neutral-on-background-strong: var(--neutral-900, #d4e4ec) !important;
+}
+
+/* Prevent any light theme flash during loading */
+body {
+	background-color: var(--neutral-100, #020b10) !important;
+	color: var(--neutral-on-background-strong, #d4e4ec) !important;
+	transition: none !important;
+}
+
+/* Force dark theme on system light preference */
+@media (prefers-color-scheme: light) {
+	:root,
+	html,
+	body {
+		color-scheme: dark !important;
+		background-color: var(--neutral-100, #020b10) !important;
+	}
+}
+
+/* Override any potential component-level light theme styles */
+[data-theme='light'] * {
+	color-scheme: dark !important;
+}
+
+/* Ensure proper contrast for text elements in forced dark mode */
+[data-theme='light'] [data-variant*='on-background'] {
+	color: var(--neutral-on-background-strong, #d4e4ec) !important;
+}
+
+/* Dark theme meta tag override */
+meta[name='color-scheme'] {
+	content: 'dark' !important;
+}
+
+/* Prevent flash of light content */
+html::before {
+	content: '';
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: var(--neutral-100, #020b10);
+	z-index: -1;
+	pointer-events: none;
+}

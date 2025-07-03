@@ -1,3 +1,4 @@
+import '@/resources/dark-theme-enforce.css';
 import '@once-ui-system/core/css/styles.css';
 import '@once-ui-system/core/css/tokens.css';
 import '@/resources/responsive-system.css';
@@ -90,6 +91,12 @@ export default async function RootLayout({
 			as='html'
 			lang='en'
 			fillWidth
+			data-theme='dark'
+			data-color-scheme='dark'
+			style={{
+				colorScheme: 'dark',
+				backgroundColor: 'var(--neutral-100, #020b10)'
+			}}
 			className={classNames(
 				fonts.heading.variable,
 				fonts.body.variable,
@@ -97,6 +104,30 @@ export default async function RootLayout({
 				fonts.code.variable
 			)}>
 			<head>
+				<meta
+					name='color-scheme'
+					content='dark'
+				/>
+				<meta
+					name='theme-color'
+					content='#020b10'
+				/>
+				<style
+					dangerouslySetInnerHTML={{
+						__html: `
+							html, body {
+								background-color: #020b10 !important;
+								color: #d4e4ec !important;
+								color-scheme: dark !important;
+							}
+							html[data-theme="light"] {
+								background-color: #020b10 !important;
+								color: #d4e4ec !important;
+								color-scheme: dark !important;
+							}
+						`
+					}}
+				/>
 				<link
 					rel='apple-touch-icon'
 					sizes='180x180'
@@ -126,6 +157,10 @@ export default async function RootLayout({
                 try {
                   const root = document.documentElement;
                   
+                  // Force dark theme immediately before any rendering
+                  root.setAttribute('data-theme', 'dark');
+                  root.style.setProperty('color-scheme', 'dark');
+                  
                   // Set theme attributes from config
                   const config = ${JSON.stringify({
 										brand: style.brand,
@@ -144,11 +179,52 @@ export default async function RootLayout({
                     root.setAttribute('data-' + key, value);
                   });
                   
-                  // Always use dark theme for portfolio
-                  root.setAttribute('data-theme', 'dark');
+                  // Remove any conflicting attributes that might cause light theme
+                  root.removeAttribute('data-theme-preference');
+                  root.removeAttribute('data-color-scheme');
+                  
+                  // Override system preferences completely
+                  const style = document.createElement('style');
+                  style.textContent = \`
+                    :root {
+                      color-scheme: dark !important;
+                    }
+                    @media (prefers-color-scheme: light) {
+                      :root {
+                        color-scheme: dark !important;
+                      }
+                    }
+                    html[data-theme="light"] {
+                      filter: invert(0) !important;
+                    }
+                    html {
+                      background-color: var(--neutral-100, #020b10) !important;
+                    }
+                  \`;
+                  document.head.appendChild(style);
+                  
+                  // Ensure dark theme persists
+                  const observer = new MutationObserver((mutations) => {
+                    mutations.forEach((mutation) => {
+                      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+                        const currentTheme = root.getAttribute('data-theme');
+                        if (currentTheme !== 'dark') {
+                          root.setAttribute('data-theme', 'dark');
+                        }
+                      }
+                    });
+                  });
+                  
+                  observer.observe(root, {
+                    attributes: true,
+                    attributeFilter: ['data-theme', 'data-color-scheme']
+                  });
+                  
                 } catch (e) {
                   console.error('Failed to initialize theme:', e);
+                  // Fallback
                   document.documentElement.setAttribute('data-theme', 'dark');
+                  document.documentElement.style.setProperty('color-scheme', 'dark');
                 }
               })();
             `

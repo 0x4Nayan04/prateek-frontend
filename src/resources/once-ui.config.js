@@ -81,7 +81,7 @@ const fonts = {
 
 // default customization applied to the HTML in the main layout.tsx
 const style = {
-	theme: 'dark', // Confirmed
+	theme: 'dark', // Force dark theme - this is critical
 	neutral: 'gray', // Slightly bluish-dark background observed
 	brand: 'aqua', // Brand buttons and gradients use warm orange tones
 	accent: 'yellow', // Icons and highlights like "stat cards" use yellow/gold
