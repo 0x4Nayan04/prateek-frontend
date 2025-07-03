@@ -89,8 +89,8 @@ export function FilteredCaseStudyGrid({
 							style={{
 								justifyItems: 'center',
 								alignItems: 'stretch',
-								paddingLeft: 'clamp(16px, 3vw, 32px)',
-								paddingRight: 'clamp(16px, 3vw, 32px)',
+								paddingLeft: 'clamp(4px, 1vw, 8px)',
+								paddingRight: 'clamp(4px, 1vw, 8px)',
 								gridAutoRows: '1fr'
 							}}>
 							{filteredCaseStudies.map((caseStudy, index) => (
