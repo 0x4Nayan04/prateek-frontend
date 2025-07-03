@@ -842,15 +842,15 @@ body[class*='display-flex'] {
 		min-height: 460px !important;
 	}
 
-	/* Mobile-optimized typography */
+	/* Mobile-optimized typography - reduced sizes for better readability */
 	[data-variant*='heading-strong-l'] {
-		font-size: clamp(1.25rem, 5vw, 1.5rem) !important;
+		font-size: clamp(1.1rem, 4vw, 1.25rem) !important;
 		line-height: 1.3 !important;
 		font-weight: 700 !important;
 	}
 
 	[data-variant*='body-default-m'] {
-		font-size: clamp(0.875rem, 3.5vw, 0.975rem) !important;
+		font-size: clamp(0.8rem, 2.5vw, 0.875rem) !important;
 		line-height: 1.5 !important;
 	}
 
@@ -866,14 +866,14 @@ body[class*='display-flex'] {
 		gap: clamp(12px, 3vw, 16px) !important;
 	}
 
-	/* Tags on mobile - maintain reference design consistency */
+	/* Tags on mobile - optimized for readability */
 	[data-tag] {
-		font-size: 13px !important;
-		padding: 5px 10px !important;
+		font-size: 11px !important;
+		padding: 4px 8px !important;
 		border-radius: 6px !important;
 		font-weight: 500 !important;
 		white-space: nowrap !important;
-		max-width: 110px !important;
+		max-width: 100px !important;
 		overflow: hidden !important;
 		text-overflow: ellipsis !important;
 		display: inline-flex !important;
@@ -1088,9 +1088,9 @@ a[href*='/work/'] {
 		width: 100% !important;
 	}
 
-	/* Tags on mobile - maintain reference design consistency */
+	/* Tags on mobile - optimized for readability */
 	[data-tag] {
-		font-size: 12px !important;
+		font-size: 11px !important;
 		padding: 4px 8px !important;
 		border-radius: 6px !important;
 		font-weight: 500 !important;
@@ -1361,45 +1361,48 @@ a[href*='/work/'] {
 		box-sizing: border-box !important;
 	}
 
-	/* Grid containers - strict viewport compliance */
+	/* Grid containers - strict viewport compliance with balanced margins */
 	[data-grid],
 	.grid-responsive,
 	[data-columns='2'],
 	[data-columns='1'] {
 		width: 100% !important;
 		max-width: 100vw !important;
-		padding-left: clamp(6px, 1.5vw, 10px) !important;
-		padding-right: clamp(6px, 1.5vw, 10px) !important;
+		padding-left: clamp(12px, 3vw, 16px) !important;
+		padding-right: clamp(12px, 3vw, 16px) !important;
 		margin-left: 0 !important;
 		margin-right: 0 !important;
 		box-sizing: border-box !important;
 		overflow-x: hidden !important;
 	}
 
-	/* Case study card containers */
+	/* Case study card containers - ensure balanced margins */
 	.caseStudyCard,
 	[data-case-study-card],
 	a[href*='/work/'] {
 		width: 100% !important;
-		max-width: calc(100vw - clamp(12px, 3vw, 20px)) !important;
-		margin: 0 !important;
+		max-width: calc(100vw - clamp(24px, 6vw, 32px)) !important;
+		margin: 0 auto !important;
 		box-sizing: border-box !important;
 	}
 
-	/* RevealFx containers that might cause overflow */
+	/* RevealFx containers that might cause overflow - balanced margins */
 	[data-revealf] {
 		width: 100% !important;
 		max-width: 100vw !important;
 		margin-left: 0 !important;
 		margin-right: 0 !important;
+		padding-left: clamp(12px, 3vw, 16px) !important;
+		padding-right: clamp(12px, 3vw, 16px) !important;
 		box-sizing: border-box !important;
 	}
 
-	/* Specific grid wrapper fix */
+	/* Specific grid wrapper fix - balanced margins */
 	div[style*='width: 100%'],
 	div[style*='maxWidth: 500px'] {
 		width: 100% !important;
-		max-width: calc(100vw - clamp(12px, 3vw, 20px)) !important;
+		max-width: calc(100vw - clamp(24px, 6vw, 32px)) !important;
+		margin: 0 auto !important;
 		box-sizing: border-box !important;
 	}
 }

@@ -127,7 +127,7 @@ export function CaseStudyCard({
 								onBackground='neutral-strong'
 								style={{
 									lineHeight: '1.3',
-									fontSize: 'clamp(1.125rem, 3.5vw, 1.375rem)',
+									fontSize: 'clamp(1.05rem, 3vw, 1.25rem)',
 									fontWeight: '700',
 									letterSpacing: '-0.01em',
 									marginBottom: '8px',
@@ -145,7 +145,7 @@ export function CaseStudyCard({
 								onBackground='neutral-weak'
 								style={{
 									lineHeight: '1.6',
-									fontSize: 'clamp(0.875rem, 2.8vw, 0.95rem)',
+									fontSize: 'clamp(0.8rem, 2.2vw, 0.875rem)',
 									display: '-webkit-box',
 									WebkitLineClamp: 3,
 									WebkitBoxOrient: 'vertical',

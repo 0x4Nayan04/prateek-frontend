@@ -100,8 +100,8 @@ export function ModernCaseStudyGrid({
 						fillWidth
 						paddingX='l'
 						style={{
-							paddingLeft: 'clamp(4px, 1vw, 8px)',
-							paddingRight: 'clamp(4px, 1vw, 8px)'
+							paddingLeft: 'clamp(12px, 3vw, 16px)',
+							paddingRight: 'clamp(12px, 3vw, 16px)'
 						}}
 						gap='s'>
 						{hasResults ? (
