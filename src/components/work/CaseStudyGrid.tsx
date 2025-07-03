@@ -82,8 +82,8 @@ export function CaseStudyGrid({
 								gap: '32px',
 								gridAutoFlow: 'row',
 								alignContent: 'start',
-								paddingLeft: 'clamp(12px, 3vw, 16px)',
-								paddingRight: 'clamp(12px, 3vw, 16px)',
+								paddingLeft: '8px',
+								paddingRight: '8px',
 								gridAutoRows: '1fr'
 							}}>
 							{displayedCaseStudies.map((caseStudy, index) => (
