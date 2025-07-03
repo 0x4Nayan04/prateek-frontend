@@ -60,7 +60,8 @@ export function CaseStudyCard({
 						maxWidth: '100%',
 						margin: '0 auto'
 					}}
-					className={styles.caseStudyCard}>
+					className={styles.caseStudyCard}
+					data-case-study-card>
 					{/* Image Container */}
 					<div
 						style={{

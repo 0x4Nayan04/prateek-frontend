@@ -64,55 +64,74 @@ export function CaseStudyGrid({
 			<Column
 				fillWidth
 				gap='32'>
-				{/* Grid */}
-				{displayedCaseStudies.length > 0 ? (
-					<RevealFx
-						translateY={8}
-						delay={0.06}>
-						<Grid
-							columns='2'
-							tabletColumns='2'
-							mobileColumns='1'
-							fillWidth
-							gap='32'
-							style={{
-								display: 'grid',
-								justifyItems: 'center',
-								alignItems: 'stretch',
-								gap: '32px',
-								gridAutoFlow: 'row',
-								alignContent: 'start',
-								paddingLeft: '8px',
-								paddingRight: '8px',
-								gridAutoRows: '1fr'
-							}}>
-							{displayedCaseStudies.map((caseStudy, index) => (
-								<div
-									key={caseStudy._id}
+				{/* Main Content with Balanced Padding */}
+				<Row
+					fillWidth
+					horizontal='center'>
+					<Column
+						fillWidth
+						style={{
+							paddingLeft: 'clamp(20px, 5vw, 32px)',
+							paddingRight: 'clamp(20px, 5vw, 32px)',
+							maxWidth: '100%',
+							boxSizing: 'border-box'
+						}}>
+						{/* Grid */}
+						{displayedCaseStudies.length > 0 ? (
+							<RevealFx
+								translateY={8}
+								delay={0.06}>
+								<Grid
+									columns='2'
+									tabletColumns='2'
+									mobileColumns='1'
+									fillWidth
+									gap='32'
 									style={{
-										width: '100%',
-										maxWidth: '500px',
-										height: '480px',
-										display: 'flex',
-										flexDirection: 'column'
-									}}>
-									<CaseStudyCard
-										caseStudy={caseStudy}
-										index={index}
-										priority={index < 4}
-									/>
-								</div>
-							))}
-						</Grid>
-					</RevealFx>
-				) : (
-					<Text
-						variant='body-default-m'
-						onBackground='neutral-medium'
-						align='center'>
-						No case studies match the selected filters.
-					</Text>
-				)}
+										display: 'grid',
+										justifyItems: 'center',
+										alignItems: 'stretch',
+										gap: '32px',
+										gridAutoFlow: 'row',
+										alignContent: 'start',
+										paddingLeft: '0',
+										paddingRight: '0',
+										marginLeft: '0',
+										marginRight: '0',
+										maxWidth: '100%',
+										boxSizing: 'border-box',
+										gridAutoRows: '1fr'
+									}}
+									data-grid>
+									{displayedCaseStudies.map((caseStudy, index) => (
+										<div
+											key={caseStudy._id}
+											style={{
+												width: '100%',
+												maxWidth: '500px',
+												height: '480px',
+												display: 'flex',
+												flexDirection: 'column'
+											}}>
+											<CaseStudyCard
+												caseStudy={caseStudy}
+												index={index}
+												priority={index < 4}
+											/>
+										</div>
+									))}
+								</Grid>
+							</RevealFx>
+						) : (
+							<Text
+								variant='body-default-m'
+								onBackground='neutral-medium'
+								align='center'>
+								No case studies match the selected filters.
+							</Text>
+						)}
+					</Column>
+				</Row>
 			</Column>
 		</Column>
 	);

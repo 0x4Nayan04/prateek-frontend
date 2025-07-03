@@ -37,6 +37,13 @@
 		box-sizing: border-box !important;
 	}
 
+	/* Featured Work section consistency - remove any maxWidth constraints */
+	[data-maxwidth='l'] {
+		max-width: 100% !important;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+
 	/* Grid system mobile fixes */
 	[data-grid] {
 		grid-template-columns: 1fr !important;
@@ -125,6 +132,27 @@
 		box-sizing: border-box !important;
 	}
 
+	/* Homepage Featured Work section - override any conflicting container styles */
+	[data-maxwidth] {
+		max-width: 100% !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+		width: 100% !important;
+	}
+
+	/* Featured Work title section - mobile-specific padding override */
+	.featured-work-title-section {
+		padding-left: 20px !important;
+		padding-right: 20px !important;
+		width: 100% !important;
+		max-width: 100% !important;
+		box-sizing: border-box !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+	}
+
 	/* Case study card specific mobile optimizations */
 	.caseStudyCard,
 	[data-case-study-card] {
@@ -140,16 +168,35 @@
 		box-sizing: border-box !important;
 	}
 
-	/* Ensure ModernCaseStudyGrid has consistent padding */
+	/* Ensure ModernCaseStudyGrid and CaseStudyGrid have consistent padding */
 	[data-grid] {
 		margin-left: 0 !important;
 		margin-right: 0 !important;
 		width: 100% !important;
 	}
+
+	/* Apply to both Modern and regular CaseStudyGrid components */
+	[data-grid],
+	.caseStudyGrid {
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		width: 100% !important;
+		max-width: 100% !important;
+		box-sizing: border-box !important;
+	}
 }
 
 /* Ensure carousel content doesn't overflow */
 @media (max-width: 768px) {
+	/* Featured Work title section - ensure consistent padding */
+	.featured-work-title-section {
+		padding-left: 20px !important;
+		padding-right: 20px !important;
+		width: 100% !important;
+		max-width: 100% !important;
+		box-sizing: border-box !important;
+	}
+
 	[data-carousel] {
 		width: 100% !important;
 		max-width: 100% !important;
@@ -164,7 +211,8 @@
 
 	/* Force all grid containers to be properly contained */
 	[data-grid],
-	[data-columns] {
+	[data-columns],
+	.caseStudyGrid {
 		width: 100% !important;
 		max-width: 100% !important;
 		margin: 0 !important;

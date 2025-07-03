@@ -166,12 +166,20 @@ export default function Home() {
 				horizontal='center'
 				vertical='center'
 				paddingY='0'
-				paddingX='l'
+				paddingX='0'
 				gap='0'>
+				{/* Title Section with Consistent Padding */}
 				<Column
-					maxWidth='l'
+					fillWidth
 					horizontal='center'
-					gap='0'>
+					gap='0'
+					className='featured-work-title-section'
+					style={{
+						paddingLeft: 'clamp(20px, 5vw, 32px)',
+						paddingRight: 'clamp(20px, 5vw, 32px)',
+						maxWidth: '100%',
+						boxSizing: 'border-box'
+					}}>
 					<RevealFx
 						translateY={4}
 						delay={0}
@@ -191,7 +199,7 @@ export default function Home() {
 					</RevealFx>
 				</Column>
 
-				{/* Wrapper to add vertical breathing room below heading */}
+				{/* Projects Section - Let ModernProjects handle its own padding */}
 				<Column
 					fillWidth
 					paddingTop='16'
