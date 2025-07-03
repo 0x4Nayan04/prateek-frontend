@@ -95,8 +95,8 @@ export function ModernCaseStudyGrid({
 				<Column
 					fillWidth
 					style={{
-						paddingLeft: 'clamp(16px, 4vw, 32px)',
-						paddingRight: 'clamp(16px, 4vw, 32px)',
+						paddingLeft: 'clamp(20px, 5vw, 32px)',
+						paddingRight: 'clamp(20px, 5vw, 32px)',
 						maxWidth: '100%',
 						boxSizing: 'border-box'
 					}}>

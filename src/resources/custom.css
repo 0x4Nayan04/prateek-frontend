@@ -1321,6 +1321,26 @@ a[href*='/work/'] {
 }
 
 /* ============================================================================
+   CASE STUDY TEXT CLAMP - CONSISTENT ACROSS ALL COMPONENTS
+   ============================================================================ */
+
+/* Ensure all case study summary text is consistently clamped to 3 lines */
+.case-study-summary,
+.card-description,
+[data-case-study-card] .case-study-summary {
+	display: -webkit-box !important;
+	-webkit-line-clamp: 3 !important;
+	line-clamp: 3 !important;
+	-webkit-box-orient: vertical !important;
+	overflow: hidden !important;
+	text-overflow: ellipsis !important;
+	line-height: 1.5 !important;
+	word-break: break-word !important;
+	height: auto !important;
+	max-height: none !important;
+}
+
+/* ============================================================================
    IMPROVED SECTION ALIGNMENT AND SPACING
    ============================================================================ */
 

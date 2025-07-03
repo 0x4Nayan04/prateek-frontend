@@ -39,8 +39,8 @@ export default function Work() {
 			horizontal='center'
 			paddingY='16'
 			style={{
-				paddingLeft: 'clamp(16px, 4vw, 32px)',
-				paddingRight: 'clamp(16px, 4vw, 32px)',
+				paddingLeft: '0',
+				paddingRight: '0',
 				maxWidth: '100%',
 				boxSizing: 'border-box'
 			}}

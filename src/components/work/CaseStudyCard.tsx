@@ -146,14 +146,10 @@ export function CaseStudyCard({
 								style={{
 									lineHeight: '1.6',
 									fontSize: 'clamp(0.8rem, 2.2vw, 0.875rem)',
-									display: '-webkit-box',
-									WebkitLineClamp: 3,
-									WebkitBoxOrient: 'vertical',
-									overflow: 'hidden',
-									textOverflow: 'ellipsis',
 									marginBottom: '12px',
 									flex: 1
-								}}>
+								}}
+								className='case-study-summary'>
 								{caseStudy.summary}
 							</Text>
 						</Column>
