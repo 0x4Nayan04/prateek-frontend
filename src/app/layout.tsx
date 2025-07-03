@@ -1,4 +1,3 @@
-import '@/resources/dark-theme-override.css';
 import '@once-ui-system/core/css/styles.css';
 import '@once-ui-system/core/css/tokens.css';
 import '@/resources/responsive-system.css';
@@ -98,24 +97,6 @@ export default async function RootLayout({
 				fonts.code.variable
 			)}>
 			<head>
-				{/* Force dark theme meta tags */}
-				<meta
-					name='color-scheme'
-					content='dark'
-				/>
-				<meta
-					name='theme-color'
-					content='#020b10'
-				/>
-				<meta
-					name='msapplication-navbutton-color'
-					content='#020b10'
-				/>
-				<meta
-					name='apple-mobile-web-app-status-bar-style'
-					content='black-translucent'
-				/>
-
 				<link
 					rel='apple-touch-icon'
 					sizes='180x180'
@@ -136,36 +117,6 @@ export default async function RootLayout({
 				<link
 					rel='manifest'
 					href='/site.webmanifest'
-				/>
-				<script
-					id='theme-force-dark'
-					dangerouslySetInnerHTML={{
-						__html: `
-              // Immediate execution before any rendering - force dark theme
-              (function() {
-                const root = document.documentElement;
-                const body = document.body;
-                
-                // Force dark theme at DOM level immediately
-                root.style.colorScheme = 'dark';
-                root.style.backgroundColor = '#020b10';
-                root.setAttribute('data-theme', 'dark');
-                
-                // Ensure body has dark background
-                if (body) {
-                  body.style.backgroundColor = '#020b10';
-                  body.style.color = '#e7f8ff';
-                }
-                
-                // Override any system theme detection
-                if (window.matchMedia) {
-                  const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-                  // Always report dark theme regardless of system preference
-                  Object.defineProperty(mediaQuery, 'matches', { value: true, writable: false });
-                }
-              })();
-            `
-					}}
 				/>
 				<script
 					id='theme-init'
@@ -195,53 +146,11 @@ export default async function RootLayout({
                   
                   // Always use dark theme for portfolio
                   root.setAttribute('data-theme', 'dark');
-                  
-                  // Force dark theme styles
-                  root.style.colorScheme = 'dark';
-                  root.style.backgroundColor = '#020b10';
-                  
                 } catch (e) {
                   console.error('Failed to initialize theme:', e);
                   document.documentElement.setAttribute('data-theme', 'dark');
-                  document.documentElement.style.colorScheme = 'dark';
-                  document.documentElement.style.backgroundColor = '#020b10';
                 }
               })();
-            `
-					}}
-				/>
-				<script
-					id='theme-persistence'
-					dangerouslySetInnerHTML={{
-						__html: `
-              // Ensure dark theme persists after any dynamic content loads
-              document.addEventListener('DOMContentLoaded', function() {
-                const root = document.documentElement;
-                const body = document.body;
-                
-                // Final enforcement of dark theme
-                root.setAttribute('data-theme', 'dark');
-                root.style.colorScheme = 'dark';
-                root.style.backgroundColor = '#020b10';
-                
-                if (body) {
-                  body.style.backgroundColor = '#020b10';
-                  body.style.color = '#e7f8ff';
-                }
-                
-                // Monitor for any theme changes and override them
-                const observer = new MutationObserver(function(mutations) {
-                  mutations.forEach(function(mutation) {
-                    if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
-                      if (root.getAttribute('data-theme') !== 'dark') {
-                        root.setAttribute('data-theme', 'dark');
-                      }
-                    }
-                  });
-                });
-                
-                observer.observe(root, { attributes: true, attributeFilter: ['data-theme'] });
-              });
             `
 					}}
 				/>
