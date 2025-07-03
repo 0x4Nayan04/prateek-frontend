@@ -3,6 +3,7 @@ import '@once-ui-system/core/css/tokens.css';
 import '@/resources/responsive-system.css';
 import '@/resources/custom-overrides.css';
 import '@/resources/custom.css';
+import '@/components/work/mobile-fixes.css';
 
 import classNames from 'classnames';
 import type { Metadata } from 'next';

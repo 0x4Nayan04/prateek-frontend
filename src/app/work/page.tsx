@@ -38,8 +38,14 @@ export default function Work() {
 			fillWidth
 			horizontal='center'
 			paddingY='16'
-			paddingX='l'
-			gap='12'>
+			style={{
+				paddingLeft: 'clamp(16px, 4vw, 32px)',
+				paddingRight: 'clamp(16px, 4vw, 32px)',
+				maxWidth: '100%',
+				boxSizing: 'border-box'
+			}}
+			gap='12'
+			data-work-page>
 			<ModernProjects
 				title='Case Studies'
 				enableFilters={true}

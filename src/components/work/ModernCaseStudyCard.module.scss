@@ -30,13 +30,19 @@
 		outline-offset: 2px;
 	}
 
-	/* Mobile Responsive Styling - Improved */
+	/* Mobile Responsive Styling - Fixed containment */
 	@media (max-width: 640px) {
 		width: 100% !important;
 		max-width: 100% !important;
-		margin: 0 !important;
-		min-height: 420px !important; // Optimized for mobile
+		margin: 0 auto !important;
+		min-height: 420px !important;
 		box-sizing: border-box !important;
+		overflow: hidden !important;
+
+		/* Ensure the card stays within viewport bounds */
+		&:not(:last-child) {
+			margin-bottom: 24px !important;
+		}
 
 		/* More subtle hover effect for mobile */
 		&:hover {

@@ -94,16 +94,21 @@ export function ModernCaseStudyGrid({
 				horizontal='center'>
 				<Column
 					fillWidth
-					paddingX='l'>
-					{/* Grid Container with consistent spacing */}
+					style={{
+						paddingLeft: 'clamp(16px, 4vw, 32px)',
+						paddingRight: 'clamp(16px, 4vw, 32px)',
+						maxWidth: '100%',
+						boxSizing: 'border-box'
+					}}>
+					{/* Grid Container with balanced mobile spacing */}
 					<Column
 						fillWidth
-						paddingX='l'
+						gap='s'
 						style={{
-							paddingLeft: '8px',
-							paddingRight: '8px'
-						}}
-						gap='s'>
+							maxWidth: '100%',
+							boxSizing: 'border-box',
+							overflow: 'hidden'
+						}}>
 						{hasResults ? (
 							<>
 								<Grid
@@ -113,8 +118,16 @@ export function ModernCaseStudyGrid({
 									gap='32'
 									fillWidth
 									style={{
-										alignItems: 'stretch'
-									}}>
+										alignItems: 'stretch',
+										paddingLeft: '0',
+										paddingRight: '0',
+										marginLeft: '0',
+										marginRight: '0',
+										maxWidth: '100%',
+										boxSizing: 'border-box',
+										width: '100%'
+									}}
+									data-grid>
 									{displayedCaseStudies.map((caseStudy, index) => (
 										<ModernCaseStudyCard
 											key={caseStudy._id}

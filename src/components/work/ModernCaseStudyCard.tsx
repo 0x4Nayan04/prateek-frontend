@@ -100,9 +100,12 @@ export function ModernCaseStudyCard({
 						flexDirection: 'column',
 						cursor: 'pointer',
 						transition:
-							'all var(--animation-duration-short) var(--animation-easing-standard)'
+							'all var(--animation-duration-short) var(--animation-easing-standard)',
+						maxWidth: '100%',
+						boxSizing: 'border-box'
 					}}
-					className={styles.caseStudyCard}>
+					className={styles.caseStudyCard}
+					data-case-study-card>
 					{/* Image Section - Improved responsive container */}
 					<div
 						style={{
@@ -113,7 +116,10 @@ export function ModernCaseStudyCard({
 							background: 'rgb(250, 250, 250)',
 							borderRadius: '12px 12px 0 0',
 							minHeight: '200px', // Minimum height for mobile
-							maxHeight: '350px' // Maximum height for larger screens
+							maxHeight: '350px', // Maximum height for larger screens
+							maxWidth: '100%',
+							boxSizing: 'border-box',
+							overflow: 'hidden'
 						}}>
 						{carouselItems.length > 0 ? (
 							<div
@@ -252,7 +258,9 @@ export function ModernCaseStudyCard({
 							wrap
 							style={{
 								marginTop: 'auto',
-								alignItems: 'flex-start'
+								alignItems: 'flex-start',
+								maxWidth: '100%',
+								overflow: 'hidden'
 							}}>
 							{/* Tech Stack Tags - Match detail page styling */}
 							{caseStudy.techStack
@@ -277,7 +285,8 @@ export function ModernCaseStudyCard({
 											whiteSpace: 'nowrap',
 											maxWidth: '120px',
 											overflow: 'hidden',
-											textOverflow: 'ellipsis'
+											textOverflow: 'ellipsis',
+											boxSizing: 'border-box'
 										}}>
 										{tech}
 									</span>
@@ -303,7 +312,8 @@ export function ModernCaseStudyCard({
 										whiteSpace: 'nowrap',
 										maxWidth: '130px',
 										overflow: 'hidden',
-										textOverflow: 'ellipsis'
+										textOverflow: 'ellipsis',
+										boxSizing: 'border-box'
 									}}>
 									{industry}
 								</span>

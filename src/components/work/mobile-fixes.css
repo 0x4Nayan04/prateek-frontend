@@ -1,0 +1,164 @@
+/* ============================================================================
+   MOBILE LAYOUT FIXES - CRITICAL FIXES FOR CARD CROPPING
+   ============================================================================ */
+
+/* Ensure no horizontal scrolling on mobile */
+@media (max-width: 768px) {
+	body,
+	html {
+		overflow-x: hidden !important;
+		width: 100% !important;
+		max-width: 100vw !important;
+	}
+
+	/* Main work page container */
+	[data-work-page] {
+		padding-left: 16px !important;
+		padding-right: 16px !important;
+		width: 100% !important;
+		max-width: 100vw !important;
+		box-sizing: border-box !important;
+	}
+
+	/* Grid system mobile fixes */
+	[data-grid] {
+		grid-template-columns: 1fr !important;
+		gap: 24px !important;
+		padding: 0 !important;
+		margin: 0 !important;
+		width: 100% !important;
+		max-width: 100% !important;
+		box-sizing: border-box !important;
+		overflow: hidden !important;
+	}
+
+	/* Case study cards - prevent cropping */
+	.caseStudyCard,
+	[data-case-study-card] {
+		width: 100% !important;
+		max-width: 100% !important;
+		margin: 0 auto !important;
+		padding: 0 !important;
+		box-sizing: border-box !important;
+		overflow: hidden !important;
+	}
+
+	/* Grid items spacing and containment */
+	[data-grid] > * {
+		width: 100% !important;
+		max-width: 100% !important;
+		margin: 0 !important;
+		box-sizing: border-box !important;
+		overflow: hidden !important;
+	}
+
+	/* Remove excessive padding from Once UI components */
+	[data-padding='l'],
+	[data-paddingx='l'] {
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+	[data-work-page] {
+		padding-left: 12px !important;
+		padding-right: 12px !important;
+	}
+
+	.caseStudyCard,
+	[data-case-study-card] {
+		max-width: calc(100vw - 24px) !important;
+		margin-left: auto !important;
+		margin-right: auto !important;
+	}
+}
+
+/* Mobile container improvements for better centering */
+@media (max-width: 640px) {
+	/* Prevent horizontal scrolling completely */
+	html,
+	body {
+		overflow-x: hidden !important;
+		max-width: 100vw !important;
+	}
+
+	/* Force container to take full width and center content */
+	[data-fillwidth='true'] {
+		width: 100% !important;
+		max-width: 100% !important;
+		margin-left: auto !important;
+		margin-right: auto !important;
+		box-sizing: border-box !important;
+	}
+
+	/* Grid column wrapper improvements */
+	[data-column][data-fillwidth='true'] {
+		padding-left: 16px !important;
+		padding-right: 16px !important;
+		width: 100% !important;
+		max-width: 100vw !important;
+		box-sizing: border-box !important;
+	}
+
+	/* Case study card specific mobile optimizations */
+	.caseStudyCard,
+	[data-case-study-card] {
+		max-width: calc(100vw - 32px) !important;
+		margin-left: auto !important;
+		margin-right: auto !important;
+		box-sizing: border-box !important;
+		overflow: hidden !important;
+	}
+
+	/* Ensure card content stays within bounds */
+	[data-case-study-card] * {
+		max-width: 100% !important;
+		box-sizing: border-box !important;
+	}
+
+	/* Aggressive mobile viewport containment */
+	* {
+		max-width: 100vw !important;
+		box-sizing: border-box !important;
+	}
+}
+
+/* Ensure carousel content doesn't overflow */
+@media (max-width: 768px) {
+	/* Prevent any content from extending beyond viewport */
+	* {
+		max-width: 100vw !important;
+		box-sizing: border-box !important;
+	}
+
+	[data-carousel] {
+		width: 100% !important;
+		max-width: 100% !important;
+		overflow: hidden !important;
+	}
+
+	[data-carousel] img {
+		width: 100% !important;
+		max-width: 100% !important;
+		object-fit: cover !important;
+	}
+
+	/* Force all grid containers to be properly contained */
+	[data-grid],
+	[data-columns] {
+		width: 100% !important;
+		max-width: 100% !important;
+		margin: 0 !important;
+		padding: 0 !important;
+		overflow: hidden !important;
+		box-sizing: border-box !important;
+	}
+
+	/* Ensure all content within cards is contained */
+	[data-case-study-card] * {
+		max-width: 100% !important;
+		box-sizing: border-box !important;
+	}
+}
