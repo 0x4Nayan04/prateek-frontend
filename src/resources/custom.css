@@ -1,59 +1,105 @@
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
 
-/* :root {
-  /*
-  /* Example setup for custom colors */
-/* Generate at: https://once-ui.com/customize */
-/*
-  --scheme-brand-100: #08002f;
-  --scheme-brand-200:  #04025c;
-  --scheme-brand-300:  #1f398e;
-  --scheme-brand-400:  #3856ae;
-  --scheme-brand-500:  #5071cc;
-  --scheme-brand-600:  #6f94f1;
-  --scheme-brand-700:  #8db3ff;
-  --scheme-brand-800:  #b2dbff;
-  --scheme-brand-900:  #bfe8ff;
-  --scheme-brand-1000: #ccf6ff;
-  --scheme-brand-1100: #d2fcff;
-  --scheme-brand-1200: #d2fcff;
-  --scheme-brand-600-10: rgba(111,148,241,0.1);
-  --scheme-brand-600-30: rgba(111,148,241,0.3);
-  --scheme-brand-600-50: rgba(111,148,241,0.5);
+/* ============================================================================
+   DARK THEME ENFORCEMENT - ALWAYS DARK MODE
+   ============================================================================ */
 
-  --scheme-accent-100:  #030b10;
-  --scheme-accent-200:  #0d181d;
-  --scheme-accent-300:  #364248;
-  --scheme-accent-400:  #505d64;
-  --scheme-accent-500:  #69777e;
-  --scheme-accent-600:  #8a989f;
-  --scheme-accent-700:  #a8b7bf;
-  --scheme-accent-800:  #c8d7df;
-  --scheme-accent-900:  #d5e4ec;
-  --scheme-accent-1000: #e2f1f9;
-  --scheme-accent-1100: #e9f8ff;
-  --scheme-accent-1200: #efffff;
-  --scheme-accent-600-10: rgba(138,152,159,0.1);
-  --scheme-accent-600-30: rgba(138,152,159,0.3);
-  --scheme-accent-600-50: rgba(138,152,159,0.5);
+/* Force dark theme globally - this overrides any system preferences */
+:root {
+	color-scheme: dark !important;
+}
 
-  --scheme-neutral-100:  #020b10;
-  --scheme-neutral-200:  #0b181d;
-  --scheme-neutral-300:  #344248;
-  --scheme-neutral-400:  #4f5d64;
-  --scheme-neutral-500:  #68777e;
-  --scheme-neutral-600:  #89989f;
-  --scheme-neutral-700:  #a7b7be;
-  --scheme-neutral-800:  #c7d7df;
-  --scheme-neutral-900:  #d4e4ec;
-  --scheme-neutral-1000: #e1f2f9;
-  --scheme-neutral-1100: #e7f8ff;
-  --scheme-neutral-1200: #eeffff;
-  --scheme-neutral-600-10: rgba(137,152,159,0.1);
-  --scheme-neutral-600-30: rgba(137,152,159,0.3);
-  --scheme-neutral-600-50: rgba(137,152,159,0.5);
-  /*
-}*/
+/* Ensure dark theme regardless of data attributes */
+html,
+html[data-theme],
+html[data-theme='light'],
+html[data-theme='dark'],
+html[data-theme='system'] {
+	color-scheme: dark !important;
+	background-color: var(--neutral-100, #020b10) !important;
+}
+
+/* Override any potential light theme variables */
+html[data-theme='light'] {
+	--page-background: var(--neutral-100, #020b10) !important;
+	--surface-background: var(--neutral-200, #0b181d) !important;
+	--neutral-on-background-weak: var(--neutral-600, #89989f) !important;
+	--neutral-on-background-medium: var(--neutral-700, #a7b7be) !important;
+	--neutral-on-background-strong: var(--neutral-800, #c7d7df) !important;
+}
+
+/* Force dark theme for system preference override */
+@media (prefers-color-scheme: light) {
+	html,
+	html[data-theme='system'] {
+		color-scheme: dark !important;
+		background-color: var(--neutral-100, #020b10) !important;
+	}
+}
+
+/* Additional enforcement for body element */
+body {
+	background-color: var(--neutral-100, #020b10) !important;
+	color: var(--neutral-on-background-medium, #a7b7be) !important;
+}
+
+/* Force all theme-dependent elements to use dark mode */
+* {
+	color-scheme: dark !important;
+}
+
+:root {
+	/* Custom color scheme matching reference design */
+	/* Generate at: https://once-ui.com/customize */
+
+	--scheme-brand-100: #08002f;
+	--scheme-brand-200: #04025c;
+	--scheme-brand-300: #1f398e;
+	--scheme-brand-400: #3856ae;
+	--scheme-brand-500: #5071cc;
+	--scheme-brand-600: #6f94f1;
+	--scheme-brand-700: #8db3ff;
+	--scheme-brand-800: #b2dbff;
+	--scheme-brand-900: #bfe8ff;
+	--scheme-brand-1000: #ccf6ff;
+	--scheme-brand-1100: #d2fcff;
+	--scheme-brand-1200: #d2fcff;
+	--scheme-brand-600-10: rgba(111, 148, 241, 0.1);
+	--scheme-brand-600-30: rgba(111, 148, 241, 0.3);
+	--scheme-brand-600-50: rgba(111, 148, 241, 0.5);
+
+	--scheme-accent-100: #030b10;
+	--scheme-accent-200: #0d181d;
+	--scheme-accent-300: #364248;
+	--scheme-accent-400: #505d64;
+	--scheme-accent-500: #69777e;
+	--scheme-accent-600: #8a989f;
+	--scheme-accent-700: #a8b7bf;
+	--scheme-accent-800: #c8d7df;
+	--scheme-accent-900: #d5e4ec;
+	--scheme-accent-1000: #e2f1f9;
+	--scheme-accent-1100: #e9f8ff;
+	--scheme-accent-1200: #efffff;
+	--scheme-accent-600-10: rgba(138, 152, 159, 0.1);
+	--scheme-accent-600-30: rgba(138, 152, 159, 0.3);
+	--scheme-accent-600-50: rgba(138, 152, 159, 0.5);
+
+	--scheme-neutral-100: #020b10;
+	--scheme-neutral-200: #0b181d;
+	--scheme-neutral-300: #344248;
+	--scheme-neutral-400: #4f5d64;
+	--scheme-neutral-500: #68777e;
+	--scheme-neutral-600: #89989f;
+	--scheme-neutral-700: #a7b7be;
+	--scheme-neutral-800: #c7d7df;
+	--scheme-neutral-900: #d4e4ec;
+	--scheme-neutral-1000: #e1f2f9;
+	--scheme-neutral-1100: #e7f8ff;
+	--scheme-neutral-1200: #eeffff;
+	--scheme-neutral-600-10: rgba(137, 152, 159, 0.1);
+	--scheme-neutral-600-30: rgba(137, 152, 159, 0.3);
+	--scheme-neutral-600-50: rgba(137, 152, 159, 0.5);
+}
 
 /* ============================================================================
    RESPONSIVE HEADER NAVIGATION CLASSES
@@ -341,6 +387,50 @@ div,
 
 [class*='Tag_brand'] {
 	max-width: 110px !important;
+}
+
+/* ============================================================================
+   BADGE STYLING - ENHANCED VISIBILITY AND CONTRAST
+   ============================================================================ */
+
+/* Enhanced badge styling for "Helping companies unlock decisions with data" */
+[data-variant='neutral'][data-textvariant='label-default-s'] {
+	color: var(--neutral-on-background-strong) !important;
+	background: var(--neutral-alpha-medium) !important;
+	border: 1px solid var(--neutral-alpha-strong) !important;
+	font-weight: 500 !important;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Specific badge styling for featured section */
+[data-variant='neutral'][data-textvariant='label-default-s'] [data-gap='4'] {
+	color: var(--neutral-on-background-strong) !important;
+	font-weight: 500 !important;
+}
+
+/* Icon styling within badges */
+[data-variant='neutral'][data-textvariant='label-default-s'] [data-icon] {
+	color: var(--neutral-on-background-strong) !important;
+}
+
+/* Row content within badges */
+[data-variant='neutral'][data-textvariant='label-default-s'] [data-row] {
+	color: var(--neutral-on-background-strong) !important;
+}
+
+/* Ensure high contrast for badge text */
+[data-variant='neutral'][data-textvariant='label-default-s'] span,
+[data-variant='neutral'][data-textvariant='label-default-s'] div {
+	color: var(--neutral-on-background-strong) !important;
+	font-weight: 500 !important;
+}
+
+/* Alternative badge styling with brand colors for better visibility */
+[data-variant='brand'][data-textvariant='label-default-s'] {
+	color: var(--brand-on-background-strong) !important;
+	background: var(--brand-alpha-weak) !important;
+	border: 1px solid var(--brand-alpha-medium) !important;
+	font-weight: 500 !important;
 }
 
 /* ============================================================================

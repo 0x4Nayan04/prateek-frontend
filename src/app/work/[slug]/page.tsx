@@ -339,7 +339,7 @@ export default async function CaseStudyPage({
 								style={{
 									borderRadius: '12px',
 									overflow: 'hidden',
-									boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)'
+									boxShadow: 'var(--shadow-l)'
 								}}
 							/>
 						</div>
@@ -536,7 +536,7 @@ export default async function CaseStudyPage({
 									border: '1px solid var(--neutral-alpha-medium)',
 									borderRadius: '12px',
 									overflow: 'hidden',
-									boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12)',
+									boxShadow: 'var(--shadow-l)',
 									background: 'var(--surface)'
 								}}>
 								<iframe

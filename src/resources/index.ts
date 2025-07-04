@@ -1,8 +1,9 @@
 // import a pre-defined template for config and content options
-export { home, work, display } from './content';
+export { person, home, work } from './content';
 
 export {
 	routes,
+	display,
 	baseURL,
 	fonts,
 	style,

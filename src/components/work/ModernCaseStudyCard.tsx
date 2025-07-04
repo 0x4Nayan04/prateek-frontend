@@ -113,7 +113,7 @@ export function ModernCaseStudyCard({
 							width: '100%',
 							aspectRatio: '16 / 10', // Use aspect ratio instead of fixed height
 							padding: '8px',
-							background: 'rgb(250, 250, 250)',
+							background: 'var(--neutral-alpha-weak)',
 							borderRadius: '12px 12px 0 0',
 							minHeight: '200px', // Minimum height for mobile
 							maxHeight: '350px', // Maximum height for larger screens
@@ -126,9 +126,8 @@ export function ModernCaseStudyCard({
 								style={{
 									borderRadius: '8px',
 									overflow: 'hidden',
-									border: '1px solid rgb(230, 230, 230)',
-									boxShadow:
-										'0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+									border: '1px solid var(--neutral-alpha-medium)',
+									boxShadow: 'var(--shadow-s)',
 									height: '100%',
 									width: '100%',
 									position: 'relative'
@@ -159,16 +158,15 @@ export function ModernCaseStudyCard({
 								style={{
 									borderRadius: '8px',
 									overflow: 'hidden',
-									border: '1px solid rgb(230, 230, 230)',
-									boxShadow:
-										'0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+									border: '1px solid var(--neutral-alpha-medium)',
+									boxShadow: 'var(--shadow-s)',
 									height: '100%',
 									width: '100%',
 									display: 'flex',
 									alignItems: 'center',
 									justifyContent: 'center',
-									color: '#666',
-									background: 'rgb(248, 248, 248)',
+									color: 'var(--neutral-on-background-weak)',
+									background: 'var(--neutral-alpha-weak)',
 									fontSize: '14px',
 									fontWeight: '500'
 								}}>
@@ -191,7 +189,7 @@ export function ModernCaseStudyCard({
 						style={{
 							width: '100%',
 							height: '1px',
-							background: 'rgb(230, 230, 230)',
+							background: 'var(--neutral-alpha-medium)',
 							margin: '0'
 						}}
 					/>

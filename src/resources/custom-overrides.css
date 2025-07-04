@@ -94,7 +94,7 @@ a[href*='/work/'],
 
 .card-base:hover {
 	transform: translateY(-4px);
-	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+	box-shadow: var(--shadow-l);
 }
 
 .grid-responsive {

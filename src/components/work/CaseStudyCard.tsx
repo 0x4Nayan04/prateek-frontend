@@ -66,7 +66,7 @@ export function CaseStudyCard({
 					<div
 						style={{
 							padding: '8px',
-							background: 'rgb(250, 250, 250)',
+							background: 'var(--neutral-alpha-weak)',
 							borderRadius: '12px 12px 0 0'
 						}}>
 						<div
@@ -76,9 +76,8 @@ export function CaseStudyCard({
 								aspectRatio: '16/9',
 								overflow: 'hidden',
 								borderRadius: '8px',
-								border: '1px solid rgb(230, 230, 230)',
-								boxShadow:
-									'0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+								border: '1px solid var(--neutral-alpha-medium)',
+								boxShadow: 'var(--shadow-s)',
 								background: 'var(--neutral-alpha-weak)'
 							}}>
 							<SanityImage
@@ -98,7 +97,7 @@ export function CaseStudyCard({
 						style={{
 							width: '100%',
 							height: '1px',
-							background: 'rgb(230, 230, 230)',
+							background: 'var(--neutral-alpha-medium)',
 							margin: '0'
 						}}
 					/>

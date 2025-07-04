@@ -218,7 +218,7 @@ const components = {
 							width: '100%',
 							height: 'auto',
 							borderRadius: '8px',
-							boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1)'
+							boxShadow: 'var(--shadow-m)'
 						}}
 					/>
 					{value.caption && (

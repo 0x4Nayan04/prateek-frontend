@@ -32,9 +32,7 @@ export function PillFilter({
 				transition:
 					'all var(--animation-duration-short) var(--animation-easing-standard)',
 				userSelect: 'none',
-				boxShadow: isActive
-					? '0 2px 8px -2px rgba(0, 0, 0, 0.15)'
-					: '0 1px 4px -1px rgba(0, 0, 0, 0.1)',
+				boxShadow: isActive ? 'var(--shadow-m)' : 'var(--shadow-s)',
 				transform: isActive ? 'translateY(-1px)' : 'translateY(0)',
 				// Tech Stack styling
 				...(category === 'techStack' && {
@@ -66,14 +64,13 @@ export function PillFilter({
 			onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => {
 				if (!isActive) {
 					e.currentTarget.style.transform = 'translateY(-2px)';
-					e.currentTarget.style.boxShadow =
-						'0 4px 12px -2px rgba(0, 0, 0, 0.15)';
+					e.currentTarget.style.boxShadow = 'var(--shadow-l)';
 				}
 			}}
 			onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => {
 				if (!isActive) {
 					e.currentTarget.style.transform = 'translateY(0)';
-					e.currentTarget.style.boxShadow = '0 1px 4px -1px rgba(0, 0, 0, 0.1)';
+					e.currentTarget.style.boxShadow = 'var(--shadow-s)';
 				}
 			}}>
 			{label}

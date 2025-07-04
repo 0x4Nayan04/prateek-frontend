@@ -5,6 +5,12 @@ const routes = {
 	'/work': true
 };
 
+const display = {
+	location: false,
+	time: false,
+	themeSwitcher: false
+};
+
 // Import and set font for each variant
 import { Inter } from 'next/font/google';
 import { Geist_Mono } from 'next/font/google';
@@ -81,22 +87,22 @@ const fonts = {
 
 // default customization applied to the HTML in the main layout.tsx
 const style = {
-	theme: 'dark', // Force dark theme - this is critical
-	neutral: 'gray', // Slightly bluish-dark background observed
-	brand: 'aqua', // Brand buttons and gradients use warm orange tones
-	accent: 'yellow', // Icons and highlights like "stat cards" use yellow/gold
-	solid: 'contrast', // Strong button color (not high contrast)
-	solidStyle: 'flat', // Buttons and inputs are slightly glossy/glass-like
-	border: 'playful', // Borders are sharp and minimal
-	surface: 'translucent', // Glowing, glassy section surfaces
-	transition: 'all', // Multiple animations (hover, icon pulses, etc.)
-	scaling: '100' // Seems like default scaling; feels natural and readable
+	theme: 'dark', // system | dark | light
+	neutral: 'gray', // sand | gray | slate
+	brand: 'cyan', // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan
+	accent: 'red', // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan
+	solid: 'contrast', // color | contrast
+	solidStyle: 'flat', // flat | plastic
+	border: 'playful', // rounded | playful | conservative
+	surface: 'translucent', // filled | translucent
+	transition: 'all', // all | micro | macro
+	scaling: '100' // 90 | 95 | 100 | 105 | 110
 };
 
 const dataStyle = {
-	variant: 'flat', // Clean flat visual
-	mode: 'categorical', // Consistent section-based colors
-	height: 28, // Slightly taller stat visuals
+	variant: 'gradient', // flat | gradient | outline
+	mode: 'categorical', // categorical | divergent | sequential
+	height: 24, // default chart height
 	axis: {
 		stroke: 'var(--neutral-alpha-weak)'
 	},
@@ -127,7 +133,7 @@ const effects = {
 	},
 	dots: {
 		display: true,
-		opacity: 80,
+		opacity: 40,
 		size: '2',
 		color: 'brand-background-strong'
 	},
@@ -148,4 +154,4 @@ const effects = {
 	}
 };
 
-export { routes, baseURL, fonts, style, effects, dataStyle };
+export { routes, baseURL, fonts, style, effects, dataStyle, display };

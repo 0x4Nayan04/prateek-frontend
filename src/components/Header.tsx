@@ -128,7 +128,7 @@ export const Header = () => {
 				fillWidth
 				padding='4'
 				horizontal='center'
-				data-border=''>
+				data-border='playful'>
 				<Flex
 					paddingLeft='12'
 					fillWidth
@@ -144,7 +144,8 @@ export const Header = () => {
 						shadow='l'
 						padding='4'
 						horizontal='center'
-						zIndex={1}>
+						zIndex={1}
+						data-border='playful'>
 						<Flex
 							gap='4'
 							vertical='center'

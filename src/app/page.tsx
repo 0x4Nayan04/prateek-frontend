@@ -88,12 +88,13 @@ export default function Home() {
 							horizontal='center'
 							paddingBottom='4'>
 							<Badge
-								background='success-alpha-weak'
-								paddingX='16'
+								background='brand-alpha-weak'
+								paddingX='12'
 								paddingY='4'
-								onBackground='neutral-strong'
+								onBackground='brand-strong'
 								textVariant='label-default-s'
-								arrow={false}>
+								arrow={false}
+								href={home.featured.href}>
 								<Row
 									gap='4'
 									vertical='center'

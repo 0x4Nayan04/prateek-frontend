@@ -1,3 +1,16 @@
+const person = {
+	firstName: 'Pratik',
+	lastName: 'Srivastava',
+	get name() {
+		return `${this.firstName} ${this.lastName}`;
+	},
+	role: 'Business Intelligence Consultant',
+	avatar: '/images/avatar.jpg',
+	email: 'pratik@example.com',
+	location: 'Asia/Kolkata', // Expecting the IANA time zone identifier
+	languages: ['English', 'Hindi'] // optional: Leave the array empty if you don't want to display languages
+};
+
 const home = {
 	path: '/',
 	label: 'Home',
@@ -11,7 +24,8 @@ const home = {
 	),
 	featured: {
 		display: true,
-		title: <>Helping companies unlock decisions with data</>
+		title: <>Helping companies unlock decisions with data</>,
+		href: '/work'
 	},
 	subline: (
 		<>
@@ -33,7 +47,8 @@ const work = {
 // Display configuration for components that need it
 const display = {
 	location: false,
-	time: false
+	time: false,
+	themeSwitcher: false // Remove theme switcher since we only want dark mode
 };
 
-export { home, work, display };
+export { person, home, work, display };
