@@ -8,20 +8,17 @@
 	align-items: center;
 	gap: 16px;
 	position: relative;
+	width: 100%;
+	max-width: 100%;
+	box-sizing: border-box;
 }
 
 .pillGroup {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 8px;
-}
-
-.pillGroupTech {
-	/* Tech stack styling */
-}
-
-.pillGroupIndustry {
-	/* Industry styling */
+	max-width: 100%;
+	box-sizing: border-box;
 }
 
 .pillDivider {
@@ -32,11 +29,25 @@
 	align-self: center;
 }
 
+/* Tablet responsive adjustments */
+@media (max-width: 1024px) and (min-width: 769px) {
+	.pillFilterContainer {
+		gap: 12px;
+		max-width: 100%;
+	}
+
+	.pillGroup {
+		gap: 6px;
+	}
+}
+
 /* Mobile responsive adjustments */
 @media (max-width: 768px) {
 	.pillFilterContainer {
 		flex-direction: column;
 		gap: 16px;
+		padding: 0;
+		max-width: 100%;
 	}
 
 	.pillDivider {
@@ -46,5 +57,6 @@
 	.pillGroup {
 		width: 100%;
 		justify-content: center;
+		max-width: 100%;
 	}
 }

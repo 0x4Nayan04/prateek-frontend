@@ -81,7 +81,27 @@ export function PillFilteredCaseStudyGrid({
 				horizontal='center'
 				gap='24'
 				paddingY='16'>
-				<PillFilterSystem availableFilters={availableFilters} />
+				<div
+					style={{
+						width: '100%',
+						paddingLeft: 'clamp(20px, 5vw, 32px)',
+						paddingRight: 'clamp(20px, 5vw, 32px)',
+						maxWidth: '100%',
+						boxSizing: 'border-box',
+						display: 'flex',
+						justifyContent: 'center'
+					}}>
+					<div
+						style={{
+							width: '100%',
+							maxWidth:
+								'1032px' /* 500px + 32px gap + 500px = 1032px for 2 cards + gap */,
+							display: 'flex',
+							justifyContent: 'center'
+						}}>
+						<PillFilterSystem availableFilters={availableFilters} />
+					</div>
+				</div>
 			</Column>
 
 			{/* Results */}

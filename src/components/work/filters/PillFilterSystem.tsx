@@ -71,7 +71,7 @@ export function PillFilterSystem({ availableFilters }: PillFilterSystemProps) {
 				{/* Pills Container */}
 				<div className={styles.pillFilterContainer}>
 					{/* Tech Stack Pills */}
-					<div className={`${styles.pillGroup} ${styles.pillGroupTech}`}>
+					<div className={`${styles.pillGroup}`}>
 						{techStackPills.map((pill) => (
 							<PillFilter
 								key={`tech-${pill.label}`}
@@ -83,11 +83,8 @@ export function PillFilterSystem({ availableFilters }: PillFilterSystemProps) {
 						))}
 					</div>
 
-					{/* Vertical Divider */}
-					<div className={styles.pillDivider} />
-
 					{/* Industry Pills */}
-					<div className={`${styles.pillGroup} ${styles.pillGroupIndustry}`}>
+					<div className={`${styles.pillGroup}`}>
 						{industryPills.map((pill) => (
 							<PillFilter
 								key={`industry-${pill.label}`}
