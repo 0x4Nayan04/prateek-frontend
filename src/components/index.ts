@@ -13,11 +13,11 @@ export { CaseStudyGrid } from './work/CaseStudyGrid';
 export { ModernCaseStudyCard } from './work/ModernCaseStudyCard';
 export { ModernCaseStudyGrid } from './work/ModernCaseStudyGrid';
 export { ModernProjects } from './work/ModernProjects';
-export { FilteredCaseStudyGrid } from './work/FilteredCaseStudyGrid';
+export { PillFilteredCaseStudyGrid } from './work/PillFilteredCaseStudyGrid';
 
 // Filter System
 export { FilterProvider, useFilters } from '../contexts/FilterContext';
-export { FilterSystem } from './work/filters';
+export { PillFilterSystem } from './work/filters';
 
 // Sanity Components
 export { SanityImage } from './sanity/SanityImage';

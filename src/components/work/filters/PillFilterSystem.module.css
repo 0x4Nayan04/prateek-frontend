@@ -1,0 +1,50 @@
+/* Pill Filter System Styles */
+
+.pillFilterContainer {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	gap: 16px;
+	position: relative;
+}
+
+.pillGroup {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.pillGroupTech {
+	/* Tech stack styling */
+}
+
+.pillGroupIndustry {
+	/* Industry styling */
+}
+
+.pillDivider {
+	width: 1px;
+	height: 24px;
+	background-color: var(--neutral-alpha-medium);
+	opacity: 0.6;
+	align-self: center;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+	.pillFilterContainer {
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	.pillDivider {
+		display: none;
+	}
+
+	.pillGroup {
+		width: 100%;
+		justify-content: center;
+	}
+}

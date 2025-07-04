@@ -4,11 +4,11 @@ import { useMemo } from 'react';
 import { Column, Grid, Heading, Text } from '@once-ui-system/core';
 import { CaseStudy } from '@/lib/sanity/types';
 import { ModernCaseStudyCard } from './ModernCaseStudyCard';
-import { FilterSystem } from './filters';
+import { PillFilterSystem } from './filters/PillFilterSystem';
 import { useFilters } from '@/contexts/FilterContext';
 import { filterCaseStudies } from '@/lib/utils/content';
 
-interface FilteredCaseStudyGridProps {
+interface PillFilteredCaseStudyGridProps {
 	caseStudies: CaseStudy[];
 	title?: string;
 	description?: string;
@@ -24,14 +24,14 @@ interface FilteredCaseStudyGridProps {
 	};
 }
 
-export function FilteredCaseStudyGrid({
+export function PillFilteredCaseStudyGrid({
 	caseStudies,
 	title,
 	description,
 	maxItems,
 	availableFilters,
 	columns = { desktop: 2, tablet: 2, mobile: 1 }
-}: FilteredCaseStudyGridProps) {
+}: PillFilteredCaseStudyGridProps) {
 	const { filters } = useFilters();
 
 	// Filter the case studies based on current filters
@@ -41,45 +41,65 @@ export function FilteredCaseStudyGrid({
 	}, [caseStudies, filters, maxItems]);
 
 	const hasResults = filteredCaseStudies.length > 0;
-	const totalResults = filteredCaseStudies.length;
 
 	return (
 		<Column
 			fillWidth
-			gap='s'
-			horizontal='center'
-			paddingY='1'>
+			gap='32'
+			horizontal='center'>
 			{/* Title */}
 			{title && (
 				<Heading
 					variant='display-strong-l'
 					align='center'
-					onBackground='neutral-strong'>
+					onBackground='neutral-strong'
+					style={{
+						fontSize: 'clamp(2rem, 5vw, 3rem)',
+						lineHeight: '1.2'
+					}}>
 					{title}
 				</Heading>
 			)}
 
-			{/* Filter System */}
+			{/* Description */}
+			{description && (
+				<Text
+					variant='body-default-l'
+					onBackground='neutral-medium'
+					align='center'
+					style={{
+						maxWidth: '600px',
+						lineHeight: '1.6'
+					}}>
+					{description}
+				</Text>
+			)}
+
+			{/* Pill Filter System */}
 			<Column
 				fillWidth
 				horizontal='center'
-				gap='s'
-				paddingY='1'>
-				<FilterSystem availableFilters={availableFilters} />
+				gap='24'
+				paddingY='16'>
+				<PillFilterSystem availableFilters={availableFilters} />
 			</Column>
 
 			{/* Results */}
 			<Column
 				fillWidth
-				gap='l'
-				horizontal='center'
-				maxWidth='xl'
-				paddingTop='0'>
-				{/* Grid */}
-				{hasResults ? (
-					<Column
-						fillWidth
-						paddingTop='m'>
+				gap='32'
+				horizontal='center'>
+				{/* Main Content with Balanced Padding */}
+				<div
+					style={{
+						width: '100%',
+						paddingLeft: 'clamp(20px, 5vw, 32px)',
+						paddingRight: 'clamp(20px, 5vw, 32px)',
+						maxWidth: '100%',
+						boxSizing: 'border-box'
+					}}>
+					{/* Grid */}
+					{hasResults ? (
 						<Grid
 							columns='2'
 							tabletColumns='2'
@@ -89,10 +109,15 @@ export function FilteredCaseStudyGrid({
 							style={{
 								justifyItems: 'center',
 								alignItems: 'stretch',
-								paddingLeft: '8px',
-								paddingRight: '8px',
+								paddingLeft: '0',
+								paddingRight: '0',
+								marginLeft: '0',
+								marginRight: '0',
+								maxWidth: '100%',
+								boxSizing: 'border-box',
 								gridAutoRows: '1fr'
-							}}>
+							}}
+							data-grid>
 							{filteredCaseStudies.map((caseStudy, index) => (
 								<div
 									key={caseStudy._id}
@@ -106,33 +131,33 @@ export function FilteredCaseStudyGrid({
 									<ModernCaseStudyCard
 										caseStudy={caseStudy}
 										index={index}
+										priority={index < 4}
 									/>
 								</div>
 							))}
 						</Grid>
-					</Column>
-				) : (
-					<Column
-						gap='24'
-						horizontal='center'
-						paddingY='xl'
-						style={{
-							textAlign: 'center'
-						}}>
-						<Text
-							variant='heading-strong-m'
-							onBackground='neutral-strong'>
-							No case studies found
-						</Text>
-						<Text
-							variant='body-default-m'
-							onBackground='neutral-medium'
-							style={{ maxWidth: '400px' }}>
-							Try adjusting your filters or clear all filters to see more
-							results.
-						</Text>
-					</Column>
-				)}
+					) : (
+						<Column
+							gap='24'
+							horizontal='center'
+							paddingY='xl'
+							style={{
+								textAlign: 'center'
+							}}>
+							<Text
+								variant='heading-strong-m'
+								onBackground='neutral-strong'>
+								No case studies found
+							</Text>
+							<Text
+								variant='body-default-m'
+								onBackground='neutral-medium'
+								style={{ maxWidth: '400px' }}>
+								Try selecting different filters to see more results.
+							</Text>
+						</Column>
+					)}
+				</div>
 			</Column>
 		</Column>
 	);

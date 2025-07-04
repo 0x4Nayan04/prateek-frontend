@@ -138,26 +138,7 @@ export function ModernCaseStudyGrid({
 									))}
 								</Grid>
 
-								{/* View All Button */}
-								{showViewAllButton && (
-									<RevealFx
-										translateY={8}
-										horizontal='center'
-										delay={0.08}>
-										<Column
-											center
-											paddingTop='32'>
-											<Button
-												id='view-all-case-studies'
-												href='/work'
-												variant='primary'
-												size='l'
-												arrowIcon>
-												Show more case studies
-											</Button>
-										</Column>
-									</RevealFx>
-								)}
+								{/* No "View All" button since we show all case studies */}
 							</>
 						) : (
 							<RevealFx

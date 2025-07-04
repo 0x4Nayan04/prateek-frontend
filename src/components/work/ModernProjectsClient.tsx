@@ -25,8 +25,8 @@ export function ModernProjectsClient({
 		mobile: 1
 	};
 
-	// Show "View All" button only if maxItems is specified (homepage usage)
-	const showViewAllButton = maxItems !== undefined;
+	// Don't show "View All" button since we show all case studies by default
+	const showViewAllButton = false;
 
 	return (
 		<ModernCaseStudyGrid

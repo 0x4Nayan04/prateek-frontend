@@ -1,8 +1,8 @@
 'use client';
 
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense } from 'react';
 import { ModernProjectsClient } from './ModernProjectsClient';
-import { FilteredCaseStudyGrid } from './FilteredCaseStudyGrid';
+import { PillFilteredCaseStudyGrid } from './PillFilteredCaseStudyGrid';
 import { CaseStudy } from '@/lib/sanity/types';
 import { Column, Text } from '@once-ui-system/core';
 import { FilterProvider } from '@/contexts/FilterContext';
@@ -40,18 +40,12 @@ export function ModernProjectsClientWrapper({
 	availableFilters = { techStack: [], industry: [] },
 	...props
 }: ModernProjectsClientWrapperProps) {
-	const [isClient, setIsClient] = useState(false);
-
-	useEffect(() => {
-		setIsClient(true);
-	}, []);
-
-	// If filters are enabled and we're on the client, wrap with FilterProvider and use FilteredCaseStudyGrid
-	if (enableFilters && isClient) {
+	// Always render the same structure to avoid hydration issues
+	if (enableFilters) {
 		return (
 			<FilterProvider>
 				<Suspense fallback={<LoadingFallback />}>
-					<FilteredCaseStudyGrid
+					<PillFilteredCaseStudyGrid
 						caseStudies={props.caseStudies}
 						title={props.title}
 						description={props.description}
@@ -68,7 +62,7 @@ export function ModernProjectsClientWrapper({
 		);
 	}
 
-	// Default behavior without filters or during SSR
+	// Default behavior without filters
 	return (
 		<Suspense fallback={<LoadingFallback />}>
 			<ModernProjectsClient {...props} />

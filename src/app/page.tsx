@@ -160,7 +160,7 @@ export default function Home() {
 			{/* Separator: Hero to Work */}
 			<SectionSeparator />
 
-			{/* Featured Work Section */}
+			{/* Case Studies Section */}
 			<Column
 				fillWidth
 				horizontal='center'
@@ -168,64 +168,17 @@ export default function Home() {
 				paddingY='0'
 				paddingX='0'
 				gap='0'>
-				{/* Title Section with Consistent Padding */}
-				<Column
-					fillWidth
-					horizontal='center'
-					gap='0'
-					className='featured-work-title-section'
-					style={{
-						paddingLeft: 'clamp(20px, 5vw, 32px)',
-						paddingRight: 'clamp(20px, 5vw, 32px)',
-						maxWidth: '100%',
-						boxSizing: 'border-box'
-					}}>
-					<RevealFx
-						translateY={4}
-						delay={0}
-						fillWidth
-						horizontal='center'
-						paddingBottom='0'>
-						<Heading
-							wrap='balance'
-							variant='display-strong-l'
-							align='center'
-							style={{
-								fontSize: 'clamp(2rem, 8vw, 3rem)',
-								lineHeight: '1.2'
-							}}>
-							Featured Work
-						</Heading>
-					</RevealFx>
-				</Column>
-
-				{/* Projects Section - Let ModernProjects handle its own padding */}
+				{/* Projects Section with pill filters */}
 				<Column
 					fillWidth
 					paddingTop='16'
-					gap='24'
+					gap='0'
 					horizontal='center'>
 					<ModernProjects
-						title=''
-						maxItems={6}
+						title='Case Studies'
 						columns='2'
 						enableFilters={true}
 					/>
-
-					{/* Show more case studies button */}
-					<RevealFx
-						translateY={4}
-						delay={0.1}
-						horizontal='center'>
-						<Button
-							href='/work'
-							id='home-show-more-case-studies'
-							variant='primary'
-							size='l'
-							arrowIcon>
-							Show more case studies
-						</Button>
-					</RevealFx>
 				</Column>
 			</Column>
 
