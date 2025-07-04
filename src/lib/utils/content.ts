@@ -123,14 +123,22 @@ export function filterCaseStudies(
 		const techStackMatch =
 			filters.techStack.length === 0 ||
 			filters.techStack.some(
-				(tech) => caseStudy.techStack?.includes(tech) ?? false
+				(tech) =>
+					caseStudy.techStack?.some(
+						(csTech) =>
+							csTech.trim().toLowerCase() === tech.trim().toLowerCase()
+					) ?? false
 			);
 
 		// Check if any of the selected industry filters match
 		const industryMatch =
 			filters.industry.length === 0 ||
 			filters.industry.some(
-				(industry) => caseStudy.industry?.includes(industry) ?? false
+				(industry) =>
+					caseStudy.industry?.some(
+						(csIndustry) =>
+							csIndustry.trim().toLowerCase() === industry.trim().toLowerCase()
+					) ?? false
 			);
 
 		// Return true if both conditions are met (OR logic for multiple selections within same category, AND logic between categories)
