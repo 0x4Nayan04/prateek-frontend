@@ -151,8 +151,8 @@ export default async function CaseStudyPage({
 				fillWidth
 				gap='32'>
 				<RevealFx
-					translateY={8}
-					delay={0.02}>
+					translateY={4}
+					delay={0.1}>
 					<Row
 						fillWidth
 						horizontal='space-between'
@@ -172,8 +172,8 @@ export default async function CaseStudyPage({
 
 				{/* Title and Summary */}
 				<RevealFx
-					translateY={8}
-					delay={0.04}>
+					translateY={6}
+					delay={0.02}>
 					<Column gap='16'>
 						<Heading
 							variant='display-strong-xl'

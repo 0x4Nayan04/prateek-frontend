@@ -65,7 +65,7 @@ export function PillFilterSystem({ availableFilters }: PillFilterSystemProps) {
 			horizontal='center'>
 			<RevealFx
 				translateY={4}
-				delay={0.02}
+				delay={0.06}
 				fillWidth
 				horizontal='center'>
 				{/* Pills Container */}

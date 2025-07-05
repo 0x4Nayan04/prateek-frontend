@@ -31,7 +31,7 @@ export function CaseStudyPagination({
 	return (
 		<RevealFx
 			translateY={8}
-			delay={0.2}>
+			delay={0.15}>
 			<Column
 				fillWidth
 				gap='0'

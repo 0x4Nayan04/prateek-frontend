@@ -23,7 +23,7 @@ const SectionSeparator = ({
 }) => (
 	<RevealFx
 		translateY={4}
-		delay={0.1}
+		delay={0.05}
 		fillWidth
 		horizontal='center'
 		paddingY='32'>
@@ -113,8 +113,8 @@ export default function Home() {
 						</RevealFx>
 					)}
 					<RevealFx
-						translateY={4}
-						delay={0.05}
+						translateY={6}
+						delay={0.02}
 						fillWidth
 						horizontal='center'
 						paddingBottom='16'>
@@ -126,8 +126,8 @@ export default function Home() {
 						</Heading>
 					</RevealFx>
 					<RevealFx
-						translateY={4}
-						delay={0.1}
+						translateY={6}
+						delay={0.04}
 						fillWidth
 						horizontal='center'
 						paddingBottom='16'>
@@ -146,7 +146,7 @@ export default function Home() {
 					</RevealFx>
 					<RevealFx
 						translateY={4}
-						delay={0.15}
+						delay={0.06}
 						horizontal='center'>
 						<Button
 							href='/work'
@@ -215,8 +215,8 @@ export default function Home() {
 						flex={1}
 						paddingLeft='8'>
 						<RevealFx
-							translateY={4}
-							delay={0}>
+							translateY={6}
+							delay={0.02}>
 							<Heading
 								as='h2'
 								variant='display-strong-m'
@@ -228,8 +228,8 @@ export default function Home() {
 					<Flex flex={2}>
 						<Column gap='24'>
 							<RevealFx
-								translateY={4}
-								delay={0.05}>
+								translateY={6}
+								delay={0.04}>
 								<Text
 									variant='body-default-l'
 									onBackground='neutral-medium'
@@ -294,8 +294,8 @@ export default function Home() {
 								</Text>
 							</RevealFx>
 							<RevealFx
-								translateY={4}
-								delay={0.15}>
+								translateY={6}
+								delay={0.08}>
 								<Text
 									variant='body-default-l'
 									onBackground='neutral-medium'

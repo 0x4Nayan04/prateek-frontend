@@ -30,7 +30,9 @@ export function CleanCaseStudyGrid({
 				{title && (
 					<RevealFx
 						translateY={6}
-						delay={0.02}>
+						delay={0.02}
+						fillWidth
+						horizontal='center'>
 						<Column
 							horizontal='center'
 							gap='s'>
@@ -51,7 +53,9 @@ export function CleanCaseStudyGrid({
 				{description && (
 					<RevealFx
 						translateY={6}
-						delay={0.04}>
+						delay={0.04}
+						fillWidth
+						horizontal='center'>
 						<Text
 							variant='body-default-l'
 							onBackground='neutral-medium'
@@ -70,7 +74,7 @@ export function CleanCaseStudyGrid({
 				{hasResults ? (
 					<RevealFx
 						translateY={8}
-						delay={0.06}>
+						delay={0.08}>
 						<div className='grid-responsive'>
 							{displayedCaseStudies.map((caseStudy, index) => (
 								<CleanCaseStudyCard
@@ -85,7 +89,7 @@ export function CleanCaseStudyGrid({
 				) : (
 					<RevealFx
 						translateY={8}
-						delay={0.06}>
+						delay={0.08}>
 						<Column
 							center
 							gap='l'

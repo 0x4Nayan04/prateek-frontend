@@ -110,7 +110,9 @@ export function ModernCaseStudyGrid({
 							overflow: 'hidden'
 						}}>
 						{hasResults ? (
-							<>
+							<RevealFx
+								translateY={8}
+								delay={0.08}>
 								<Grid
 									columns={columns.desktop as any}
 									tabletColumns={columns.tablet as any}
@@ -137,13 +139,11 @@ export function ModernCaseStudyGrid({
 										/>
 									))}
 								</Grid>
-
-								{/* No "View All" button since we show all case studies */}
-							</>
+							</RevealFx>
 						) : (
 							<RevealFx
 								translateY={8}
-								delay={0.06}>
+								delay={0.08}>
 								<Column
 									fillWidth
 									center

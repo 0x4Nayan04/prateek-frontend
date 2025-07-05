@@ -49,7 +49,9 @@ export function CaseStudyGrid({
 				{title && (
 					<RevealFx
 						translateY={6}
-						delay={0.02}>
+						delay={0.02}
+						fillWidth
+						horizontal='center'>
 						<Heading
 							variant='display-strong-l'
 							align='center'
@@ -80,7 +82,7 @@ export function CaseStudyGrid({
 						{displayedCaseStudies.length > 0 ? (
 							<RevealFx
 								translateY={8}
-								delay={0.06}>
+								delay={0.08}>
 								<Grid
 									columns='2'
 									tabletColumns='2'

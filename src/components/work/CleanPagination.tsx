@@ -39,7 +39,7 @@ export function CleanPagination({
 		<div className={styles.paginationContainer}>
 			<RevealFx
 				translateY={8}
-				delay={0.05}>
+				delay={0.15}>
 				{/* Desktop Pagination */}
 				<Column
 					fillWidth
