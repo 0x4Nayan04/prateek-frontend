@@ -48,6 +48,8 @@ function FilterProviderInner({ children }: FilterProviderProps) {
 
 	// Initialize filters from URL on mount
 	useEffect(() => {
+		if (typeof window === 'undefined') return;
+
 		const techStackParam = searchParams.get('techStack');
 		const industryParam = searchParams.get('industry');
 
@@ -61,6 +63,8 @@ function FilterProviderInner({ children }: FilterProviderProps) {
 
 	// Update URL when filters change
 	const updateURL = (newFilters: FilterState) => {
+		if (typeof window === 'undefined') return;
+
 		const params = new URLSearchParams();
 
 		if (newFilters.techStack.length > 0) {

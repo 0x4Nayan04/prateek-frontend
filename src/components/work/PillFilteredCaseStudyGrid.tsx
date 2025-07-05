@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useEffect, useState } from 'react';
 import { Column, Grid, Heading, Text } from '@once-ui-system/core';
 import { CaseStudy } from '@/lib/sanity/types';
 import { ModernCaseStudyCard } from './ModernCaseStudyCard';
@@ -32,7 +32,12 @@ export function PillFilteredCaseStudyGrid({
 	availableFilters,
 	columns = { desktop: 2, tablet: 2, mobile: 1 }
 }: PillFilteredCaseStudyGridProps) {
+	const [mounted, setMounted] = useState(false);
 	const { filters } = useFilters();
+
+	useEffect(() => {
+		setMounted(true);
+	}, []);
 
 	// Filter the case studies based on current filters
 	const filteredCaseStudies = useMemo(() => {
@@ -41,6 +46,57 @@ export function PillFilteredCaseStudyGrid({
 	}, [caseStudies, filters, maxItems]);
 
 	const hasResults = filteredCaseStudies.length > 0;
+
+	// Show loading state until mounted to prevent hydration mismatch
+	if (!mounted) {
+		return (
+			<Column
+				fillWidth
+				gap='32'
+				horizontal='center'>
+				{/* Title */}
+				{title && (
+					<Column
+						fillWidth
+						horizontal='center'
+						gap='8'>
+						<Heading
+							variant='display-strong-l'
+							align='center'
+							wrap='balance'>
+							{title}
+						</Heading>
+					</Column>
+				)}
+
+				{/* Description */}
+				{description && (
+					<Text
+						variant='body-default-l'
+						onBackground='neutral-medium'
+						align='center'
+						style={{
+							maxWidth: '600px',
+							lineHeight: '1.6'
+						}}>
+						{description}
+					</Text>
+				)}
+
+				{/* Loading state */}
+				<Column
+					fillWidth
+					horizontal='center'
+					paddingY='32'>
+					<Text
+						variant='body-default-m'
+						onBackground='neutral-medium'>
+						Loading...
+					</Text>
+				</Column>
+			</Column>
+		);
+	}
 
 	return (
 		<Column

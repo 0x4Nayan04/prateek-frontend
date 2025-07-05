@@ -4,6 +4,7 @@ import {
 	getAvailableFilters
 } from '@/lib/utils/content';
 import { ModernProjectsClientWrapper } from './ModernProjectsClientWrapper';
+import { ClientOnlyFilteredProjects } from './ClientOnlyFilteredProjects';
 
 interface ModernProjectsProps {
 	title?: string;
@@ -31,6 +32,22 @@ export async function ModernProjects({
 			? await getAvailableFilters()
 			: { techStack: [], industry: [] };
 
+		// Use client-only component when filters are enabled to avoid SSR issues
+		if (enableFilters) {
+			return (
+				<ClientOnlyFilteredProjects
+					caseStudies={caseStudies}
+					title={title}
+					description={description}
+					columns={columns}
+					maxItems={maxItems}
+					enableFilters={enableFilters}
+					availableFilters={availableFilters}
+				/>
+			);
+		}
+
+		// Regular server-side rendering for non-filtered components
 		return (
 			<ModernProjectsClientWrapper
 				caseStudies={caseStudies}
@@ -44,6 +61,21 @@ export async function ModernProjects({
 		);
 	} catch (error) {
 		console.error('Error fetching case studies:', error);
+
+		// Use client-only component when filters are enabled, even for error cases
+		if (enableFilters) {
+			return (
+				<ClientOnlyFilteredProjects
+					caseStudies={[]}
+					title={title}
+					description={description}
+					columns={columns}
+					maxItems={maxItems}
+					enableFilters={enableFilters}
+					availableFilters={{ techStack: [], industry: [] }}
+				/>
+			);
+		}
 
 		return (
 			<ModernProjectsClientWrapper

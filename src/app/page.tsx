@@ -13,6 +13,8 @@ import {
 	Text
 } from '@once-ui-system/core';
 
+export const revalidate = 60; // ISR revalidation every 60 seconds - matches work pages
+
 // Elegant Section Separator Component
 const SectionSeparator = ({
 	variant = 'default'
@@ -94,7 +96,9 @@ export default function Home() {
 								onBackground='brand-strong'
 								textVariant='label-default-s'
 								arrow={false}
-								href={home.featured.href}>
+								style={{
+									cursor: 'pointer'
+								}}>
 								<Row
 									gap='4'
 									vertical='center'
