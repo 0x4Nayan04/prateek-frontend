@@ -13,10 +13,22 @@ export const Header = () => {
 	const router = useRouter();
 	const [isAboutInView, setIsAboutInView] = useState(false);
 	const [mounted, setMounted] = useState(false);
+	const [isMobile, setIsMobile] = useState(false);
 
-	// Handle mounting for SSR safety
+	// Handle mounting for SSR safety and responsive detection
 	useEffect(() => {
 		setMounted(true);
+
+		const checkMobile = () => {
+			setIsMobile(window.innerWidth <= 768);
+		};
+
+		checkMobile();
+		window.addEventListener('resize', checkMobile);
+
+		return () => {
+			window.removeEventListener('resize', checkMobile);
+		};
 	}, []);
 
 	// Set up intersection observer to track about section visibility
@@ -143,21 +155,21 @@ export const Header = () => {
 								<ToggleButton
 									prefixIcon='home'
 									href='/'
-									label={<span className='s-flex-hide'>Home</span>}
+									label={!isMobile ? 'Home' : undefined}
 									selected={isHomeActive}
 								/>
 							)}
 							<ToggleButton
 								prefixIcon='person'
 								onClick={scrollToAbout}
-								label={<span className='s-flex-hide'>About</span>}
+								label={!isMobile ? 'About' : undefined}
 								selected={isAboutActive}
 							/>
 							{routes['/work'] && (
 								<ToggleButton
 									prefixIcon='grid'
 									href='/work'
-									label={<span className='s-flex-hide'>{work.label}</span>}
+									label={!isMobile ? work.label : undefined}
 									selected={pathname.startsWith('/work')}
 								/>
 							)}
