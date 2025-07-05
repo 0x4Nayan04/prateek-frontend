@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useEffect, useState } from 'react';
-import { Column, Grid, Heading, Text } from '@once-ui-system/core';
+import { Column, Grid, Heading, Text, RevealFx } from '@once-ui-system/core';
 import { CaseStudy } from '@/lib/sanity/types';
 import { ModernCaseStudyCard } from './ModernCaseStudyCard';
 import { PillFilterSystem } from './filters/PillFilterSystem';
@@ -56,31 +56,44 @@ export function PillFilteredCaseStudyGrid({
 				horizontal='center'>
 				{/* Title */}
 				{title && (
-					<Column
+					<RevealFx
+						translateY={6}
+						delay={0.02}
 						fillWidth
 						horizontal='center'
-						gap='8'>
-						<Heading
-							variant='display-strong-l'
-							align='center'
-							wrap='balance'>
-							{title}
-						</Heading>
-					</Column>
+						paddingBottom='8'>
+						<Column
+							fillWidth
+							horizontal='center'
+							gap='8'>
+							<Heading
+								variant='display-strong-l'
+								align='center'
+								wrap='balance'>
+								{title}
+							</Heading>
+						</Column>
+					</RevealFx>
 				)}
 
 				{/* Description */}
 				{description && (
-					<Text
-						variant='body-default-l'
-						onBackground='neutral-medium'
-						align='center'
-						style={{
-							maxWidth: '600px',
-							lineHeight: '1.6'
-						}}>
-						{description}
-					</Text>
+					<RevealFx
+						translateY={6}
+						delay={0.04}
+						fillWidth
+						horizontal='center'>
+						<Text
+							variant='body-default-l'
+							onBackground='neutral-medium'
+							align='center'
+							style={{
+								maxWidth: '600px',
+								lineHeight: '1.6'
+							}}>
+							{description}
+						</Text>
+					</RevealFx>
 				)}
 
 				{/* Loading state */}
@@ -105,30 +118,49 @@ export function PillFilteredCaseStudyGrid({
 			horizontal='center'>
 			{/* Title */}
 			{title && (
-				<Heading
-					variant='display-strong-l'
-					align='center'
-					onBackground='neutral-strong'
-					style={{
-						fontSize: 'clamp(2rem, 5vw, 3rem)',
-						lineHeight: '1.2'
-					}}>
-					{title}
-				</Heading>
+				<RevealFx
+					translateY={6}
+					delay={0.02}
+					fillWidth
+					horizontal='center'
+					paddingBottom='8'>
+					<Column
+						horizontal='center'
+						gap='8'>
+						<Heading
+							variant='display-strong-l'
+							align='center'
+							onBackground='neutral-strong'
+							wrap='balance'
+							style={{
+								fontSize: 'clamp(2rem, 5vw, 3rem)',
+								lineHeight: '1.2'
+							}}>
+							{title}
+						</Heading>
+					</Column>
+				</RevealFx>
 			)}
 
 			{/* Description */}
+			{/* Description */}
 			{description && (
-				<Text
-					variant='body-default-l'
-					onBackground='neutral-medium'
-					align='center'
-					style={{
-						maxWidth: '600px',
-						lineHeight: '1.6'
-					}}>
-					{description}
-				</Text>
+				<RevealFx
+					translateY={6}
+					delay={0.04}
+					fillWidth
+					horizontal='center'>
+					<Text
+						variant='body-default-l'
+						onBackground='neutral-medium'
+						align='center'
+						style={{
+							maxWidth: '600px',
+							lineHeight: '1.6'
+						}}>
+						{description}
+					</Text>
+				</RevealFx>
 			)}
 
 			{/* Pill Filter System */}
